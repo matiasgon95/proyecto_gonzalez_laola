@@ -4,11 +4,6 @@
     display: block; 
     margin: 0 auto;
 }
-/*
-footer{
-    text-align: center;
-    padding: 50 px;
-}*/
 
 footer {
       text-align: center;
@@ -16,3 +11,20 @@ footer {
       background-color: #333;
       color: white;
     }
+
+body {
+    background-color: #405059;
+}
+
+.mi-navbar {
+    background-color: #333 ;
+}
+
+.mi-navbar .nav-link,
+.mi-navbar .navbar-brand {
+    color: white;
+}
+
+.mi-navbar .nav-link:hover {
+    color: #ccc;
+}
