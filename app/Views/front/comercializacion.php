@@ -2,7 +2,7 @@
 
 <?= $this->section('contenedor'); ?>
 
-<h1>ESTO ES COMERCIALIZACION</h1>
+<h1>Comercialización</h1>
 
 
 <?= $this->endSection(); ?>

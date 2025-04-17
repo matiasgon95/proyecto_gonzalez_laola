@@ -14,19 +14,35 @@ footer {
 
 body {
     background-color: #405059;
+    font-family: "Winky Rough", sans-serif;
+}
+
+h1{
+    color: white;
+    text-align:center; 
+    margin-top:10px;
 }
 
 .mi-navbar {
     background-color: #00abff;
+    padding: 0%;
 }
 
 .nav-link{
     color: black;
-    font-family: "Winky Rough", sans-serif;
     font-size: xx-large;
     margin: 10px;
 }
 
 .mi-navbar .nav-link:hover {
     color: #ccc;
+}
+
+.quienes_somos{
+    color: white;
+    margin-top: 30px;
+    margin-bottom: 100px;
+    margin-left: 100px;
+    margin-right: 100px;
+    font-size: 20px;
 }

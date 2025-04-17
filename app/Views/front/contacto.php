@@ -2,7 +2,7 @@
 
 <?= $this->section('contenedor'); ?>
 
-<h1>ESTO ES CONTACTO</h1>
+<h1>Contacto</h1>
 
 
 <?= $this->endSection(); ?>
