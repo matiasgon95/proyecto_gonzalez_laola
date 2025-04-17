@@ -2,7 +2,7 @@
 
 <?= $this->section('contenedor'); ?>
 
-<!-- carrousel 
+<!-- carrousel -->
 <section class="container-fluid">
   <div id="carouselExample" class="carousel slide">
     <div class="carousel-inner">
@@ -23,6 +23,6 @@
     </button>
   </div>
 </section>
- fin carrousel -->
+ <!--fin carrousel -->
 
 <?= $this->endSection(); ?>

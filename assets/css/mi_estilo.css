@@ -1,5 +1,5 @@
 .logo{
-    width: 150px;
+    width: 200px;
     height: auto;
     display: block; 
     margin: 0 auto;
@@ -17,12 +17,14 @@ body {
 }
 
 .mi-navbar {
-    background-color: #333 ;
+    background-color: #00abff;
 }
 
-.mi-navbar .nav-link,
-.mi-navbar .navbar-brand {
-    color: white;
+.nav-link{
+    color: black;
+    font-family: "Winky Rough", sans-serif;
+    font-size: xx-large;
+    margin: 10px;
 }
 
 .mi-navbar .nav-link:hover {
