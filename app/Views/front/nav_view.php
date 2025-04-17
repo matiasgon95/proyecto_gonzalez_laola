@@ -1,6 +1,6 @@
 
 <!-- barra de navegacion -->
-<section class="container-fluid">
+<section>
     <nav class="navbar navbar-expand-lg mi-navbar">
       <div class="container-fluid">
         <a href="<?php echo base_url('/');?>">

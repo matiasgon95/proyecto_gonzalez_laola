@@ -3,7 +3,7 @@
 <?= $this->section('contenedor'); ?>
 
 <!-- carrousel -->
-<section class="container-fluid">
+<section>
   <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
     <div class="carousel-inner">
       <div class="carousel-item active">
