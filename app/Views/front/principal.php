@@ -4,7 +4,7 @@
 
 <!-- carrousel -->
 <section class="container-fluid">
-  <div id="carouselExample" class="carousel slide">
+  <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img src="assets/img/uno.jpg" class="d-block w-100" alt="...">
