@@ -23,4 +23,9 @@ class Home extends BaseController
     {
         return view('front/contacto');
     }
+
+    public function terminos()
+    {
+        return view('front/terminos_y_usos');
+    }
 }

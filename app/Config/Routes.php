@@ -5,7 +5,8 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-// Página principal (ventana principal)
+
+
 // Página principal (ventana principal)
 $routes->get('/', 'Home::index');
 
@@ -14,6 +15,7 @@ $routes->get('productos', 'Front\Producto::index'); // Página de inicio que mue
 $routes->get('comercializacion', 'Home::comercializacion');
 $routes->get('quienes_somos', 'Home::quienes_somos');
 $routes->get('contacto', 'Home::contacto');
+$routes->get('terminos', 'Home::terminos');
 
 // Rutas para productos (deberían ir después de las rutas estáticas)
 $routes->get('producto/detalle/(:num)', 'Front\Producto::detalle/$1');  // Detalle de un producto, pasando el ID como parámetro

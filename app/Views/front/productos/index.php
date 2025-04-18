@@ -28,7 +28,7 @@
                 <?php foreach ($productos as $producto): ?>
                     <div class="col-md-4 mb-4">
                         <div class="card shadow-sm">
-                            <img src="<?= base_url('assets/img/' . esc($producto['id']) . '.jpg'); ?>" class="card-img-top" alt="<?= esc($producto['nombre']); ?>">
+                            <img src="<?= base_url('assets/img/' . esc($producto['id']) . '.jpg'); ?>" class="card-img-top img-fluid" alt="<?= esc($producto['nombre']); ?>">
                             <div class="card-body">
                                 <h5 class="card-title"><?= esc($producto['nombre']); ?></h5>
                                 <p class="card-text"><?= esc($producto['descripcion']); ?></p>
