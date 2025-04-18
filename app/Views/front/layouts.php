@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/mi_estilo.css">
-    <script src="assets/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/mi_estilo.css') ?>">
+    <script src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
+
 
     <!--Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
