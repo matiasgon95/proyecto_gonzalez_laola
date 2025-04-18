@@ -33,6 +33,8 @@
    <footer class="bg-dark text-white text-center py-3">
      <div>
        © 2025 González Matías - Laola Mariano. Todos los derechos reservados.
+       <br>
+       <a href="<?= base_url('terminos')?>" class="text-white">Términos y Condiciones de Uso</a>
      </div>
     </footer>
 </body>

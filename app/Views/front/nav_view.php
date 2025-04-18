@@ -27,12 +27,8 @@
         <li class="nav-item">
           <a class="nav-link" href="<?= base_url('contacto'); ?>">Contacto</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<?= base_url('terminos'); ?>">Términos y Usos</a>
-        </li>
       </ul>
     </div>
   </div>
 </nav>
 <!-- Fin barra de navegación -->
-->
