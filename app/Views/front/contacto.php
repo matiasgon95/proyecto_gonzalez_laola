@@ -51,8 +51,7 @@
 
 
                         <div class="col-md-12">
-                            <input type="submit" class="btn btn-success btn-send  pt-2 btn-block
-                                " value="Enviar Consulta" >
+                            <input type="submit" class="btn btn-primary" value="Enviar Consulta" style='margin-top: 10px'>
                     </div>
                     </div>
             </div>
