@@ -1,7 +1,7 @@
 <?= $this->extend('front/layouts'); ?>
 
 <?= $this->section('contenedor'); ?>
-<div class="container mt-5 mb-5">
+<div class="container mt-5 mb-5" style='color: white'>
     <h1 class="mb-4">Términos y Condiciones de Uso</h1>
 
     <p>Bienvenido a <strong>GL Technology</strong>. Al acceder a este sitio web y utilizar nuestros servicios, aceptás los siguientes términos y condiciones. Te recomendamos leerlos detenidamente antes de realizar cualquier operación.</p>
