@@ -4,7 +4,7 @@
     <nav class="navbar navbar-expand-lg mi-navbar">
       <div class="container-fluid">
         <a href="<?php echo base_url('/');?>">
-            <img class="logo" src="assets\img\logo.png" alt="logo.png" >
+            <img class="logo" src="<?= base_url('assets/img/logo.png') ?>" alt="logo.png" >
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
