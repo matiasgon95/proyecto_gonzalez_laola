@@ -7,3 +7,33 @@ in APPPATH\Config\Routes.php on line 12.
  4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
  5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  6 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-18 17:57:46 --> ErrorException: Undefined variable $titulo
+[Method: GET, Route: productos]
+in APPPATH\Views\front\layouts.php on line 17.
+ 1 APPPATH\Views\front\layouts.php(17): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $titulo', 'C:\\xampp\\htdocs\\proyecto_gonzalez_laola\\app\\Views\\front\\layouts.php', 17)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\proyecto_gonzalez_laola\\app\\Views\\front\\layouts.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(240): CodeIgniter\View\View->render('front/layouts', [], true)
+ 5 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('front/productos/index', [], true)
+ 6 APPPATH\Controllers\Front\Producto.php(39): view('front/productos/index', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Front\Producto->index()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Front\Producto))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-04-18 17:58:26 --> ErrorException: Undefined variable $titulo
+[Method: GET, Route: productos]
+in APPPATH\Views\front\layouts.php on line 17.
+ 1 APPPATH\Views\front\layouts.php(17): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $titulo', 'C:\\xampp\\htdocs\\proyecto_gonzalez_laola\\app\\Views\\front\\layouts.php', 17)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\proyecto_gonzalez_laola\\app\\Views\\front\\layouts.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(240): CodeIgniter\View\View->render('front/layouts', [], true)
+ 5 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('front/productos/index', [], true)
+ 6 APPPATH\Controllers\Front\Producto.php(39): view('front/productos/index', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Front\Producto->index()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Front\Producto))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
