@@ -1,105 +1,122 @@
-.logo{
+/* Estilo general */
+body {
+    background-color: #1e1b2e;
+    font-family: "Winky Rough", sans-serif;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar estilo gamer */
+.mi-navbar {
+    background-color: #3d2a5a;
+    padding: 10px 0;
+}
+
+.nav-link {
+    color: #dcd6f7;
+    font-size: 1.5rem;
+    margin: 0 15px;
+}
+
+.nav-link:hover {
+    color: #9a75ff;
+}
+
+/* Logo centrado */
+.logo {
     width: 200px;
     height: auto;
-    display: block; 
+    display: block;
     margin: 0 auto;
 }
 
+/* Footer oscuro */
 footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #333;
-      color: white;
-    }
-
-body {
-    background-color: #405059;
-    font-family: "Winky Rough", sans-serif;
+    text-align: center;
+    padding: 20px;
+    background-color: #2d203f;
+    color: #e0e0e0;
 }
 
-h1{
-    color: white;
-    text-align:center; 
-    margin-top:10px;
+/* Títulos */
+h1, h2, h3, h4 {
+    color: #dcd6f7;
+    text-align: center;
+    margin-top: 20px;
 }
 
-.mi-navbar {
-    background-color: #00abff;
-    padding: 0%;
+/* Sección quienes somos y formulario */
+.quienes_somos,
+.formulario {
+    margin: 30px 100px;
+    font-size: 18px;
 }
 
-.nav-link{
-    color: black;
-    font-size: xx-large;
-    margin: 10px;
-}
-
-.mi-navbar .nav-link:hover {
-    color: #ccc;
-}
-
-.quienes_somos{
-    color: white;
-    margin-top: 30px;
-    margin-bottom: 100px;
-    margin-left: 100px;
-    margin-right: 100px;
-    font-size: 20px;
-}
-
-.formulario{
-    color: white;
-    margin-top: 30px;
-    margin-bottom: 100px;
-    margin-left: 100px;
-    margin-right: 100px;
-}
-
+/* Detalle de productos */
 .producto-detalle {
     max-width: 600px;
     margin: 2rem auto;
     padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f8f9fa;
-    box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+    border: 1px solid #5a4b81;
+    border-radius: 10px;
+    background-color: #2e2640;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
 }
 
-.producto-detalle h2 {
-    color: #333;
-    margin-bottom: 1rem;
-}
-
-/* Barra lateral de categorías */
+/* Sidebar de categorías */
 .sidebar {
-    background-color: #f8f9fa;
+    background-color: #2e2640;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 }
 
 .sidebar h3 {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     margin-bottom: 15px;
 }
 
 .sidebar .list-group-item {
-    border: 1px solid #ddd;
-    background-color: #fff;
+    border: 1px solid #4c3c66;
+    background-color: #3d2a5a;
+    color: #fff;
     cursor: pointer;
 }
 
 .sidebar .list-group-item:hover {
-    background-color: #007bff;
-    color: white;
+    background-color: #7f5af0;
 }
 
+/* Tarjetas de productos */
 .card-img-top {
     height: 200px;
     object-fit: cover;
 }
 
 .card-body {
-    background-color: #f9f9f9;
+    background-color: #3d2a5a;
     padding: 15px;
+    color: #fff;
+}
+
+/* Carrusel estilizado */
+.carousel {
+    max-width: 1000px;
+    margin: 30px auto;
+    border: 3px solid #6a0dad; /* violeta oscuro */
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(106, 13, 173, 0.6);
+}
+
+.carousel-item img {
+    height: 400px; /* ajustá a gusto: 300px, 400px, etc. */
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .carousel-item img {
+      height: 250px;
+    }
 }
