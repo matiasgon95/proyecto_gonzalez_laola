@@ -40,15 +40,20 @@ footer {
 }
 
 /* Títulos */
-h1, h2, h3, h4 {
+h1, h2, h4 {
     color: #dcd6f7;
     text-align: center;
     margin-top: 20px;
 }
 
+h3 {
+    color: #dcd6f7;
+    margin-top: 20px;
+}
+
 /* Sección quienes somos y formulario */
 .quienes_somos,
-.formulario {
+.formulario, .comercializacion{
     margin: 30px 100px;
     font-size: 18px;
 }
