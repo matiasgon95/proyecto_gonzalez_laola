@@ -10,8 +10,8 @@
             </div>
         <div class="row ">
           <div class="col-lg-7 mx-auto">
-            <div class="card mt-2 mx-auto p-4 bg-light">
-                <div class="card-body bg-light">
+            <div class="card mt-2 mx-auto p-4">
+                <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
