@@ -37,17 +37,17 @@
 <section class="container my-5">
   <div class="row text-center">
     <div class="col-md-4 mb-4">
-      <img src="<?= base_url('assets/img/procesador.jpg') ?>" class="img-fluid rounded" alt="Procesadores">
+      <img src="<?= base_url('assets/img/ProcesadorRyzen5_3600.jpg') ?>" class="img-fluid rounded card-img-top" alt="Procesadores">
       <h4 class="mt-3">Procesadores</h4>
       <p>Potenciá tu PC con lo último en tecnología de procesamiento. Trabajamos con Intel y AMD.</p>
     </div>
     <div class="col-md-4 mb-4">
-      <img src="<?= base_url('assets/img/ram.jpg') ?>" class="img-fluid rounded" alt="Memorias RAM">
+      <img src="<?= base_url('assets/img/MemoriaRamAsusTuf3200.jpg') ?>" class="img-fluid rounded card-img-top" alt="Memorias RAM">
       <h4 class="mt-3">Memorias RAM</h4>
       <p>Ampliá la memoria de tu equipo con módulos DDR4 y DDR5 de las mejores marcas.</p>
     </div>
     <div class="col-md-4 mb-4">
-      <img src="<?= base_url('assets/img/mother.jpg') ?>" class="img-fluid rounded" alt="Placas Base">
+      <img src="<?= base_url('assets/img/motherbord b450.jpg') ?>" class="img-fluid rounded card-img-top" alt="Placas Base">
       <h4 class="mt-3">Placas Base</h4>
       <p>Encontrá la placa base ideal para tu configuración, con soporte para los últimos estándares.</p>
     </div>
