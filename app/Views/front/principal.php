@@ -7,10 +7,16 @@
   <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="<?= base_url('assets/img/uno.jpg') ?>" class="d-block w-100" alt="Imagen promocional 1">
+        <img src="<?= base_url('assets/img/procesadorInteli9.jpg') ?>" class="d-block w-100" alt="Imagen promocional 1">
+        <div class="carousel-caption d-none d-md-block">
+          <a href="<?= base_url('producto/categoria/Procesadores') ?>" class="btn btn-info btn-lg">Ver productos</a>
+        </div>
       </div>
       <div class="carousel-item">
-        <img src="<?= base_url('assets/img/dos.jpg') ?>" class="d-block w-100" alt="Imagen promocional 2">
+        <img src="<?= base_url('assets/img/placabaseb550.jpg') ?>" class="d-block w-100" alt="Imagen promocional 2">
+        <div class="carousel-caption d-none d-md-block">
+          <a href="<?= base_url('producto/categoria/Placas%20Base') ?>" class="btn btn-info btn-lg">Ver productos</a>
+        </div>
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -37,17 +43,17 @@
 <section class="container my-5">
   <div class="row text-center">
     <div class="col-md-4 mb-4">
-      <img src="<?= base_url('assets/img/ProcesadorRyzen5_3600.jpg') ?>" class="img-fluid rounded card-img-top" alt="Procesadores">
+      <img src="<?= base_url('assets/img/ProcesadorRyzen5_3600.jpg') ?>" class="img-fluid card-img-top" alt="Procesadores">
       <h4 class="mt-3">Procesadores</h4>
       <p>Potenciá tu PC con lo último en tecnología de procesamiento. Trabajamos con Intel y AMD.</p>
     </div>
     <div class="col-md-4 mb-4">
-      <img src="<?= base_url('assets/img/MemoriaRamAsusTuf3200.jpg') ?>" class="img-fluid rounded card-img-top" alt="Memorias RAM">
+      <img src="<?= base_url('assets/img/MemoriaRamAsusTuf3200.jpg') ?>" class="img-fluid card-img-top" alt="Memorias RAM">
       <h4 class="mt-3">Memorias RAM</h4>
       <p>Ampliá la memoria de tu equipo con módulos DDR4 y DDR5 de las mejores marcas.</p>
     </div>
     <div class="col-md-4 mb-4">
-      <img src="<?= base_url('assets/img/motherbord b450.jpg') ?>" class="img-fluid rounded card-img-top" alt="Placas Base">
+      <img src="<?= base_url('assets/img/motherbord b450.jpg') ?>" class="img-fluid card-img-top" alt="Placas Base">
       <h4 class="mt-3">Placas Base</h4>
       <p>Encontrá la placa base ideal para tu configuración, con soporte para los últimos estándares.</p>
     </div>
