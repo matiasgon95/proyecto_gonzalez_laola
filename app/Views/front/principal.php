@@ -8,13 +8,13 @@
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img src="<?= base_url('assets/img/procesadorInteli9.jpg') ?>" class="d-block w-100" alt="Imagen promocional 1">
-        <div class="carousel-caption d-none d-md-block">
+        <div class="carousel-caption d-block">
           <a href="<?= base_url('producto/categoria/Procesadores') ?>" class="btn btn-info btn-lg">Ver productos</a>
         </div>
       </div>
       <div class="carousel-item">
         <img src="<?= base_url('assets/img/placabaseb550.jpg') ?>" class="d-block w-100" alt="Imagen promocional 2">
-        <div class="carousel-caption d-none d-md-block">
+        <div class="carousel-caption d-block">
           <a href="<?= base_url('producto/categoria/Placas%20Base') ?>" class="btn btn-info btn-lg">Ver productos</a>
         </div>
       </div>
