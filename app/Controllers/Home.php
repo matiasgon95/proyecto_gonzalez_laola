@@ -28,4 +28,9 @@ class Home extends BaseController
     {
         return view('front/terminos_y_usos');
     }
+
+    public function sitio_en_construccion()
+    {
+    return view('front/sitio_en_construccion');
+    }
 }

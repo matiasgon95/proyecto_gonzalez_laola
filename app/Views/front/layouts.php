@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/mi_estilo.css') ?>">
     <script src="<?= base_url('assets/js/bootstrap.bundle.min.js') ?>"></script>
-    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"> iconos para login y carrito-->
+    <!--iconos para login y carrito-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" > 
 
 
 

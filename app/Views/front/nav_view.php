@@ -23,9 +23,14 @@
 
       <!-- Iconos usuario / carrito -->
       <div class="iconos-nav d-flex align-items-center gap-3">
-        <i class="bi bi-person-circle"></i>
-        <i class="bi bi-cart3"></i>
+        <a href="<?= base_url('sitio_en_construccion'); ?>" class="text-dark">
+          <i class="bi bi-person-circle fs-4"></i>
+        </a>
+        <a href="<?= base_url('sitio_en_construccion'); ?>" class="text-dark">
+          <i class="bi bi-cart3 fs-4"></i>
+        </a>
       </div>
+
 
     </div>
 
