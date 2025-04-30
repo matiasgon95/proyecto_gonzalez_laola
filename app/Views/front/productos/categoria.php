@@ -23,8 +23,8 @@
         <h1>Catálogo de Productos</h1>
         <div class="row">
             <?php foreach ($productos as $producto): ?>
-                <div class="col-md-4 mb-4">
-                    <div class="card shadow-sm">
+                <div class="col-md-4 mb-4 d-flex">
+                    <div class="card shadow-sm w-100">
                         <!-- Imagen del producto -->
                         <img src="assets/img/<?= esc($producto['id']); ?>.jpg" class="imagen-producto" alt="<?= esc($producto['nombre']); ?>">
 
