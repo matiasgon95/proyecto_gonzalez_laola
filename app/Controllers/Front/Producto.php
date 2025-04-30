@@ -12,21 +12,21 @@ class Producto extends BaseController
             'id' => 1,
             'nombre' => 'Procesador Intel i9',
             'descripcion' => 'Procesador de alto rendimiento',
-            'precio' => 999.99,
+            'precio' => 343000,
             'categoria' => 'Procesadores'
         ],
         [
             'id' => 2,
             'nombre' => 'Memoria RAM Corsair 16GB',
-            'descripcion' => 'Memoria RAM DDR4 de 16GB',
-            'precio' => 79.99,
+            'descripcion' => 'Memoria RAM DDR4 16GB',
+            'precio' => 64000,
             'categoria' => 'Memorias RAM'
         ],
         [
             'id' => 3,
             'nombre' => 'Placa Base ASUS ROG',
-            'descripcion' => 'Placa base para gaming',
-            'precio' => 199.99,
+            'descripcion' => 'Placa base gaming',
+            'precio' => 260000,
             'categoria' => 'Placas Base'
         ]
     ];
