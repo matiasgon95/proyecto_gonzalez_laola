@@ -3,7 +3,7 @@
 <?= $this->section('contenedor'); ?>
 
 <h1>Contacto</h1>
-<form action="" class='formulario'>
+<form action="" class='container mt-5 mb-5'>
     <div class="container">
             <div class=" text-center mt-5 ">
                 <h3>¿Tienes preguntas sobre nuestros productos o necesitas ayuda con tu compra? ¡Estamos aquí para  ayudarte!</h3>

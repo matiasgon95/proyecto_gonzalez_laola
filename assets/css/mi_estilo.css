@@ -105,13 +105,6 @@ h3 {
     margin-top: 20px;
 }
 
-/* Secciones generales */
-.quienes_somos,
-.formulario, .comercializacion {
-    margin: 30px 100px;
-    font-size: 18px;
-}
-
 /* Detalle de productos */
 .producto-detalle {
     max-width: 600px;

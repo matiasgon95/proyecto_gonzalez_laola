@@ -4,7 +4,7 @@
 
 <h1>Comercialización</h1>
 
-<div class='comercializacion'>
+<div class='container mt-5 mb-5'>
 
     <p>En <strong>GL Technology</strong>, trabajamos para que tu experiencia de compra sea rápida, segura y eficiente. A continuación, te detallamos todo lo que necesitás saber sobre nuestros procesos de entrega, envío y formas de pago.</p>
 

@@ -3,7 +3,7 @@
 <?= $this->section('contenedor'); ?>
 
 <h1>¿Quiénes somos?</h1>
-<div class='quienes_somos'>
+<div class='container mt-5 mb-5'>
     <p>En <strong><i>GL Technology</i></strong> somos un equipo apasionado por la tecnología y el alto rendimiento. Nos dedicamos a ofrecer hardware de calidad para todos los niveles: desde entusiastas del gaming hasta profesionales y empresas.</p>
 
     <p>Creemos que la tecnología no es solo una herramienta, sino una forma de potenciar ideas, proyectos y experiencias. Por eso, trabajamos con las mejores marcas del mercado y brindamos un asesoramiento personalizado, para ayudarte a encontrar exactamente lo que necesitás.</p>
