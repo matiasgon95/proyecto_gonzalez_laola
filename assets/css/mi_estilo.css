@@ -237,3 +237,9 @@ h3 {
     display: block;
     border-radius: 0.5rem;
 }
+.card {
+    border: none !important;
+    background-color: #1a1a1a !important;
+    box-shadow: 0px 4px 8px rgba(0, 188, 212, 0.3); /* si querés mantener la sombra */
+    color: #e0f7fa;
+}

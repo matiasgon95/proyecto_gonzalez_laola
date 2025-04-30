@@ -6,7 +6,8 @@
 <form action="" class='container mt-5 mb-5'>
     <div class="container">
             <div class=" text-center mt-5 ">
-                <h3>¿Tienes preguntas sobre nuestros productos o necesitas ayuda con tu compra? ¡Estamos aquí para  ayudarte!</h3>
+                <h3>¿Tienes preguntas sobre nuestros productos o necesitas ayuda con tu compra?</h3>
+                <h3>¡Estamos aquí para  ayudarte!</h3>
             </div>
         <div class="row ">
           <div class="col-lg-7 mx-auto">
