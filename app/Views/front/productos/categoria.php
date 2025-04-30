@@ -26,7 +26,7 @@
                 <div class="col-md-4 mb-4">
                     <div class="card shadow-sm">
                         <!-- Imagen del producto -->
-                        <img src="assets/img/<?= esc($producto['id']); ?>.jpg" class="card-img-top" alt="<?= esc($producto['nombre']); ?>">
+                        <img src="assets/img/<?= esc($producto['id']); ?>.jpg" class="imagen-producto" alt="<?= esc($producto['nombre']); ?>">
 
                         <!-- Cuerpo de la tarjeta -->
                         <div class="card-body">
