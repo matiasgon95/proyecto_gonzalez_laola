@@ -17,9 +17,12 @@
       </button>
 
       <!-- Buscador (se oculta en mobile dentro del colapsable) -->
-      <div class="buscador-nav mx-3 d-none d-lg-block" style="flex: 0 0 40%;">
-        <input type="text" class="form-control form-control-sm" placeholder="Buscar productos...">
-      </div>
+      <form class="buscador-nav mx-3 d-none d-lg-flex" style="flex: 0 0 40%;" action="<?= base_url('sitio_en_construccion'); ?>" method="get" onsubmit="return irASitio();">
+  <div class="input-group">
+    <input type="text" class="form-control form-control-sm" placeholder="Buscar productos..." name="q">
+    <button class="btn btn-outline-info btn-sm" type="submit">Buscar</button>
+  </div>
+</form>
 
       <!-- Iconos usuario / carrito -->
       <div class="iconos-nav d-flex align-items-center gap-3">
@@ -38,9 +41,12 @@
     <div class="collapse navbar-collapse justify-content-center w-100" id="navbarSupportedContent">
       
       <!-- Buscador visible solo en móviles -->
-      <div class="buscador-nav w-100 my-2 d-lg-none">
-        <input type="text" class="form-control form-control-sm" placeholder="Buscar productos...">
-      </div>
+      <form class="buscador-nav w-100 my-2 d-lg-none" action="<?= base_url('sitio_en_construccion'); ?>" method="get" onsubmit="return irASitio();">
+  <div class="input-group">
+    <input type="text" class="form-control form-control-sm" placeholder="Buscar productos..." name="q">
+    <button class="btn btn-outline-info btn-sm" type="submit">Buscar</button>
+  </div>
+</form>
 
       <!-- Menú de enlaces -->
       <ul class="navbar-nav mb-2 mb-lg-0 d-flex flex-column flex-lg-row gap-3 gap-lg-4">
@@ -63,3 +69,9 @@
   </div>
 </nav>
 <!-- Fin barra de navegación adaptada -->
+<script>
+function irASitio() {
+  window.location.href = "<?= base_url('sitio_en_construccion'); ?>";
+  return false; // Previene el envío real del formulario
+}
+</script>

@@ -4,12 +4,14 @@
 <div class="row">
     <!-- Barra lateral de categorías -->
     <div class="col-md-3">
-        <div class="sidebar">
-            <h3>Categorías</h3>
-            <ul class="list-group">
+        <div class="sidebar shadow-sm p-3">
+            <h3 class="text-center mb-3">Categorías</h3>
+            <ul class="list-group list-group-flush">
                 <?php foreach ($categorias as $categoria): ?>
                     <li class="list-group-item">
-                        <a href="/categoria/<?= urlencode($categoria); ?>"><?= esc($categoria); ?></a>
+                        <a href="/categoria/<?= urlencode($categoria); ?>" class="text-decoration-none text-info fw-semibold d-block text-center">
+                            <?= esc($categoria); ?>
+                        </a>
                     </li>
                 <?php endforeach; ?>
             </ul>
