@@ -17,6 +17,8 @@ $routes->get('quienes_somos', 'Home::quienes_somos');
 $routes->get('contacto', 'Home::contacto');
 $routes->get('terminos', 'Home::terminos');
 $routes->get('sitio_en_construccion', 'Home::sitio_en_construccion');
+$routes->get('login', 'Home::login');
+$routes->get('registro_usuario', 'Home::registro_usuario');
 
 // Rutas para productos (deberían ir después de las rutas estáticas)
 $routes->get('producto/detalle/(:num)', 'Front\Producto::detalle/$1');  // Detalle de un producto, pasando el ID como parámetro

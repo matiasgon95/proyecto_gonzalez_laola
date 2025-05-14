@@ -33,4 +33,14 @@ class Home extends BaseController
     {
     return view('front/sitio_en_construccion');
     }
+
+    public function login()
+    {
+    return view('front/login');
+    }
+
+    public function registro_usuario()
+    {
+    return view('front/registro_usuario');
+    }
 }
