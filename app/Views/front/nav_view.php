@@ -26,7 +26,7 @@
 
       <!-- Iconos usuario / carrito -->
       <div class="iconos-nav d-flex align-items-center gap-3">
-        <a href="<?= base_url('login'); ?>" class="text-dark">
+        <a href="<?= base_url('front/login'); ?>" class="text-dark">
           <i class="bi bi-person-circle fs-4"></i>
         </a>
         <a href="<?= base_url('sitio_en_construccion'); ?>" class="text-dark">

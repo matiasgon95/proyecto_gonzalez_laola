@@ -19,19 +19,30 @@ class login_controller extends Controller
 
     public function index()
     {
-        // Mostrar vista de login
-        return view('login');
-    }
+        // Si ya está logueado, redirigir al dashboard
+        if (session()->get('usuario_logueado')) {
+            return redirect()->to('front/dashboard');
+        }
+
+        return view('front/login');
+    }   
+
 
     public function autenticar()
     {
         $email = $this->request->getPost('email');
-        $password = $this->request->getPost('password');
+        $pass = $this->request->getPost('pass');
 
         $usuario = $this->usuarioModel->obtener_por_email($email);
 
+         /*dd([
+        'email_form' => $email,
+        'pass_form' => $pass,
+        'usuario_db' => $usuario
+        ]);*/
+
         if ($usuario) {
-            if (password_verify($password, $usuario['password'])) {
+            if ($pass === $usuario['pass']) {
                 // Guardar en sesión
                 $this->session->set([
                     'usuario_id'       => $usuario['id'],
@@ -39,20 +50,43 @@ class login_controller extends Controller
                     'usuario_nombre'   => $usuario['nombre'],
                     'usuario_logueado' => true
                 ]);
-                return redirect()->to('/panel'); // Ruta protegida con filtro auth
+                return redirect()->to('front/dashboard'); // Ruta protegida con filtro auth
             } else {
                 $this->session->setFlashdata('error', 'Contraseña incorrecta.');
-                return redirect()->to('/login');
-            }
+                return redirect()->to('front/login');
+            }/*
+            if (password_verify($pass, $usuario['pass'])) {
+                // Guardar en sesión
+                $this->session->set([
+                    'usuario_id'       => $usuario['id'],
+                    'usuario_email'    => $usuario['email'],
+                    'usuario_nombre'   => $usuario['nombre'],
+                    'usuario_logueado' => true
+                ]);
+                return redirect()->to('/dashboard'); // Ruta protegida con filtro auth
+            } else {
+                $this->session->setFlashdata('error', 'Contraseña incorrecta.');
+                return redirect()->to('/front/login');
+            }*/
         } else {
             $this->session->setFlashdata('error', 'El usuario no existe.');
-            return redirect()->to('/login');
+            return redirect()->to('front/login');
         }
     }
+
+    public function dashboard()
+    {
+        if (!session()->get('usuario_logueado')) {
+            return redirect()->to('front/login');
+        }
+
+        return view('front/dashboard');
+    }
+
 
     public function logout()
     {
         $this->session->destroy();
-        return redirect()->to('/login');
+        return redirect()->to('front/login');
     }
 }

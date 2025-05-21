@@ -29,7 +29,7 @@ class usuario_controller extends Controller
     public function guardar()
     {
         $data = $this->request->getPost();
-        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+        $data['pass'] = password_hash($data['pass'], PASSWORD_DEFAULT);
         $this->Usuario_model->agregar_usuario($data);
     
         return redirect()->to(site_url('usuario_controller'));

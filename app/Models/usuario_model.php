@@ -11,7 +11,7 @@ class usuario_model extends Model
 
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
-    protected $allowedFields    = ['nombre', 'email', 'password'];
+    protected $allowedFields    = ['nombre', 'apellido', 'email', 'pass', 'provincia', 'perfil_id'];
     protected $useTimestamps    = false;
 
     public function agregar_usuario($data)
