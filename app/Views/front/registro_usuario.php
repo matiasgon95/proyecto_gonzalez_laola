@@ -18,18 +18,17 @@
                 </div>
             <?php endif; ?>
 
-            <?php $validation = \Config\Services::validation(); ?>
-            <?php if ($validation->getErrors()): ?>
+            <?php if (session('errors')): ?>
                 <div class="alert alert-danger">
                     <ul>
-                        <?php foreach ($validation->getErrors() as $error): ?>
+                        <?php foreach (session('errors') as $error): ?>
                             <li><?= esc($error) ?></li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
             <?php endif; ?>
 
-            <form action="<?= base_url('registro_controller/guardar') ?>" method="post">
+            <form action="<?= base_url('front/registro_usuario/guardar') ?>" method="post">
                 <?= csrf_field() ?>
 
                 <div class="mb-3">

@@ -30,19 +30,13 @@ class login_controller extends Controller
 
     public function autenticar()
     {
-        $email = $this->request->getPost('email');
+        $email = strtolower(trim($this->request->getPost('email')));
         $pass = $this->request->getPost('pass');
 
         $usuario = $this->usuarioModel->obtener_por_email($email);
 
-         /*dd([
-        'email_form' => $email,
-        'pass_form' => $pass,
-        'usuario_db' => $usuario
-        ]);*/
-
         if ($usuario) {
-            if ($pass === $usuario['pass']) {
+            if ($usuario && password_verify($pass, $usuario['pass'])) {
                 // Guardar en sesión
                 $this->session->set([
                     'usuario_id'       => $usuario['id'],
@@ -54,20 +48,7 @@ class login_controller extends Controller
             } else {
                 $this->session->setFlashdata('error', 'Contraseña incorrecta.');
                 return redirect()->to('front/login');
-            }/*
-            if (password_verify($pass, $usuario['pass'])) {
-                // Guardar en sesión
-                $this->session->set([
-                    'usuario_id'       => $usuario['id'],
-                    'usuario_email'    => $usuario['email'],
-                    'usuario_nombre'   => $usuario['nombre'],
-                    'usuario_logueado' => true
-                ]);
-                return redirect()->to('/dashboard'); // Ruta protegida con filtro auth
-            } else {
-                $this->session->setFlashdata('error', 'Contraseña incorrecta.');
-                return redirect()->to('/front/login');
-            }*/
+            }
         } else {
             $this->session->setFlashdata('error', 'El usuario no existe.');
             return redirect()->to('front/login');

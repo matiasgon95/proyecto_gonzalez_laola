@@ -21,8 +21,8 @@ $routes->get('front/login', 'login_controller::index');
 $routes->post('login_controller/autenticar', 'login_controller::autenticar');
 $routes->get('front/dashboard', 'login_controller::dashboard', ['filter' => 'auth']);
 $routes->get('login_controller/logout', 'login_controller::logout');
-$routes->get('front/registro_usuario', 'registro_controller::index');
-$routes->post('registro_controller/guardar', 'registro_controller::guardar');
+$routes->get('front/registro_usuario', 'registro_controller::index'); // muestra la vista
+$routes->post('front/registro_usuario/guardar','registro_controller::guardar'); // guarda en la DB
 
 
 
