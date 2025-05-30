@@ -1,4 +1,4 @@
-<?php echo $this->extend('front/layouts'); ?>
+<?php echo $this->extend('front/layout/layouts'); ?>
 
 <?= $this->section('contenedor'); ?>
 

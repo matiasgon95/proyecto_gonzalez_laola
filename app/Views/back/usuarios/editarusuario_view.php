@@ -1,5 +1,5 @@
 <h2>Editar Usuario</h2>
-<form method="post" action="<?= site_url('usuario_controller/actualizar/' . $usuario->id) ?>">
+<form method="post" action="<?= site_url('UsuarioController/actualizar/' . $usuario->id) ?>">
     <input type="text" name="nombre" value="<?= $usuario->nombre ?>" placeholder="Nombre"><br>
     <input type="text" name="apellido" value="<?= $usuario->apellido ?>" placeholder="Apellido"><br>
     <input type="email" name="email" value="<?= $usuario->email ?>" placeholder="Email"><br>

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Front;
 
 use App\Models\usuario_model;
 use CodeIgniter\Controller;
 
-class login_controller extends Controller
+class LoginController extends Controller
 {
     protected $usuarioModel;
     protected $session;
@@ -21,7 +21,7 @@ class login_controller extends Controller
     {
         // Si ya está logueado, redirigir al dashboard
         if (session()->get('usuario_logueado')) {
-            return redirect()->to('front/dashboard');
+            return redirect()->to('front/cliente/dashboard');
         }
 
         return view('front/login');
@@ -36,15 +36,21 @@ class login_controller extends Controller
         $usuario = $this->usuarioModel->obtener_por_email($email);
 
         if ($usuario) {
-            if ($usuario && password_verify($pass, $usuario['pass'])) {
+            if (password_verify($pass, $usuario['pass'])) {
                 // Guardar en sesión
                 $this->session->set([
                     'usuario_id'       => $usuario['id'],
                     'usuario_email'    => $usuario['email'],
                     'usuario_nombre'   => $usuario['nombre'],
+                    'perfil_id'        => $usuario['perfil_id'], // <-- esto es nuevo
                     'usuario_logueado' => true
                 ]);
-                return redirect()->to('front/dashboard'); // Ruta protegida con filtro auth
+                // Redirigir según perfil
+                if ($usuario['perfil_id'] == 1) {
+                    return redirect()->to('back/dashboard'); // Admin
+                } else {
+                    return redirect()->to('front/cliente/dashboard'); // Cliente
+                }
             } else {
                 $this->session->setFlashdata('error', 'Contraseña incorrecta.');
                 return redirect()->to('front/login');
@@ -53,6 +59,7 @@ class login_controller extends Controller
             $this->session->setFlashdata('error', 'El usuario no existe.');
             return redirect()->to('front/login');
         }
+        
     }
 
     public function dashboard()
@@ -61,7 +68,7 @@ class login_controller extends Controller
             return redirect()->to('front/login');
         }
 
-        return view('front/dashboard');
+        return view('front/cliente/dashboard');
     }
 
 

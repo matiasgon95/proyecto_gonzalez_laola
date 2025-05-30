@@ -1,4 +1,4 @@
-<?= $this->extend('front/layouts'); ?>
+<?= $this->extend('front/layout/layouts'); ?>
 
 <?= $this->section('contenedor'); ?>
 
@@ -6,6 +6,6 @@
 
     <p>Has iniciado sesión correctamente.</p>
 
-    <p><a href="<?= site_url('login_controller/logout') ?>">Cerrar sesión</a></p>
+    <p><a href="<?= site_url('LoginController/logout') ?>">Cerrar sesión</a></p>
 
 <?= $this->endSection(); ?>

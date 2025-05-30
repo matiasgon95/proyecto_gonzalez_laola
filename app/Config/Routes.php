@@ -6,26 +6,47 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-
-// Página principal (ventana principal)
+// Página principal
 $routes->get('/', 'Home::index');
 
-// Rutas adicionales
-$routes->get('productos', 'Front\Producto::index'); // Página de inicio que muestra el catálogo de productos
+// Rutas públicas (sin login)
+$routes->get('productos', 'Front\Producto::index');
 $routes->get('comercializacion', 'Home::comercializacion');
 $routes->get('quienes_somos', 'Home::quienes_somos');
 $routes->get('contacto', 'Home::contacto');
 $routes->get('terminos', 'Home::terminos');
 $routes->get('sitio_en_construccion', 'Home::sitio_en_construccion');
-$routes->get('front/login', 'login_controller::index');
-$routes->post('login_controller/autenticar', 'login_controller::autenticar');
-$routes->get('front/dashboard', 'login_controller::dashboard', ['filter' => 'auth']);
-$routes->get('login_controller/logout', 'login_controller::logout');
-$routes->get('front/registro_usuario', 'registro_controller::index'); // muestra la vista
-$routes->post('front/registro_usuario/guardar','registro_controller::guardar'); // guarda en la DB
+
+// Login y registro
+$routes->get('front/login', 'Front\LoginController::index');
+$routes->post('LoginController/autenticar', 'Front\LoginController::autenticar');
+$routes->get('LoginController/logout', 'Front\LoginController::logout');
+$routes->get('front/registro_usuario', 'Front\RegistroController::index');
+$routes->post('front/registro_usuario/guardar','Front\RegistroController::guardar');
+
+// Rutas protegidas por perfil
+$routes->group('front/cliente', ['filter' => 'auth:2'], function($routes) {
+    $routes->get('dashboard', 'Admin\PanelController::cliente');
+});
+// Rutas de gestión de Productos del admin
+$routes->group('back', ['filter' => 'auth:1'], function($routes) {
+    $routes->get('dashboard', 'Admin\PanelController::admin');
+    $routes->get('productos', 'Admin\ProductoController::index');
+    $routes->get('productos/crear', 'Admin\ProductoController::crear');
+    $routes->post('productos/guardar', 'Admin\ProductoController::guardar');
+    $routes->get('productos/editar/(:num)', 'Admin\ProductoController::editar/$1');
+    $routes->post('productos/actualizar/(:num)', 'Admin\ProductoController::actualizar/$1');
+    $routes->get('productos/eliminar/(:num)', 'Admin\ProductoController::eliminar/$1');
+});
 
 
 
-// Rutas para productos (deberían ir después de las rutas estáticas)
-$routes->get('producto/detalle/(:num)', 'Front\Producto::detalle/$1');  // Detalle de un producto, pasando el ID como parámetro
-$routes->get('producto/categoria/(:any)', 'Front\Producto::categoria/$1');  // Ver productos por categoría
+
+
+
+
+
+
+// Rutas de productos
+$routes->get('producto/detalle/(:num)', 'Front\Producto::detalle/$1');
+$routes->get('producto/categoria/(:any)', 'Front\Producto::categoria/$1');

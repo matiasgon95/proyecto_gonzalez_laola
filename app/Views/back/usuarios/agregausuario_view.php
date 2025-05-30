@@ -1,4 +1,4 @@
-<form method="post" action="<?= site_url('usuario_controller/guardar') ?>">
+<form method="post" action="<?= site_url('UsuarioController/guardar') ?>">
     <input type="text" name="nombre" placeholder="Nombre"><br>
     <input type="text" name="apellido" placeholder="Apellido"><br>
     <input type="email" name="email" placeholder="Email"><br>

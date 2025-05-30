@@ -1,5 +1,5 @@
 <h2>Listado de Usuarios</h2>
-<a href="<?= site_url('usuario_controller/agregar') ?>">Agregar nuevo usuario</a>
+<a href="<?= site_url('UsuarioController/agregar') ?>">Agregar nuevo usuario</a>
 <table border="1" cellpadding="5">
     <thead>
         <tr>
@@ -18,8 +18,8 @@
             <td><?= $usuario->perfil_id ?></td>
             <td><?= $usuario->baja ?></td>
             <td>
-                <a href="<?= site_url('usuario_controller/editar/' . $usuario->id) ?>">Editar</a> |
-                <a href="<?= site_url('usuario_controller/eliminar/' . $usuario->id) ?>" onclick="return confirm('¿Estás seguro de eliminar este usuario?')">Eliminar</a>
+                <a href="<?= site_url('UsuarioController/editar/' . $usuario->id) ?>">Editar</a> |
+                <a href="<?= site_url('UsuarioController/eliminar/' . $usuario->id) ?>" onclick="return confirm('¿Estás seguro de eliminar este usuario?')">Eliminar</a>
             </td>
         </tr>
         <?php endforeach; ?>

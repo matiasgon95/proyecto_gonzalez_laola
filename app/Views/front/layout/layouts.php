@@ -24,7 +24,7 @@
 <body class="d-flex flex-column min-vh-100">
     
     <!--Seccion navbar-->
-    <?php echo $this->include('front/nav_view');?>
+    <?php echo $this->include('front/layout/nav_view');?>
     
     <!--Seccion de posicionamiento de los contenedores-->
     <div class="flex-fill">

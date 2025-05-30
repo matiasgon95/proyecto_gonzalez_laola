@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Front;
 
 use App\Models\usuario_model;
 use CodeIgniter\Controller;
 
-class registro_controller extends Controller
+class RegistroController extends Controller
 {
     protected $usuarioModel;
     protected $session;

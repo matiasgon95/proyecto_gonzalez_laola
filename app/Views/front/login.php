@@ -1,4 +1,4 @@
-<?= $this->extend('front/layouts'); ?>
+<?= $this->extend('front/layout/layouts'); ?>
 <?= $this->section('contenedor'); ?>
 
 
@@ -18,7 +18,7 @@
                 </div>
             <?php endif; ?>
 
-            <form action="<?= base_url('login_controller/autenticar') ?>" method="post">
+            <form action="<?= base_url('LoginController/autenticar') ?>" method="post">
                 <?= csrf_field() ?>
 
                 <div class="mb-3">

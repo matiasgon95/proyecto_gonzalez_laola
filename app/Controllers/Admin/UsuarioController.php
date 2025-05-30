@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Models\usuario_model;
 use CodeIgniter\Controller;
 
-class usuario_controller extends Controller
+class UsuarioController extends Controller
 {
     protected $usuarioModel;
     protected $helpers = ['url', 'form'];
@@ -32,7 +32,7 @@ class usuario_controller extends Controller
         $data['pass'] = password_hash($data['pass'], PASSWORD_DEFAULT);
         $this->Usuario_model->agregar_usuario($data);
     
-        return redirect()->to(site_url('usuario_controller'));
+        return redirect()->to(site_url('UsuarioController'));
     }
 
 
@@ -46,12 +46,12 @@ class usuario_controller extends Controller
     {
         $data = $this->request->getPost();
         $this->usuarioModel->actualizar_usuario($id, $data);
-        return redirect()->to(site_url('usuario_controller'));
+        return redirect()->to(site_url('UsuarioController'));
     }
 
     public function eliminar($id)
     {
         $this->usuarioModel->eliminar_usuario($id);
-        return redirect()->to(site_url('usuario_controller'));
+        return redirect()->to(site_url('UsuarioController'));
     }
 }

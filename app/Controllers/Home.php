@@ -6,7 +6,7 @@ class Home extends BaseController
 {
     public function index()
     {
-        return view('front\principal');
+        return view('front/principal');
     }
 
     public function quienes_somos()
@@ -16,7 +16,7 @@ class Home extends BaseController
 
     public function comercializacion()
     {
-        return view('front/comercializacion');
+        return view('front/productos/comercializacion');
     }
 
     public function contacto()
