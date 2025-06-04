@@ -25,14 +25,26 @@
 </form>
 
       <!-- Iconos usuario / carrito -->
-      <div class="iconos-nav d-flex align-items-center gap-3">
-        <a href="<?= base_url('front/login'); ?>" class="text-dark">
+      <div class="iconos-nav">
+      <div class="dropdown dropdown-hover">
+        <a href="#" class="text-dark" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="bi bi-person-circle fs-4"></i>
         </a>
-        <a href="<?= base_url('sitio_en_construccion'); ?>" class="text-dark">
-          <i class="bi bi-cart3 fs-4"></i>
-        </a>
+        <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="userDropdown">
+          <?php if(session()->get('usuario_logueado')): ?>
+            <?php if(session()->get('perfil_id') == 1): ?>
+              <li><a class="dropdown-item" href="<?= base_url('back/dashboard') ?>">Administrar</a></li>
+            <?php endif; ?>
+            <li><a class="dropdown-item" href="<?= site_url('LoginController/logout') ?>">Cerrar Sesión</a></li>
+          <?php else: ?>
+            <li><a class="dropdown-item" href="<?= base_url('front/login') ?>">Iniciar Sesión</a></li>
+          <?php endif; ?>
+        </ul>
       </div>
+      <a href="<?= base_url('sitio_en_construccion'); ?>" class="text-dark">
+        <i class="bi bi-cart3 fs-4"></i>
+      </a>
+    </div>
 
 
     </div>

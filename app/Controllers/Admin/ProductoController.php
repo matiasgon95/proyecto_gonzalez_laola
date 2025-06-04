@@ -27,32 +27,28 @@ class ProductoController extends BaseController
         return view('back/productos/index', $data);
     }
 
-
-
-
     public function crear()
     {
         $data['categorias'] = $this->categoriaModel->findAll();
         return view('back/productos/crear', $data);
     }
 
+    private function limpiarNombreArchivo($nombre) {
+        $nombre = strtolower($nombre);
+        $nombre = preg_replace('/[^a-z0-9]+/', '-', $nombre);
+        $nombre = trim($nombre, '-');
+        return $nombre;
+    }
+
     public function guardar()
     {
-        // Función para limpiar el nombre del archivo
-        function limpiarNombreArchivo($nombre) {
-            $nombre = strtolower($nombre);
-            $nombre = preg_replace('/[^a-z0-9]+/', '-', $nombre);
-            $nombre = trim($nombre, '-');
-            return $nombre;
-        }
-
         $img = $this->request->getFile('imagen');
         if ($img && $img->isValid() && !$img->hasMoved()) {
             $originalName = pathinfo($img->getClientName(), PATHINFO_FILENAME);
-            $nombreLimpio = limpiarNombreArchivo($originalName);
+            $nombreLimpio = $this->limpiarNombreArchivo($originalName);
             $newName = $nombreLimpio . '_' . time() . '.' . $img->getClientExtension();
-            $img->move(ROOTPATH . 'public/uploads/', $newName);
-            $imagenPath = 'uploads/' . $newName;
+            $img->move('public/uploads', $newName);
+            $imagenPath = 'public/uploads/' . $newName;
         } else {
             $imagenPath = null;
         }
@@ -86,26 +82,17 @@ class ProductoController extends BaseController
 
     public function actualizar($id)
     {
-        // Función para limpiar el nombre del archivo
-        function limpiarNombreArchivo($nombre) {
-        $nombre = strtolower($nombre);
-        $nombre = preg_replace('/[^a-z0-9]+/', '-', $nombre);
-        $nombre = trim($nombre, '-');
-        return $nombre;
-        }
-
-
         $img = $this->request->getFile('imagen');
         if ($img && $img->isValid() && !$img->hasMoved()) {
             $originalName = pathinfo($img->getClientName(), PATHINFO_FILENAME);
+            $nombreLimpio = $this->limpiarNombreArchivo($originalName);
             $extension = $img->getClientExtension();
-            $newName = $originalName . '_' . time() . '.' . $extension;
+            $newName = $nombreLimpio . '_' . time() . '.' . $extension;
 
-            $img->move(ROOTPATH . 'public/uploads/', $newName);
-            $imagenPath = 'uploads/' . $newName;
+            $img->move('public/uploads', $newName);
+            $imagenPath = 'public/uploads/' . $newName;
         } else {
-            $imagenPath = $this->request->getPost('imagen_actual'); // mantener la imagen vieja si no se cambia
-            
+            $imagenPath = $this->request->getPost('imagen_actual');
         }
 
         $datos = [
@@ -120,7 +107,6 @@ class ProductoController extends BaseController
         $this->productoModel->update($id, $datos);
         session()->setFlashdata('exito', 'Producto actualizado correctamente.');
         return redirect()->to('back/productos');
-
     }
 
     public function eliminar($id)
