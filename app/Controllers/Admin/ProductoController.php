@@ -65,7 +65,7 @@ class ProductoController extends BaseController
             $nombreLimpio = $this->limpiarNombreArchivo($originalName);
             $newName = $nombreLimpio . '_' . time() . '.' . $img->getClientExtension();
             $img->move('public/uploads', $newName);
-            $imagenPath = 'public/uploads/' . $newName;
+            $imagenPath = 'uploads/' . $newName;
         } else {
             $imagenPath = null;
         }
@@ -78,8 +78,8 @@ class ProductoController extends BaseController
             'stock'        => $this->request->getPost('stock'),
             'imagen'       => $imagenPath,
             'eliminado'    => 0,
-            'creado_en'    => date('Y-m-d H:i:s'),
-            'modificado_en'=> date('Y-m-d H:i:s'),
+            'created_at'    => date('Y-m-d H:i:s'),
+            'updated_at'=> date('Y-m-d H:i:s'),
         ];
 
         $this->productoModel->insert($datos);
@@ -109,7 +109,7 @@ class ProductoController extends BaseController
             $newName = $nombreLimpio . '_' . time() . '.' . $extension;
 
             $img->move('public/uploads', $newName);
-            $imagenPath = 'public/uploads/' . $newName;
+            $imagenPath = 'uploads/' . $newName;
         } else {
             $imagenPath = $this->request->getPost('imagen_actual');
         }
@@ -121,7 +121,7 @@ class ProductoController extends BaseController
             'categoria_id' => $this->request->getPost('categoria'),
             'stock'        => $this->request->getPost('stock'),
             'imagen'       => $imagenPath,
-            'modificado_en'=> date('Y-m-d H:i:s'),
+            'updated_at'=> date('Y-m-d H:i:s'),
         ];
 
         $this->productoModel->update($id, $datos);
@@ -139,7 +139,7 @@ class ProductoController extends BaseController
 
         $this->productoModel->update($id, [
             'eliminado' => 1,
-            'modificado_en' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         return redirect()->to('back/productos')->with('exito', 'Producto eliminado correctamente');
@@ -162,7 +162,7 @@ class ProductoController extends BaseController
 
         $this->productoModel->update($id, [
             'eliminado' => 0,
-            'modificado_en' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ]);
 
         return redirect()->to('back/productos/papelera')->with('exito', 'Producto restaurado correctamente');

@@ -54,7 +54,7 @@
                                     <td><?= date('d/m/Y H:i', strtotime($producto['updated_at'])) ?></td>
                                     <td>
                                         <?php if (!empty($producto['imagen'])): ?>
-                                            <img src="<?= base_url($producto['imagen']) ?>" alt="Imagen producto" class="img-thumbnail border-warning" style="max-width: 80px;">
+                                            <img src="<?= base_url('public/' . $producto['imagen']) ?>" alt="Imagen producto" class="img-thumbnail border-warning" style="max-width: 80px; object-fit: cover;">
                                         <?php else: ?>
                                             <span class="text-muted">No hay imagen</span>
                                         <?php endif; ?>

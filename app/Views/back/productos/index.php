@@ -40,7 +40,11 @@
                                 <tr>
                                     <td><?= $producto['id'] ?></td>
                                     <td><?= esc($producto['nombre']) ?></td>
-                                    <td><?= esc($producto['descripcion']) ?></td>
+                                    <td>
+                                        <div class="descripcion-celda" title="<?= esc($producto['descripcion']) ?>">
+                                            <?= esc($producto['descripcion']) ?>
+                                        </div>
+                                    </td>
                                     <td><?= esc($producto['categoria_descripcion']) ?></td>
                                     <td>$<?= number_format($producto['precio'], 2) ?></td>
                                     <td>$<?= number_format($producto['precio'] * 1.3, 2) ?></td>
@@ -49,7 +53,7 @@
                                     <td><?= date('d/m/Y H:i', strtotime($producto['updated_at'])) ?></td>
                                     <td>
                                         <?php if (!empty($producto['imagen'])): ?>
-                                            <img src="<?= base_url($producto['imagen']) ?>" alt="Imagen producto" class="img-thumbnail border-info" style="max-width: 80px;">
+                                            <img src="<?= base_url('public/' . $producto['imagen']) ?>" alt="Imagen producto" class="img-thumbnail border-info" style="max-width: 80px;">
                                         <?php else: ?>
                                             <span class="text-muted">No hay imagen</span>
                                         <?php endif; ?>
@@ -60,8 +64,8 @@
                                                 <i class="fas fa-edit"></i> Editar
                                             </a>
                                             <a href="<?= base_url('back/productos/eliminar/' . $producto['id']) ?>" 
-                                               onclick="return confirm('¿Estás seguro de eliminar este producto?')" 
-                                               class="btn btn-sm btn-outline-danger">
+                                            onclick="return confirm('¿Estás seguro de eliminar este producto?')" 
+                                            class="btn btn-sm btn-outline-danger">
                                                 <i class="fas fa-trash"></i> Eliminar
                                             </a>
                                         </div>
@@ -70,7 +74,7 @@
                             <?php endforeach; ?>
                         <?php else : ?>
                             <tr>
-                                <td colspan="8" class="text-center text-muted">No hay productos disponibles.</td>
+                                <td colspan="11" class="text-center text-muted">No hay productos disponibles.</td>
                             </tr>
                         <?php endif; ?>
                     </tbody>

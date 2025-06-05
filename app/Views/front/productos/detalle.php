@@ -5,7 +5,8 @@
     <div class="row">
         <div class="col-md-6">
             <div class="producto-imagen-container">
-                <img src="<?= base_url('assets/img/' . esc($producto['id']) . '.jpg'); ?>" class="producto-imagen" alt="<?= esc($producto['nombre']); ?>">
+            <img src="<?= base_url('public/' . $producto['imagen']); ?>" class="producto-imagen" alt="<?= esc($producto['nombre']); ?>">
+
             </div>
         </div>
         <div class="col-md-6">

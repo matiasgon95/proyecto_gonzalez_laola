@@ -114,6 +114,13 @@ body {
     pointer-events: none;
 }
 
+.descripcion-celda {
+    max-width: 200px;        /* ancho máximo para que no estire la columna */
+    white-space: nowrap;     /* que no haga salto de línea */
+    overflow: hidden;        /* oculta lo que exceda el ancho */
+    text-overflow: ellipsis; /* muestra "..." cuando el texto es muy largo */
+}
+
 .producto-imagen-container:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-hover);
