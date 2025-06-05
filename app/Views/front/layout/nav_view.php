@@ -66,6 +66,9 @@
       <!-- Menú de enlaces mejorado -->
       <ul class="navbar-nav mb-2 mb-lg-0 d-flex flex-column flex-lg-row gap-2 gap-lg-4 text-center">
         <li class="nav-item">
+          <a class="nav-link" href="<?= base_url('/'); ?>">Inicio</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="<?= base_url('productos'); ?>">Productos</a>
         </li>
         <li class="nav-item">

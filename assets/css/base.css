@@ -1,0 +1,32 @@
+/* Variables CSS */
+:root {
+    --color-background: #0d0d0d;
+    --color-card-bg: #1a1a1a;
+    --color-primary: #00bcd4;
+    --color-primary-dark: #0097a7;
+    --color-text: #e0f7fa;
+    --transition-standard: all 0.3s ease;
+    --shadow-standard: 0 5px 15px rgba(0, 0, 0, 0.3);
+    --shadow-hover: 0 10px 25px rgba(0, 188, 212, 0.3);
+}
+
+/* Estilo general */
+body {
+    background-color: var(--color-background);
+    font-family: "Orbitron", sans-serif;
+    color: var(--color-text);
+    margin: 0;
+    padding: 0;
+}
+
+/* Títulos */
+h1, h2, h4 {
+    color: #e0f7fa;
+    text-align: center;
+    margin-top: 20px;
+}
+
+h3 {
+    color: #e0f7fa;
+    margin-top: 20px;
+}

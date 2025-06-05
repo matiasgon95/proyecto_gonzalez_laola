@@ -29,9 +29,11 @@
                     <?php foreach ($productos as $producto): ?>
                         <div class="col-md-4 mb-4">
                             <div class="card shadow border border-info h-100">
+                                <!-- Modificar la etiqueta de imagen para incluir lazy loading -->
                                 <img src="<?= base_url('assets/img/' . esc($producto['id']) . '.jpg'); ?>" 
                                      class="card-img-top imagen-producto" 
-                                     alt="<?= esc($producto['nombre']); ?>">
+                                     alt="<?= esc($producto['nombre']); ?>"
+                                     loading="lazy">
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title text-info"><?= esc($producto['nombre']); ?></h5>
                                     <p class="card-text flex-grow-1"><?= esc($producto['descripcion']); ?></p>

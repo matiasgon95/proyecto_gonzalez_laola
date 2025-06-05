@@ -16,12 +16,15 @@
                     <li><a href="<?= base_url('terminos') ?>" class="terms-link">Términos y Condiciones</a></li>
                 </ul>
             </div>
-            <div class="col-lg-4">
-                <h5 class="footer-heading">Síguenos</h5>
-                <div class="footer-social d-flex align-items-center">
-                    <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
-                    <a href="#" class="social-icon"><i class="bi bi-x"></i></a>
+            <div class="col-lg-4 text-center">
+                <h5 class="footer-heading">SÍGUENOS</h5>
+                <div class="footer-social-wrapper">
+                <div class="footer-social">
+                  <a href="https://www.facebook.com" class="social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                  <a href="https://www.instagram.com" class="social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+                  <a href="https://x.com" class="social-icon" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                </div>
+
                 </div>
             </div>
         </div>
