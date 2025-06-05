@@ -40,6 +40,7 @@
               <li><a class="dropdown-item" href="<?= site_url('LoginController/logout') ?>"><i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión</a></li>
             <?php else: ?>
               <li><a class="dropdown-item" href="<?= base_url('front/login') ?>"><i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión</a></li>
+              <li><a class="dropdown-item" href="<?= base_url('front/registro_usuario') ?>"><i class="bi bi-person-plus me-2"></i>Registrarse</a></li>
             <?php endif; ?>
           </ul>
         </div>

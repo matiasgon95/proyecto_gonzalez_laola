@@ -74,21 +74,38 @@ body {
     transform: scale(1.1);
 }
 
-/* Dropdown mejorado */
+/* Ajustes para el menú desplegable */
+.dropdown-hover {
+    position: relative;
+}
+
 .nav-dropdown {
-    background-color: #1a1a1a;
-    border: 1px solid #00bcd4;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0;
+    min-width: 200px;
     padding: 0.5rem 0;
+    background-color: #1a1a1a;
+    border: 1px solid rgba(0, 188, 212, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.dropdown:hover .nav-dropdown {
+    display: block;
 }
 
 .nav-dropdown .dropdown-item {
     color: #e0f7fa;
+    padding: 0.8rem 1.2rem;
     transition: all 0.3s ease;
-    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+    white-space: nowrap;
 }
 
 .nav-dropdown .dropdown-item:hover {
-    background-color: #2a2a2a;
+    background-color: rgba(0, 188, 212, 0.1);
     color: #00bcd4;
     transform: translateX(5px);
 }
@@ -1669,4 +1686,137 @@ h3 {
 
 .dropdown-toggle::after {
   display: none;
+}
+
+/* Estilos para el footer */
+.footer-custom {
+    background-color: #0d0d0d;
+    color: #e0f7fa;
+    border-top: 2px solid rgba(0, 188, 212, 0.2);
+}
+
+.footer-heading {
+    color: #00bcd4;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-text {
+    color: #b2ebf2;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-links a {
+    color: #b2ebf2;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    color: #00bcd4;
+    transform: translateX(5px);
+}
+
+.footer-social {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.social-icon {
+    font-size: 1.5rem;
+    color: #e0f7fa;
+    transition: transform 0.3s ease, color 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-icon:hover {
+    color: #00bcd4;
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    color: #b2ebf2;
+    font-size: 0.85rem;
+}
+
+/* Estilos para Términos y Condiciones */
+.terminos-container {
+    background-color: #1a1a1a;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 0 20px rgba(0, 188, 212, 0.1);
+    margin: 2rem auto;
+}
+
+.terminos-container h1 {
+    color: #00bcd4;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.terminos-container h4 {
+    color: #00bcd4;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    text-align: left;
+}
+
+.terminos-container p {
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: #e0f7fa;
+    font-family: 'Arial', sans-serif;
+}
+
+.terminos-container strong {
+    color: #00bcd4;
+    font-weight: bold;
+}
+
+.terms-link {
+    color: #00bcd4 !important;
+    position: relative;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.terms-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #00bcd4;
+    transition: width 0.3s ease;
+}
+
+.terms-link:hover::after {
+    width: 100%;
 }
