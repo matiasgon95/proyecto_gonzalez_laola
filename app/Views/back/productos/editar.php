@@ -29,6 +29,13 @@
                                 <input type="number" class="form-control bg-dark text-info border-info" name="precio" id="precio" step="0.01" min="0" value="<?= esc($producto['precio']) ?>" required>
                             </div>
                         </div>
+                        <div class="mb-3">
+                            <label for="precio_vta" class="form-label">Precio de Venta</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-dark text-info border-info">$</span>
+                                <input type="number" class="form-control bg-dark text-info border-info" name="precio_vta" id="precio_vta" step="0.01" min="0" value="<?= esc($producto['precio_vta']) ?>" required>
+                            </div>
+                        </div>
 
                         <div class="mb-3">
                             <label for="categoria" class="form-label">Categoría</label>
@@ -45,6 +52,10 @@
                         <div class="mb-3">
                             <label for="stock" class="form-label">Stock</label>
                             <input type="number" class="form-control bg-dark text-info border-info" name="stock" id="stock" min="0" value="<?= esc($producto['stock']) ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="stock_min" class="form-label">Stock mínimo</label>
+                            <input type="number" class="form-control bg-dark text-info border-info" name="stock_min" id="stock_min" min="0" value="<?= esc($producto['stock_min']) ?>" required>
                         </div>
 
                         <div class="mb-3">

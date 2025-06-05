@@ -28,6 +28,7 @@
                             <th>Precio</th>
                             <th>Precio Venta</th>
                             <th>Stock</th>
+                            <th>Stock Mínimo</th>
                             <th>Creado</th>
                             <th>Modificado</th>
                             <th>Imagen</th>
@@ -47,8 +48,14 @@
                                     </td>
                                     <td><?= esc($producto['categoria_descripcion']) ?></td>
                                     <td>$<?= number_format($producto['precio'], 2) ?></td>
-                                    <td>$<?= number_format($producto['precio'] * 1.3, 2) ?></td>
-                                    <td><?= $producto['stock'] ?></td>
+                                    <td>$<?= number_format($producto['precio_vta'], 2) ?></td>
+                                    <td class="<?= ($producto['stock'] < $producto['stock_min']) ? 'text-danger fw-bold' : '' ?>">
+                                        <?= $producto['stock'] ?>
+                                        <?php if ($producto['stock'] < $producto['stock_min']) : ?>
+                                            <i class="fas fa-exclamation-triangle ms-1 text-warning" title="Stock bajo"></i>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?= $producto['stock_min'] ?></td>
                                     <td><?= date('d/m/Y H:i', strtotime($producto['created_at'])) ?></td>
                                     <td><?= date('d/m/Y H:i', strtotime($producto['updated_at'])) ?></td>
                                     <td>

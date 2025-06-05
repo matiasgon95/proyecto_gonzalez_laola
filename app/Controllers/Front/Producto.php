@@ -17,13 +17,11 @@ class Producto extends BaseController
         $this->categoriaModel = new CategoriaModel();
     }
 
-    // Mostrar la lista de productos
+    // Mostrar la lista de productos activos con stock > 0
     public function index()
     {
-        // Traemos todos los productos activos con su categoría
-        $productos = $this->productoModel->getProductosConCategoria();
+        $productos = $this->productoModel->getProductosConCategoriaActivos();
 
-        // Traemos todas las categorías activas para la barra lateral
         $categoriasArray = $this->categoriaModel->where('activo', 1)->findAll();
         $categorias = array_column($categoriasArray, 'descripcion');
 
@@ -33,13 +31,14 @@ class Producto extends BaseController
         ]);
     }
 
-    // Ver detalles de un producto
+    // Ver detalles de un producto (si está activo y stock > 0)
     public function detalle($id)
     {
         $producto = $this->productoModel->select('productos.*, categorias.descripcion as categoria')
                                         ->join('categorias', 'categorias.id = productos.categoria_id', 'left')
                                         ->where('productos.id', $id)
                                         ->where('productos.eliminado', 0)
+                                        ->where('productos.stock >', 0)
                                         ->first();
 
         if (!$producto) {
@@ -49,7 +48,7 @@ class Producto extends BaseController
         return view('front/productos/detalle', ['producto' => $producto]);
     }
 
-    // Filtrar productos por categoría
+    // Filtrar productos activos con stock > 0 por categoría
     public function categoria($categoria)
     {
         $productos = $this->productoModel
@@ -57,6 +56,7 @@ class Producto extends BaseController
                          ->join('categorias', 'categorias.id = productos.categoria_id', 'left')
                          ->where('categorias.descripcion', $categoria)
                          ->where('productos.eliminado', 0)
+                         ->where('productos.stock >', 0)
                          ->findAll();
 
         $categoriasArray = $this->categoriaModel->where('activo', 1)->findAll();

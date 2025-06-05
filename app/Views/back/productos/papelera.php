@@ -49,7 +49,13 @@
                                     <td><?= esc($producto['descripcion']) ?></td>
                                     <td><?= esc($producto['categoria_descripcion']) ?></td>
                                     <td>$<?= number_format($producto['precio'], 2) ?></td>
-                                    <td><?= $producto['stock'] ?></td>
+                                    <td class="<?= ($producto['stock'] < $producto['stock_min']) ? 'text-danger fw-bold' : '' ?>">
+                                        <?= $producto['stock'] ?>
+                                        <?php if ($producto['stock'] < $producto['stock_min']) : ?>
+                                            <i class="fas fa-exclamation-triangle ms-1 text-warning" title="Stock bajo"></i>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?= $producto['stock_min'] ?></td>
                                     <td><?= date('d/m/Y H:i', strtotime($producto['created_at'])) ?></td>
                                     <td><?= date('d/m/Y H:i', strtotime($producto['updated_at'])) ?></td>
                                     <td>

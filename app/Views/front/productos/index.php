@@ -36,7 +36,7 @@
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title text-info"><?= esc($producto['nombre']); ?></h5>
                                     <h6 class="text-muted mb-2"><?= esc($producto['categoria']); ?></h6>  <!-- Aquí la categoría -->
-                                    <p class="card-text flex-grow-1"><?= esc($producto['descripcion']); ?></p>
+                                    <!-- <p class="card-text flex-grow-1"><?= esc($producto['descripcion']); ?></p> -->
                                     <div class="mt-auto">
                                         <p class="card-text text-info mb-3">$<?= number_format($producto['precio'], 2); ?></p>
                                         <a href="<?= base_url('producto/detalle/' . $producto['id']); ?>" 
