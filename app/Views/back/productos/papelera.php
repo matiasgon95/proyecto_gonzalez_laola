@@ -1,7 +1,7 @@
 <?= $this->extend('front/layout/layouts') ?>
 <?= $this->section('contenedor') ?>
 
-<div class="container py-4">
+<div class="container-fluid py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h2 text-warning">Papelera de Productos Eliminados</h1>
         <a href="<?= base_url('back/productos') ?>" class="btn btn-info text-black rounded-pill px-4">
@@ -45,16 +45,20 @@
                             <?php foreach ($productos as $producto) : ?>
                                 <tr>
                                     <td><?= $producto['id'] ?></td>
-                                    <td><?= esc($producto['nombre']) ?></td>
-                                    <td><?= esc($producto['descripcion']) ?></td>
-                                    <td><?= esc($producto['categoria_descripcion']) ?></td>
+                                    <td class="text-nowrap"><?= esc($producto['nombre']) ?></td>
+                                    <td>
+                                        <div class="descripcion-celda" title="<?= esc($producto['descripcion']) ?>">
+                                            <?= esc($producto['descripcion']) ?>
+                                        </div>
+                                    </td>
+                                    <td class="text-nowrap"><?= esc($producto['categoria_descripcion']) ?></td>
                                     <td>$<?= number_format($producto['precio'], 2) ?></td>
                                     <td><?= $producto['stock'] ?></td>
-                                    <td><?= date('d/m/Y H:i', strtotime($producto['created_at'])) ?></td>
-                                    <td><?= date('d/m/Y H:i', strtotime($producto['updated_at'])) ?></td>
+                                    <td class="text-nowrap"><?= date('d/m/Y', strtotime($producto['created_at'])) ?></td>
+                                    <td class="text-nowrap"><?= date('d/m/Y', strtotime($producto['updated_at'])) ?></td>
                                     <td>
                                         <?php if (!empty($producto['imagen'])): ?>
-                                            <img src="<?= base_url('public/' . $producto['imagen']) ?>" alt="Imagen producto" class="img-thumbnail border-warning" style="max-width: 80px; object-fit: cover;">
+                                            <img src="<?= base_url('public/' . $producto['imagen']) ?>" alt="Imagen producto" class="img-thumbnail border-warning" style="max-width: 60px; max-height: 60px; object-fit: cover;">
                                         <?php else: ?>
                                             <span class="text-muted">No hay imagen</span>
                                         <?php endif; ?>
@@ -64,14 +68,13 @@
                                             <a href="<?= base_url('back/productos/restaurar/' . $producto['id']) ?>" 
                                                onclick="return confirm('¿Restaurar este producto?')" 
                                                class="btn btn-sm btn-outline-success">
-                                                <i class="fas fa-undo"></i> Restaurar
+                                                <i class="fas fa-undo"></i>
                                             </a>
                                             <a href="<?= base_url('back/productos/eliminar_definitivo/' . $producto['id']) ?>"
                                                 onclick="return confirm('¿Estás seguro de eliminar este producto de forma permanente?')"
                                                 class="btn btn-sm btn-outline-danger">
-                                                <i class="fas fa-times"></i> Eliminar Definitivo
+                                                <i class="fas fa-times"></i>
                                             </a>
-                                            <!-- Aquí podrías poner un botón para eliminar físicamente si quieres -->
                                         </div>
                                     </td>
                                 </tr>
