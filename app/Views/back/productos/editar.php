@@ -63,7 +63,7 @@
                             <?php if ($producto['imagen']): ?>
                                 <input type="hidden" name="imagen_actual" value="<?= esc($producto['imagen']) ?>">
                                 <div class="text-center mb-3">
-                                    <img src="<?= base_url($producto['imagen']) ?>" alt="Imagen producto" class="img-thumbnail border border-info" style="max-width: 200px;">
+                                    <img src="<?= base_url('public/' . $producto['imagen']) ?>" alt="Imagen producto" class="img-thumbnail border border-info" style="max-width: 200px;">
                                 </div>
                             <?php else: ?>
                                 <p class="text-muted">No hay imagen subida.</p>
