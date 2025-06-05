@@ -1,67 +1,69 @@
-<!-- Barra de navegación adaptada -->
-<nav class="navbar navbar-expand-lg mi-navbar">
+<!-- Barra de navegación elegante -->
+<nav class="navbar navbar-expand-lg mi-navbar shadow-sm">
   <div class="container-fluid d-flex flex-column p-0">
     
     <!-- Primera fila: Logo, Botón Toggler, Buscador e Iconos -->
-    <div class="d-flex justify-content-between align-items-center w-100 p-2">
+    <div class="d-flex justify-content-between align-items-center w-100 px-3 py-2">
       
-      <!-- Logo -->
-      <a href="<?= base_url('/'); ?>" class="d-flex align-items-center">
-        <img class="logo img-fluid" src="<?= base_url('assets/img/logo.png') ?>" alt="logo.png">
+      <!-- Logo con efecto hover -->
+      <a href="<?= base_url('/'); ?>" class="d-flex align-items-center logo-container">
+        <img class="logo img-fluid transition-scale" src="<?= base_url('assets/img/logo.png') ?>" alt="logo.png">
       </a>
 
-      <!-- Botón hamburguesa (solo visible en pantallas chicas) -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      <!-- Botón hamburguesa estilizado -->
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Buscador (se oculta en mobile dentro del colapsable) -->
-      <form class="buscador-nav mx-3 d-none d-lg-flex" style="flex: 0 0 40%;" action="<?= base_url('sitio_en_construccion'); ?>" method="get" onsubmit="return irASitio();">
-  <div class="input-group">
-    <input type="text" class="form-control form-control-sm" placeholder="Buscar productos..." name="q">
-    <button class="btn btn-outline-info btn-sm" type="submit">Buscar</button>
-  </div>
-</form>
+      <!-- Buscador mejorado -->
+      <form class="buscador-nav mx-4 d-none d-lg-flex" style="flex: 0 0 40%;" action="<?= base_url('sitio_en_construccion'); ?>" method="get" onsubmit="return irASitio();">
+        <div class="input-group">
+          <input type="text" class="form-control form-control-sm" placeholder="Buscar productos..." name="q">
+          <button class="btn btn-outline-info btn-sm" type="submit">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+      </form>
 
-      <!-- Iconos usuario / carrito -->
+      <!-- Iconos usuario / carrito con efectos -->
       <div class="iconos-nav">
-      <div class="dropdown dropdown-hover">
-        <a href="<?= base_url('front/login') ?>" class="text-dark" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="bi bi-person-circle fs-4"></i>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="userDropdown">
-          <?php if(session()->get('usuario_logueado')): ?>
-            <?php if(session()->get('perfil_id') == 1): ?>
-              <li><a class="dropdown-item" href="<?= base_url('back/dashboard') ?>">Administrar</a></li>
+        <div class="dropdown dropdown-hover">
+          <a href="<?= base_url('front/login') ?>" class="nav-icon-link" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person-circle fs-4"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end nav-dropdown" aria-labelledby="userDropdown">
+            <?php if(session()->get('usuario_logueado')): ?>
+              <?php if(session()->get('perfil_id') == 1): ?>
+                <li><a class="dropdown-item" href="<?= base_url('back/dashboard') ?>"><i class="bi bi-gear me-2"></i>Administrar</a></li>
+              <?php endif; ?>
+              <li><a class="dropdown-item" href="<?= site_url('LoginController/logout') ?>"><i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión</a></li>
+            <?php else: ?>
+              <li><a class="dropdown-item" href="<?= base_url('front/login') ?>"><i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión</a></li>
             <?php endif; ?>
-            <li><a class="dropdown-item" href="<?= site_url('LoginController/logout') ?>">Cerrar Sesión</a></li>
-          <?php else: ?>
-            <li><a class="dropdown-item" href="<?= base_url('front/login') ?>">Iniciar Sesión</a></li>
-          <?php endif; ?>
-        </ul>
+          </ul>
+        </div>
+        <a href="<?= base_url('sitio_en_construccion'); ?>" class="nav-icon-link">
+          <i class="bi bi-cart3 fs-4"></i>
+        </a>
       </div>
-      <a href="<?= base_url('sitio_en_construccion'); ?>" class="text-dark">
-        <i class="bi bi-cart3 fs-4"></i>
-      </a>
-    </div>
-
-
     </div>
 
     <!-- Segunda fila: Enlaces + Buscador (en responsive) -->
     <div class="collapse navbar-collapse justify-content-center w-100" id="navbarSupportedContent">
       
-      <!-- Buscador visible solo en móviles -->
-      <form class="buscador-nav w-100 my-2 d-lg-none" action="<?= base_url('sitio_en_construccion'); ?>" method="get" onsubmit="return irASitio();">
-  <div class="input-group">
-    <input type="text" class="form-control form-control-sm" placeholder="Buscar productos..." name="q">
-    <button class="btn btn-outline-info btn-sm" type="submit">Buscar</button>
-  </div>
-</form>
+      <!-- Buscador móvil mejorado -->
+      <form class="buscador-nav w-100 my-3 px-3 d-lg-none" action="<?= base_url('sitio_en_construccion'); ?>" method="get" onsubmit="return irASitio();">
+        <div class="input-group">
+          <input type="text" class="form-control form-control-sm" placeholder="Buscar productos..." name="q">
+          <button class="btn btn-outline-info btn-sm" type="submit">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+      </form>
 
-      <!-- Menú de enlaces -->
-      <ul class="navbar-nav mb-2 mb-lg-0 d-flex flex-column flex-lg-row gap-3 gap-lg-4">
+      <!-- Menú de enlaces mejorado -->
+      <ul class="navbar-nav mb-2 mb-lg-0 d-flex flex-column flex-lg-row gap-2 gap-lg-4 text-center">
         <li class="nav-item">
           <a class="nav-link" href="<?= base_url('productos'); ?>">Productos</a>
         </li>
@@ -75,9 +77,7 @@
           <a class="nav-link" href="<?= base_url('contacto'); ?>">Contacto</a>
         </li>
       </ul>
-
     </div>
-
   </div>
 </nav>
 <!-- Fin barra de navegación adaptada -->
