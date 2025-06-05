@@ -59,6 +59,21 @@ class ProductoController extends BaseController
 
     public function guardar()
     {
+        $validation = \Config\Services::validation();
+        $validation->setRules([
+            'nombre'       => 'required',
+            'descripcion'  => 'permit_empty',
+            'precio'       => 'required|decimal|greater_than_equal_to[0]',
+            'categoria'    => 'required|integer',
+            'stock'        => 'required|integer|greater_than_equal_to[0]',
+            'imagen'       => 'permit_empty|is_image[imagen]',
+        ]);
+
+        if (!$validation->withRequest($this->request)->run()) {
+            // Si falla la validación, volvemos al formulario con los errores y datos viejos
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+        }
+
         $img = $this->request->getFile('imagen');
         if ($img && $img->isValid() && !$img->hasMoved()) {
             $originalName = pathinfo($img->getClientName(), PATHINFO_FILENAME);
@@ -74,8 +89,10 @@ class ProductoController extends BaseController
             'nombre'       => $this->request->getPost('nombre'),
             'descripcion'  => $this->request->getPost('descripcion'),
             'precio'       => $this->request->getPost('precio'),
+            'precio_vta'   => $this->request->getPost('precio_vta'),
             'categoria_id' => $this->request->getPost('categoria'),
             'stock'        => $this->request->getPost('stock'),
+            'stock_min' => $this->request->getPost('stock_min'),
             'imagen'       => $imagenPath,
             'eliminado'    => 0,
             'created_at'    => date('Y-m-d H:i:s'),
@@ -118,8 +135,10 @@ class ProductoController extends BaseController
             'nombre'       => $this->request->getPost('nombre'),
             'descripcion'  => $this->request->getPost('descripcion'),
             'precio'       => $this->request->getPost('precio'),
+            'precio_vta' => $this->request->getPost('precio_vta'),
             'categoria_id' => $this->request->getPost('categoria'),
             'stock'        => $this->request->getPost('stock'),
+            'stock_min' => $this->request->getPost('stock_min'),
             'imagen'       => $imagenPath,
             'updated_at'=> date('Y-m-d H:i:s'),
         ];

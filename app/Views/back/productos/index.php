@@ -1,7 +1,7 @@
 <?= $this->extend('front/layout/layouts') ?>
 <?= $this->section('contenedor') ?>
 
-<div class="container-fluid py-4">
+<div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h2 text-info">Listado de Productos</h1>
         <div>
@@ -26,8 +26,9 @@
                             <th>Descripción</th>
                             <th>Categoría</th>
                             <th>Precio</th>
-                            <th>P. Venta</th>
+                            <th>Precio Venta</th>
                             <th>Stock</th>
+                            <th>Stock Mínimo</th>
                             <th>Creado</th>
                             <th>Modificado</th>
                             <th>Imagen</th>
@@ -39,25 +40,27 @@
                             <?php foreach ($productos as $producto) : ?>
                                 <tr>
                                     <td><?= $producto['id'] ?></td>
-                                    <td class="text-nowrap"><?= esc($producto['nombre']) ?></td>
+                                    <td><?= esc($producto['nombre']) ?></td>
                                     <td>
                                         <div class="descripcion-celda" title="<?= esc($producto['descripcion']) ?>">
                                             <?= esc($producto['descripcion']) ?>
                                         </div>
                                     </td>
-                                    <td class="text-nowrap"><?= esc($producto['categoria_descripcion']) ?></td>
+                                    <td><?= esc($producto['categoria_descripcion']) ?></td>
                                     <td>$<?= number_format($producto['precio'], 2) ?></td>
-                                    <td>$<?= number_format($producto['precio'] * 1.3, 2) ?></td>
-                                    <td><?= $producto['stock'] ?></td>
-                                    <td class="text-nowrap"><?= date('d/m/Y', strtotime($producto['created_at'])) ?></td>
-                                    <td class="text-nowrap"><?= date('d/m/Y', strtotime($producto['updated_at'])) ?></td>
+                                    <td>$<?= number_format($producto['precio_vta'], 2) ?></td>
+                                    <td class="<?= ($producto['stock'] < $producto['stock_min']) ? 'text-danger fw-bold' : '' ?>">
+                                        <?= $producto['stock'] ?>
+                                        <?php if ($producto['stock'] < $producto['stock_min']) : ?>
+                                            <i class="fas fa-exclamation-triangle ms-1 text-warning" title="Stock bajo"></i>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?= $producto['stock_min'] ?></td>
+                                    <td><?= date('d/m/Y H:i', strtotime($producto['created_at'])) ?></td>
+                                    <td><?= date('d/m/Y H:i', strtotime($producto['updated_at'])) ?></td>
                                     <td>
                                         <?php if (!empty($producto['imagen'])): ?>
-                                            <img src="<?= base_url('public/' . $producto['imagen']) ?>" 
-                                                alt="Imagen producto" 
-                                                class="img-thumbnail border-info producto-imagen-thumbnail" 
-                                                style="max-width: 60px; max-height: 60px; object-fit: cover; cursor: pointer;" 
-                                                onclick="mostrarImagenModal('<?= base_url('public/' . $producto['imagen']) ?>', '<?= esc($producto['nombre']) ?>')">
+                                            <img src="<?= base_url('public/' . $producto['imagen']) ?>" alt="Imagen producto" class="img-thumbnail border-info" style="max-width: 60px; max-height: 60px; object-fit: cover;">
                                         <?php else: ?>
                                             <span class="text-muted">No hay imagen</span>
                                         <?php endif; ?>
@@ -65,12 +68,12 @@
                                     <td>
                                         <div class="btn-group">
                                             <a href="<?= base_url('back/productos/editar/' . $producto['id']) ?>" class="btn btn-sm btn-outline-info">
-                                                <i class="fas fa-edit"></i>
+                                                <i class="fas fa-edit"></i> Editar
                                             </a>
                                             <a href="<?= base_url('back/productos/eliminar/' . $producto['id']) ?>" 
                                             onclick="return confirm('¿Estás seguro de eliminar este producto?')" 
                                             class="btn btn-sm btn-outline-danger">
-                                                <i class="fas fa-trash"></i>
+                                                <i class="fas fa-trash"></i> Eliminar
                                             </a>
                                         </div>
                                     </td>
