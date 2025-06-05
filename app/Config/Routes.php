@@ -31,6 +31,10 @@ $routes->group('front/cliente', ['filter' => 'auth:2'], function($routes) {
 // Rutas de gestión de Productos del admin
 $routes->group('back', ['filter' => 'auth:1'], function($routes) {
     $routes->get('dashboard', 'Admin\PanelController::admin');
+    $routes->get('productos/papelera', 'Admin\ProductoController::papelera');
+    $routes->get('productos/restaurar/(:num)', 'Admin\ProductoController::restaurar/$1');
+    $routes->get('productos/eliminar_definitivo/(:num)', 'Admin\ProductoController::eliminar_definitivo/$1');
+
     $routes->get('productos', 'Admin\ProductoController::index');
     $routes->get('productos/crear', 'Admin\ProductoController::crear');
     $routes->post('productos/guardar', 'Admin\ProductoController::guardar');

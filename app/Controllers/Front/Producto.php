@@ -3,52 +3,44 @@
 namespace App\Controllers\Front;
 
 use App\Controllers\BaseController;
+use App\Models\ProductoModel;
+use App\Models\CategoriaModel;
 
 class Producto extends BaseController
 {
-    // Datos de productos estáticos
-    private $productos = [
-        [
-            'id' => 1,
-            'nombre' => 'Procesador Intel i9',
-            'descripcion' => 'Procesador de alto rendimiento',
-            'precio' => 343000,
-            'categoria' => 'Procesadores'
-        ],
-        [
-            'id' => 2,
-            'nombre' => 'Memoria RAM Corsair 16GB',
-            'descripcion' => 'Memoria RAM DDR4 16GB',
-            'precio' => 64000,
-            'categoria' => 'Memorias RAM'
-        ],
-        [
-            'id' => 3,
-            'nombre' => 'Placa Base ASUS ROG',
-            'descripcion' => 'Placa base gaming',
-            'precio' => 260000,
-            'categoria' => 'Placas Base'
-        ]
-    ];
+    protected $productoModel;
+    protected $categoriaModel;
+
+    public function __construct()
+    {
+        $this->productoModel = new ProductoModel();
+        $this->categoriaModel = new CategoriaModel();
+    }
 
     // Mostrar la lista de productos
     public function index()
-{
-    $categorias = array_unique(array_column($this->productos, 'categoria'));
+    {
+        // Traemos todos los productos activos con su categoría
+        $productos = $this->productoModel->getProductosConCategoria();
 
-    return view('front/productos/index', [
-        'productos' => $this->productos,
-        'categorias' => $categorias
-    ]);
-}
+        // Traemos todas las categorías activas para la barra lateral
+        $categoriasArray = $this->categoriaModel->where('activo', 1)->findAll();
+        $categorias = array_column($categoriasArray, 'descripcion');
 
+        return view('front/productos/index', [
+            'productos' => $productos,
+            'categorias' => $categorias
+        ]);
+    }
 
     // Ver detalles de un producto
     public function detalle($id)
     {
-        // Buscar el producto por ID
-        $producto = array_filter($this->productos, fn($producto) => $producto['id'] == $id);
-        $producto = reset($producto); // Obtener el primer producto encontrado
+        $producto = $this->productoModel->select('productos.*, categorias.descripcion as categoria')
+                                        ->join('categorias', 'categorias.id = productos.categoria_id', 'left')
+                                        ->where('productos.id', $id)
+                                        ->where('productos.eliminado', 0)
+                                        ->first();
 
         if (!$producto) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
@@ -60,14 +52,19 @@ class Producto extends BaseController
     // Filtrar productos por categoría
     public function categoria($categoria)
     {
-        $productos = array_filter($this->productos, fn($producto) => $producto['categoria'] == $categoria);
-        $categorias = array_unique(array_column($this->productos, 'categoria'));
+        $productos = $this->productoModel
+                         ->select('productos.*, categorias.descripcion as categoria')
+                         ->join('categorias', 'categorias.id = productos.categoria_id', 'left')
+                         ->where('categorias.descripcion', $categoria)
+                         ->where('productos.eliminado', 0)
+                         ->findAll();
+
+        $categoriasArray = $this->categoriaModel->where('activo', 1)->findAll();
+        $categorias = array_column($categoriasArray, 'descripcion');
 
         return view('front/productos/index', [
             'productos' => $productos,
             'categorias' => $categorias
         ]);
     }
-
-
 }
