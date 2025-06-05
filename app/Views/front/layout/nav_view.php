@@ -34,7 +34,7 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end nav-dropdown" aria-labelledby="userDropdown">
             <?php if(session()->get('usuario_logueado')): ?>
-              <?php if(session()->get('perfil_id') == 1): ?>
+              <?php if(session()->get('perfil_id') == 1 || session()->get('perfil_id') == 2): ?>
                 <li><a class="dropdown-item" href="<?= base_url('back/dashboard') ?>"><i class="bi bi-gear me-2"></i>Administrar</a></li>
               <?php endif; ?>
               <li><a class="dropdown-item" href="<?= site_url('LoginController/logout') ?>"><i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión</a></li>

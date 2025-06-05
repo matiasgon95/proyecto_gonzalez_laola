@@ -358,3 +358,32 @@
     max-width: 800px;
     margin: 0 auto;
 }
+
+/* Estilos para las miniaturas de imágenes en tablas */
+.producto-imagen-thumbnail {
+    transition: var(--transition-standard);
+    cursor: pointer;
+}
+
+.producto-imagen-thumbnail:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Estilos para el modal de imagen */
+.modal-content.bg-dark {
+    background-color: var(--color-card-bg) !important;
+    border: 1px solid var(--color-primary);
+}
+
+.modal-header.border-info,
+.modal-header.border-warning {
+    border-bottom-color: inherit;
+}
+
+#imagenAmpliada {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: var(--shadow-standard);
+}

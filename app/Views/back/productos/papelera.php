@@ -58,7 +58,11 @@
                                     <td class="text-nowrap"><?= date('d/m/Y', strtotime($producto['updated_at'])) ?></td>
                                     <td>
                                         <?php if (!empty($producto['imagen'])): ?>
-                                            <img src="<?= base_url('public/' . $producto['imagen']) ?>" alt="Imagen producto" class="img-thumbnail border-warning" style="max-width: 60px; max-height: 60px; object-fit: cover;">
+                                            <img src="<?= base_url('public/' . $producto['imagen']) ?>" 
+                                                alt="Imagen producto" 
+                                                class="img-thumbnail border-warning producto-imagen-thumbnail" 
+                                                style="max-width: 60px; max-height: 60px; object-fit: cover; cursor: pointer;" 
+                                                onclick="mostrarImagenModal('<?= base_url('public/' . $producto['imagen']) ?>', '<?= esc($producto['nombre']) ?>')">
                                         <?php else: ?>
                                             <span class="text-muted">No hay imagen</span>
                                         <?php endif; ?>
@@ -90,5 +94,29 @@
         </div>
     </div>
 </div>
+
+<!-- Modal para mostrar imagen ampliada -->
+<div class="modal fade" id="imagenModal" tabindex="-1" aria-labelledby="imagenModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content bg-dark">
+            <div class="modal-header border-warning">
+                <h5 class="modal-title text-warning" id="imagenModalLabel">Imagen del Producto</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img id="imagenAmpliada" src="" alt="Imagen ampliada" class="img-fluid" style="max-height: 70vh;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function mostrarImagenModal(imagenSrc, nombreProducto) {
+        document.getElementById('imagenAmpliada').src = imagenSrc;
+        document.getElementById('imagenModalLabel').textContent = 'Imagen: ' + nombreProducto;
+        var modal = new bootstrap.Modal(document.getElementById('imagenModal'));
+        modal.show();
+    }
+</script>
 
 <?= $this->endSection() ?>
