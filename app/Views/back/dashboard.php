@@ -1,47 +1,72 @@
 <?= $this->extend('front/layout/layouts') ?>
 <?= $this->section('contenedor') ?>
 
-<div class="admin-dashboard">
-    <div class="dashboard-header">
-        <h1 class="cyber-title">Panel de Administración</h1>
-        <p class="user-welcome">Bienvenido, <?= session('usuario_nombre') ?> <span class="role-badge">Administrador</span></p>
-    </div>
+<div class="container-fluid py-5 bg-dark text-info">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card bg-dark border-info mb-4">
+                    <div class="card-body text-info">
+                        <h1 class="display-4 text-center mb-4">Panel de Administración</h1>
+                        <p class="lead text-center mb-4">Bienvenido, <?= session('usuario_nombre') ?> 
+                            <span class="badge bg-info text-dark ms-2">Administrador</span>
+                        </p>
+                    </div>
+                </div>
 
-    <div class="admin-menu">
-        <div class="menu-item">
-            <a href="#" class="menu-link">
-                <i class="fas fa-users"></i>
-                <span>Gestión de Usuarios</span>
-            </a>
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card h-100 bg-dark border-info dashboard-card">
+                            <div class="card-body text-center">
+                                <a href="#" class="text-decoration-none text-info dashboard-link">
+                                    <i class="fas fa-users fa-3x mb-3"></i>
+                                    <h5 class="card-title">Gestión de Usuarios</h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card h-100 bg-dark border-info dashboard-card">
+                            <div class="card-body text-center">
+                                <a href="<?= base_url('back/productos') ?>" class="text-decoration-none text-info dashboard-link">
+                                    <i class="fas fa-box fa-3x mb-3"></i>
+                                    <h5 class="card-title">Gestión de Productos</h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card h-100 bg-dark border-info dashboard-card">
+                            <div class="card-body text-center">
+                                <a href="#" class="text-decoration-none text-info dashboard-link">
+                                    <i class="fas fa-shopping-cart fa-3x mb-3"></i>
+                                    <h5 class="card-title">Pedidos</h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card h-100 bg-dark border-info dashboard-card">
+                            <div class="card-body text-center">
+                                <a href="#" class="text-decoration-none text-info dashboard-link">
+                                    <i class="fas fa-chart-line fa-3x mb-3"></i>
+                                    <h5 class="card-title" style="font-size: 1.2rem;">Estadísticas</h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-5">
+                    <a href="<?= base_url('LoginController/logout') ?>" class="btn btn-outline-danger btn-lg">
+                        <i class="fas fa-power-off me-2"></i>Cerrar Sesión
+                    </a>
+                </div>
+            </div>
         </div>
-
-        <div class="menu-item">
-            <a href="<?= base_url('back/productos') ?>" class="menu-link">
-                <i class="fas fa-box"></i>
-                <span>Gestión de Productos</span>
-            </a>
-        </div>
-
-        <div class="menu-item">
-            <a href="#" class="menu-link">
-                <i class="fas fa-shopping-cart"></i>
-                <span>Pedidos</span>
-            </a>
-        </div>
-
-        <div class="menu-item">
-            <a href="#" class="menu-link">
-                <i class="fas fa-chart-line"></i>
-                <span>Estadísticas</span>
-            </a>
-        </div>
-    </div>
-
-    <div class="logout-section">
-        <a href="<?= base_url('LoginController/logout') ?>" class="logout-btn">
-            <i class="fas fa-power-off"></i>
-            <span>Cerrar Sesión</span>
-        </a>
     </div>
 </div>
 

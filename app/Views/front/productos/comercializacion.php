@@ -2,46 +2,72 @@
 
 <?= $this->section('contenedor'); ?>
 
-<h1>Comercialización</h1>
+<div class="container-fluid py-5 bg-dark text-info">
+    <div class="container">
+        <h1 class="display-4 text-center mb-5 text-info fw-bold">Comercialización</h1>
 
-<div class='container mt-5 mb-5'>
+        <div class="card bg-dark border-info mb-4">
+            <div class="card-body text-info">
+                <p class="lead">En <strong class="text-info">GL Technology</strong>, trabajamos para que tu experiencia de compra sea rápida, segura y eficiente. A continuación, te detallamos todo lo que necesitás saber sobre nuestros procesos de entrega, envío y formas de pago.</p>
+            </div>
+        </div>
 
-    <p>En <strong>GL Technology</strong>, trabajamos para que tu experiencia de compra sea rápida, segura y eficiente. A continuación, te detallamos todo lo que necesitás saber sobre nuestros procesos de entrega, envío y formas de pago.</p>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card h-100 bg-dark border-info hover-card">
+                    <div class="card-body text-info">
+                        <h3 class="card-title text-center mb-4">Tipos de Entregas</h3>
+                        <ul class="list-group list-group-flush bg-dark">
+                            <li class="list-group-item bg-dark text-info border-info">✓ Retiro en tienda: Sin costo adicional</li>
+                            <li class="list-group-item bg-dark text-info border-info">✓ Entrega programada: Coordina día y horario</li>
+                            <li class="list-group-item bg-dark text-info border-info">✓ Entrega inmediata: Disponible según stock</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-    <h3>Tipos de Entregas</h3>
-    <p>Ofrecemos diferentes opciones para que elijas la que mejor se adapte a tus necesidades:</p>
-    
-    <ul>
-        <li>Retiro en tienda: Podés retirar tu compra en nuestra sucursal sin costo adicional. Te avisaremos por mail o WhatsApp cuando el pedido esté listo.</li>
-        <li>Entrega programada: Coordinamos con vos día y franja horaria para que recibas tu pedido en el momento más conveniente.</li>
-        <li>Entrega inmediata (sujeta a disponibilidad): Para productos en stock, ofrecemos entregas el mismo día dentro de determinadas zonas.</li>
-    </ul>
+            <div class="col-md-6">
+                <div class="card h-100 bg-dark border-info hover-card">
+                    <div class="card-body text-info">
+                        <h3 class="card-title text-center mb-4">Formas de Envío</h3>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item bg-dark text-info border-info">✓ Correo y transportes reconocidos</li>
+                            <li class="list-group-item bg-dark text-info border-info">✓ Envío propio en zonas cercanas</li>
+                            <li class="list-group-item bg-dark text-info border-info">✓ Servicio de envío exprés</li>
+                        </ul>
+                        <p class="mt-3 fst-italic">El costo varía según destino y modalidad</p>
+                    </div>
+                </div>
+            </div>
 
-    <h3>Formas de Envío</h3>
-    <p>Realizamos envíos a todo el país mediante los siguientes métodos:</p>
-        <ul>
-            <li>Correo y transportes: Trabajamos con empresas de logística reconocidas (Andreani, Correo Argentino, OCA, entre otras) para asegurar una entrega segura y a tiempo.</li>
-            <li>Envío propio: En zonas cercanas a nuestra tienda, ofrecemos reparto propio para mayor rapidez.</li>
-            <li>Envío exprés: Si necesitás tu pedido con urgencia, consultanos por nuestro servicio de envío exprés.</li>
-        </ul>
-    <i>El costo del envío puede variar según el destino, el tamaño del paquete y la modalidad seleccionada. Consultá al momento de la compra para más detalles.</i>
+            <div class="col-md-6">
+                <div class="card h-100 bg-dark border-info hover-card">
+                    <div class="card-body text-info">
+                        <h3 class="card-title text-center mb-4">Formas de Pago</h3>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item bg-dark text-info border-info">✓ Efectivo (en tienda)</li>
+                            <li class="list-group-item bg-dark text-info border-info">✓ Mercado Pago</li>
+                            <li class="list-group-item bg-dark text-info border-info">✓ Tarjetas de crédito/débito</li>
+                            <li class="list-group-item bg-dark text-info border-info">✓ Planes Ahora 3, 6, 12</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-    <h3>Formas de Pago</h3>
-    <p>Contamos con múltiples opciones para que puedas abonar tu compra de manera fácil y segura:</p>
-    <ul>
-        <li>Efectivo (solo en retiro por tienda o entrega propia)Transferencia bancaria</li>
-        <li>Mercado Pago (tarjetas de crédito, débito, dinero en cuenta, cuotas sin interés en promociones seleccionadas)</li>
-        <li>Pago con tarjeta en tienda física o mediante link de pago</li>
-        <li>Planes Ahora 3, 6, 12 (según promociones vigentes)</li>
-    </ul>
-
-    <h3>Información Adicional</h3>
-    <ul>
-        <li>Todos nuestros productos cuentan con garantía oficial del fabricante.</li>
-        <li>Emitimos factura A o B, según la necesidad del cliente.</li>
-        <li>Asesoramiento personalizado: si tenés dudas sobre compatibilidad de hardware, rendimiento o necesitás ayuda para armar tu equipo, estamos para ayudarte.</li>
-    </ul>
+            <div class="col-md-6">
+                <div class="card h-100 bg-dark border-info hover-card">
+                    <div class="card-body text-info">
+                        <h3 class="card-title text-center mb-4">Información Adicional</h3>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item bg-dark text-info border-info">✓ Garantía oficial del fabricante</li>
+                            <li class="list-group-item bg-dark text-info border-info">✓ Factura A o B</li>
+                            <li class="list-group-item bg-dark text-info border-info">✓ Asesoramiento personalizado</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
 
 <?= $this->endSection(); ?>

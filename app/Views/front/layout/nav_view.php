@@ -27,7 +27,7 @@
       <!-- Iconos usuario / carrito -->
       <div class="iconos-nav">
       <div class="dropdown dropdown-hover">
-        <a href="#" class="text-dark" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <a href="<?= base_url('front/login') ?>" class="text-dark" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="bi bi-person-circle fs-4"></i>
         </a>
         <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="userDropdown">
