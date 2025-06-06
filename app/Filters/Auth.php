@@ -2,39 +2,32 @@
 
 namespace App\Filters;
 
+use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
-use CodeIgniter\Filters\FilterInterface;
 
 class Auth implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        // Si no hay sesión, redirigir al login
+        // Si el usuario no está logueado, redirigir al login
         if (!session()->get('usuario_logueado')) {
-            return redirect()->to('front/login');
+            return redirect()->to(site_url('front/login'));
         }
-
-        // Si hay argumentos (ej. perfil requerido), verificar
-        if ($arguments) {
-            $perfilRequerido = $arguments[0]; // Ej: '1' para admin
-            $perfilUsuario   = session()->get('perfil_id');
-
-            if ($perfilUsuario != $perfilRequerido) {
-                // Si no tiene permiso, redirigir al panel correcto
-                if ($perfilUsuario == 1) {
-                    return redirect()->to('back/dashboard'); // admin
-                } else {
-                    return redirect()->to('front/cliente/dashboard'); // cliente
-                }
-            }
+        
+        // Verificar el perfil si se especifica en los argumentos
+        if (!empty($arguments) && session()->get('perfil_id') != $arguments[0]) {
+            return redirect()->to(site_url('/'));
         }
-
-        // Si todo está bien, continuar
+        
+        // Si intenta acceder a rutas de admin y no es admin, redirigir
+        if (strpos($request->getUri()->getPath(), 'admin') !== false && session()->get('perfil_id') != 1) {
+            return redirect()->to(site_url('/'));
+        }
     }
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        // No se hace nada después
+        // No hacemos nada después
     }
 }

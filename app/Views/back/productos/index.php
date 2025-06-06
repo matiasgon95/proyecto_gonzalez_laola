@@ -28,7 +28,7 @@
                             <th>Precio</th>
                             <th>P.Vta</th>
                             <th>Stock</th>
-                            <th>Mín</th>
+                            <th>Mínimo</th>
                             <th>Creado</th>
                             <th>Modificado</th>
                             <th>Imagen</th>

@@ -72,3 +72,22 @@ $routes->get('carrito/clear', 'Front\CarritoController::clear');
 // Rutas para ver facturas
 $routes->get('vista_compras/(:num)', 'Front\CarritoController::ver_factura/$1');
 $routes->get('mis_compras/(:num)', 'Front\CarritoController::ver_facturas_usuario/$1');
+
+
+// Rutas de administración de usuarios
+$routes->group('admin', ['filter' => 'auth'], function($routes) {
+    $routes->get('dashboard', 'Admin\PanelController::admin');
+    
+    // Rutas de gestión de usuarios
+    $routes->get('usuarios', 'Admin\UsuarioController::index');
+    $routes->get('usuarios/clientes', 'Admin\UsuarioController::clientes');
+    $routes->get('usuarios/administradores', 'Admin\UsuarioController::administradores');
+    $routes->get('usuarios/agregar/(:segment)', 'Admin\UsuarioController::agregar/$1');
+    $routes->get('usuarios/agregar', 'Admin\UsuarioController::agregar');
+    $routes->post('usuarios/guardar', 'Admin\UsuarioController::guardar');
+    $routes->get('usuarios/editar/(:num)', 'Admin\UsuarioController::editar/$1');
+    $routes->post('usuarios/actualizar/(:num)', 'Admin\UsuarioController::actualizar/$1');
+    $routes->get('usuarios/eliminar/(:num)', 'Admin\UsuarioController::eliminar/$1');
+    $routes->get('usuarios/bloquear/(:num)', 'Admin\UsuarioController::bloquear/$1');
+    $routes->get('usuarios/desbloquear/(:num)', 'Admin\UsuarioController::desbloquear/$1');
+});
