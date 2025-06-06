@@ -38,5 +38,16 @@
 
     <!--Seccion del pie de página-->
     <?php echo $this->include('front/layout/footer_view');?>
+    
+    <!-- Icono flotante del carrito -->
+    <?php $cart = \Config\Services::cart(); ?>
+    <?php if ($cart->totalItems() > 0): ?>
+    <a href="<?= base_url('carrito'); ?>" class="floating-cart">
+        <div class="cart-icon">
+            <i class="bi bi-cart-fill"></i>
+            <span class="cart-count"><?= $cart->totalItems(); ?></span>
+        </div>
+    </a>
+    <?php endif; ?>
 </body>
 </html>

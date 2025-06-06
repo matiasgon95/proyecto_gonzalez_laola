@@ -30,7 +30,7 @@
                     <div class="col-md-6 col-lg-3">
                         <div class="card h-100 bg-dark border-info dashboard-card">
                             <div class="card-body text-center">
-                                <a href="<?= base_url('front') ?>" class="text-decoration-none text-info dashboard-link">
+                                <a href="<?= base_url('productos') ?>" class="text-decoration-none text-info dashboard-link">
                                     <i class="fas fa-shopping-cart fa-3x mb-3"></i>
                                     <h5 class="card-title">Comprar Productos</h5>
                                 </a>

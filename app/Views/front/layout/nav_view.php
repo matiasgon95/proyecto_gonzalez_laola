@@ -44,8 +44,16 @@
             <?php endif; ?>
           </ul>
         </div>
-        <a href="<?= base_url('sitio_en_construccion'); ?>" class="nav-icon-link">
-          <i class="bi bi-cart3 fs-4"></i>
+        <!-- Reemplazar el enlace actual del carrito por este -->
+        <a href="<?= base_url('carrito'); ?>" class="nav-icon-link position-relative">
+            <i class="bi bi-cart3 fs-4"></i>
+            <?php $cart = \Config\Services::cart(); ?>
+            <?php if ($cart->totalItems() > 0): ?>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                <?= $cart->totalItems(); ?>
+                <span class="visually-hidden">productos en el carrito</span>
+            </span>
+            <?php endif; ?>
         </a>
       </div>
     </div>
