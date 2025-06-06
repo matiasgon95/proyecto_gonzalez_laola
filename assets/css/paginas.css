@@ -516,6 +516,7 @@
     }
 }
 
+
 /* Ajustes para la columna de acciones */
 .table th:nth-child(12), /* Acciones en index.php */
 .table td:nth-child(12) {
@@ -563,6 +564,7 @@
         max-width: 100px;
     }
 }
+
 
 /* Estilos para la papelera */
 .table-warning {
@@ -648,4 +650,13 @@
 .table-dark .hora-celda {
     color: white; /* Color cian para la tabla oscura */
     font-weight: 600;
+}
+
+/* Estilos para truncar descripciones en tablas */
+.descripcion-celda {
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
 }

@@ -15,22 +15,26 @@
         </div>
     <?php endif; ?>
     
+    <!-- Título del producto -->
+    <h1 class="producto-titulo mb-4"><?= esc($producto['nombre']); ?></h1>
+    
     <div class="row">
+        <!-- Columna izquierda: Imagen -->
         <div class="col-md-6">
-            <div class="producto-imagen-container">
-                <img src="<?= base_url('public/' . $producto['imagen']); ?>" class="producto-imagen" alt="<?= esc($producto['nombre']); ?>">
+            <div class="producto-imagen-container mb-4">
+                <img src="<?= base_url('public/' . $producto['imagen']); ?>" class="producto-imagen img-fluid" alt="<?= esc($producto['nombre']); ?>">
             </div>
         </div>
+        
+        <!-- Columna derecha: Precio y botones -->
         <div class="col-md-6">
             <div class="producto-info">
-                <h1 class="producto-titulo"><?= esc($producto['nombre']); ?></h1>
-
-                <div class="producto-precio mb-3">
+                <div class="producto-precio mb-4">
                     <span class="precio-etiqueta">Precio:</span>
                     <span class="precio-valor">$<?= esc($producto['precio_vta']); ?></span>
                 </div>
 
-                <div class="producto-stock mb-3">
+                <div class="producto-stock mb-4">
                     <?php
                         $stock = $producto['stock'];
                         $stock_min = $producto['stock_min'];
@@ -46,11 +50,6 @@
                     <?php endif; ?>
                 </div>
 
-                <div class="producto-descripcion">
-                    <h3>Descripción</h3>
-                    <p><?= esc($producto['descripcion']); ?></p>
-                </div>
-
                 <!-- Formulario con selector de cantidad -->
                 <div class="producto-acciones mt-4">
                     <form action="<?= base_url('carrito/add'); ?>" method="post">
@@ -61,20 +60,32 @@
                         <input type="hidden" name="imagen" value="<?= $producto['imagen']; ?>">
                         
                         <div class="row mb-3">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label for="cantidad" class="form-label">Cantidad:</label>
                                 <input type="number" name="qty" id="cantidad" class="form-control" value="1" min="1" max="<?= $producto['stock']; ?>">
                             </div>
                         </div>
                         
-                        <button type="submit" class="btn btn-info text-dark btn-comprar">
-                            <i class="fas fa-cart-plus me-2"></i>Añadir al carrito
-                        </button>
-                        <a href="<?= base_url('productos'); ?>" class="btn btn-outline-secondary btn-volver">
-                            <i class="fas fa-arrow-left me-2"></i>Volver al catálogo
-                        </a>
+                        <div class="d-grid gap-2 d-md-flex">
+                            <button type="submit" class="btn btn-info text-dark btn-comprar">
+                                <i class="fas fa-cart-plus me-2"></i>Añadir al carrito
+                            </button>
+                            <a href="<?= base_url('productos'); ?>" class="btn btn-outline-secondary btn-volver">
+                                <i class="fas fa-arrow-left me-2"></i>Volver al catálogo
+                            </a>
+                        </div>
                     </form>
                 </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Descripción debajo de la imagen -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="producto-descripcion p-3 border rounded">
+                <h3>Descripción</h3>
+                <p><?= esc($producto['descripcion']); ?></p>
             </div>
         </div>
     </div>

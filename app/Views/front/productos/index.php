@@ -51,7 +51,7 @@
                                     <span class="badge bg-info text-dark mb-2"><?= esc($producto['categoria']); ?></span>  <!-- Categoría con badge -->
                                     <!-- <p class="card-text flex-grow-1"><?= esc($producto['descripcion']); ?></p> -->
                                     <div class="mt-auto">
-                                        <p class="card-text text-info mb-3">$<?= number_format($producto['precio'], 2); ?></p>
+                                        <p class="card-text text-info mb-3">$<?= number_format($producto['precio_vta'], 2); ?></p>
                                         <a href="<?= base_url('producto/detalle/' . $producto['id']); ?>" 
                                         class="btn btn-info text-black rounded-pill w-100 mb-2">
                                         <i class="fas fa-eye me-2"></i>Ver detalle

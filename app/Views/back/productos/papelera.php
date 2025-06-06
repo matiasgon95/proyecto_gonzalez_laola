@@ -24,15 +24,17 @@
     <div class="card shadow border border-warning">
         <div class="card-body p-0 p-sm-2"> <!-- Reducir aún más el padding en móviles -->
             <div class="table-responsive">
-                <table class="table table-hover table-warning table-striped align-middle mb-0">
-                    <thead class="table-dark text-warning">
+                <table class="table table-hover table-dark table-striped align-middle mb-0">
+                    <thead class="table-warning text-black">
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
                             <th>Descripción</th>
                             <th>Categoría</th>
                             <th>Precio</th>
+                            <th>P.Vta</th>
                             <th>Stock</th>
+                            <th>Mín</th>
                             <th>Creado</th>
                             <th>Modificado</th>
                             <th>Imagen</th>
@@ -52,7 +54,14 @@
                                     </td>
                                     <td class="text-nowrap"><?= esc($producto['categoria_descripcion']) ?></td>
                                     <td>$<?= number_format($producto['precio'], 2) ?></td>
-                                    <td><?= $producto['stock'] ?></td>
+                                    <td>$<?= number_format($producto['precio_vta'], 2) ?></td>
+                                    <td class="<?= ($producto['stock'] < $producto['stock_min']) ? 'text-danger fw-bold' : '' ?>">
+                                        <?= $producto['stock'] ?>
+                                        <?php if ($producto['stock'] < $producto['stock_min']) : ?>
+                                            <i class="fas fa-exclamation-triangle ms-1 text-warning" title="Stock bajo"></i>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?= $producto['stock_min'] ?></td>
                                     <td class="fecha-celda">
                                         <div><?= date('d/m/y', strtotime($producto['created_at'])) ?></div>
                                         <div class="hora-celda"><?= date('H:i', strtotime($producto['created_at'])) ?></div>
@@ -66,7 +75,7 @@
                                             <img src="<?= base_url('public/' . $producto['imagen']) ?>" 
                                                  alt="Imagen producto" 
                                                  class="img-thumbnail border-warning" 
-                                                 style="max-width: 60px; max-height: 60px; object-fit: cover; margin-left: 10px;"
+                                                 style="max-width: 60px; max-height: 60px; object-fit: cover;"
                                                  onclick="mostrarImagenModal('<?= base_url('public/' . $producto['imagen']) ?>', '<?= esc($producto['nombre']) ?>')">
                                         <?php else: ?>
                                             <span class="text-muted">No hay imagen</span>
@@ -90,7 +99,7 @@
                             <?php endforeach; ?>
                         <?php else : ?>
                             <tr>
-                                <td colspan="10" class="text-center text-muted">No hay productos eliminados.</td>
+                                <td colspan="12" class="text-center text-muted">No hay productos eliminados.</td>
                             </tr>
                         <?php endif; ?>
                     </tbody>
