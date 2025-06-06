@@ -1,7 +1,7 @@
 <?= $this->extend('front/layout/layouts') ?>
 <?= $this->section('contenedor') ?>
 
-<div class="container py-4">
+<div class="container-fluid py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h2 text-warning">Papelera de Productos Eliminados</h1>
         <a href="<?= base_url('back/productos') ?>" class="btn btn-info text-black rounded-pill px-4">
@@ -9,7 +9,6 @@
         </a>
     </div>
     
-
     <?php if(session()->getFlashdata('exito')): ?>
         <div class="alert alert-success">
             <?= session()->getFlashdata('exito') ?>
@@ -23,9 +22,9 @@
     <?php endif; ?>
 
     <div class="card shadow border border-warning">
-        <div class="card-body">
+        <div class="card-body p-0 p-sm-2"> <!-- Reducir aún más el padding en móviles -->
             <div class="table-responsive">
-                <table class="table table-hover table-warning table-striped align-middle">
+                <table class="table table-hover table-warning table-striped align-middle mb-0">
                     <thead class="table-dark text-warning">
                         <tr>
                             <th>ID</th>
@@ -45,22 +44,30 @@
                             <?php foreach ($productos as $producto) : ?>
                                 <tr>
                                     <td><?= $producto['id'] ?></td>
-                                    <td><?= esc($producto['nombre']) ?></td>
-                                    <td><?= esc($producto['descripcion']) ?></td>
-                                    <td><?= esc($producto['categoria_descripcion']) ?></td>
-                                    <td>$<?= number_format($producto['precio'], 2) ?></td>
-                                    <td class="<?= ($producto['stock'] < $producto['stock_min']) ? 'text-danger fw-bold' : '' ?>">
-                                        <?= $producto['stock'] ?>
-                                        <?php if ($producto['stock'] < $producto['stock_min']) : ?>
-                                            <i class="fas fa-exclamation-triangle ms-1 text-warning" title="Stock bajo"></i>
-                                        <?php endif; ?>
+                                    <td class="text-nowrap"><?= esc($producto['nombre']) ?></td>
+                                    <td>
+                                        <div class="descripcion-celda" title="<?= esc($producto['descripcion']) ?>">
+                                            <?= esc($producto['descripcion']) ?>
+                                        </div>
                                     </td>
-                                    <td><?= $producto['stock_min'] ?></td>
-                                    <td><?= date('d/m/Y H:i', strtotime($producto['created_at'])) ?></td>
-                                    <td><?= date('d/m/Y H:i', strtotime($producto['updated_at'])) ?></td>
+                                    <td class="text-nowrap"><?= esc($producto['categoria_descripcion']) ?></td>
+                                    <td>$<?= number_format($producto['precio'], 2) ?></td>
+                                    <td><?= $producto['stock'] ?></td>
+                                    <td class="fecha-celda">
+                                        <div><?= date('d/m/y', strtotime($producto['created_at'])) ?></div>
+                                        <div class="hora-celda"><?= date('H:i', strtotime($producto['created_at'])) ?></div>
+                                    </td>
+                                    <td class="fecha-celda">
+                                        <div><?= date('d/m/y', strtotime($producto['updated_at'])) ?></div>
+                                        <div class="hora-celda"><?= date('H:i', strtotime($producto['updated_at'])) ?></div>
+                                    </td>
                                     <td>
                                         <?php if (!empty($producto['imagen'])): ?>
-                                            <img src="<?= base_url('public/' . $producto['imagen']) ?>" alt="Imagen producto" class="img-thumbnail border-warning" style="max-width: 60px; max-height: 60px; object-fit: cover;">
+                                            <img src="<?= base_url('public/' . $producto['imagen']) ?>" 
+                                                 alt="Imagen producto" 
+                                                 class="img-thumbnail border-warning" 
+                                                 style="max-width: 60px; max-height: 60px; object-fit: cover; margin-left: 10px;"
+                                                 onclick="mostrarImagenModal('<?= base_url('public/' . $producto['imagen']) ?>', '<?= esc($producto['nombre']) ?>')">
                                         <?php else: ?>
                                             <span class="text-muted">No hay imagen</span>
                                         <?php endif; ?>
@@ -69,15 +76,14 @@
                                         <div class="btn-group">
                                             <a href="<?= base_url('back/productos/restaurar/' . $producto['id']) ?>" 
                                                onclick="return confirm('¿Restaurar este producto?')" 
-                                               class="btn btn-sm btn-outline-success">
-                                                <i class="fas fa-undo"></i> Restaurar
+                                               class="btn btn-sm btn-outline-success" title="Restaurar">
+                                                <i class="fas fa-undo"></i>
                                             </a>
                                             <a href="<?= base_url('back/productos/eliminar_definitivo/' . $producto['id']) ?>"
                                                 onclick="return confirm('¿Estás seguro de eliminar este producto de forma permanente?')"
-                                                class="btn btn-sm btn-outline-danger">
-                                                <i class="fas fa-times"></i> Eliminar Definitivo
+                                                class="btn btn-sm btn-outline-danger" title="Eliminar definitivamente">
+                                                <i class="fas fa-times"></i>
                                             </a>
-                                            <!-- Aquí podrías poner un botón para eliminar físicamente si quieres -->
                                         </div>
                                     </td>
                                 </tr>
@@ -102,8 +108,10 @@
                 <h5 class="modal-title text-warning" id="imagenModalLabel">Imagen del Producto</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body text-center">
-                <img id="imagenAmpliada" src="" alt="Imagen ampliada" class="img-fluid" style="max-height: 70vh;">
+            <div class="modal-body">
+                <div class="modal-img-container">
+                    <img id="imagenModalSrc" src="" alt="Imagen ampliada" class="img-fluid">
+                </div>
             </div>
         </div>
     </div>
@@ -111,7 +119,7 @@
 
 <script>
     function mostrarImagenModal(imagenSrc, nombreProducto) {
-        document.getElementById('imagenAmpliada').src = imagenSrc;
+        document.getElementById('imagenModalSrc').src = imagenSrc;
         document.getElementById('imagenModalLabel').textContent = 'Imagen: ' + nombreProducto;
         var modal = new bootstrap.Modal(document.getElementById('imagenModal'));
         modal.show();

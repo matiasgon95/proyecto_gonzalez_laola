@@ -105,7 +105,9 @@
 .navbar-nav .nav-link:hover::after {
     width: 80%;
 }
-font-size: 1.2rem;
+
+.navbar-nav .nav-link {
+    font-size: 1.2rem;
     margin: 0 15px;
     text-transform: uppercase;
     font-weight: 500;
