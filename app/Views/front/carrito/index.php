@@ -76,7 +76,7 @@
                                     </tbody>
                                     <tfoot class="table-dark">
                                         <tr>
-                                            <td colspan="4" class="text-end fw-bold">Gran total:</td>
+                                            <td colspan="4" class="text-end fw-bold">Total de la compra:</td>
                                             <td class="fw-bold text-info">$ <?= number_format($gran_total, 2) ?></td>
                                             <td></td>
                                         </tr>

@@ -144,10 +144,7 @@ class CarritoController extends BaseController
     {
         $this->cart = \Config\Services::cart();
         
-        $this->cart->update(array(
-            'rowid' => $rowid,
-            'qty'   => 0
-        ));
+        $this->cart->remove($rowid);
         
         return redirect()->to(base_url('carrito'));
     }
