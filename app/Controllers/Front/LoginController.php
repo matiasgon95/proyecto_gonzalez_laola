@@ -36,17 +36,17 @@ class LoginController extends Controller
         $usuario = $this->usuarioModel->obtener_por_email($email);
 
         if ($usuario) {
-            if (password_verify($pass, $usuario['pass'])) {
+            if (password_verify($pass, $usuario->pass)) {
                 // Guardar en sesión
                 $this->session->set([
-                    'usuario_id'       => $usuario['id'],
-                    'usuario_email'    => $usuario['email'],
-                    'usuario_nombre'   => $usuario['nombre'],
-                    'perfil_id'        => $usuario['perfil_id'], // <-- esto es nuevo
+                    'usuario_id'       => $usuario->id,
+                    'usuario_email'    => $usuario->email,
+                    'usuario_nombre'   => $usuario->nombre,
+                    'perfil_id'        => $usuario->perfil_id, // <-- esto es nuevo
                     'usuario_logueado' => true
                 ]);
                 // Redirigir según perfil
-                if ($usuario['perfil_id'] == 1) {
+                if ($usuario->perfil_id == 1) {
                     return redirect()->to('back/dashboard'); // Admin
                 } else {
                     return redirect()->to('front/cliente/dashboard'); // Cliente
