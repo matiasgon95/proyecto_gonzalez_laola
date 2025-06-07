@@ -68,7 +68,7 @@
                                         </a>
                                         
                                         <!-- Botón Agregar al Carrito -->
-                                        <form action="<?= base_url('carrito/add'); ?>" method="post" class="mt-2">
+                                        <form action="<?= base_url('carrito_agrega'); ?>" method="post" class="mt-2">
                                             <?= csrf_field() ?>
                                             <input type="hidden" name="id" value="<?= $producto['id']; ?>">
                                             <input type="hidden" name="nombre_prod" value="<?= $producto['nombre']; ?>">

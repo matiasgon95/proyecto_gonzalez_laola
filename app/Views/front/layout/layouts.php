@@ -74,7 +74,9 @@
                 </div>
             </div>
             <div class="cart-modal-footer">
-                <button type="button" class="btn btn-primary" id="continueShoppingBtn">Seguir comprando</button>
+                <button type="button" class="btn btn-info btn-sm" id="continueShoppingBtn"><i class="fas fa-shopping-basket me-1"></i>Seguir comprando</button>
+                <button type="button" class="btn btn-outline-danger btn-sm btn-cart-clear"><i class="fas fa-trash me-1"></i>Vaciar carrito</button>
+                <button type="button" class="btn btn-info btn-sm btn-cart-checkout"><i class="fas fa-shopping-cart me-1"></i>Finalizar compra</button>
             </div>
         </div>
     </div>

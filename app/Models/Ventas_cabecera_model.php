@@ -10,7 +10,7 @@ class Ventas_cabecera_model extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
-    protected $allowedFields    = ['usuario_id', 'total_venta'];
+    protected $allowedFields    = ['usuario_id', 'total_venta', 'datos_adicionales'];
     protected $useTimestamps    = true;
     protected $createdField     = 'created_at';
     protected $updatedField     = 'updated_at';

@@ -443,6 +443,7 @@
     justify-content: space-between;
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 0 0 10px 10px;
+    gap: 10px; /* Añadir espacio entre botones */
 }
 
 /* Estilos para los productos en el carrito modal */

@@ -29,9 +29,6 @@
             <span></span> <!-- Elemento vacío para mantener el justify-content-between -->
         </div>
         
-        <div class="cart-actions mt-3 d-flex justify-content-between">
-            <button class="btn btn-outline-danger btn-sm btn-cart-clear"><i class="fas fa-trash me-1"></i>Vaciar carrito</button>
-            <button class="btn btn-info btn-sm btn-cart-checkout"><i class="fas fa-shopping-cart me-1"></i>Finalizar compra</button>
-        </div>
+        <!-- Los botones se han movido al footer del modal -->
     </div>
 <?php endif; ?>

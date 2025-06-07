@@ -56,20 +56,20 @@ $routes->get('producto/detalle/(:num)', 'Front\Producto::detalle/$1');
 $routes->get('producto/categoria/(:any)', 'Front\Producto::categoria/$1');
 
 // Rutas del carrito de compras
+// Rutas del carrito
 $routes->get('carrito', 'Front\CarritoController::index');
-$routes->post('carrito/add', 'Front\CarritoController::add');
-$routes->get('carrito_suma/(:any)', 'Front\CarritoController::suma/$1');
-$routes->get('carrito_resta/(:any)', 'Front\CarritoController::resta/$1');
-$routes->get('carrito_elimina/(:any)', 'Front\CarritoController::remove/$1');
-$routes->get('carrito_vaciar', 'Front\CarritoController::clear');
+$routes->post('carrito_agrega', 'Front\CarritoController::add');
 $routes->post('carrito_actualiza', 'Front\CarritoController::actualiza_carrito');
-$routes->get('carrito_comprar', 'Front\CarritoController::comprar');
-$routes->post('carrito/update', 'Front\CarritoController::update');
-$routes->get('carrito/remove/(:any)', 'Front\CarritoController::remove/$1');
-$routes->get('carrito/clear', 'Front\CarritoController::clear');
+$routes->get('carrito_suma/(:segment)', 'Front\CarritoController::suma/$1');
+$routes->get('carrito_resta/(:segment)', 'Front\CarritoController::resta/$1');
+$routes->get('carrito_elimina/(:segment)', 'Front\CarritoController::remove/$1');
+$routes->get('carrito_vaciar', 'Front\CarritoController::clear');
 $routes->get('carrito/mini', 'Front\CarritoController::mini');
+$routes->get('carrito/count', 'Front\CarritoController::count');
 
-// Rutas para ver facturas
+// Rutas de checkout
+$routes->get('carrito_comprar', 'Front\CarritoController::comprar');
+$routes->post('carrito_confirmar', 'Front\CarritoController::confirmar');
 $routes->get('vista_compras/(:num)', 'Front\CarritoController::ver_factura/$1');
 $routes->get('mis_compras/(:num)', 'Front\CarritoController::ver_facturas_usuario/$1');
 

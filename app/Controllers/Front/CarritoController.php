@@ -219,6 +219,64 @@ class CarritoController extends BaseController
         }
         
         // Verificar si el usuario está logueado
+        if (!session()->get('usuario_logueado')) {
+            $this->session->setFlashdata('mensaje', 'Debe iniciar sesión para realizar la compra.');
+            return redirect()->to(base_url('front/login'));
+        }
+        
+        // Cargar los modelos necesarios
+        $productoModel = new \App\Models\ProductoModel();
+        
+        // Validar stock y filtrar productos válidos
+        $productos_validos = [];
+        $productos_sin_stock = [];
+        $subtotal = 0;
+        
+        foreach ($carrito_contents as $item) {
+            $producto = $productoModel->find($item['id']);
+            
+            if ($producto && $producto['stock'] >= $item['qty']) {
+                $productos_validos[] = $item;
+                $subtotal += $item['subtotal'];
+            } else {
+                $productos_sin_stock[] = $item['name'];
+            }
+        }
+        
+        // Si hay productos sin stock suficiente, mostrar mensaje y volver al carrito
+        if (!empty($productos_sin_stock)) {
+            $mensaje = 'Los siguientes productos no tienen stock suficiente y fueron eliminados del carrito: ' . 
+                       implode(', ', $productos_sin_stock);
+            $this->session->setFlashdata('mensaje', $mensaje);
+            return redirect()->to(base_url('carrito'));
+        }
+        
+        // Si no hay productos válidos, no se registra la venta
+        if (empty($productos_validos)) {
+            $this->session->setFlashdata('mensaje', 'No hay productos válidos para registrar la venta.');
+            return redirect()->to(base_url('carrito'));
+        }
+        
+        // Cargar la vista de checkout
+        $data = [
+            'titulo' => 'Finalizar Compra',
+            'cart' => $productos_validos,
+            'subtotal' => $subtotal
+        ];
+        
+        return view('front/carrito/checkout', $data);
+    }
+    
+    public function confirmar()
+    {
+        // Verificar si hay productos en el carrito
+        $carrito_contents = $this->cart->contents();
+        if (empty($carrito_contents)) {
+            $this->session->setFlashdata('mensaje', 'No hay productos en el carrito para realizar la compra.');
+            return redirect()->to(base_url('carrito'));
+        }
+        
+        // Verificar si el usuario está logueado
         if (!session()->get('id_usuario')) {
             $this->session->setFlashdata('mensaje', 'Debe iniciar sesión para realizar la compra.');
             return redirect()->to(base_url('front/login'));
@@ -260,10 +318,33 @@ class CarritoController extends BaseController
             return redirect()->to(base_url('carrito'));
         }
         
+        // Obtener datos del formulario
+        $metodo_entrega = $this->request->getPost('metodo_entrega');
+        $metodo_pago = $this->request->getPost('metodo_pago');
+        $costo_envio = (float)$this->request->getPost('costo_envio');
+        $total_final = (float)$this->request->getPost('total');
+        
+        // Datos adicionales para guardar
+        $datos_adicionales = [
+            'nombre' => $this->request->getPost('nombre'),
+            'email' => $this->request->getPost('email'),
+            'telefono' => $this->request->getPost('telefono'),
+            'metodo_entrega' => $metodo_entrega,
+            'metodo_pago' => $metodo_pago
+        ];
+        
+        // Si es envío a domicilio, guardar dirección
+        if ($metodo_entrega === 'envio_domicilio') {
+            $datos_adicionales['direccion'] = $this->request->getPost('direccion');
+            $datos_adicionales['ciudad'] = $this->request->getPost('ciudad');
+            $datos_adicionales['codigo_postal'] = $this->request->getPost('codigo_postal');
+        }
+        
         // Registrar cabecera de la venta
         $nueva_venta = [
             'usuario_id' => $this->session->get('id_usuario'),
-            'total_venta' => $total
+            'total_venta' => $total_final,
+            'datos_adicionales' => json_encode($datos_adicionales)
         ];
         $venta_id = $ventasModel->insert($nueva_venta);
         
@@ -283,7 +364,7 @@ class CarritoController extends BaseController
         
         // Vaciar carrito y mostrar confirmación
         $this->cart->destroy();
-        $this->session->setFlashdata('mensaje', 'Venta registrada exitosamente.');
+        $this->session->setFlashdata('mensaje', 'Compra realizada exitosamente. ¡Gracias por tu compra!');
         return redirect()->to(base_url('vista_compras/' . $venta_id));
     }
     

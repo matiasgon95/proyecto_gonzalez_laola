@@ -104,7 +104,7 @@
 
                 <!-- Formulario con selector de cantidad -->
                 <div class="producto-acciones mt-4">
-                    <form action="<?= base_url('carrito/add'); ?>" method="post">
+                    <form action="<?= base_url('carrito_agrega'); ?>" method="post">
                         <?= csrf_field() ?>
                         <input type="hidden" name="id" value="<?= $producto['id']; ?>">
                         <input type="hidden" name="nombre_prod" value="<?= $producto['nombre']; ?>">
