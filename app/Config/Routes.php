@@ -67,7 +67,7 @@ $routes->get('carrito_comprar', 'Front\CarritoController::comprar');
 $routes->post('carrito/update', 'Front\CarritoController::update');
 $routes->get('carrito/remove/(:any)', 'Front\CarritoController::remove/$1');
 $routes->get('carrito/clear', 'Front\CarritoController::clear');
-
+$routes->get('carrito/mini', 'Front\CarritoController::mini');
 
 // Rutas para ver facturas
 $routes->get('vista_compras/(:num)', 'Front\CarritoController::ver_factura/$1');

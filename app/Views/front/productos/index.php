@@ -2,17 +2,27 @@
 
 <?= $this->section('contenedor'); ?>
 <div class="container py-4">
-    <!-- Mostrar mensaje Flash si existe -->
+    <!-- Mostrar mensaje Flash si existe como toast -->
     <?php if (session()->getFlashdata('mensaje')): ?>
-        <div class="alert alert-info alert-dismissible fade show mt-3 mb-4 fw-bold" role="alert">
-            <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center justify-content-between">
-                <div>
-                    <i class="fas fa-info-circle me-2"></i><?= session()->getFlashdata('mensaje') ?>
-                </div>
-                <a href="<?= base_url('carrito') ?>" class="btn btn-info btn-sm mt-2 mt-sm-0"><i class="fas fa-shopping-cart me-1"></i>Ver carrito</a>
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+        <div class="toast show bg-dark" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-info text-dark">
+                <i class="fas fa-info-circle me-2"></i>
+                <strong class="me-auto">Notificación</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
             </div>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+            <div class="toast-body text-light">
+                <div class="d-flex flex-column">
+                    <div class="mb-2">
+                        <?= session()->getFlashdata('mensaje') ?>
+                    </div>
+                    <button type="button" class="btn btn-info btn-sm align-self-end" id="openCartModalBtn">
+                        <i class="fas fa-shopping-cart me-1"></i>Ver carrito
+                    </button>
+                </div>
+            </div>
         </div>
+    </div>
     <?php endif; ?>
     
     <div class="row">

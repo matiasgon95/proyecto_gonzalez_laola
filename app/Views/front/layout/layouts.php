@@ -16,12 +16,19 @@
     <!--iconos para login y carrito-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"> 
 
-
-
     <!--Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Variable global para la URL base -->
+    <script>
+        var baseUrl = '<?= base_url() ?>';
+    </script>
+    
+    <!-- JavaScript personalizado -->
+    <script src="<?= base_url('assets/js/cart.js') ?>"></script>
+    <script src="<?= base_url('assets/js/notifications.js') ?>"></script>
     
     <!--Titulo-->
     <title>GL technology</title>
@@ -41,13 +48,35 @@
     
     <!-- Icono flotante del carrito -->
     <?php $cart = \Config\Services::cart(); ?>
-    <?php if ($cart->totalItems() > 0): ?>
-    <a href="<?= base_url('carrito'); ?>" class="floating-cart">
-        <div class="cart-icon">
-            <i class="bi bi-cart-fill"></i>
-            <span class="cart-count"><?= $cart->totalItems(); ?></span>
+    <div class="floating-cart-container" <?= ($cart->totalItems() == 0) ? 'style="display: none;"' : '' ?>>
+        <button type="button" class="floating-cart" id="openCartModal">
+            <div class="cart-icon">
+                <i class="bi bi-cart-fill"></i>
+                <span class="cart-count"><?= $cart->totalItems(); ?></span>
+            </div>
+        </button>
+    </div>
+    
+    <!-- Modal del Carrito -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-modal-content">
+            <div class="cart-modal-header">
+                <h5 class="cart-modal-title">Tu Carrito</h5>
+                <button type="button" class="cart-close" id="closeCartModal">&times;</button>
+            </div>
+            <div class="cart-modal-body" id="cartModalBody">
+                <!-- El contenido del carrito se cargará aquí mediante AJAX -->
+                <div class="text-center p-4">
+                    <div class="spinner-border text-info" role="status">
+                        <span class="visually-hidden">Cargando...</span>
+                    </div>
+                    <p class="mt-2">Cargando tu carrito...</p>
+                </div>
+            </div>
+            <div class="cart-modal-footer">
+                <button type="button" class="btn btn-primary" id="continueShoppingBtn">Seguir comprando</button>
+            </div>
         </div>
-    </a>
-    <?php endif; ?>
+    </div>
 </body>
 </html>

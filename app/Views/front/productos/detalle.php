@@ -2,17 +2,69 @@
 
 <?= $this->section('contenedor'); ?>
 <div class="container producto-detalle-container my-5">
-    <!-- Mostrar mensaje Flash si existe -->
+    <!-- Mostrar mensaje Flash si existe como toast -->
     <?php if (session()->getFlashdata('mensaje')): ?>
-        <div class="alert alert-info alert-dismissible fade show mb-4 fw-bold" role="alert">
-            <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center justify-content-between">
-                <div>
-                    <i class="fas fa-info-circle me-2"></i><?= session()->getFlashdata('mensaje') ?>
-                </div>
-                <a href="<?= base_url('carrito') ?>" class="btn btn-info btn-sm mt-2 mt-sm-0"><i class="fas fa-shopping-cart me-1"></i>Ver carrito</a>
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+        <div class="toast show bg-dark" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-info text-dark">
+                <i class="fas fa-info-circle me-2"></i>
+                <strong class="me-auto">Notificación</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Cerrar"></button>
             </div>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+            <div class="toast-body text-light">
+                <div class="d-flex flex-column">
+                    <div class="mb-2">
+                        <?= session()->getFlashdata('mensaje') ?>
+                    </div>
+                    <button type="button" class="btn btn-info btn-sm align-self-end" id="openCartModalBtn">
+                        <i class="fas fa-shopping-cart me-1"></i>Ver carrito
+                    </button>
+                </div>
+            </div>
         </div>
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Guardar la posición actual de la página
+        const currentPosition = window.scrollY;
+        
+        // Configurar el toast para que se cierre automáticamente después de 5 segundos
+        setTimeout(function() {
+            const toast = document.querySelector('.toast');
+            const bsToast = new bootstrap.Toast(toast);
+            bsToast.hide();
+        }, 5000);
+        
+        // Restaurar la posición de desplazamiento
+        window.scrollTo(0, currentPosition);
+        
+        // Abrir el modal del carrito al hacer clic en el botón del toast
+        document.getElementById('openCartModalBtn').addEventListener('click', function() {
+            const cartModal = document.getElementById('cartModal');
+            cartModal.classList.add('show');
+            // Cargar el contenido del carrito
+            fetch(baseUrl + 'carrito/mini')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('cartModalBody').innerHTML = data;
+                    // Configurar los botones del carrito
+                    if (typeof setupCartButtons === 'function') {
+                        setupCartButtons();
+                    } else {
+                        // Si la función no está disponible, cargar el script y ejecutarla
+                        const script = document.createElement('script');
+                        script.src = baseUrl + 'assets/js/cart.js';
+                        script.onload = function() {
+                            if (typeof setupCartButtons === 'function') {
+                                setupCartButtons();
+                            }
+                        };
+                        document.head.appendChild(script);
+                    }
+                });
+        });
+    });
+    </script>
     <?php endif; ?>
     
     <!-- Título del producto -->

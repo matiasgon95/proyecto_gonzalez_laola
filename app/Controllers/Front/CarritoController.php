@@ -50,6 +50,8 @@ class CarritoController extends BaseController
         // Calcular la cantidad total (actual + nueva)
         $cantidad_total = $cantidad_en_carrito + $cantidad;
         
+        $response = ['success' => false, 'message' => ''];
+        
         // Validar stock considerando lo que ya está en el carrito
         if ($producto && $producto['stock'] >= $cantidad_total) {
             $this->cart->insert(array(
@@ -62,15 +64,23 @@ class CarritoController extends BaseController
             
             // Añadir mensaje flash de confirmación
             $this->session->setFlashdata('mensaje', 'Producto agregado al carrito correctamente');
+            $response['success'] = true;
+            $response['message'] = 'Producto agregado al carrito correctamente';
         } else {
             // Mensaje de error si no hay suficiente stock
             $this->session->setFlashdata('mensaje', 'No hay suficiente stock disponible. Stock actual: ' . $producto['stock'] . ', En carrito: ' . $cantidad_en_carrito);
+            $response['message'] = 'No hay suficiente stock disponible. Stock actual: ' . $producto['stock'] . ', En carrito: ' . $cantidad_en_carrito;
         }
         
-        // Redireccionar a la página anterior
+        // Si es una solicitud AJAX, devolver JSON
+        if ($request->isAJAX()) {
+            return $this->response->setJSON($response);
+        }
+        
+        // Si no es AJAX, redireccionar a la página anterior
         $referer = $request->getServer('HTTP_REFERER');
         if (!empty($referer)) {
-            return redirect()->to($referer);
+            return redirect()->to($referer . '#producto-' . $request->getPost('id'));
         } else {
             // Si no hay referrer, redirigir a productos
             return redirect()->to(base_url('productos'));
@@ -105,15 +115,28 @@ class CarritoController extends BaseController
         $productoModel = new \App\Models\ProductoModel();
         $producto = $productoModel->find($item['id']);
         
+        $success = false;
+        $message = '';
+        
         if ($producto && $producto['stock'] > $item['qty']) {
             // Incrementar la cantidad
             $this->cart->update(array(
                 'rowid' => $rowid,
                 'qty'   => $item['qty'] + 1
             ));
+            $success = true;
         } else {
             // Mensaje de error si no hay suficiente stock
-            $this->session->setFlashdata('mensaje', 'No se puede agregar más unidades. Stock máximo disponible: ' . $producto['stock']);
+            $message = 'No se puede agregar más unidades. Stock máximo disponible: ' . $producto['stock'];
+            $this->session->setFlashdata('mensaje', $message);
+        }
+        
+        // Si es una solicitud AJAX, devolver JSON
+        if ($this->request->isAJAX()) {
+            return $this->response->setJSON([
+                'success' => $success,
+                'message' => $message
+            ]);
         }
         
         return redirect()->to(base_url('carrito'));
@@ -123,7 +146,7 @@ class CarritoController extends BaseController
     {
         $this->cart = \Config\Services::cart();
         
-        // Obtener el item actual (corregido de get_item a getItem)
+        // Obtener el item actual
         $item = $this->cart->getItem($rowid);
         
         // Decrementar la cantidad (mínimo 1)
@@ -137,6 +160,11 @@ class CarritoController extends BaseController
             'qty'   => $qty
         ));
         
+        // Si es una solicitud AJAX, devolver JSON
+        if ($this->request->isAJAX()) {
+            return $this->response->setJSON(['success' => true]);
+        }
+        
         return redirect()->to(base_url('carrito'));
     }
     
@@ -145,6 +173,11 @@ class CarritoController extends BaseController
         $this->cart = \Config\Services::cart();
         
         $this->cart->remove($rowid);
+        
+        // Si es una solicitud AJAX, devolver JSON
+        if ($this->request->isAJAX()) {
+            return $this->response->setJSON(['success' => true]);
+        }
         
         return redirect()->to(base_url('carrito'));
     }
@@ -155,6 +188,25 @@ class CarritoController extends BaseController
         $this->cart->destroy();
         
         return redirect()->to(base_url('carrito'));
+    }
+    
+    public function mini()
+    {
+        $this->cart = \Config\Services::cart();
+        $data = [
+            'cart' => $this->cart->contents(),
+            'total' => $this->cart->total()
+        ];
+        
+        return view('front/carrito/mini', $data);
+    }
+    
+    public function count()
+    {
+        $this->cart = \Config\Services::cart();
+        return $this->response->setJSON([
+            'count' => $this->cart->totalItems()
+        ]);
     }
     
     public function comprar()

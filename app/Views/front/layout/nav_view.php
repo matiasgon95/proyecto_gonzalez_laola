@@ -47,7 +47,7 @@
           </ul>
         </div>
         <!-- Reemplazar el enlace actual del carrito por este -->
-        <a href="<?= base_url('carrito'); ?>" class="nav-icon-link position-relative">
+        <a href="#" class="nav-icon-link position-relative">
             <i class="bi bi-cart3 fs-4"></i>
             <?php $cart = \Config\Services::cart(); ?>
             <?php if ($cart->totalItems() > 0): ?>
