@@ -2,6 +2,15 @@
 
 <?= $this->section('contenedor'); ?>
 
+<!-- Mostrar mensaje Flash si existe -->
+<?php if (session()->getFlashdata('mensaje')): ?>
+    <?php $tipo = session()->getFlashdata('tipo_mensaje') ?? 'info'; ?>
+    <div class="alert alert-<?= $tipo ?> alert-dismissible fade show mt-3 mx-3 fw-bold" role="alert">
+        <i class="fas fa-info-circle me-2"></i><?= session()->getFlashdata('mensaje') ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+    </div>
+<?php endif; ?>
+
 <!-- carrousel -->
 <div class="carousel-container">
   <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">

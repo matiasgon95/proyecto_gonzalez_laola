@@ -369,9 +369,11 @@ class CarritoController extends BaseController
         $this->session->setFlashdata('mensaje', 'Compra realizada exitosamente. ¡Gracias por tu compra!');
         $this->session->setFlashdata('tipo_mensaje', 'success'); // Añadimos un tipo para el mensaje
         
-        return redirect()->to(base_url('vista_compras/' . $venta_id));
+        // Redirigir a la página principal en lugar de a la vista de facturas
+        return redirect()->to(base_url());
     }
     
+    // Eliminar los métodos ver_factura y ver_facturas_usuario
     public function ver_factura($venta_id)
     {
         //Verificar si el usuario está logueado

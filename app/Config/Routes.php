@@ -43,14 +43,6 @@ $routes->group('back', ['filter' => 'auth:1'], function($routes) {
     $routes->get('productos/eliminar/(:num)', 'Admin\ProductoController::eliminar/$1');
 });
 
-
-
-
-
-
-
-
-
 // Rutas de productos
 $routes->get('producto/detalle/(:num)', 'Front\Producto::detalle/$1');
 $routes->get('producto/categoria/(:any)', 'Front\Producto::categoria/$1');
@@ -70,8 +62,6 @@ $routes->get('carrito/count', 'Front\CarritoController::count');
 // Rutas de checkout
 $routes->get('carrito_comprar', 'Front\CarritoController::comprar');
 $routes->post('carrito_confirmar', 'Front\CarritoController::confirmar');
-$routes->get('vista_compras/(:num)', 'Front\CarritoController::ver_factura/$1');
-$routes->get('mis_compras/(:num)', 'Front\CarritoController::ver_facturas_usuario/$1');
 
 
 // Rutas de administración de usuarios
