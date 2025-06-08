@@ -10,10 +10,8 @@ class Ventas_cabecera_model extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
-    protected $allowedFields    = ['usuario_id', 'total_venta', 'datos_adicionales'];
-    protected $useTimestamps    = true;
-    protected $createdField     = 'created_at';
-    protected $updatedField     = 'updated_at';
+    protected $allowedFields    = ['usuario_id', 'total_venta'];
+    protected $useTimestamps    = false; // Cambiado a false porque no existen estos campos
     
     public function insert($data = null, bool $returnID = true)
     {
@@ -23,7 +21,7 @@ class Ventas_cabecera_model extends Model
     public function getVentas($id_usuario)
     {
         return $this->where('usuario_id', $id_usuario)
-                    ->orderBy('created_at', 'DESC')
+                    ->orderBy('fecha', 'DESC') // Cambiado de created_at a fecha
                     ->findAll();
     }
 }

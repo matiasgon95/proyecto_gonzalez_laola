@@ -28,6 +28,7 @@
         </div>
         
         <form action="<?= base_url('carrito_confirmar') ?>" method="post">
+            <?= csrf_field() ?>
             <!-- Paso 1: Datos de envío y pago -->
             <div class="checkout-step-content active">
                 <div class="row">

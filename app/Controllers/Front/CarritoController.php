@@ -277,7 +277,7 @@ class CarritoController extends BaseController
         }
         
         // Verificar si el usuario está logueado
-        if (!session()->get('id_usuario')) {
+        if (!session()->get('usuario_id')) {  // Cambiado de id_usuario a usuario_id
             $this->session->setFlashdata('mensaje', 'Debe iniciar sesión para realizar la compra.');
             return redirect()->to(base_url('front/login'));
         }
@@ -342,9 +342,9 @@ class CarritoController extends BaseController
         
         // Registrar cabecera de la venta
         $nueva_venta = [
-            'usuario_id' => $this->session->get('id_usuario'),
-            'total_venta' => $total_final,
-            'datos_adicionales' => json_encode($datos_adicionales)
+            'usuario_id' => $this->session->get('usuario_id'),
+            'total_venta' => $total_final
+            // Se elimina la línea de datos_adicionales
         ];
         $venta_id = $ventasModel->insert($nueva_venta);
         
@@ -364,19 +364,29 @@ class CarritoController extends BaseController
         
         // Vaciar carrito y mostrar confirmación
         $this->cart->destroy();
+        
+        // Mensaje más destacado
         $this->session->setFlashdata('mensaje', 'Compra realizada exitosamente. ¡Gracias por tu compra!');
+        $this->session->setFlashdata('tipo_mensaje', 'success'); // Añadimos un tipo para el mensaje
+        
         return redirect()->to(base_url('vista_compras/' . $venta_id));
     }
     
     public function ver_factura($venta_id)
     {
         //Verificar si el usuario está logueado
-        if (!session()->get('id_usuario')) {
+        if (!session()->get('usuario_id')) {  // Cambiado de id_usuario a usuario_id
             return redirect()->to(base_url('front/login'));
         }
         
         $detalle_ventas = new \App\Models\Ventas_detalle_model();
         $data['venta'] = $detalle_ventas->getDetalles($venta_id);
+        
+        // Verificar si se encontraron detalles
+        if (empty($data['venta'])) {
+            $this->session->setFlashdata('mensaje', 'No se encontraron detalles para esta compra.');
+            $this->session->setFlashdata('tipo_mensaje', 'warning');
+        }
         
         $data['titulo'] = "Mi compra";
         
