@@ -786,6 +786,11 @@
     font-weight: 500;
     color: #e0f7fa;
     padding-left: 20px !important;
+    white-space: normal; /* Permite que el texto se ajuste en múltiples líneas */
+    word-break: break-word; /* Evita que palabras largas se salgan del contenedor */
+    padding-right: 10px !important; /* Añade espacio a la derecha */
+    font-size: 1rem;
+    line-height: 1.4;
 }
 
 .checkout-step-content .table-dark tbody td {
@@ -831,9 +836,10 @@
 /* Mejoras para las secciones de resumen */
 .checkout-summary-item {
     display: flex;
-    margin-bottom: 12px;
-    border-bottom: 1px solid rgba(0, 229, 255, 0.2);
-    padding-bottom: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(0, 229, 255, 0.3);
+    padding-bottom: 12px;
+    align-items: center;
 }
 
 .checkout-summary-item:last-child {
@@ -844,13 +850,117 @@
 
 .checkout-summary-label {
     font-weight: bold;
-    width: 40%;
+    width: 35%;
     color: #00e5ff;
+    text-shadow: 0 0 5px rgba(0, 229, 255, 0.5);
+    font-size: 1.05rem;
 }
 
 .checkout-summary-value {
-    width: 60%;
+    width: 65%;
     word-break: break-word;
+    background-color: rgba(0, 229, 255, 0.1);
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 1.05rem;
+}
+
+/* Mejoras para las tarjetas de resumen */
+.checkout-step-content .card {
+    box-shadow: 0 4px 12px rgba(0, 229, 255, 0.2);
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    border: 1px solid rgba(0, 229, 255, 0.4) !important;
+}
+
+.checkout-step-content .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 229, 255, 0.4);
+}
+
+.checkout-step-content .card-header {
+    background: linear-gradient(45deg, #00e5ff, #00b8d4) !important;
+    color: #000 !important;
+    font-weight: bold;
+    padding: 14px 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.checkout-step-content .card-body {
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Mejoras para la tabla de resumen de compra */
+.table-responsive {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 229, 255, 0.2);
+}
+
+.table-dark {
+    border-collapse: collapse;
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    table-layout: fixed; /* Importante para controlar mejor los anchos */
+    width: 100%;
+}
+
+/* Ajuste de anchos de columnas */
+.table-dark th:first-child {
+    width: 65% !important; /* Aumentamos el ancho de la columna PRODUCTO */
+}
+
+.table-dark th:nth-child(2) {
+    width: 15% !important; /* Mantenemos el ancho de CANTIDAD */
+}
+
+.table-dark th:last-child {
+    width: 20% !important; /* Reducimos ligeramente el ancho de PRECIO */
+}
+
+/* Estilo para el texto del producto */
+.producto-nombre {
+    white-space: normal; /* Permite que el texto se ajuste en múltiples líneas */
+    word-break: break-word; /* Evita que palabras largas se salgan del contenedor */
+    padding-right: 10px !important; /* Añade espacio a la derecha */
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.table-dark thead th {
+    background: linear-gradient(45deg, #00e5ff, #00b8d4) !important;
+    color: #000 !important;
+    font-weight: bold;
+    border-bottom: none;
+    padding: 15px !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1rem;
+    text-align: center; /* Centramos los encabezados */
+}
+
+.table-dark tbody td {
+    padding: 15px !important;
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+.table-dark tfoot tr:last-child {
+    border-top: 2px solid #00e5ff;
+    font-size: 1.1em;
+}
+
+.table-dark tfoot td {
+    padding: 15px !important;
+}
+
+.table-dark tfoot tr:last-child .text-info {
+    color: #00e5ff !important;
+    font-size: 1.2rem;
+    text-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
 }
 
 /* Mejoras responsivas */
@@ -862,10 +972,15 @@
     
     .checkout-summary-item {
         flex-direction: column;
+        align-items: flex-start;
     }
     
     .checkout-summary-label {
-        margin-bottom: 5px;
+        margin-bottom: 8px;
+    }
+    
+    .checkout-summary-value {
+        padding: 10px;
     }
 }
 
