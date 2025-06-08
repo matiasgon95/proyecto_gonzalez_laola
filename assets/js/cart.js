@@ -280,6 +280,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Validar campos específicos según el método de entrega
         if (document.getElementById('envio_domicilio').checked) {
             const direccion = document.getElementById('direccion');
+            const provincia = document.getElementById('provincia');
+            const localidad = document.getElementById('localidad');
             const codigoPostal = document.getElementById('codigo_postal');
             
             if (!direccion.value.trim()) {
@@ -287,8 +289,46 @@ document.addEventListener('DOMContentLoaded', function() {
                 isValid = false;
             }
             
+            if (!provincia.value.trim()) {
+                provincia.classList.add('is-invalid');
+                isValid = false;
+            }
+            
+            if (!localidad.value.trim()) {
+                localidad.classList.add('is-invalid');
+                isValid = false;
+            }
+            
             if (!codigoPostal.value.trim()) {
                 codigoPostal.classList.add('is-invalid');
+                isValid = false;
+            }
+        }
+        
+        // Validar campos de tarjeta si ese método de pago está seleccionado
+        if (document.getElementById('tarjeta') && document.getElementById('tarjeta').checked) {
+            const nombreTarjeta = document.getElementById('nombre_tarjeta');
+            const numeroTarjeta = document.getElementById('numero_tarjeta');
+            const fechaVencimiento = document.getElementById('fecha_vencimiento');
+            const cvv = document.getElementById('cvv');
+            
+            if (!nombreTarjeta.value.trim()) {
+                nombreTarjeta.classList.add('is-invalid');
+                isValid = false;
+            }
+            
+            if (!numeroTarjeta.value.trim() || numeroTarjeta.value.replace(/\s/g, '').length < 16) {
+                numeroTarjeta.classList.add('is-invalid');
+                isValid = false;
+            }
+            
+            if (!fechaVencimiento.value.trim() || fechaVencimiento.value.length < 5) {
+                fechaVencimiento.classList.add('is-invalid');
+                isValid = false;
+            }
+            
+            if (!cvv.value.trim() || cvv.value.length < 3) {
+                cvv.classList.add('is-invalid');
                 isValid = false;
             }
         }
@@ -299,13 +339,42 @@ document.addEventListener('DOMContentLoaded', function() {
     // Función para actualizar el resumen
     function updateSummary() {
         // Actualizar datos del cliente
-        const nombreCompleto = document.getElementById('nombre').value;
-        const email = document.getElementById('email').value;
-        const telefono = document.getElementById('telefono').value;
+        const nombreInput = document.getElementById('nombre');
+        if (!nombreInput) {
+            console.error('Elemento con ID "nombre" no encontrado');
+            return; // Salir de la función si no se encuentra el elemento
+        }
         
-        document.getElementById('summary_nombre').textContent = nombreCompleto;
-        document.getElementById('summary_email').textContent = email;
-        document.getElementById('summary_telefono').textContent = telefono || 'No proporcionado';
+        const nombreCompleto = nombreInput.value;
+        console.log('Valor del campo nombre:', nombreCompleto);
+        
+        const email = document.getElementById('email') ? document.getElementById('email').value : '';
+        const telefono = document.getElementById('telefono') ? document.getElementById('telefono').value : '';
+        const telefonoContacto = document.getElementById('telefono_contacto');
+        
+        // Mostrar nombre completo y teléfono en la sección de datos del cliente
+        const summaryNombre = document.getElementById('summary_nombre');
+        if (summaryNombre) {
+            summaryNombre.textContent = nombreCompleto;
+            console.log('Actualizando nombre completo:', nombreCompleto);
+        } else {
+            console.error('Elemento con ID "summary_nombre" no encontrado');
+        }
+        
+        const summaryEmail = document.getElementById('summary_email');
+        if (summaryEmail) {
+            summaryEmail.textContent = email;
+        }
+        
+        // Si hay teléfono de contacto y está en modo envío a domicilio, usarlo; de lo contrario, usar el teléfono principal
+        const summaryTelefono = document.getElementById('summary_telefono');
+        if (summaryTelefono) {
+            if (telefonoContacto && telefonoContacto.value && document.querySelector('input[name="metodo_entrega"]:checked').value === 'envio_domicilio') {
+                summaryTelefono.textContent = telefonoContacto.value;
+            } else {
+                summaryTelefono.textContent = telefono || 'No proporcionado';
+            }
+        }
         
         // Actualizar método de entrega
         const metodoEntregaValue = document.querySelector('input[name="metodo_entrega"]:checked').value;
@@ -314,13 +383,30 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Actualizar dirección si es envío a domicilio
         const direccionContainer = document.getElementById('summary_direccion_container');
+        const provinciaContainer = document.getElementById('summary_provincia_container');
+        const localidadContainer = document.getElementById('summary_localidad_container');
+        const codigoPostalContainer = document.getElementById('summary_codigo_postal_container');
+        
         if (metodoEntregaValue === 'envio_domicilio') {
             const direccion = document.getElementById('direccion').value;
+            const provincia = document.getElementById('provincia').value;
+            const localidad = document.getElementById('localidad').value;
             const codigoPostal = document.getElementById('codigo_postal').value;
-            document.getElementById('summary_direccion').textContent = direccion + ' (CP: ' + codigoPostal + ')';
+            
+            document.getElementById('summary_direccion').textContent = direccion;
+            document.getElementById('summary_provincia').textContent = provincia;
+            document.getElementById('summary_localidad').textContent = localidad;
+            document.getElementById('summary_codigo_postal').textContent = codigoPostal;
+            
             direccionContainer.style.display = 'block';
+            provinciaContainer.style.display = 'block';
+            localidadContainer.style.display = 'block';
+            codigoPostalContainer.style.display = 'block';
         } else {
             direccionContainer.style.display = 'none';
+            provinciaContainer.style.display = 'none';
+            localidadContainer.style.display = 'none';
+            codigoPostalContainer.style.display = 'none';
         }
         
         // Actualizar método de pago
@@ -328,7 +414,9 @@ document.addEventListener('DOMContentLoaded', function() {
         let metodoPagoText = '';
         switch (metodoPagoValue) {
             case 'tarjeta':
-                metodoPagoText = 'Tarjeta de Crédito/Débito';
+                const numeroTarjeta = document.getElementById('numero_tarjeta').value.replace(/\s/g, '');
+                const ultimosDigitos = numeroTarjeta.length >= 4 ? numeroTarjeta.slice(-4) : '';
+                metodoPagoText = ultimosDigitos ? `Tarjeta terminada en ${ultimosDigitos}` : 'Tarjeta de Crédito/Débito';
                 break;
             case 'transferencia':
                 metodoPagoText = 'Transferencia Bancaria';
@@ -405,6 +493,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    // Event listeners para los métodos de pago
     if (metodoPago.length > 0) {
         metodoPago.forEach(function(radio) {
             radio.addEventListener('change', togglePaymentFields);
@@ -412,5 +501,64 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Inicializar campos de pago
         togglePaymentFields();
+        
+        // Formatear número de tarjeta automáticamente
+        const numeroTarjeta = document.getElementById('numero_tarjeta');
+        if (numeroTarjeta) {
+            numeroTarjeta.addEventListener('input', function(e) {
+                // Eliminar espacios y caracteres no numéricos
+                let valor = e.target.value.replace(/\D/g, '');
+                
+                // Limitar a 16 dígitos
+                valor = valor.substring(0, 16);
+                
+                // Formatear con espacios cada 4 dígitos
+                let valorFormateado = '';
+                for (let i = 0; i < valor.length; i++) {
+                    if (i > 0 && i % 4 === 0) {
+                        valorFormateado += ' ';
+                    }
+                    valorFormateado += valor[i];
+                }
+                
+                // Actualizar el valor del campo
+                e.target.value = valorFormateado;
+            });
+        }
+        
+        // Formatear fecha de vencimiento automáticamente (MM/AA)
+        const fechaVencimiento = document.getElementById('fecha_vencimiento');
+        if (fechaVencimiento) {
+            fechaVencimiento.addEventListener('input', function(e) {
+                // Eliminar caracteres no numéricos
+                let valor = e.target.value.replace(/\D/g, '');
+                
+                // Limitar a 4 dígitos (MMAA)
+                valor = valor.substring(0, 4);
+                
+                // Formatear como MM/AA
+                if (valor.length > 2) {
+                    valor = valor.substring(0, 2) + '/' + valor.substring(2);
+                }
+                
+                // Actualizar el valor del campo
+                e.target.value = valor;
+            });
+        }
+        
+        // Limitar CVV a solo 3 dígitos
+        const cvv = document.getElementById('cvv');
+        if (cvv) {
+            cvv.addEventListener('input', function(e) {
+                // Eliminar caracteres no numéricos
+                let valor = e.target.value.replace(/\D/g, '');
+                
+                // Limitar a 3 dígitos
+                valor = valor.substring(0, 3);
+                
+                // Actualizar el valor del campo
+                e.target.value = valor;
+            });
+        }
     }
 });

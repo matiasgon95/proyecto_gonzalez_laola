@@ -39,7 +39,7 @@
                             </div>
                             <div class="card-body">
                                 <!-- Estos campos se llenarán automáticamente con los datos del usuario -->
-                                <input type="hidden" class="form-control" id="nombre" name="nombre" value="<?= session()->get('usuario_nombre') ?>">
+                                <input type="hidden" class="form-control" id="nombre" name="nombre" value="<?= session()->get('usuario_nombre') . ' ' . session()->get('usuario_apellido') ?>">
                                 <input type="hidden" class="form-control" id="email" name="email" value="<?= session()->get('usuario_email') ?>">
                                 <input type="hidden" class="form-control" id="telefono" name="telefono" value="<?= session()->get('usuario_telefono') ?? '' ?>">
                                 
@@ -62,9 +62,23 @@
                                         <div class="invalid-feedback">Por favor ingrese una dirección</div>
                                     </div>
                                     <div class="mb-3">
+                                        <label for="provincia" class="form-label">Provincia</label>
+                                        <input type="text" class="form-control" id="provincia" name="provincia">
+                                        <div class="invalid-feedback">Por favor ingrese una provincia</div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="localidad" class="form-label">Localidad</label>
+                                        <input type="text" class="form-control" id="localidad" name="localidad">
+                                        <div class="invalid-feedback">Por favor ingrese una localidad</div>
+                                    </div>
+                                    <div class="mb-3">
                                         <label for="codigo_postal" class="form-label">Código Postal</label>
                                         <input type="text" class="form-control" id="codigo_postal" name="codigo_postal">
                                         <div class="invalid-feedback">Por favor ingrese un código postal</div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="telefono_contacto" class="form-label">Teléfono de contacto (opcional)</label>
+                                        <input type="text" class="form-control" id="telefono_contacto" name="telefono_contacto">
                                     </div>
                                 </div>
                             </div>
@@ -101,8 +115,13 @@
                                 
                                 <div id="datos_tarjeta">
                                     <div class="mb-3">
+                                        <label for="nombre_tarjeta" class="form-label">Nombre y apellido (como figura en la tarjeta)</label>
+                                        <input type="text" class="form-control" id="nombre_tarjeta" name="nombre_tarjeta">
+                                        <div class="invalid-feedback">Por favor ingrese el nombre como figura en la tarjeta</div>
+                                    </div>
+                                    <div class="mb-3">
                                         <label for="numero_tarjeta" class="form-label">Número de Tarjeta</label>
-                                        <input type="text" class="form-control" id="numero_tarjeta" name="numero_tarjeta" placeholder="XXXX XXXX XXXX XXXX">
+                                        <input type="text" class="form-control" id="numero_tarjeta" name="numero_tarjeta" placeholder="XXXX XXXX XXXX XXXX" maxlength="19">
                                         <div class="invalid-feedback">Por favor ingrese el número de tarjeta</div>
                                     </div>
                                     <div class="row">
@@ -144,10 +163,11 @@
             
             <!-- Paso 2: Resumen de la compra -->
             <div class="checkout-step-content">
-                <div class="row">
-                    <!-- Columna de datos del cliente -->
-                    <div class="col-md-6 mb-4">
-                        <div class="card bg-dark border-info mb-4">
+                <!-- Sección de información del cliente -->
+                <div class="row mb-4">
+                    <!-- Datos del cliente -->
+                    <div class="col-md-4">
+                        <div class="card bg-dark border-info h-100">
                             <div class="card-header bg-info text-dark">
                                 <h4 class="mb-0">Datos del Cliente</h4>
                             </div>
@@ -166,8 +186,11 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="card bg-dark border-info">
+                    </div>
+                    
+                    <!-- Detalles de entrega -->
+                    <div class="col-md-4">
+                        <div class="card bg-dark border-info h-100">
                             <div class="card-header bg-info text-dark">
                                 <h4 class="mb-0">Detalles de Entrega</h4>
                             </div>
@@ -180,13 +203,25 @@
                                     <div class="checkout-summary-label">Dirección de entrega:</div>
                                     <div class="checkout-summary-value" id="summary_direccion"></div>
                                 </div>
+                                <div class="checkout-summary-item" id="summary_provincia_container" style="display: none;">
+                                    <div class="checkout-summary-label">Provincia:</div>
+                                    <div class="checkout-summary-value" id="summary_provincia"></div>
+                                </div>
+                                <div class="checkout-summary-item" id="summary_localidad_container" style="display: none;">
+                                    <div class="checkout-summary-label">Localidad:</div>
+                                    <div class="checkout-summary-value" id="summary_localidad"></div>
+                                </div>
+                                <div class="checkout-summary-item" id="summary_codigo_postal_container" style="display: none;">
+                                    <div class="checkout-summary-label">Código Postal:</div>
+                                    <div class="checkout-summary-value" id="summary_codigo_postal"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Columna de resumen y pago -->
-                    <div class="col-md-6">
-                        <div class="card bg-dark border-info mb-4">
+                    <!-- Método de pago -->
+                    <div class="col-md-4">
+                        <div class="card bg-dark border-info h-100">
                             <div class="card-header bg-info text-dark">
                                 <h4 class="mb-0">Método de Pago</h4>
                             </div>
@@ -197,7 +232,12 @@
                                 </div>
                             </div>
                         </div>
-                        
+                    </div>
+                </div>
+                
+                <!-- Resumen de la compra (ocupa todo el ancho) -->
+                <div class="row">
+                    <div class="col-12">
                         <div class="card bg-dark border-info">
                             <div class="card-header bg-info text-dark">
                                 <h4 class="mb-0">Resumen de la Compra</h4>
@@ -205,11 +245,11 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-dark table-hover">
-                                        <thead class="table-info text-dark">
+                                        <thead class="table-info-bright">
                                             <tr>
-                                                <th>Producto</th>
-                                                <th class="text-center">Cantidad</th>
-                                                <th class="text-end">Precio</th>
+                                                <th width="60%">PRODUCTO</th>
+                                                <th class="text-center" width="15%">CANTIDAD</th>
+                                                <th class="text-end" width="25%">PRECIO</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -217,24 +257,24 @@
                                             <?php foreach ($cart as $item): ?>
                                                 <?php $subtotal += $item['subtotal']; ?>
                                                 <tr>
-                                                    <td class="align-middle"><?= esc($item['name']) ?></td>
+                                                    <td class="align-middle producto-nombre"><?= esc($item['name']) ?></td>
                                                     <td class="text-center align-middle"><?= $item['qty'] ?></td>
-                                                    <td class="text-end align-middle">$<?= number_format($item['subtotal'], 2) ?></td>
+                                                    <td class="text-end align-middle">$<?= number_format($item['price'], 2, ',', '.') ?></td>
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>
-                                        <tfoot class="table-dark">
+                                        <tfoot>
                                             <tr>
-                                                <td colspan="2" class="text-end fw-bold">Subtotal:</td>
-                                                <td class="text-end fw-bold">$<?= number_format($subtotal, 2) ?></td>
+                                                <td colspan="2" class="text-end">Subtotal:</td>
+                                                <td class="text-end">$<?= number_format($subtotal, 2, ',', '.') ?></td>
                                             </tr>
                                             <tr>
                                                 <td colspan="2" class="text-end">Costo de envío:</td>
-                                                <td class="text-end" id="costo_envio">$0.00</td>
+                                                <td class="text-end" id="shipping_cost_display">$<?= number_format($shipping_cost ?? 0, 2, ',', '.') ?></td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2" class="text-end fw-bold text-info">Total:</td>
-                                                <td class="text-end fw-bold text-info" id="total_final">$<?= number_format($subtotal, 2) ?></td>
+                                                <td colspan="2" class="text-end fw-bold">Total:</td>
+                                                <td class="text-end fw-bold text-info" id="total_amount_display">$<?= number_format(($subtotal + ($shipping_cost ?? 0)), 2, ',', '.') ?></td>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -274,85 +314,42 @@
 </div>
 <?= $this->endSection(); ?>
 
-<?= $this->section('js'); ?>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Mostrar/ocultar campos de dirección según método de entrega
-        const metodoEntrega = document.querySelectorAll('input[name="metodo_entrega"]');
-        const datosEnvio = document.getElementById('datos_envio');
-        const costoEnvioContainer = document.getElementById('costo_envio_container');
-        const costoEnvio = document.getElementById('costo_envio');
-        const inputCostoEnvio = document.querySelector('input[name="costo_envio"]');
-        const totalFinal = document.getElementById('total_final');
-        const inputTotal = document.querySelector('input[name="total"]');
-        const subtotal = <?= $subtotal ?>;
+// Script de inicialización para checkout
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Checkout cargado');
+    
+    // Verificar valores de los campos
+    const nombreInput = document.getElementById('nombre');
+    console.log('Valor del campo nombre:', nombreInput ? nombreInput.value : 'No encontrado');
+    
+    // Verificar si updateSummary está disponible
+    if (typeof updateSummary === 'function') {
+        console.log('updateSummary está disponible');
         
-        metodoEntrega.forEach(function(radio) {
-            radio.addEventListener('change', function() {
-                if (this.value === 'envio_domicilio') {
-                    datosEnvio.style.display = 'block';
-                    // Simular costo de envío
-                    const costoEnvioValor = 500; // $500 de envío
-                    costoEnvio.textContent = '$' + costoEnvioValor.toFixed(2);
-                    inputCostoEnvio.value = costoEnvioValor;
-                    
-                    // Actualizar total
-                    const nuevoTotal = subtotal + costoEnvioValor;
-                    totalFinal.textContent = '$' + nuevoTotal.toFixed(2);
-                    inputTotal.value = nuevoTotal;
-                } else {
-                    datosEnvio.style.display = 'none';
-                    // Sin costo de envío
-                    costoEnvio.textContent = '$0.00';
-                    inputCostoEnvio.value = 0;
-                    
-                    // Actualizar total
-                    totalFinal.textContent = '$' + subtotal.toFixed(2);
-                    inputTotal.value = subtotal;
+        // Forzar la actualización del resumen después de que todo esté cargado
+        setTimeout(function() {
+            updateSummary();
+            console.log('Resumen actualizado manualmente');
+            console.log('Valor de summary_nombre después de actualizar:', 
+                document.getElementById('summary_nombre') ? 
+                document.getElementById('summary_nombre').textContent : 'No encontrado');
+        }, 500);
+    } else {
+        console.error('La función updateSummary no está disponible');
+    }
+    
+    // Asegurarse de que el resumen se actualice al cambiar de paso
+    const nextStepBtn = document.getElementById('nextStepBtn');
+    if (nextStepBtn) {
+        nextStepBtn.addEventListener('click', function() {
+            setTimeout(function() {
+                if (typeof updateSummary === 'function') {
+                    updateSummary();
+                    console.log('Resumen actualizado después de cambiar de paso');
                 }
-            });
+            }, 100);
         });
-        
-        // Mostrar/ocultar campos según método de pago
-        const metodoPago = document.querySelectorAll('input[name="metodo_pago"]');
-        const datosTarjeta = document.getElementById('datos_tarjeta');
-        const datosTransferencia = document.getElementById('datos_transferencia');
-        const datosEfectivo = document.getElementById('datos_efectivo');
-        
-        metodoPago.forEach(function(radio) {
-            radio.addEventListener('change', function() {
-                datosTarjeta.style.display = 'none';
-                datosTransferencia.style.display = 'none';
-                datosEfectivo.style.display = 'none';
-                
-                if (this.value === 'tarjeta') {
-                    datosTarjeta.style.display = 'block';
-                } else if (this.value === 'transferencia') {
-                    datosTransferencia.style.display = 'block';
-                } else if (this.value === 'efectivo') {
-                    datosEfectivo.style.display = 'block';
-                }
-            });
-        });
-        
-        // Validar que efectivo solo se pueda seleccionar con retiro en local
-        const efectivoRadio = document.getElementById('efectivo');
-        const retiroLocalRadio = document.getElementById('retiro_local');
-        const envioDomicilioRadio = document.getElementById('envio_domicilio');
-        
-        envioDomicilioRadio.addEventListener('change', function() {
-            if (this.checked && efectivoRadio.checked) {
-                // Si selecciona envío a domicilio y tenía efectivo, cambiar a tarjeta
-                document.getElementById('tarjeta').checked = true;
-                datosTarjeta.style.display = 'block';
-                datosEfectivo.style.display = 'none';
-            }
-            efectivoRadio.disabled = true;
-        });
-        
-        retiroLocalRadio.addEventListener('change', function() {
-            efectivoRadio.disabled = false;
-        });
-    });
+    }
+});
 </script>
-<?= $this->endSection(); ?>
