@@ -42,7 +42,8 @@ class LoginController extends Controller
                     'usuario_id'       => $usuario->id,
                     'usuario_email'    => $usuario->email,
                     'usuario_nombre'   => $usuario->nombre,
-                    'perfil_id'        => $usuario->perfil_id, // <-- esto es nuevo
+                    'usuario_apellido' => $usuario->apellido, // Añadir el apellido a la sesión
+                    'perfil_id'        => $usuario->perfil_id,
                     'usuario_logueado' => true
                 ]);
                 // Redirigir según perfil
