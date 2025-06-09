@@ -17,7 +17,6 @@ class Producto extends BaseController
         $this->categoriaModel = new CategoriaModel();
     }
 
-    // Mostrar la lista de productos activos con stock > 0
     public function index()
     {
         $productos = $this->productoModel->getProductosConCategoriaActivos();
@@ -31,9 +30,12 @@ class Producto extends BaseController
         ]);
     }
 
-    // Ver detalles de un producto (si está activo y stock > 0)
     public function detalle($id)
     {
+        if (!is_numeric($id)) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
         $producto = $this->productoModel->select('productos.*, categorias.descripcion as categoria')
                                         ->join('categorias', 'categorias.id = productos.categoria_id', 'left')
                                         ->where('productos.id', $id)
@@ -48,13 +50,18 @@ class Producto extends BaseController
         return view('front/productos/detalle', ['producto' => $producto]);
     }
 
-    // Filtrar productos activos con stock > 0 por categoría
     public function categoria($categoria)
     {
+        $categoriaObj = $this->categoriaModel->where('descripcion', $categoria)->first();
+
+        if (!$categoriaObj) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+
         $productos = $this->productoModel
                          ->select('productos.*, categorias.descripcion as categoria')
                          ->join('categorias', 'categorias.id = productos.categoria_id', 'left')
-                         ->where('categorias.descripcion', $categoria)
+                         ->where('productos.categoria_id', $categoriaObj['id'])
                          ->where('productos.eliminado', 0)
                          ->where('productos.stock >', 0)
                          ->findAll();
@@ -67,26 +74,16 @@ class Producto extends BaseController
             'categorias' => $categorias
         ]);
     }
-    
-    // Buscar productos por término de búsqueda
+
     public function buscar()
     {
         $termino = $this->request->getGet('q');
-        
+
         if (empty($termino)) {
             return redirect()->to(base_url('productos'));
         }
-        
-        $productos = $this->productoModel
-                         ->select('productos.*, categorias.descripcion as categoria')
-                         ->join('categorias', 'categorias.id = productos.categoria_id', 'left')
-                         ->where('productos.eliminado', 0)
-                         ->where('productos.stock >', 0)
-                         ->groupStart()
-                             ->like('productos.nombre', $termino)
-                             ->orLike('productos.descripcion', $termino)
-                         ->groupEnd()
-                         ->findAll();
+
+        $productos = $this->productoModel->buscarProductosAvanzado($termino);
 
         $categoriasArray = $this->categoriaModel->where('activo', 1)->findAll();
         $categorias = array_column($categoriasArray, 'descripcion');
@@ -97,48 +94,18 @@ class Producto extends BaseController
             'termino_busqueda' => $termino
         ]);
     }
-    
-    // Método para sugerencias de autocompletado
+
     public function sugerencias()
     {
         $termino = $this->request->getGet('q');
-        
-        // Consulta base para productos activos con stock
-        $query = $this->productoModel
-                      ->select('productos.id, productos.nombre, productos.precio, productos.imagen, productos.descripcion')
-                      ->where('productos.eliminado', 0)
-                      ->where('productos.stock >', 0);
-        
-        // Si hay un término de búsqueda, filtrar por él
-        if (!empty($termino)) {
-            $query->groupStart()
-                  ->like('productos.nombre', $termino)
-                  ->orLike('productos.descripcion', $termino)
-                  ->groupEnd();
+
+        if (empty($termino)) {
+            $productos = $this->productoModel->getProductosConCategoriaActivos();
+        } else {
+            $productos = $this->productoModel->buscarConSinonimos($termino);
         }
-        
-        // Limitar resultados y ejecutar consulta
-        $productos = $query->limit(5)->findAll();
-        
-        // Asegurarse de que la imagen tenga la ruta correcta
-        foreach ($productos as &$producto) {
-            // Verificar si la imagen existe
-            if (!empty($producto['imagen'])) {
-                $rutaImagen = FCPATH . 'uploads/' . $producto['imagen'];
-                if (file_exists($rutaImagen)) {
-                    // Mantener solo el nombre del archivo, sin la ruta
-                    $producto['imagen'] = $producto['imagen'];
-                    // Para depuración
-                    log_message('debug', 'Imagen encontrada: ' . $rutaImagen);
-                } else {
-                    // Si no existe, dejar vacío para usar la imagen por defecto
-                    $producto['imagen'] = '';
-                    // Para depuración
-                    log_message('error', 'Imagen no encontrada: ' . $rutaImagen);
-                }
-            }
-        }
-        
+
         return $this->response->setJSON($productos);
     }
+
 }
