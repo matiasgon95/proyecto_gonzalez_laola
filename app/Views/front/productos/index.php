@@ -29,8 +29,20 @@
         <!-- Barra lateral de categorías -->
         <div class="col-md-3">
             <div class="sidebar shadow-sm">
-                <h3>Categorías</h3>
-                <ul class="list-group">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3>Categorías</h3>
+                    <button class="btn btn-sm btn-info toggle-categories" id="toggleCategories">
+                        <i class="fas fa-chevron-up" id="categoryIcon"></i>
+                    </button>
+                </div>
+                <ul class="list-group" id="categoriesList">
+                    <!-- Opción para ver todos los productos -->
+                    <li class="list-group-item">
+                        <a href="<?= base_url('productos'); ?>" class="d-flex justify-content-between align-items-center">
+                            <span>Ver todos los productos</span>
+                            <i class="fas fa-list text-info"></i>
+                        </a>
+                    </li>
                     <?php if (!empty($categorias)): ?>
                         <?php foreach ($categorias as $categoria): ?>
                             <li class="list-group-item">

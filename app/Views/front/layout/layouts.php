@@ -28,6 +28,7 @@
     <!-- JavaScript personalizado -->
     <script src="<?= base_url('assets/js/cart.js') ?>"></script>
     <script src="<?= base_url('assets/js/notifications.js') ?>"></script>
+    <script src="<?= base_url('assets/js/ui.js') ?>"></script>
     
     <!--Titulo-->
     <title>GL technology</title>
