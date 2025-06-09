@@ -99,6 +99,13 @@
 
 .imagen-producto {
     transition: transform 0.5s ease;
+    height: 200px;           /* Altura fija para todas las imágenes */
+    width: 100%;             /* Ancho al 100% del contenedor */
+    object-fit: contain;     /* Mantiene la proporción sin recortar la imagen */
+    background-color: #000;  /* Fondo negro para imágenes con transparencia */
+    padding: 10px;           /* Espacio interno para que las imágenes no toquen los bordes */
+    display: block;          /* Asegura que la imagen se comporte como bloque */
+    margin: 0 auto;          /* Centra la imagen horizontalmente */
 }
 
 .card:hover .imagen-producto {
