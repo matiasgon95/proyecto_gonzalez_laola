@@ -16,6 +16,7 @@ $routes->get('quienes_somos', 'Home::quienes_somos');
 $routes->get('contacto', 'Home::contacto');
 $routes->get('terminos', 'Home::terminos');
 $routes->get('sitio_en_construccion', 'Home::sitio_en_construccion');
+$routes->get('productos/buscar', 'Front\Producto::buscar');
 
 // Login y registro
 $routes->get('front/login', 'Front\LoginController::index');

@@ -2,7 +2,8 @@
 
 <?= $this->section('contenedor'); ?>
 <div class="container py-4">
-    <!-- Mostrar mensaje Flash si existe como toast -->
+
+    <!-- Mostrar mensaje Flash como toast -->
     <?php if (session()->getFlashdata('mensaje')): ?>
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
         <div class="toast show bg-dark" role="alert" aria-live="assertive" aria-atomic="true">
@@ -24,8 +25,9 @@
         </div>
     </div>
     <?php endif; ?>
-    
+
     <div class="row">
+
         <!-- Barra lateral de categorías -->
         <div class="col-md-3">
             <div class="sidebar shadow-sm">
@@ -34,7 +36,9 @@
                     <?php if (!empty($categorias)): ?>
                         <?php foreach ($categorias as $categoria): ?>
                             <li class="list-group-item">
-                                <a href="<?= base_url('producto/categoria/' . urlencode($categoria)); ?>"><?= esc($categoria); ?></a>
+                                <a href="<?= base_url('producto/categoria/' . urlencode($categoria)); ?>">
+                                    <?= esc($categoria); ?>
+                                </a>
                             </li>
                         <?php endforeach; ?>
                     <?php else: ?>
@@ -47,26 +51,33 @@
         <!-- Lista de productos -->
         <div class="col-md-9">
             <h1 class="mb-4 text-info">Catálogo de Productos</h1>
+
+            <!-- Título si hay búsqueda -->
+            <?php if (isset($busqueda) && !empty($busqueda)): ?>
+                <h5 class="mb-4">Resultados para: "<strong><?= esc($busqueda) ?></strong>"</h5>
+            <?php endif; ?>
+
             <div class="row">
                 <?php if (!empty($productos)): ?>
                     <?php foreach ($productos as $producto): ?>
                         <div class="col-md-4 mb-4">
                             <div class="card shadow border border-info h-100">
-                            <img src="<?= base_url('public/' . $producto['imagen']) ?>"
-                                    class="card-img-top imagen-producto" 
-                                    alt="<?= esc($producto['nombre']); ?>"
-                                    loading="lazy">
+                                <img src="<?= base_url('public/' . $producto['imagen']) ?>"
+                                     class="card-img-top imagen-producto"
+                                     alt="<?= esc($producto['nombre']); ?>"
+                                     loading="lazy">
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title text-info"><?= esc($producto['nombre']); ?></h5>
-                                    <span class="badge bg-info text-dark mb-2"><?= esc($producto['categoria']); ?></span>  <!-- Categoría con badge -->
-                                    <!-- <p class="card-text flex-grow-1"><?= esc($producto['descripcion']); ?></p> -->
+                                    <span class="badge bg-info text-dark mb-2"><?= esc($producto['categoria']); ?></span>
                                     <div class="mt-auto">
-                                        <p class="card-text text-info mb-3">$<?= number_format($producto['precio_vta'], 2); ?></p>
-                                        <a href="<?= base_url('producto/detalle/' . $producto['id']); ?>" 
-                                        class="btn btn-info text-black rounded-pill w-100 mb-2">
-                                        <i class="fas fa-eye me-2"></i>Ver detalle
+                                        <p class="card-text text-info mb-3">
+                                            $<?= number_format($producto['precio_vta'], 2); ?>
+                                        </p>
+                                        <a href="<?= base_url('producto/detalle/' . $producto['id']); ?>"
+                                           class="btn btn-info text-black rounded-pill w-100 mb-2">
+                                           <i class="fas fa-eye me-2"></i>Ver detalle
                                         </a>
-                                        
+
                                         <!-- Botón Agregar al Carrito -->
                                         <form action="<?= base_url('carrito_agrega'); ?>" method="post" class="mt-2">
                                             <?= csrf_field() ?>
@@ -85,7 +96,11 @@
                     <?php endforeach; ?>
                 <?php else: ?>
                     <div class="col-12 text-center text-muted">
-                        <p>No hay productos en esta categoría.</p>
+                        <?php if (isset($busqueda) && !empty($busqueda)): ?>
+                            <p>No se encontraron resultados para "<?= esc($busqueda); ?>".</p>
+                        <?php else: ?>
+                            <p>No hay productos en esta categoría.</p>
+                        <?php endif; ?>
                     </div>
                 <?php endif; ?>
             </div>

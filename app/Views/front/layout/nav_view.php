@@ -16,8 +16,8 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Buscador mejorado -->
-      <form class="buscador-nav mx-4 d-none d-lg-flex" style="flex: 0 0 40%;" action="<?= base_url('sitio_en_construccion'); ?>" method="get" onsubmit="return irASitio();">
+      <!-- Buscador (escritorio) -->
+      <form class="buscador-nav mx-4 d-none d-lg-flex" style="flex: 0 0 40%;" action="<?= base_url('productos/buscar'); ?>" method="get">
         <div class="input-group">
           <input type="text" class="form-control form-control-sm" placeholder="Buscar productos..." name="q">
           <button class="btn btn-outline-info btn-sm" type="submit">
@@ -26,7 +26,7 @@
         </div>
       </form>
 
-      <!-- Iconos usuario / carrito con efectos -->
+      <!-- Iconos usuario / carrito -->
       <div class="iconos-nav">
         <div class="dropdown dropdown-hover">
           <a href="<?= base_url('front/login') ?>" class="nav-icon-link" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -46,7 +46,6 @@
             <?php endif; ?>
           </ul>
         </div>
-        <!-- Reemplazar el enlace actual del carrito por este -->
         <a href="#" class="nav-icon-link position-relative">
             <i class="bi bi-cart3 fs-4"></i>
             <?php $cart = \Config\Services::cart(); ?>
@@ -60,11 +59,11 @@
       </div>
     </div>
 
-    <!-- Segunda fila: Enlaces + Buscador (en responsive) -->
+    <!-- Segunda fila: Menú de enlaces y buscador móvil -->
     <div class="collapse navbar-collapse justify-content-center w-100" id="navbarSupportedContent">
       
-      <!-- Buscador móvil mejorado -->
-      <form class="buscador-nav w-100 my-3 px-3 d-lg-none" action="<?= base_url('sitio_en_construccion'); ?>" method="get" onsubmit="return irASitio();">
+      <!-- Buscador (móvil) -->
+      <form class="buscador-nav w-100 my-3 px-3 d-lg-none" action="<?= base_url('productos/buscar'); ?>" method="get">
         <div class="input-group">
           <input type="text" class="form-control form-control-sm" placeholder="Buscar productos..." name="q">
           <button class="btn btn-outline-info btn-sm" type="submit">
@@ -73,7 +72,7 @@
         </div>
       </form>
 
-      <!-- Menú de enlaces mejorado -->
+      <!-- Enlaces de navegación -->
       <ul class="navbar-nav mb-2 mb-lg-0 d-flex flex-column flex-lg-row gap-2 gap-lg-4 text-center">
         <li class="nav-item">
           <a class="nav-link" href="<?= base_url('/'); ?>">Inicio</a>
@@ -94,10 +93,4 @@
     </div>
   </div>
 </nav>
-<!-- Fin barra de navegación adaptada -->
-<script>
-function irASitio() {
-  window.location.href = "<?= base_url('sitio_en_construccion'); ?>";
-  return false; // Previene el envío real del formulario
-}
-</script>
+<!-- Fin barra de navegación -->
