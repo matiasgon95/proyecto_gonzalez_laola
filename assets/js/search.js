@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     searchInputs.forEach(input => {
         const resultsContainer = input.parentElement.querySelector('.autocomplete-results');
         let debounceTimer;
-        
+        //
         // Función para cargar sugerencias
         function cargarSugerencias(query = '') {
             fetch(`${baseUrl}/producto/sugerencias?q=${encodeURIComponent(query)}`)
