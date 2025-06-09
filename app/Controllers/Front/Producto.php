@@ -97,4 +97,38 @@ class Producto extends BaseController
             'termino_busqueda' => $termino
         ]);
     }
+    
+    // Método para sugerencias de autocompletado
+    public function sugerencias()
+    {
+        $termino = $this->request->getGet('q');
+        
+        if (empty($termino)) {
+            return $this->response->setJSON([]);
+        }
+        
+        $productos = $this->productoModel
+                         ->select('productos.id, productos.nombre, productos.precio, productos.imagen, productos.descripcion')
+                         ->where('productos.eliminado', 0)
+                         ->where('productos.stock >', 0)
+                         ->groupStart()
+                             ->like('productos.nombre', $termino)
+                             ->orLike('productos.descripcion', $termino)
+                         ->groupEnd()
+                         ->limit(5)
+                         ->findAll();
+        
+        // Asegurarse de que la imagen tenga la ruta correcta
+        foreach ($productos as &$producto) {
+            // Verificar si la imagen existe
+            if (!empty($producto['imagen'])) {
+                $rutaImagen = FCPATH . 'public/uploads/' . $producto['imagen'];
+                if (!file_exists($rutaImagen)) {
+                    $producto['imagen'] = ''; // Si no existe, dejar vacío para usar la imagen por defecto
+                }
+            }
+        }
+        
+        return $this->response->setJSON($productos);
+    }
 }

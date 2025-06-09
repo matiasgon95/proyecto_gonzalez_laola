@@ -19,10 +19,11 @@
       <!-- Buscador mejorado -->
       <form class="buscador-nav mx-4 d-none d-lg-flex" style="flex: 0 0 40%;" action="<?= base_url('producto/buscar'); ?>" method="get">
         <div class="input-group">
-          <input type="text" class="form-control form-control-sm" placeholder="Buscar productos..." name="q">
+          <input type="text" class="form-control form-control-sm search-autocomplete" placeholder="Buscar productos..." name="q" autocomplete="off">
           <button class="btn btn-outline-info btn-sm" type="submit">
             <i class="bi bi-search"></i>
           </button>
+          <div class="autocomplete-results"></div>
         </div>
       </form>
 
@@ -66,10 +67,11 @@
       <!-- Buscador móvil mejorado -->
       <form class="buscador-nav w-100 my-3 px-3 d-lg-none" action="<?= base_url('producto/buscar'); ?>" method="get">
         <div class="input-group">
-          <input type="text" class="form-control form-control-sm" placeholder="Buscar productos..." name="q">
+          <input type="text" class="form-control form-control-sm search-autocomplete" placeholder="Buscar productos..." name="q" autocomplete="off">
           <button class="btn btn-outline-info btn-sm" type="submit">
             <i class="bi bi-search"></i>
           </button>
+          <div class="autocomplete-results"></div>
         </div>
       </form>
 
