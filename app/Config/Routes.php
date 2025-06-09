@@ -46,6 +46,7 @@ $routes->group('back', ['filter' => 'auth:1'], function($routes) {
 // Rutas de productos
 $routes->get('producto/detalle/(:num)', 'Front\Producto::detalle/$1');
 $routes->get('producto/categoria/(:any)', 'Front\Producto::categoria/$1');
+$routes->get('producto/buscar', 'Front\Producto::buscar'); // Nueva ruta para búsqueda
 
 // Rutas del carrito de compras
 // Rutas del carrito

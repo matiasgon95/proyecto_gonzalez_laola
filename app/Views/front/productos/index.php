@@ -59,6 +59,14 @@
         <!-- Lista de productos -->
         <div class="col-md-9">
             <h1 class="mb-4 text-info">Catálogo de Productos</h1>
+            
+            <?php if(isset($termino_busqueda)): ?>
+            <div class="alert alert-info mb-4">
+                <i class="fas fa-search me-2"></i> Resultados para: <strong><?= esc($termino_busqueda) ?></strong>
+                <a href="<?= base_url('productos') ?>" class="float-end"><i class="fas fa-times"></i> Limpiar búsqueda</a>
+            </div>
+            <?php endif; ?>
+            
             <div class="row">
                 <?php if (!empty($productos)): ?>
                     <?php foreach ($productos as $producto): ?>

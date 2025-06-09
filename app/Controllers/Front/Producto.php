@@ -67,4 +67,34 @@ class Producto extends BaseController
             'categorias' => $categorias
         ]);
     }
+    
+    // Buscar productos por término de búsqueda
+    public function buscar()
+    {
+        $termino = $this->request->getGet('q');
+        
+        if (empty($termino)) {
+            return redirect()->to(base_url('productos'));
+        }
+        
+        $productos = $this->productoModel
+                         ->select('productos.*, categorias.descripcion as categoria')
+                         ->join('categorias', 'categorias.id = productos.categoria_id', 'left')
+                         ->where('productos.eliminado', 0)
+                         ->where('productos.stock >', 0)
+                         ->groupStart()
+                             ->like('productos.nombre', $termino)
+                             ->orLike('productos.descripcion', $termino)
+                         ->groupEnd()
+                         ->findAll();
+
+        $categoriasArray = $this->categoriaModel->where('activo', 1)->findAll();
+        $categorias = array_column($categoriasArray, 'descripcion');
+
+        return view('front/productos/index', [
+            'productos' => $productos,
+            'categorias' => $categorias,
+            'termino_busqueda' => $termino
+        ]);
+    }
 }

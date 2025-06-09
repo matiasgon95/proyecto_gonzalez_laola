@@ -17,7 +17,7 @@
       </button>
 
       <!-- Buscador mejorado -->
-      <form class="buscador-nav mx-4 d-none d-lg-flex" style="flex: 0 0 40%;" action="<?= base_url('sitio_en_construccion'); ?>" method="get" onsubmit="return irASitio();">
+      <form class="buscador-nav mx-4 d-none d-lg-flex" style="flex: 0 0 40%;" action="<?= base_url('producto/buscar'); ?>" method="get">
         <div class="input-group">
           <input type="text" class="form-control form-control-sm" placeholder="Buscar productos..." name="q">
           <button class="btn btn-outline-info btn-sm" type="submit">
@@ -64,7 +64,7 @@
     <div class="collapse navbar-collapse justify-content-center w-100" id="navbarSupportedContent">
       
       <!-- Buscador móvil mejorado -->
-      <form class="buscador-nav w-100 my-3 px-3 d-lg-none" action="<?= base_url('sitio_en_construccion'); ?>" method="get" onsubmit="return irASitio();">
+      <form class="buscador-nav w-100 my-3 px-3 d-lg-none" action="<?= base_url('producto/buscar'); ?>" method="get">
         <div class="input-group">
           <input type="text" class="form-control form-control-sm" placeholder="Buscar productos..." name="q">
           <button class="btn btn-outline-info btn-sm" type="submit">
@@ -95,9 +95,3 @@
   </div>
 </nav>
 <!-- Fin barra de navegación adaptada -->
-<script>
-function irASitio() {
-  window.location.href = "<?= base_url('sitio_en_construccion'); ?>";
-  return false; // Previene el envío real del formulario
-}
-</script>
