@@ -63,10 +63,31 @@ function initScrollTopButton() {
     });
 }
 
+// Función para mostrar/ocultar contraseña en formularios
+function initPasswordToggle() {
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('pass');
+    const toggleIcon = document.getElementById('toggleIcon');
+    
+    // Si no existen los elementos, no ejecutar el código
+    if (!togglePassword || !passwordInput || !toggleIcon) return;
+    
+    togglePassword.addEventListener('click', function() {
+        // Cambiar el tipo de input entre password y text
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        
+        // Cambiar el icono entre ojo y ojo tachado
+        toggleIcon.classList.toggle('fa-eye');
+        toggleIcon.classList.toggle('fa-eye-slash');
+    });
+}
+
 // Inicializar cuando el DOM esté cargado
 document.addEventListener('DOMContentLoaded', function() {
     initCategoryMenu();
     initScrollTopButton();
+    initPasswordToggle(); // Inicializar el toggle de contraseña
     
     // Aquí puedes agregar más inicializaciones de UI en el futuro
 });

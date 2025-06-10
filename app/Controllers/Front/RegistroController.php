@@ -49,10 +49,12 @@ class RegistroController extends Controller
                 ]
             ],
             'pass' => [
-                'rules' => 'required|min_length[6]',
+                'rules' => 'required|min_length[8]|max_length[16]|regex_match[/^(?=.*[A-Z])(?=.*[0-9])/]',
                 'errors' => [
                     'required' => 'La contraseña es obligatoria',
-                    'min_length' => 'La contraseña debe tener al menos 6 caracteres'
+                    'min_length' => 'La contraseña debe tener al menos 8 caracteres',
+                    'max_length' => 'La contraseña no debe exceder los 16 caracteres',
+                    'regex_match' => 'La contraseña debe contener al menos una letra mayúscula y un número'
                 ]
             ],
             'provincia' => [

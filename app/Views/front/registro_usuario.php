@@ -51,37 +51,46 @@
 
                             <div class="mb-3">
                                 <label for="pass" class="form-label"><i class="fas fa-lock me-2"></i>Contraseña</label>
-                                <input type="password" class="form-control bg-dark text-info border-info" name="pass" id="pass" required>
+                                <div class="input-group">
+                                    <input type="password" class="form-control bg-dark text-info border-info" name="pass" id="pass" required>
+                                    <button class="btn btn-outline-info" type="button" id="togglePassword">
+                                        <i class="fas fa-eye" id="toggleIcon"></i>
+                                    </button>
+                                </div>
+                                <div class="form-text text-info small mt-1">
+                                    La contraseña debe tener entre 8 y 16 caracteres, incluir al menos una letra mayúscula y un número.
+                                </div>
                             </div>
 
                             <div class="mb-4">
                                 <label for="provincia" class="form-label"><i class="fas fa-map-marker-alt me-2"></i>Provincia</label>
                                 <select class="form-select bg-dark text-info border-info" name="provincia" id="provincia" required>
-                                    <option value="" selected disabled>Seleccione una provincia</option>
-                                    <option value="Buenos Aires">Buenos Aires</option>
-                                    <option value="Ciudad Autónoma de Buenos Aires">Ciudad Autónoma de Buenos Aires</option>
-                                    <option value="Catamarca">Catamarca</option>
-                                    <option value="Chaco">Chaco</option>
-                                    <option value="Chubut">Chubut</option>
-                                    <option value="Córdoba">Córdoba</option>
-                                    <option value="Corrientes">Corrientes</option>
-                                    <option value="Entre Ríos">Entre Ríos</option>
-                                    <option value="Formosa">Formosa</option>
-                                    <option value="Jujuy">Jujuy</option>
-                                    <option value="La Pampa">La Pampa</option>
-                                    <option value="La Rioja">La Rioja</option>
-                                    <option value="Mendoza">Mendoza</option>
-                                    <option value="Misiones">Misiones</option>
-                                    <option value="Neuquén">Neuquén</option>
-                                    <option value="Río Negro">Río Negro</option>
-                                    <option value="Salta">Salta</option>
-                                    <option value="San Juan">San Juan</option>
-                                    <option value="San Luis">San Luis</option>
-                                    <option value="Santa Cruz">Santa Cruz</option>
-                                    <option value="Santa Fe">Santa Fe</option>
-                                    <option value="Santiago del Estero">Santiago del Estero</option>
-                                    <option value="Tierra del Fuego">Tierra del Fuego</option>
-                                    <option value="Tucumán">Tucumán</option>
+                                    <option value="">Seleccione una provincia</option>
+                                    <?php $selectedProvincia = old('provincia'); ?>
+                                    <option value="Buenos Aires" <?= ($selectedProvincia == 'Buenos Aires') ? 'selected' : '' ?>>Buenos Aires</option>
+                                    <option value="Ciudad Autónoma de Buenos Aires" <?= ($selectedProvincia == 'Ciudad Autónoma de Buenos Aires') ? 'selected' : '' ?>>Ciudad Autónoma de Buenos Aires</option>
+                                    <option value="Catamarca" <?= ($selectedProvincia == 'Catamarca') ? 'selected' : '' ?>>Catamarca</option>
+                                    <option value="Chaco" <?= ($selectedProvincia == 'Chaco') ? 'selected' : '' ?>>Chaco</option>
+                                    <option value="Chubut" <?= ($selectedProvincia == 'Chubut') ? 'selected' : '' ?>>Chubut</option>
+                                    <option value="Córdoba" <?= ($selectedProvincia == 'Córdoba') ? 'selected' : '' ?>>Córdoba</option>
+                                    <option value="Corrientes" <?= ($selectedProvincia == 'Corrientes') ? 'selected' : '' ?>>Corrientes</option>
+                                    <option value="Entre Ríos" <?= ($selectedProvincia == 'Entre Ríos') ? 'selected' : '' ?>>Entre Ríos</option>
+                                    <option value="Formosa" <?= ($selectedProvincia == 'Formosa') ? 'selected' : '' ?>>Formosa</option>
+                                    <option value="Jujuy" <?= ($selectedProvincia == 'Jujuy') ? 'selected' : '' ?>>Jujuy</option>
+                                    <option value="La Pampa" <?= ($selectedProvincia == 'La Pampa') ? 'selected' : '' ?>>La Pampa</option>
+                                    <option value="La Rioja" <?= ($selectedProvincia == 'La Rioja') ? 'selected' : '' ?>>La Rioja</option>
+                                    <option value="Mendoza" <?= ($selectedProvincia == 'Mendoza') ? 'selected' : '' ?>>Mendoza</option>
+                                    <option value="Misiones" <?= ($selectedProvincia == 'Misiones') ? 'selected' : '' ?>>Misiones</option>
+                                    <option value="Neuquén" <?= ($selectedProvincia == 'Neuquén') ? 'selected' : '' ?>>Neuquén</option>
+                                    <option value="Río Negro" <?= ($selectedProvincia == 'Río Negro') ? 'selected' : '' ?>>Río Negro</option>
+                                    <option value="Salta" <?= ($selectedProvincia == 'Salta') ? 'selected' : '' ?>>Salta</option>
+                                    <option value="San Juan" <?= ($selectedProvincia == 'San Juan') ? 'selected' : '' ?>>San Juan</option>
+                                    <option value="San Luis" <?= ($selectedProvincia == 'San Luis') ? 'selected' : '' ?>>San Luis</option>
+                                    <option value="Santa Cruz" <?= ($selectedProvincia == 'Santa Cruz') ? 'selected' : '' ?>>Santa Cruz</option>
+                                    <option value="Santa Fe" <?= ($selectedProvincia == 'Santa Fe') ? 'selected' : '' ?>>Santa Fe</option>
+                                    <option value="Santiago del Estero" <?= ($selectedProvincia == 'Santiago del Estero') ? 'selected' : '' ?>>Santiago del Estero</option>
+                                    <option value="Tierra del Fuego" <?= ($selectedProvincia == 'Tierra del Fuego') ? 'selected' : '' ?>>Tierra del Fuego</option>
+                                    <option value="Tucumán" <?= ($selectedProvincia == 'Tucumán') ? 'selected' : '' ?>>Tucumán</option>
                                 </select>
                             </div>
 
