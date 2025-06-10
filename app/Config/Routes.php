@@ -28,6 +28,7 @@ $routes->post('front/registro_usuario/guardar','Front\RegistroController::guarda
 $routes->group('front/cliente', ['filter' => 'auth:2'], function($routes) {
     $routes->get('dashboard', 'Admin\PanelController::cliente');
 });
+
 // Rutas de gestión de Productos del admin
 $routes->group('back', ['filter' => 'auth:1'], function($routes) {
     $routes->get('dashboard', 'Admin\PanelController::admin');
@@ -46,6 +47,9 @@ $routes->group('back', ['filter' => 'auth:1'], function($routes) {
     // Nuevas rutas para pedidos
     $routes->get('pedidos', 'Admin\PedidoController::index');
     $routes->get('pedidos/detalle/(:num)', 'Admin\PedidoController::detalle/$1');
+    
+    // Ruta para estadísticas
+    $routes->get('estadisticas', 'Admin\PanelController::estadisticas');
 });
 
 // Rutas de productos

@@ -1,0 +1,39 @@
+/* Estilos para la página de estadísticas */
+.card-header {
+    font-weight: bold;
+}
+
+.text-info-emphasis {
+    color: #6edff6;
+}
+
+.list-group-item {
+    border-color: #0dcaf0;
+    margin-bottom: 5px;
+}
+
+.table th, .table td {
+    vertical-align: middle;
+}
+
+.text-danger {
+    color: #ff6b6b !important;
+}
+
+.text-warning {
+    color: #ffd166 !important;
+}
+
+/* Ajuste para el número de ventas totales */
+.card-body .display-4 {
+    white-space: nowrap;
+    font-size: 2rem; /* Tamaño reducido para que quepa en la tarjeta */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Muestra puntos suspensivos si el texto es demasiado largo */
+}
+
+/* Ajuste específico para la tarjeta de ventas totales */
+.card-body .display-4.text-info {
+    font-size: 1.8rem; /* Tamaño aún más reducido para números grandes */
+    letter-spacing: -1px; /* Reduce el espacio entre caracteres */
+}
