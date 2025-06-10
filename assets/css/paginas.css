@@ -608,3 +608,50 @@
 .form-control.is-invalid ~ .invalid-feedback {
     display: block;
 }
+
+/* Estilos específicos para la página de términos y condiciones */
+.terminos-container {
+    border: 1px solid rgba(0, 188, 212, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 188, 212, 0.2);
+}
+
+.separator-line {
+    height: 3px;
+    width: 100px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+}
+
+/* Estilos personalizados para el acordeón de términos */
+.accordion-item {
+    border-radius: 8px;
+    overflow: hidden;
+    border-width: 1px;
+    transition: all 0.3s ease;
+}
+
+.accordion-item:hover {
+    box-shadow: 0 5px 15px rgba(0, 188, 212, 0.2);
+    transform: translateY(-2px);
+}
+
+.accordion-button:not(.collapsed) {
+    color: white;
+    background-color: rgba(0, 188, 212, 0.2);
+    box-shadow: none;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: var(--color-primary);
+}
+
+.accordion-button::after {
+    filter: brightness(0) invert(1);
+}
+
+/* Aseguramos que el texto en los acordeones sea visible */
+.accordion-body p {
+    color: #e0f7fa !important;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
