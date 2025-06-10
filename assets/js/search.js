@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (producto.imagen) {
                             const img = document.createElement('img');
                             // Construir la URL completa para la imagen
-                            const imagenUrl = `${baseUrl}/uploads/${producto.imagen}`;
+                            const imagenUrl = `${baseUrl}/public/${producto.imagen}`;
                             
                             // Asignar la imagen directamente
                             img.src = imagenUrl;
