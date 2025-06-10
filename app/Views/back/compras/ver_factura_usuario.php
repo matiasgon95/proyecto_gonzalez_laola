@@ -22,7 +22,7 @@
                             <?php foreach ($ventas as $venta): ?>
                             <tr>
                                 <td><?= date('d/m/Y H:i', strtotime($venta['created_at'])) ?></td>
-                                <td>$<?= number_format($venta['total_venta'], 2) ?></td>
+                                <td>$<?= number_format($venta['total_venta'], 2, ',', '.') ?></td>
                                 <td>
                                     <a href="<?= base_url('vista_compras/' . $venta['id']) ?>" class="btn btn-sm btn-info">
                                         <i class="fas fa-eye"></i> Ver detalle
@@ -40,3 +40,4 @@
         </div>
     </div>
 </div>
+<td>$<?= number_format($venta['total_venta'], 2, ',', '.') ?></td>

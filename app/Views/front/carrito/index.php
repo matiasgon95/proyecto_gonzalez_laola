@@ -59,15 +59,15 @@
                                                 <td class="align-middle">
                                                     <img src="<?= base_url('public/' . $item['imagen']) ?>" class="img-thumbnail" width="80" height="80" alt="<?= esc($item['name']) ?>"></td>
                                                 <td class="align-middle"><?= esc($item['name']) ?></td>
-                                                <td class="align-middle">$ <?= number_format($item['price'], 2) ?></td>
+                                                <td class="align-middle">$ <?= number_format($item['price'], 2, ',', '.') ?></td>
                                                 <td class="align-middle">
                                                     <div class="d-flex align-items-center justify-content-center">
                                                         <a class="btn btn-sm btn-outline-info me-2" href="<?= base_url('carrito_resta/' . $item['rowid']) ?>"><i class="fas fa-minus"></i></a>
-                                                        <span class="mx-2"><?= number_format($item['qty']) ?></span>
+                                                        <span class="mx-2"><?= number_format($item['qty'], 0, ',', '.') ?></span>
                                                         <a class="btn btn-sm btn-info ms-2" href="<?= base_url('carrito_suma/' . $item['rowid']) ?>"><i class="fas fa-plus"></i></a>
                                                     </div>
                                                 </td>
-                                                <td class="align-middle">$ <?= number_format($item['subtotal'], 2) ?></td>
+                                                <td class="align-middle">$ <?= number_format($item['subtotal'], 2, ',', '.') ?></td>
                                                 <td class="align-middle">
                                                     <a class="btn btn-sm btn-danger" href="<?= base_url('carrito_elimina/' . $item['rowid']) ?>"><i class="fas fa-trash"></i></a>
                                                 </td>
@@ -77,7 +77,7 @@
                                     <tfoot class="table-dark">
                                         <tr>
                                             <td colspan="4" class="text-end fw-bold">Total de la compra:</td>
-                                            <td class="fw-bold text-info">$ <?= number_format($gran_total, 2) ?></td>
+                                            <td class="fw-bold text-info">$ <?= number_format($gran_total, 2, ',', '.') ?></td>
                                             <td></td>
                                         </tr>
                                     </tfoot>

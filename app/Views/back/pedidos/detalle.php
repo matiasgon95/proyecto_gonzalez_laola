@@ -29,7 +29,7 @@
                 </div>
                 <div class="card-body">
                     <p><strong>Fecha:</strong> <?= date('d/m/Y H:i', strtotime($pedido['fecha'])) ?></p>
-                    <p><strong>Total:</strong> $<?= number_format($pedido['total_venta'], 2) ?></p>
+                    <p><strong>Total:</strong> $<?= number_format($pedido['total_venta'], 2, ',', '.') ?></p>
                 </div>
             </div>
         </div>
@@ -64,13 +64,13 @@
                                         <?php endif; ?>
                                     </td>
                                     <td class="text-center"><?= esc($detalle['cantidad']) ?></td>
-                                    <td>$<?= number_format($detalle['precio'] / $detalle['cantidad'], 2) ?></td>
-                                    <td>$<?= number_format($detalle['precio'], 2) ?></td>
+                                    <td>$<?= number_format($detalle['precio'] / $detalle['cantidad'], 2, ',', '.') ?></td>
+                                    <td>$<?= number_format($detalle['precio'], 2, ',', '.') ?></td>
                                 </tr>
                             <?php endforeach; ?>
                             <tr class="table-info text-dark">
                                 <td colspan="4" class="text-end fw-bold">Total:</td>
-                                <td class="fw-bold">$<?= number_format($pedido['total_venta'], 2) ?></td>
+                                <td class="fw-bold">$<?= number_format($pedido['total_venta'], 2, ',', '.') ?></td>
                             </tr>
                         <?php else : ?>
                             <tr>

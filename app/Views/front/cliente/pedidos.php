@@ -43,7 +43,7 @@
                                             <tr>
                                                 <td class="text-center"><?= esc($pedido['id']) ?></td>
                                                 <td class="text-center"><?= date('d/m/Y H:i', strtotime($pedido['fecha'])) ?></td>
-                                                <td class="text-center">$<?= number_format($pedido['total_venta'], 2) ?></td>
+                                                <td class="text-center">$<?= number_format($pedido['total_venta'], 2, ',', '.') ?></td>
                                                 <td class="text-center">
                                                     <a href="<?= base_url('front/cliente/detalle_pedido/' . $pedido['id']) ?>" class="btn btn-sm btn-info">
                                                         <i class="fas fa-eye"></i> Ver detalle

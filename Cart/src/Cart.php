@@ -463,7 +463,7 @@ class Cart
      */
     public function formatNumber($n = ''): string
     {
-        return ( $n === '' ) ? '' : number_format((float)$n, 2);
+        return ( $n === '' ) ? '' : number_format((float)$n, 2, ',', '.');
     }
 
     // ------------------------------------------------------------------------

@@ -53,8 +53,8 @@
                 <div class="card-body text-center">
                     <i class="fas fa-dollar-sign fa-3x mb-3 text-info"></i>
                     <h5 class="card-title text-info">Ventas Totales</h5>
-                    <p class="display-4 text-info">$<?= number_format($total_ventas, 2) ?></p>
-                    <p class="text-info-emphasis">Este mes: $<?= number_format($ventas_mes, 2) ?></p>
+                    <p class="display-4 text-info">$<?= number_format($total_ventas, 2, ',', '.') ?></p>
+                    <p class="text-info-emphasis">Este mes: $<?= number_format($ventas_mes, 2, ',', '.') ?></p>
                 </div>
             </div>
         </div>

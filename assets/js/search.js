@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         
                         // Precio del producto
                         const precio = document.createElement('div');
-                        precio.textContent = `$${parseFloat(producto.precio).toLocaleString('es-AR')}`;
+                        precio.textContent = `$${parseFloat(producto.precio).toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true, decimal: ',', thousands: '.'})}`;  
                         textContainer.appendChild(precio);
                         
                         item.appendChild(textContainer);

@@ -82,7 +82,7 @@
                                         <h5 class="card-title text-info"><?= esc($producto['nombre']); ?></h5>
                                         <span class="badge bg-info text-dark mb-2"><?= esc($producto['categoria']); ?></span>
                                         <div class="mt-auto">
-                                            <p class="card-text text-info mb-3">$<?= number_format($producto['precio_vta'], 2); ?></p>
+                                            <p class="card-text text-info mb-3">$<?= number_format($producto['precio_vta'], 2, ',', '.'); ?></p>
                                             <div class="d-flex justify-content-between align-items-center mb-2">
                                                 <a href="<?= base_url('producto/detalle/' . $producto['id']); ?>" 
                                                     class="btn btn-info text-black rounded-pill flex-grow-1 me-2">

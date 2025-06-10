@@ -87,8 +87,8 @@
                                         </div>
                                     </td>
                                     <td class="text-nowrap categoria-celda"><?= esc($producto['categoria_descripcion']) ?></td>
-                                    <td>$<?= number_format($producto['precio'], 2) ?></td>
-                                    <td class="d-none d-sm-table-cell">$<?= number_format($producto['precio_vta'], 2) ?></td>
+                                    <td>$<?= number_format($producto['precio'], 2, ',', '.') ?></td>
+                                    <td class="d-none d-sm-table-cell">$<?= number_format($producto['precio_vta'], 2, ',', '.') ?></td>
                                     <td class="<?= ($producto['stock'] < $producto['stock_min']) ? 'text-danger fw-bold' : '' ?>">
                                         <?= $producto['stock'] ?>
                                         <?php if ($producto['stock'] < $producto['stock_min']) : ?>

@@ -105,8 +105,8 @@
                                          width="50" height="50">
                                 </td>
                                 <td><?= $item['cantidad'] ?></td>
-                                <td>$<?= number_format($item['precio'] / $item['cantidad'], 2) ?></td>
-                                <td>$<?= number_format($item['precio'], 2) ?></td>
+                                <td>$<?= number_format($item['precio'] / $item['cantidad'], 2, ',', '.') ?></td>
+                                <td>$<?= number_format($item['precio'], 2, ',', '.') ?></td>
                             </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -119,7 +119,7 @@
                             <?php endif; ?>
                             <tr>
                                 <th colspan="4" class="text-end">Total:</th>
-                                <th>$<?= number_format($total + (!empty($datos_adicionales) && isset($datos_adicionales['metodo_entrega']) && $datos_adicionales['metodo_entrega'] === 'envio_domicilio' ? 500 : 0), 2) ?></th>
+                                <th>$<?= number_format($total + (!empty($datos_adicionales) && isset($datos_adicionales['metodo_entrega']) && $datos_adicionales['metodo_entrega'] === 'envio_domicilio' ? 500 : 0), 2, ',', '.') ?></th>
                             </tr>
                         </tfoot>
                     </table>

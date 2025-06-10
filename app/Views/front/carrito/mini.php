@@ -11,7 +11,7 @@
                 <img src="<?= base_url('public/' . $item['imagen']) ?>" class="cart-item-image" alt="<?= esc($item['name']) ?>">
                 <div class="cart-item-details">
                     <div class="cart-item-name"><?= esc($item['name']) ?></div>
-                    <div class="cart-item-price">$ <?= number_format($item['price'], 2) ?></div>
+                    <div class="cart-item-price">$ <?= number_format($item['price'], 2, ',', '.') ?></div>
                     <div class="cart-item-quantity">
                         <div class="d-flex align-items-center">
                             <button class="btn btn-sm btn-outline-info me-2 btn-cart-resta" data-rowid="<?= $item['rowid'] ?>"><i class="fas fa-minus"></i></button>
@@ -25,7 +25,7 @@
         <?php endforeach; ?>
         
         <div class="cart-total">
-            <span class="cart-total-label">Total: <span class="cart-total-amount">$ <?= number_format($total, 2) ?></span></span>
+            <span class="cart-total-label">Total: <span class="cart-total-amount">$ <?= number_format($total, 2, ',', '.') ?></span></span>
             <span></span> <!-- Elemento vacío para mantener el justify-content-between -->
         </div>
         

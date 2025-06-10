@@ -40,7 +40,7 @@
                                                 <h5 class="card-title text-info"><?= esc($favorito['nombre']); ?></h5>
                                                 <span class="badge bg-info text-dark mb-2"><?= esc($favorito['categoria']); ?></span>
                                                 <div class="mt-auto">
-                                                    <p class="card-text text-info mb-3">$<?= number_format($favorito['precio_vta'], 2); ?></p>
+                                                    <p class="card-text text-info mb-3">$<?= number_format($favorito['precio_vta'], 2, ',', '.'); ?></p>
                                                     <div class="d-flex flex-column gap-2">
                                                         <a href="<?= base_url('producto/detalle/' . $favorito['producto_id']); ?>" 
                                                             class="btn btn-info text-black rounded-pill">
