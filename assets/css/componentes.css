@@ -306,7 +306,7 @@
 /* Estilos para el icono flotante del carrito */
 .floating-cart-container {
     position: fixed;
-    bottom: 30px;
+    bottom: 100px; /* Mantener esta posición para que esté por encima del botón de scroll-to-top */
     right: 30px;
     z-index: 1000;
 }
@@ -537,7 +537,7 @@
 /* Ajuste para dispositivos móviles */
 @media (max-width: 768px) {
     .floating-cart-container {
-        bottom: 20px;
+        bottom: 90px; /* Mantener esta posición para que esté por encima del botón de scroll-to-top en móviles */
         right: 20px;
     }
     
