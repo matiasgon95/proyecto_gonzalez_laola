@@ -499,3 +499,107 @@
         text-align: left;
     }
 }
+
+/* Estilos mejorados para el carrusel */
+.carousel-container {
+    max-width: 85%;
+    margin: 2rem auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    position: relative;
+    border: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+/* Efecto de gradiente en los bordes */
+.carousel-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 20px;
+    padding: 2px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Ajuste de altura para que no sea tan grande */
+.carousel-item img {
+    height: 400px;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Mejora de los controles del carrusel */
+.carousel-control-prev, .carousel-control-next {
+    width: 10%;
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+.carousel-container:hover .carousel-control-prev,
+.carousel-container:hover .carousel-control-next {
+    opacity: 0.8;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    padding: 25px;
+    background-size: 50%;
+}
+
+/* Mejora del caption */
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    padding: 15px 25px;
+    bottom: 30px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.carousel-caption .btn {
+    background: var(--gradient-primary);
+    border: none;
+    padding: 10px 25px;
+    font-family: "Orbitron", sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    color: #000;
+    font-weight: 600;
+}
+
+.carousel-caption .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Animación sutil al cambiar de slide */
+.carousel-item {
+    transition: transform 0.8s ease-in-out;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    .carousel-container {
+        max-width: 95%;
+        margin: 1rem auto;
+    }
+    
+    .carousel-item img {
+        height: 300px;
+    }
+    
+    .carousel-caption {
+        padding: 10px 15px;
+        bottom: 20px;
+    }
+}
