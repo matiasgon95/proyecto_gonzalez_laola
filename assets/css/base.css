@@ -30,3 +30,24 @@ h3 {
     color: #e0f7fa;
     margin-top: 20px;
 }
+
+/* Estilos para botones de favoritos */
+.favorito-btn {
+    transition: all 0.3s ease;
+}
+
+.favorito-btn.favorito-activo {
+    background-color: #dc3545;
+    color: white;
+    border-color: #dc3545;
+}
+
+.favorito-btn.favorito-activo i {
+    color: white;
+}
+
+/* Estilos para el botón de favoritos en la página de detalle */
+.btn-outline-danger.favorito-activo {
+    background-color: #dc3545;
+    color: white;
+}

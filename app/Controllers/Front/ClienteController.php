@@ -5,6 +5,8 @@ namespace App\Controllers\Front;
 use App\Models\usuario_model;
 use App\Models\Ventas_cabecera_model;
 use App\Models\Ventas_detalle_model;
+use App\Models\FavoritoModel;
+use App\Models\ProductoModel;
 use App\Controllers\BaseController;
 
 class ClienteController extends BaseController
@@ -12,6 +14,8 @@ class ClienteController extends BaseController
     protected $usuarioModel;
     protected $ventasCabeceraModel;
     protected $ventasDetalleModel;
+    protected $favoritoModel;
+    protected $productoModel;
     protected $session;
     protected $helpers = ['url', 'form'];
 
@@ -20,6 +24,8 @@ class ClienteController extends BaseController
         $this->usuarioModel = new usuario_model();
         $this->ventasCabeceraModel = new Ventas_cabecera_model();
         $this->ventasDetalleModel = new Ventas_detalle_model();
+        $this->favoritoModel = new FavoritoModel();
+        $this->productoModel = new ProductoModel();
         $this->session = session();
     }
 
@@ -118,5 +124,83 @@ class ClienteController extends BaseController
         $data['pedido'] = $pedido;
         $data['detalles'] = $detalles;
         return view('front/cliente/detalle_pedido', $data);
+    }
+    
+    // Método para mostrar los favoritos del cliente
+    public function favoritos()
+    {
+        // Obtener el ID del usuario de la sesión
+        $usuario_id = session()->get('usuario_id');
+        
+        // Obtener todos los favoritos del usuario
+        $favoritos = $this->favoritoModel->getFavoritos($usuario_id);
+        
+        $data['favoritos'] = $favoritos;
+        return view('front/cliente/favoritos', $data);
+    }
+    
+    // Método para agregar un producto a favoritos
+    public function agregar_favorito()
+    {
+        // Verificar si el usuario está logueado
+        if (!session()->has('usuario_id')) {
+            return redirect()->to('front/login')->with('error', 'Debe iniciar sesión para agregar productos a favoritos');
+        }
+        
+        $usuario_id = session()->get('usuario_id');
+        $producto_id = $this->request->getPost('producto_id');
+        
+        if (empty($producto_id)) {
+            return redirect()->back()->with('error', 'Producto no válido');
+        }
+        
+        // Agregar a favoritos
+        $resultado = $this->favoritoModel->agregarFavorito($usuario_id, $producto_id);
+        
+        if ($resultado) {
+            return redirect()->back()->with('mensaje', 'Producto agregado a favoritos');
+        } else {
+            return redirect()->back()->with('error', 'El producto ya está en favoritos');
+        }
+    }
+    
+    // Método para eliminar un producto de favoritos
+    public function eliminar_favorito($producto_id = null)
+    {
+        // Verificar si el usuario está logueado
+        if (!session()->has('usuario_id')) {
+            return redirect()->to('front/login')->with('error', 'Debe iniciar sesión para gestionar favoritos');
+        }
+        
+        $usuario_id = session()->get('usuario_id');
+        
+        if (empty($producto_id)) {
+            return redirect()->back()->with('error', 'Producto no válido');
+        }
+        
+        // Eliminar de favoritos
+        $this->favoritoModel->eliminarFavorito($usuario_id, $producto_id);
+        
+        return redirect()->back()->with('mensaje', 'Producto eliminado de favoritos');
+    }
+    
+    // Método para verificar si un producto es favorito (para AJAX)
+    public function es_favorito($producto_id = null)
+    {
+        // Verificar si el usuario está logueado
+        if (!session()->has('usuario_id')) {
+            return $this->response->setJSON(['esFavorito' => false]);
+        }
+        
+        $usuario_id = session()->get('usuario_id');
+        
+        if (empty($producto_id)) {
+            return $this->response->setJSON(['esFavorito' => false]);
+        }
+        
+        // Verificar si es favorito
+        $esFavorito = $this->favoritoModel->esFavorito($usuario_id, $producto_id);
+        
+        return $this->response->setJSON(['esFavorito' => $esFavorito]);
     }
 }

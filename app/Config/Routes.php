@@ -31,6 +31,10 @@ $routes->group('front/cliente', ['filter' => 'auth:2'], function($routes) {
     $routes->post('actualizar_perfil', 'Front\ClienteController::actualizar_perfil');
     $routes->get('pedidos', 'Front\ClienteController::pedidos');
     $routes->get('detalle_pedido/(:num)', 'Front\ClienteController::detalle_pedido/$1');
+    $routes->get('favoritos', 'Front\ClienteController::favoritos');
+    $routes->post('agregar_favorito', 'Front\ClienteController::agregar_favorito');
+    $routes->get('eliminar_favorito/(:num)', 'Front\ClienteController::eliminar_favorito/$1');
+    $routes->get('es_favorito/(:num)', 'Front\ClienteController::es_favorito/$1');
 });
 
 // Rutas de gestión de Productos del admin

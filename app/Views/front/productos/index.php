@@ -68,46 +68,61 @@
             <?php endif; ?>
             
             <div class="row">
-                <?php if (!empty($productos)): ?>
-                    <?php foreach ($productos as $producto): ?>
-                        <div class="col-md-4 mb-4">
-                            <div class="card shadow border border-info h-100">
-                            <img src="<?= base_url('public/' . $producto['imagen']) ?>"
-                                    class="card-img-top imagen-producto" 
-                                    alt="<?= esc($producto['nombre']); ?>"
-                                    loading="lazy">
-                                <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title text-info"><?= esc($producto['nombre']); ?></h5>
-                                    <span class="badge bg-info text-dark mb-2"><?= esc($producto['categoria']); ?></span>  <!-- Categoría con badge -->
-                                    <!-- <p class="card-text flex-grow-1"><?= esc($producto['descripcion']); ?></p> -->
-                                    <div class="mt-auto">
-                                        <p class="card-text text-info mb-3">$<?= number_format($producto['precio_vta'], 2); ?></p>
-                                        <a href="<?= base_url('producto/detalle/' . $producto['id']); ?>" 
-                                        class="btn btn-info text-black rounded-pill w-100 mb-2">
-                                        <i class="fas fa-eye me-2"></i>Ver detalle
-                                        </a>
-                                        
-                                        <!-- Botón Agregar al Carrito -->
-                                        <form action="<?= base_url('carrito_agrega'); ?>" method="post" class="mt-2">
-                                            <?= csrf_field() ?>
-                                            <input type="hidden" name="id" value="<?= $producto['id']; ?>">
-                                            <input type="hidden" name="nombre_prod" value="<?= $producto['nombre']; ?>">
-                                            <input type="hidden" name="precio_vta" value="<?= $producto['precio_vta']; ?>">
-                                            <input type="hidden" name="imagen" value="<?= $producto['imagen']; ?>">
-                                            <button type="submit" class="btn btn-primary rounded-pill w-100">
-                                                <i class="fas fa-cart-plus me-2"></i>Añadir al carrito
-                                            </button>
-                                        </form>
+                <div class="row">
+                    <?php if (!empty($productos)): ?>
+                        <!-- Dentro del bucle foreach de productos, después del botón de "Ver detalle" y antes del formulario de agregar al carrito -->
+                        <?php foreach ($productos as $producto): ?>
+                            <div class="col-md-4 mb-4">
+                                <div class="card shadow border border-info h-100">
+                                    <img src="<?= base_url('public/' . $producto['imagen']) ?>" 
+                                        class="card-img-top imagen-producto" 
+                                        alt="<?= esc($producto['nombre']); ?>"
+                                        loading="lazy">
+                                    <div class="card-body d-flex flex-column">
+                                        <h5 class="card-title text-info"><?= esc($producto['nombre']); ?></h5>
+                                        <span class="badge bg-info text-dark mb-2"><?= esc($producto['categoria']); ?></span>
+                                        <div class="mt-auto">
+                                            <p class="card-text text-info mb-3">$<?= number_format($producto['precio_vta'], 2); ?></p>
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <a href="<?= base_url('producto/detalle/' . $producto['id']); ?>" 
+                                                    class="btn btn-info text-black rounded-pill flex-grow-1 me-2">
+                                                    <i class="fas fa-eye me-2"></i>Ver detalle
+                                                </a>
+                                                
+                                                <!-- Botón de Favoritos -->
+                                                <?php if(session()->has('usuario_id')): ?>
+                                                    <form action="<?= base_url('front/cliente/agregar_favorito'); ?>" method="post" class="d-inline favorito-form">
+                                                        <?= csrf_field() ?>
+                                                        <input type="hidden" name="producto_id" value="<?= $producto['id']; ?>">
+                                                        <button type="submit" class="btn btn-outline-danger rounded-circle favorito-btn" title="Agregar a favoritos">
+                                                            <i class="fas fa-heart"></i>
+                                                        </button>
+                                                    </form>
+                                                <?php endif; ?>
+                                            </div>
+                                            
+                                            <!-- Formulario Agregar al Carrito -->
+                                            <form action="<?= base_url('carrito_agrega'); ?>" method="post">
+                                                <?= csrf_field() ?>
+                                                <input type="hidden" name="id" value="<?= $producto['id']; ?>">
+                                                <input type="hidden" name="nombre_prod" value="<?= $producto['nombre']; ?>">
+                                                <input type="hidden" name="precio_vta" value="<?= $producto['precio_vta']; ?>">
+                                                <input type="hidden" name="imagen" value="<?= $producto['imagen']; ?>">
+                                                <button type="submit" class="btn btn-primary rounded-pill w-100">
+                                                    <i class="fas fa-cart-plus me-2"></i>Añadir al carrito
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="col-12 text-center text-muted">
+                            <p>No hay productos en esta categoría.</p>
                         </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <div class="col-12 text-center text-muted">
-                        <p>No hay productos en esta categoría.</p>
-                    </div>
-                <?php endif; ?>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </div>

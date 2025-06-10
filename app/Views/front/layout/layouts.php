@@ -82,5 +82,7 @@
             </div>
         </div>
     </div>
+    <!-- Antes de cerrar el body, añade: -->
+    <script src="<?= base_url('assets/js/favoritos.js') ?>"></script>
 </body>
 </html>

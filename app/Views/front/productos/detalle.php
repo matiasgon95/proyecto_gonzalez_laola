@@ -122,11 +122,25 @@
                             <button type="submit" class="btn btn-info text-dark btn-comprar">
                                 <i class="fas fa-cart-plus me-2"></i>Añadir al carrito
                             </button>
+                            
+                            <?php if(session()->has('usuario_id')): ?>
+                                <!-- Separar el formulario de favoritos del formulario de carrito -->
+                            </form>
+                            <form action="<?= base_url('front/cliente/agregar_favorito'); ?>" method="post" class="d-inline favorito-form">
+                                <?= csrf_field() ?>
+                                <input type="hidden" name="producto_id" value="<?= $producto['id']; ?>">
+                                <button type="submit" class="btn btn-outline-danger favorito-btn">
+                                    <i class="fas fa-heart me-2"></i>Añadir a favoritos
+                                </button>
+                            </form>
+                            <?php else: ?>
+                            </form>
+                            <?php endif; ?>
+                            
                             <a href="<?= base_url('productos'); ?>" class="btn btn-outline-secondary btn-volver">
                                 <i class="fas fa-arrow-left me-2"></i>Volver al catálogo
                             </a>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
