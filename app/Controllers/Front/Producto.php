@@ -146,19 +146,18 @@ class Producto extends BaseController
         // Definir cuántos productos por página
         $productosPorPagina = 9; // 3 filas de 3 productos
         
-        // Usar el método existente pero con paginación
-        $builder = $this->productoModel->select('productos.*, categorias.descripcion as categoria')
-                                      ->join('categorias', 'categorias.id = productos.categoria_id', 'left')
-                                      ->where('productos.eliminado', 0)
-                                      ->where('productos.stock >', 0)
-                                      ->groupStart()
-                                      ->like('productos.nombre', $termino)
-                                      ->orLike('productos.descripcion', $termino)
-                                      ->orLike('categorias.descripcion', $termino)
-                                      ->groupEnd();
+        // Obtener productos usando el método que incluye búsqueda por sinónimos
+        $productos = $this->productoModel->buscarConSinonimos($termino);
         
-        $productos = $builder->paginate($productosPorPagina);
-        $pager = $this->productoModel->pager;
+        // Convertir el resultado a un objeto de paginación
+        $pager = service('pager');
+        $page = (int)(($this->request->getGet('page') ?? 1));
+        $total = count($productos);
+        $pager->makeLinks($page, $productosPorPagina, $total);
+        
+        // Paginar manualmente los resultados
+        $offset = ($page - 1) * $productosPorPagina;
+        $productos = array_slice($productos, $offset, $productosPorPagina);
 
         $categoriasArray = $this->categoriaModel->where('activo', 1)->findAll();
         $categorias = array_column($categoriasArray, 'descripcion');
