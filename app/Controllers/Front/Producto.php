@@ -36,6 +36,10 @@ class Producto extends BaseController
             $builder->orderBy('productos.precio_vta', 'ASC');
         } elseif ($orden == 'precio_desc') {
             $builder->orderBy('productos.precio_vta', 'DESC');
+        } elseif ($orden == 'mas_vendidos') {
+            // Consulta para productos más vendidos
+            $builder->select('productos.*, categorias.descripcion as categoria, (SELECT COALESCE(SUM(cantidad), 0) FROM ventas_detalle WHERE producto_id = productos.id) as total_vendido');
+            $builder->orderBy('total_vendido', 'DESC');
         } else {
             // Ordenación predeterminada
             $builder->orderBy('productos.id', 'DESC');
@@ -105,6 +109,10 @@ class Producto extends BaseController
             $builder->orderBy('productos.precio_vta', 'ASC');
         } elseif ($orden == 'precio_desc') {
             $builder->orderBy('productos.precio_vta', 'DESC');
+        } elseif ($orden == 'mas_vendidos') {
+            // Consulta para productos más vendidos
+            $builder->select('productos.*, categorias.descripcion as categoria, (SELECT COALESCE(SUM(cantidad), 0) FROM ventas_detalle WHERE producto_id = productos.id) as total_vendido');
+            $builder->orderBy('total_vendido', 'DESC');
         } else {
             // Ordenación predeterminada
             $builder->orderBy('productos.id', 'DESC');

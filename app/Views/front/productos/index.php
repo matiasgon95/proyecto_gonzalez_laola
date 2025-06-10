@@ -71,6 +71,7 @@
                             switch ($orden_actual) {
                                 case 'precio_asc': $textoOrden = 'Precio: menor a mayor'; break;
                                 case 'precio_desc': $textoOrden = 'Precio: mayor a menor'; break;
+                                case 'mas_vendidos': $textoOrden = 'Más vendidos'; break;
                             }
                         }
                         echo $textoOrden;
@@ -83,6 +84,7 @@
                             ? base_url('producto/categoria/' . urlencode($categoria_actual)) 
                             : base_url('productos');
                         ?>
+                        <li><a class="dropdown-item" href="<?= $urlBase . '?orden=mas_vendidos' ?>">Más vendidos</a></li>
                         <li><a class="dropdown-item" href="<?= $urlBase . '?orden=precio_asc' ?>">Precio: menor a mayor</a></li>
                         <li><a class="dropdown-item" href="<?= $urlBase . '?orden=precio_desc' ?>">Precio: mayor a menor</a></li>
                     </ul>
