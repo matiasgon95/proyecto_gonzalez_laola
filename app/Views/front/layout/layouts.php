@@ -59,6 +59,11 @@
         </button>
     </div>
     
+    <!-- Botón para volver arriba -->
+    <button type="button" id="scrollTopBtn" class="scroll-top-btn" aria-label="Volver arriba">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
     <!-- Modal del Carrito -->
     <div class="cart-modal" id="cartModal">
         <div class="cart-modal-content">

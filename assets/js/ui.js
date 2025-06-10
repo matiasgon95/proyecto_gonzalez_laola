@@ -37,9 +37,36 @@ function initCategoryMenu() {
     });
 }
 
+// Función para inicializar el botón de volver arriba
+function initScrollTopButton() {
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    
+    // Si no existe el botón, no ejecutar el código
+    if (!scrollTopBtn) return;
+    
+    // Mostrar/ocultar el botón según el desplazamiento
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) { // Mostrar después de 300px de desplazamiento
+            scrollTopBtn.style.display = 'flex';
+        } else {
+            scrollTopBtn.style.display = 'none';
+        }
+    });
+    
+    // Manejar el clic en el botón
+    scrollTopBtn.addEventListener('click', function() {
+        // Desplazamiento suave hacia arriba
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
+
 // Inicializar cuando el DOM esté cargado
 document.addEventListener('DOMContentLoaded', function() {
     initCategoryMenu();
+    initScrollTopButton();
     
     // Aquí puedes agregar más inicializaciones de UI en el futuro
 });
