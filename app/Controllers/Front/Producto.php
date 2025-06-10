@@ -55,6 +55,7 @@ class Producto extends BaseController
         $categorias = array_column($categoriasArray, 'descripcion');
 
         return view('front/productos/index', [
+            'titulo' => 'Catálogo de Productos',
             'productos' => $productos,
             'categorias' => $categorias,
             'pager' => $pager,
@@ -79,7 +80,10 @@ class Producto extends BaseController
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
-        return view('front/productos/detalle', ['producto' => $producto]);
+        return view('front/productos/detalle', [
+            'titulo' => $producto['nombre'],
+            'producto' => $producto
+        ]);
     }
 
     public function categoria($categoria)

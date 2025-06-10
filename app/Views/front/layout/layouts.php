@@ -36,7 +36,7 @@
     <script src="<?= base_url('assets/js/checkout.js') ?>"></script>
     
     <!--Titulo-->
-    <title>GL technology</title>
+    <title><?= isset($titulo) ? $titulo . ' - GL technology' : 'GL technology' ?></title>
 </head>
 <body class="d-flex flex-column min-vh-100">
     

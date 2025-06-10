@@ -24,8 +24,21 @@ class LoginController extends Controller
             return redirect()->to('front/cliente/dashboard');
         }
 
-        return view('front/login');
-    }   
+        return view('front/login', [
+            'titulo' => 'Iniciar Sesión'
+        ]);
+    }
+
+    public function dashboard()
+    {
+        if (!session()->get('usuario_logueado')) {
+            return redirect()->to('front/login');
+        }
+
+        return view('front/cliente/dashboard', [
+            'titulo' => 'Panel de Cliente'
+        ]);
+    }
 
 
     public function autenticar()

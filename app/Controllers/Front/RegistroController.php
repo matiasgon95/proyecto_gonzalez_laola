@@ -19,7 +19,9 @@ class RegistroController extends Controller
 
     public function index()
     {
-        return view('front/registro_usuario');
+        return view('front/registro_usuario', [
+            'titulo' => 'Registro de Usuario'
+        ]);
     }
 
     public function guardar()

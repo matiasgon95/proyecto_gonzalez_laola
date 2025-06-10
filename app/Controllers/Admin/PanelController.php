@@ -7,15 +7,18 @@ class PanelController extends BaseController
 {
     public function cliente()
     {
-        return view('front/cliente/dashboard');
+        return view('front/cliente/dashboard', [
+            'titulo' => 'Panel de Cliente'
+        ]);
     }
 
     public function admin()
     {
-        return view('back/dashboard');
+        return view('back/dashboard', [
+            'titulo' => 'Panel de Administración'
+        ]);
     }
 
-    // Agregar este método al controlador existente
     public function estadisticas()
     {
         // Cargar los modelos necesarios
@@ -117,6 +120,9 @@ class PanelController extends BaseController
                                                      ->where('eliminado', 0)
                                                      ->orderBy('stock', 'ASC')
                                                      ->findAll(10);
+        
+        // Añadir título a los datos
+        $data['titulo'] = 'Estadísticas';
         
         return view('back/estadisticas', $data);
     }

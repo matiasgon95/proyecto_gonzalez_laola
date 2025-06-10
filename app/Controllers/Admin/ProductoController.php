@@ -27,6 +27,7 @@ class ProductoController extends BaseController
             ->findAll();
 
         $data['productos'] = $productos;
+        $data['titulo'] = 'Gestión de Productos';
         return view('back/productos/index', $data);
     }
 
@@ -40,12 +41,14 @@ class ProductoController extends BaseController
             ->findAll();
 
         $data['productos'] = $productosEliminados;
+        $data['titulo'] = 'Papelera de Productos';
         return view('back/productos/papelera', $data);
     }
 
     public function crear()
     {
         $data['categorias'] = $this->categoriaModel->findAll();
+        $data['titulo'] = 'Crear Producto';
         return view('back/productos/crear', $data);
     }
 
