@@ -19,14 +19,26 @@ class Producto extends BaseController
 
     public function index()
     {
-        $productos = $this->productoModel->getProductosConCategoriaActivos();
+        // Definir cuántos productos por página
+        $productosPorPagina = 9; // 3 filas de 3 productos
+        
+        // Usar el paginador de CodeIgniter
+        $productos = $this->productoModel->select('productos.*, categorias.descripcion as categoria')
+                                        ->join('categorias', 'categorias.id = productos.categoria_id', 'left')
+                                        ->where('productos.eliminado', 0)
+                                        ->where('productos.stock >', 0)
+                                        ->paginate($productosPorPagina);
+        
+        // Obtener el paginador
+        $pager = $this->productoModel->pager;
 
         $categoriasArray = $this->categoriaModel->where('activo', 1)->findAll();
         $categorias = array_column($categoriasArray, 'descripcion');
 
         return view('front/productos/index', [
             'productos' => $productos,
-            'categorias' => $categorias
+            'categorias' => $categorias,
+            'pager' => $pager
         ]);
     }
 
@@ -58,20 +70,27 @@ class Producto extends BaseController
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
 
+        // Definir cuántos productos por página
+        $productosPorPagina = 9; // 3 filas de 3 productos
+        
         $productos = $this->productoModel
                          ->select('productos.*, categorias.descripcion as categoria')
                          ->join('categorias', 'categorias.id = productos.categoria_id', 'left')
                          ->where('productos.categoria_id', $categoriaObj['id'])
                          ->where('productos.eliminado', 0)
                          ->where('productos.stock >', 0)
-                         ->findAll();
+                         ->paginate($productosPorPagina);
+        
+        // Obtener el paginador
+        $pager = $this->productoModel->pager;
 
         $categoriasArray = $this->categoriaModel->where('activo', 1)->findAll();
         $categorias = array_column($categoriasArray, 'descripcion');
 
         return view('front/productos/index', [
             'productos' => $productos,
-            'categorias' => $categorias
+            'categorias' => $categorias,
+            'pager' => $pager
         ]);
     }
 
@@ -83,7 +102,22 @@ class Producto extends BaseController
             return redirect()->to(base_url('productos'));
         }
 
-        $productos = $this->productoModel->buscarProductosAvanzado($termino);
+        // Definir cuántos productos por página
+        $productosPorPagina = 9; // 3 filas de 3 productos
+        
+        // Usar el método existente pero con paginación
+        $builder = $this->productoModel->select('productos.*, categorias.descripcion as categoria')
+                                      ->join('categorias', 'categorias.id = productos.categoria_id', 'left')
+                                      ->where('productos.eliminado', 0)
+                                      ->where('productos.stock >', 0)
+                                      ->groupStart()
+                                      ->like('productos.nombre', $termino)
+                                      ->orLike('productos.descripcion', $termino)
+                                      ->orLike('categorias.descripcion', $termino)
+                                      ->groupEnd();
+        
+        $productos = $builder->paginate($productosPorPagina);
+        $pager = $this->productoModel->pager;
 
         $categoriasArray = $this->categoriaModel->where('activo', 1)->findAll();
         $categorias = array_column($categoriasArray, 'descripcion');
@@ -91,7 +125,8 @@ class Producto extends BaseController
         return view('front/productos/index', [
             'productos' => $productos,
             'categorias' => $categorias,
-            'termino_busqueda' => $termino
+            'termino_busqueda' => $termino,
+            'pager' => $pager
         ]);
     }
 

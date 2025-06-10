@@ -70,7 +70,6 @@
             <div class="row">
                 <div class="row">
                     <?php if (!empty($productos)): ?>
-                        <!-- Dentro del bucle foreach de productos, después del botón de "Ver detalle" y antes del formulario de agregar al carrito -->
                         <?php foreach ($productos as $producto): ?>
                             <div class="col-md-4 mb-4">
                                 <div class="card shadow border border-info h-100">
@@ -83,40 +82,47 @@
                                         <span class="badge bg-info text-dark mb-2"><?= esc($producto['categoria']); ?></span>
                                         <div class="mt-auto">
                                             <p class="card-text text-info mb-3">$<?= number_format($producto['precio_vta'], 2, ',', '.'); ?></p>
-                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <div class="d-flex flex-column gap-2">
                                                 <a href="<?= base_url('producto/detalle/' . $producto['id']); ?>" 
-                                                    class="btn btn-info text-black rounded-pill flex-grow-1 me-2">
+                                                    class="btn btn-info text-black rounded-pill">
                                                     <i class="fas fa-eye me-2"></i>Ver detalle
                                                 </a>
                                                 
-                                                <!-- Botón de Favoritos -->
-                                                <?php if(session()->has('usuario_id')): ?>
-                                                    <form action="<?= base_url('front/cliente/agregar_favorito'); ?>" method="post" class="d-inline favorito-form">
-                                                        <?= csrf_field() ?>
-                                                        <input type="hidden" name="producto_id" value="<?= $producto['id']; ?>">
-                                                        <button type="submit" class="btn btn-outline-danger rounded-circle favorito-btn" title="Agregar a favoritos">
-                                                            <i class="fas fa-heart"></i>
-                                                        </button>
-                                                    </form>
+                                                <?php if(session()->get('usuario_id')): ?>
+                                                <!-- Formulario para agregar a favoritos -->
+                                                <form action="<?= base_url('front/cliente/agregar_favorito') ?>" method="post" class="mb-2">
+                                                    <input type="hidden" name="producto_id" value="<?= $producto['id'] ?>">
+                                                    <button type="submit" class="btn btn-outline-info rounded-pill w-100 favorito-btn" data-producto-id="<?= $producto['id'] ?>">
+                                                        <i class="far fa-heart me-2"></i>Agregar a favoritos
+                                                    </button>
+                                                </form>
                                                 <?php endif; ?>
+                                                
+                                                <!-- Formulario para agregar al carrito -->
+                                                <form action="<?= base_url('carrito_agrega') ?>" method="post">
+                                                    <input type="hidden" name="id" value="<?= $producto['id'] ?>">
+                                                    <input type="hidden" name="name" value="<?= $producto['nombre'] ?>">
+                                                    <input type="hidden" name="price" value="<?= $producto['precio_vta'] ?>">
+                                                    <input type="hidden" name="imagen" value="<?= $producto['imagen'] ?>">
+                                                    <button type="submit" class="btn btn-outline-info rounded-pill w-100">
+                                                        <i class="fas fa-shopping-cart me-2"></i>Agregar al carrito
+                                                    </button>
+                                                </form>
                                             </div>
-                                            
-                                            <!-- Formulario Agregar al Carrito -->
-                                            <form action="<?= base_url('carrito_agrega'); ?>" method="post">
-                                                <?= csrf_field() ?>
-                                                <input type="hidden" name="id" value="<?= $producto['id']; ?>">
-                                                <input type="hidden" name="nombre_prod" value="<?= $producto['nombre']; ?>">
-                                                <input type="hidden" name="precio_vta" value="<?= $producto['precio_vta']; ?>">
-                                                <input type="hidden" name="imagen" value="<?= $producto['imagen']; ?>">
-                                                <button type="submit" class="btn btn-primary rounded-pill w-100">
-                                                    <i class="fas fa-cart-plus me-2"></i>Añadir al carrito
-                                                </button>
-                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         <?php endforeach; ?>
+                        
+                        <!-- Agregar los enlaces de paginación -->
+                        <div class="col-12 mt-4">
+                            <div class="d-flex justify-content-center">
+                                <?php if (isset($pager)): ?>
+                                    <?= $pager->links('default', 'bootstrap_pagination') ?>
+                                <?php endif; ?>
+                            </div>
+                        </div>
                     <?php else: ?>
                         <div class="col-12 text-center text-muted">
                             <p>No hay productos en esta categoría.</p>
