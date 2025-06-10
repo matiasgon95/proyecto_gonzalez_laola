@@ -91,17 +91,20 @@
 
 /* ==================== ESTILOS PARA IMÁGENES EN TABLAS ==================== */
 .table img.img-thumbnail {
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-    border: var(--img-border);
-    background-color: rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
+    width: 75px; /* Aumentado de 60px a 75px para un contenedor más grande */
+    height: 75px; /* Aumentado de 60px a 75px para un contenedor más grande */
+    object-fit: contain; /* Mantener 'contain' para mostrar la imagen completa */
+    object-position: center; /* Centrar la imagen dentro del contenedor */
+    padding: 2px; /* Mantener el padding reducido */
+    border: var(--img-border); /* Mantener el mismo grosor de borde */
+    background-color: rgba(0, 0, 0, 0.1); /* Mantener el fondo más claro */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+    border-radius: 8px; /* Bordes redondeados */
 }
 
 .table img.img-thumbnail:hover {
-    transform: scale(1.2);
+    transform: scale(1.5); /* Mantener la escala al hacer hover */
     border-color: var(--color-primary);
     box-shadow: var(--img-hover-shadow);
     z-index: 10;
@@ -109,19 +112,69 @@
 
 /* ==================== BOTONES DENTRO DE TABLAS ==================== */
 .table .btn {
-    margin: 1px;
-    padding: 3px 6px;
-    transition: all 0.3s ease;
+    margin: 2px;
+    padding: 4px 8px; /* Aumentado para botones más grandes */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Transición más elegante */
+    border-radius: 8px; /* Bordes más redondeados */
+    position: relative;
+    overflow: hidden;
 }
 
 .table .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    transform: translateY(-3px) scale(1.05); /* Efecto de elevación y ligero aumento */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+.table .btn:active {
+    transform: translateY(1px); /* Efecto de presión */
 }
 
 .table .btn-group .btn-sm {
-    padding: 0.2rem 0.35rem;
-    font-size: 0.7rem;
+    padding: 0.25rem 0.4rem;
+    font-size: 0.8rem; /* Iconos ligeramente más grandes */
+}
+
+.table .btn-outline-info {
+    border-width: 2px; /* Borde más grueso */
+    background-color: rgba(13, 202, 240, 0.05); /* Fondo sutil */
+}
+
+.table .btn-outline-danger {
+    border-width: 2px; /* Borde más grueso */
+    background-color: rgba(220, 53, 69, 0.05); /* Fondo sutil */
+}
+
+.table .btn-outline-success {
+    border-width: 2px; /* Borde más grueso */
+    background-color: rgba(25, 135, 84, 0.05); /* Fondo sutil */
+}
+
+/* Efecto de brillo al pasar el cursor */
+.table .btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.table .btn:hover::before {
+    opacity: 1;
+    animation: shine 1.5s ease;
+}
+
+@keyframes shine {
+    from {
+        left: -50%;
+    }
+    to {
+        left: 150%;
+    }
 }
 
 /* ==================== MEJORAS PARA LAS FECHAS ==================== */
@@ -165,7 +218,7 @@
 .productos-table td:nth-child(4),
 .productos-table td:nth-child(5) {
     width: 85px; /* Aumentado de 75px a 85px */
-    text-align: right; /* Mantener alineación a la derecha para los valores */
+    text-align: left; /* Cambiado de right a left */
 }
 
 /* Centrar tanto los encabezados como las celdas de stock y mínimo */
@@ -472,8 +525,9 @@
     background-color: rgba(220, 53, 69, 0.05); /* Fondo sutil */
 }
 
-.productos-papelera-table .btn i {
-    font-size: 0.9rem; /* Iconos ligeramente más grandes */
+.productos-papelera-table .btn-outline-success {
+    border-width: 2px; /* Borde más grueso */
+    background-color: rgba(25, 135, 84, 0.05); /* Fondo sutil */
 }
 
 /* Efecto de brillo al pasar el cursor */
