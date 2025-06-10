@@ -16,17 +16,20 @@
 }
 
 /* ==================== ESTRUCTURA DE TABLA ==================== */
+/* Mejoras para la responsividad de las tablas */
 .table-responsive {
     position: relative;
-    margin-bottom: 0; /* Eliminado completamente el margen inferior */
+    margin-bottom: 0;
     border-radius: var(--table-border-radius);
     box-shadow: var(--table-shadow);
     border: var(--table-border);
-    overflow: hidden;
+    overflow-x: auto; /* Garantiza el desplazamiento horizontal */
+    -webkit-overflow-scrolling: touch; /* Mejora el desplazamiento en iOS */
+    max-width: 100%; /* Asegura que no exceda el ancho del contenedor */
     padding: 0;
 }
 
-/* Tablas */
+/* Asegurar que las tablas mantengan su estructura */
 .table {
     width: 100%;
     margin: 0;
@@ -34,120 +37,159 @@
     background-color: var(--color-card-bg);
     border-collapse: collapse;
     border-spacing: 0;
-    table-layout: fixed;
+    table-layout: fixed; /* Mantener fixed para controlar mejor los anchos de columna */
+    min-width: 800px; /* Ancho mínimo para asegurar que todas las columnas sean visibles con scroll */
     border-radius: var(--table-border-radius);
 }
 
-/* ==================== ESTILOS PARA ENCABEZADOS DE TABLA ==================== */
-.table thead th {
-    background: var(--header-gradient);
-    color: #000;
-    font-weight: 600;
-    text-transform: capitalize;
-    letter-spacing: 1px;
-    padding: 6px 2px; /* Reducido de 8px 4px a 6px 2px */
-    border: none;
-    position: relative;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 0.8rem;
-}
-
-/* ==================== ESTILOS PARA CELDAS DE TABLA ==================== */
-.table td {
-    padding: 3px 2px; /* Reducido de 4px 3px a 3px 2px */
-    vertical-align: middle;
-    border-top: 1px solid rgba(0, 188, 212, 0.1);
-    transition: all 0.2s ease;
-    font-size: 0.8rem;
-}
-
-/* ==================== ESTILOS PARA IMÁGENES EN TABLAS ==================== */
-.table img.img-thumbnail {
-    width: 75px;
-    height: 75px;
-    object-fit: contain;
-    object-position: center;
-    padding: 1px; /* Reducido de 2px a 1px para minimizar el espacio negro */
-    border: var(--img-border);
-    background-color: rgba(0, 0, 0, 0.05); /* Reducido de 0.1 a 0.05 para menos negro */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-    border-radius: 6px; /* Reducido de 8px a 6px */
-    margin: 0; /* Asegurar que no haya margen */
-}
-
-.table img.img-thumbnail:hover {
-    transform: scale(1.5); /* Mantener la escala al hacer hover */
-    border-color: var(--color-primary);
-    box-shadow: var(--img-hover-shadow);
-    z-index: 10;
-}
-
-/* ==================== BOTONES DENTRO DE TABLAS ==================== */
-.table .btn {
-    margin: 2px;
-    padding: 4px 8px; /* Aumentado para botones más grandes */
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Transición más elegante */
-    border-radius: 8px; /* Bordes más redondeados */
-    position: relative;
-    overflow: hidden;
-}
-
-.table .btn:hover {
-    transform: translateY(-3px) scale(1.05); /* Efecto de elevación y ligero aumento */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
-}
-
-.table .btn:active {
-    transform: translateY(1px); /* Efecto de presión */
-}
-
-.table .btn-group .btn-sm {
-    padding: 0.25rem 0.4rem;
-    font-size: 0.8rem; /* Iconos ligeramente más grandes */
-}
-
-.table .btn-outline-info {
-    border-width: 2px; /* Borde más grueso */
-    background-color: rgba(13, 202, 240, 0.05); /* Fondo sutil */
-}
-
-.table .btn-outline-danger {
-    border-width: 2px; /* Borde más grueso */
-    background-color: rgba(220, 53, 69, 0.05); /* Fondo sutil */
-}
-
-.table .btn-outline-success {
-    border-width: 2px; /* Borde más grueso */
-    background-color: rgba(25, 135, 84, 0.05); /* Fondo sutil */
-}
-
-/* Efecto de brillo al pasar el cursor */
-.table .btn::before {
+/* Indicador visual de desplazamiento horizontal */
+.table-responsive::after {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: rgba(255, 255, 255, 0.2);
-    transform: rotate(45deg);
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 30px;
+    background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.2));
+    pointer-events: none;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
-.table .btn:hover::before {
-    opacity: 1;
-    animation: shine 1.5s ease;
+/* Mostrar indicador solo cuando hay contenido para desplazar */
+@media (max-width: 992px) {
+    .table-responsive:not(:hover):not(:focus-within)::after {
+        opacity: 1;
+    }
 }
 
-@keyframes shine {
-    from {
-        left: -50%;
+/* Ajustar el tamaño de texto en pantallas pequeñas */
+@media (max-width: 576px) {
+    .table thead th {
+        padding: 4px 2px;
+        font-size: 0.65rem;
+        white-space: nowrap;
     }
-    to {
-        left: 150%;
+    
+    .table td {
+        padding: 2px 2px;
+        font-size: 0.65rem;
+        white-space: nowrap; /* Evita que el texto se rompa en múltiples líneas */
+    }
+    
+    /* Reducir el tamaño de las imágenes en móviles */
+    .table img.img-thumbnail {
+        width: 25px;
+        height: 25px;
+        padding: 1px;
+    }
+    
+    /* Ajustar los botones para pantallas muy pequeñas */
+    .table .btn-sm {
+        padding: 0.1rem 0.15rem;
+        font-size: 0.6rem;
+    }
+    
+    /* Asegurar que los botones de acción se muestren correctamente */
+    .table .btn-group {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 2px;
+    }
+}
+
+/* Estilos específicos para la tabla de productos en pantallas pequeñas */
+@media (max-width: 576px) {
+    /* Mantener anchos mínimos para las columnas críticas */
+    .productos-table th.nombre-column,
+    .productos-table td:nth-child(1),
+    .productos-papelera-table th.nombre-column,
+    .productos-papelera-table td:nth-child(1) {
+        min-width: 80px;
+    }
+    
+    .productos-table th.categoria-column,
+    .productos-table td:nth-child(3),
+    .productos-papelera-table th.categoria-column,
+    .productos-papelera-table td:nth-child(3) {
+        min-width: 70px;
+    }
+    
+    .productos-table th.precio-column,
+    .productos-table td:nth-child(4),
+    .productos-papelera-table th.precio-column,
+    .productos-papelera-table td:nth-child(4) {
+        min-width: 60px;
+    }
+    
+    .productos-table th.stock-column,
+    .productos-table td:nth-child(6),
+    .productos-papelera-table th.stock-column,
+    .productos-papelera-table td:nth-child(6) {
+        min-width: 40px;
+    }
+    
+    .productos-table th.imagen-column,
+    .productos-table td:nth-child(10),
+    .productos-papelera-table th.imagen-column,
+    .productos-papelera-table td:nth-child(10) {
+        min-width: 40px;
+    }
+    
+    .productos-table th.actions-column,
+    .productos-table td:nth-child(11),
+    .productos-papelera-table th.actions-column,
+    .productos-papelera-table td:nth-child(11) {
+        min-width: 70px;
+    }
+}
+
+/* Ajustes para pantallas extra pequeñas */
+@media (max-width: 400px) {
+    /* Reducir aún más el tamaño de los elementos */
+    .table thead th {
+        padding: 3px 1px;
+        font-size: 0.6rem;
+    }
+    
+    .table td {
+        padding: 2px 1px;
+        font-size: 0.6rem;
+    }
+    
+    /* Minimizar los botones */
+    .table .btn-sm {
+        padding: 0.05rem 0.1rem;
+        font-size: 0.55rem;
+    }
+    
+    /* Reducir aún más las imágenes */
+    .table img.img-thumbnail {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* Estilo para indicar al usuario que puede desplazarse horizontalmente */
+.scroll-hint {
+    display: none;
+}
+
+@media (max-width: 992px) {
+    .scroll-hint {
+        display: block;
+        text-align: center;
+        font-size: 0.8rem;
+        color: var(--color-primary);
+        margin-bottom: 5px;
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0% { opacity: 0.5; }
+        50% { opacity: 1; }
+        100% { opacity: 0.5; }
     }
 }
 

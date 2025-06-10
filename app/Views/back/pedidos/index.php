@@ -18,15 +18,18 @@
 
     <div class="card shadow border border-info">
         <div class="card-body p-0 p-sm-2">
+            <div class="d-block d-md-none alert alert-info      py-2 mb-2 text-center small">
+                <i class="fas fa-arrows-left-right me-1"></i> Desliza horizontalmente para ver toda la tabla
+            </div>
             <div class="table-responsive">
                 <table class="table table-hover table-dark table-striped align-middle mb-0 admin-table">
                     <thead class="table-info text-black">
                         <tr>
-                            <th>ID</th>
-                            <th>Fecha</th>
-                            <th>Cliente</th>
-                            <th>Email</th>
-                            <th>Total</th>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">Fecha</th>
+                            <th class="text-center">Cliente</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center">Total</th>
                             <th class="text-center">Acciones</th>
                         </tr>
                     </thead>

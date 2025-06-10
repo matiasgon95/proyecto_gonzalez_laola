@@ -59,6 +59,10 @@
 
     <div class="card shadow border border-info">
         <div class="card-body p-0 p-sm-2">
+            <!-- Mensaje de desplazamiento horizontal - solo visible en móviles -->
+            <div class="d-block d-md-none alert alert-info py-2 mb-2 text-center small">
+                <i class="fas fa-arrows-left-right me-1"></i> Desliza horizontalmente para ver toda la tabla
+            </div>
             <div class="table-responsive">
                 <table class="table table-hover table-dark table-striped align-middle mb-0 admin-table productos-table">
                     <thead class="table-info text-black">

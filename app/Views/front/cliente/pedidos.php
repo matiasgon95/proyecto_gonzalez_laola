@@ -26,7 +26,9 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         <?php endif; ?>
-
+                        <div class="d-block d-md-none alert alert-info py-2 mb-2 text-center small">
+                            <i class="fas fa-arrows-left-right          me-1"></i> Desliza horizontalmente para        ver toda la tabla
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-hover table-dark table-striped align-middle mb-0">
                                 <thead class="table-info text-black">

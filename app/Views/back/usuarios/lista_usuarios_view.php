@@ -32,7 +32,9 @@
                     </a>
                 </div>
             </div>
-            
+            <div class="d-block d-md-none alert alert-info py-2 mb-2 text-center small">
+                <i class="fas fa-arrows-left-right me-1"></i> Desliza horizontalmente para ver toda la tabla
+            </div>
             <div class="table-responsive">
                 <table class="table table-dark table-striped table-hover">
                     <thead class="table-info">
