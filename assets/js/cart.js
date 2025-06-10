@@ -28,9 +28,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Configurar los event listeners para los botones del carrito
     // Exponemos la función globalmente para que pueda ser llamada desde otros scripts
     window.setupCartButtons = function() {
+        // Eliminar event listeners existentes clonando y reemplazando los elementos
+        
         // Botones de suma
         document.querySelectorAll('.btn-cart-suma').forEach(button => {
-            button.addEventListener('click', function(e) {
+            const newButton = button.cloneNode(true);
+            button.parentNode.replaceChild(newButton, button);
+            newButton.addEventListener('click', function(e) {
                 e.preventDefault();
                 const rowid = this.getAttribute('data-rowid');
                 updateCartItem(rowid, 'suma');
@@ -39,7 +43,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Botones de resta
         document.querySelectorAll('.btn-cart-resta').forEach(button => {
-            button.addEventListener('click', function(e) {
+            const newButton = button.cloneNode(true);
+            button.parentNode.replaceChild(newButton, button);
+            newButton.addEventListener('click', function(e) {
                 e.preventDefault();
                 const rowid = this.getAttribute('data-rowid');
                 updateCartItem(rowid, 'resta');
@@ -48,7 +54,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Botones de eliminar
         document.querySelectorAll('.btn-cart-remove').forEach(button => {
-            button.addEventListener('click', function(e) {
+            const newButton = button.cloneNode(true);
+            button.parentNode.replaceChild(newButton, button);
+            newButton.addEventListener('click', function(e) {
                 e.preventDefault();
                 const rowid = this.getAttribute('data-rowid');
                 updateCartItem(rowid, 'remove');
@@ -58,7 +66,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Botón de vaciar carrito
         const clearCartBtn = document.querySelector('.btn-cart-clear');
         if (clearCartBtn) {
-            clearCartBtn.addEventListener('click', function(e) {
+            const newClearCartBtn = clearCartBtn.cloneNode(true);
+            clearCartBtn.parentNode.replaceChild(newClearCartBtn, clearCartBtn);
+            newClearCartBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 if (confirm('¿Estás seguro de que deseas vaciar el carrito?')) {
                     fetch(baseUrl + 'carrito_vaciar')
@@ -78,7 +88,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Botón de finalizar compra
         const checkoutBtn = document.querySelector('.btn-cart-checkout');
         if (checkoutBtn) {
-            checkoutBtn.addEventListener('click', function(e) {
+            const newCheckoutBtn = checkoutBtn.cloneNode(true);
+            checkoutBtn.parentNode.replaceChild(newCheckoutBtn, checkoutBtn);
+            newCheckoutBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 window.location.href = baseUrl + 'carrito';
             });
