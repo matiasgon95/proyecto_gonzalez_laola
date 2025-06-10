@@ -47,8 +47,6 @@ class ProductoModel extends Model
                     ->where('productos.eliminado', 1)
                     ->findAll();
     }
-<<<<<<< Updated upstream
-=======
 
     // Búsqueda usando SinonimoModel para obtener sinónimos de la palabra clave
     public function buscarConSinonimos($termino)
@@ -131,6 +129,4 @@ class ProductoModel extends Model
                     ->limit($limite)
                     ->findAll();
     }
-    
->>>>>>> Stashed changes
 }
