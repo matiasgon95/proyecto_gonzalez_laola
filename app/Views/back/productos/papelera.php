@@ -24,64 +24,62 @@
     <div class="card shadow border border-warning">
         <div class="card-body p-0 p-sm-2"> <!-- Reducir aún más el padding en móviles -->
             <div class="table-responsive">
-                <table class="table table-hover table-dark table-striped align-middle mb-0">
+                <table class="table table-hover table-dark table-striped align-middle mb-0 admin-table productos-papelera-table">
                     <thead class="table-warning text-black">
                         <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Descripción</th>
-                            <th>Categoría</th>
-                            <th>Precio</th>
-                            <th>P.Vta</th>
-                            <th>Stock</th>
-                            <th>Mínimo</th>
-                            <th>Creado</th>
-                            <th>Modificado</th>
-                            <th>Imagen</th>
-                            <th>Acciones</th>
+                            <th class="nombre-column">Nombre</th>
+                            <th class="descripcion-column d-none d-md-table-cell">Descripción</th>
+                            <th class="categoria-column">Categoría</th>
+                            <th class="precio-column">Precio</th>
+                            <th class="precio-column d-none d-sm-table-cell">P.vta</th>
+                            <th class="stock-column">Stock</th>
+                            <th class="stock-column d-none d-md-table-cell">Mínimo</th>
+                            <th class="fecha-column d-none d-lg-table-cell">Creado</th>
+                            <th class="fecha-column d-none d-lg-table-cell">Modificado</th>
+                            <th class="imagen-column">Imagen</th>
+                            <th class="actions-column">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php if (!empty($productos) && is_array($productos)) : ?>
                             <?php foreach ($productos as $producto) : ?>
                                 <tr>
-                                    <td><?= $producto['id'] ?></td>
-                                    <td class="text-nowrap"><?= esc($producto['nombre']) ?></td>
-                                    <td>
+                                    <td class="text-nowrap nombre-celda"><?= esc($producto['nombre']) ?></td>
+                                    <td class="d-none d-md-table-cell">
                                         <div class="descripcion-celda" title="<?= esc($producto['descripcion']) ?>">
                                             <?= esc($producto['descripcion']) ?>
                                         </div>
                                     </td>
-                                    <td class="text-nowrap"><?= esc($producto['categoria_descripcion']) ?></td>
+                                    <td class="text-nowrap categoria-celda"><?= esc($producto['categoria_descripcion']) ?></td>
                                     <td>$<?= number_format($producto['precio'], 2) ?></td>
-                                    <td>$<?= number_format($producto['precio_vta'], 2) ?></td>
+                                    <td class="d-none d-sm-table-cell">$<?= number_format($producto['precio_vta'], 2) ?></td>
                                     <td class="<?= ($producto['stock'] < $producto['stock_min']) ? 'text-danger fw-bold' : '' ?>">
                                         <?= $producto['stock'] ?>
                                         <?php if ($producto['stock'] < $producto['stock_min']) : ?>
                                             <i class="fas fa-exclamation-triangle ms-1 text-warning" title="Stock bajo"></i>
                                         <?php endif; ?>
                                     </td>
-                                    <td><?= $producto['stock_min'] ?></td>
-                                    <td class="fecha-celda">
+                                    <td class="d-none d-md-table-cell"><?= $producto['stock_min'] ?></td>
+                                    <td class="fecha-celda d-none d-lg-table-cell">
                                         <div><?= date('d/m/y', strtotime($producto['created_at'])) ?></div>
                                         <div class="hora-celda"><?= date('H:i', strtotime($producto['created_at'])) ?></div>
                                     </td>
-                                    <td class="fecha-celda">
+                                    <td class="fecha-celda d-none d-lg-table-cell">
                                         <div><?= date('d/m/y', strtotime($producto['updated_at'])) ?></div>
                                         <div class="hora-celda"><?= date('H:i', strtotime($producto['updated_at'])) ?></div>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <?php if (!empty($producto['imagen'])): ?>
                                             <img src="<?= base_url('public/' . $producto['imagen']) ?>" 
                                                  alt="Imagen producto" 
                                                  class="img-thumbnail border-warning" 
-                                                 style="max-width: 60px; max-height: 60px; object-fit: cover;"
+                                                 style="width: 40px; height: 40px; object-fit: cover;"
                                                  onclick="mostrarImagenModal('<?= base_url('public/' . $producto['imagen']) ?>', '<?= esc($producto['nombre']) ?>')">
                                         <?php else: ?>
-                                            <span class="text-muted">No hay imagen</span>
+                                            <span class="text-muted">No</span>
                                         <?php endif; ?>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <div class="btn-group">
                                             <a href="<?= base_url('back/productos/restaurar/' . $producto['id']) ?>" 
                                                onclick="return confirm('¿Restaurar este producto?')" 
@@ -99,7 +97,7 @@
                             <?php endforeach; ?>
                         <?php else : ?>
                             <tr>
-                                <td colspan="12" class="text-center text-muted">No hay productos eliminados.</td>
+                                <td colspan="11" class="text-center text-muted">No hay productos eliminados.</td>
                             </tr>
                         <?php endif; ?>
                     </tbody>

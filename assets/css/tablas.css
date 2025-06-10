@@ -336,9 +336,20 @@
     background-color: rgba(255, 193, 7, 0.1);
 }
 
-.table-warning thead th {
-    background: linear-gradient(45deg, #ffc107, #e0a800);
-    color: #000;
+/* Selector más específico para el encabezado de la tabla de papelera */
+.table.table-dark thead.table-warning th,
+.productos-papelera-table thead.table-warning th {
+    background: linear-gradient(45deg, #ffc107, #ffca2c) !important; /* Amarillo brillante con !important */
+    color: #000 !important;
+    text-align: center !important;
+    border-bottom: 2px solid #e0a800 !important;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Anular el efecto de brillo para los encabezados de la tabla de papelera */
+.table.table-dark thead.table-warning th::after,
+.productos-papelera-table thead.table-warning th::after {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent) !important;
 }
 
 .table-warning.table-striped > tbody > tr:nth-of-type(odd) {
@@ -347,6 +358,68 @@
 
 .table-warning.table-hover > tbody > tr:hover {
     background-color: rgba(224, 168, 0, 0.2) !important;
+}
+
+/* Estilos específicos para la tabla de papelera */
+.productos-papelera-table th.nombre-column,
+.productos-papelera-table td:nth-child(1) {
+    width: 120px;
+}
+
+.productos-papelera-table th.descripcion-column,
+.productos-papelera-table td:nth-child(2) {
+    width: 180px;
+}
+
+.productos-papelera-table th.categoria-column,
+.productos-papelera-table td:nth-child(3) {
+    width: 100px;
+}
+
+/* Centrar encabezados de precio y aumentar el ancho */
+.productos-papelera-table th.precio-column {
+    width: 85px;
+    text-align: center;
+}
+
+.productos-papelera-table td:nth-child(4),
+.productos-papelera-table td:nth-child(5) {
+    width: 85px;
+    text-align: left; /* Cambiar alineación a la izquierda para los valores */
+    white-space: nowrap;
+    overflow: visible;
+    min-width: 85px;
+    font-size: 0.8rem;
+}
+
+/* Centrar tanto los encabezados como las celdas de stock y mínimo */
+.productos-papelera-table th.stock-column {
+    width: 45px;
+    text-align: center;
+}
+
+.productos-papelera-table td:nth-child(6),
+.productos-papelera-table td:nth-child(7) {
+    width: 45px;
+    text-align: center;
+}
+
+.productos-papelera-table th.fecha-column,
+.productos-papelera-table td:nth-child(8),
+.productos-papelera-table td:nth-child(9) {
+    width: 80px;
+}
+
+.productos-papelera-table th.imagen-column,
+.productos-papelera-table td:nth-child(10) {
+    width: 60px;
+    text-align: center;
+}
+
+.productos-papelera-table th.actions-column,
+.productos-papelera-table td:nth-child(11) {
+    width: 70px;
+    text-align: center;
 }
 
 /* ==================== ESTILOS PARA LA TABLA DE CARRITO ==================== */
@@ -362,4 +435,71 @@
 /* ==================== ESTILOS PARA MODALES CON TABLAS ==================== */
 .modal-header.border-info {
     border-bottom-color: var(--color-primary) !important;
+}
+
+/* Botones mejorados para la tabla de papelera */
+.productos-papelera-table .btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 5px; /* Espacio entre botones */
+}
+
+.productos-papelera-table .btn {
+    border-radius: 8px; /* Bordes más redondeados */
+    padding: 5px 8px; /* Más padding para botones más grandes */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Transición más elegante */
+    position: relative;
+    overflow: hidden;
+    margin: 2px;
+}
+
+.productos-papelera-table .btn:hover {
+    transform: translateY(-3px) scale(1.05); /* Efecto de elevación y ligero aumento */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+.productos-papelera-table .btn:active {
+    transform: translateY(1px); /* Efecto de presión */
+}
+
+.productos-papelera-table .btn-outline-success {
+    border-width: 2px; /* Borde más grueso */
+    background-color: rgba(25, 135, 84, 0.05); /* Fondo sutil */
+}
+
+.productos-papelera-table .btn-outline-danger {
+    border-width: 2px; /* Borde más grueso */
+    background-color: rgba(220, 53, 69, 0.05); /* Fondo sutil */
+}
+
+.productos-papelera-table .btn i {
+    font-size: 0.9rem; /* Iconos ligeramente más grandes */
+}
+
+/* Efecto de brillo al pasar el cursor */
+.productos-papelera-table .btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.productos-papelera-table .btn:hover::before {
+    opacity: 1;
+    animation: shine 1.5s ease;
+}
+
+@keyframes shine {
+    from {
+        left: -50%;
+    }
+    to {
+        left: 150%;
+    }
 }
