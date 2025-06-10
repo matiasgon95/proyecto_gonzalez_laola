@@ -365,12 +365,20 @@ class CarritoController extends BaseController
         // Vaciar carrito y mostrar confirmación
         $this->cart->destroy();
         
-        // Mensaje más destacado
+        // Mensaje para la vista de compra exitosa
         $this->session->setFlashdata('mensaje', 'Compra realizada exitosamente. ¡Gracias por tu compra!');
-        $this->session->setFlashdata('tipo_mensaje', 'success'); // Añadimos un tipo para el mensaje
+        $this->session->setFlashdata('tipo_mensaje', 'success');
         
-        // Redirigir a la página principal en lugar de a la vista de facturas
-        return redirect()->to(base_url());
+        // Redirigir a la nueva vista de compra exitosa en lugar de a la página principal
+        return redirect()->to(base_url('carrito/compra_exitosa'));
+    }
+    
+    // Nuevo método para mostrar la vista de compra exitosa
+    public function compra_exitosa()
+    {
+        $data['titulo'] = "Compra Exitosa";
+        
+        return view('front/carrito/compra_exitosa', $data);
     }
     
     // Eliminar los métodos ver_factura y ver_facturas_usuario

@@ -69,14 +69,20 @@ $routes->get('producto/sugerencias', 'Front\Producto::sugerencias'); // Nueva ru
 // Rutas del carrito de compras
 // Rutas del carrito
 $routes->get('carrito', 'Front\CarritoController::index');
-$routes->post('carrito_agrega', 'Front\CarritoController::add');
+$routes->post('carrito_add', 'Front\CarritoController::add');
+$routes->post('carrito_agrega', 'Front\CarritoController::add'); // Nueva ruta para compatibilidad
 $routes->post('carrito_actualiza', 'Front\CarritoController::actualiza_carrito');
 $routes->get('carrito_suma/(:segment)', 'Front\CarritoController::suma/$1');
 $routes->get('carrito_resta/(:segment)', 'Front\CarritoController::resta/$1');
 $routes->get('carrito_elimina/(:segment)', 'Front\CarritoController::remove/$1');
 $routes->get('carrito_vaciar', 'Front\CarritoController::clear');
-$routes->get('carrito/mini', 'Front\CarritoController::mini');
-$routes->get('carrito/count', 'Front\CarritoController::count');
+$routes->get('carrito_mini', 'Front\CarritoController::mini');
+$routes->get('carrito/mini', 'Front\CarritoController::mini'); // Nueva ruta para compatibilidad
+$routes->get('carrito_count', 'Front\CarritoController::count');
+$routes->get('carrito/count', 'Front\CarritoController::count'); // Nueva ruta para compatibilidad
+$routes->get('carrito_comprar', 'Front\CarritoController::comprar');
+$routes->post('carrito_confirmar', 'Front\CarritoController::confirmar');
+$routes->get('carrito/compra_exitosa', 'Front\CarritoController::compra_exitosa'); // Nueva ruta para la vista de compra exitosa
 
 // Rutas de checkout
 $routes->get('carrito_comprar', 'Front\CarritoController::comprar');
