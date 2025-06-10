@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/layout.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/componentes.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/paginas.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/tablas.css') ?>">
     <script src="<?= base_url('assets/js/bootstrap.bundle.min.js') ?>"></script>
     <!--iconos para login y carrito-->
     <link href="<?= base_url('assets/css/bootstrap-icons/font/bootstrap-icons.css') ?>" rel="stylesheet"> 

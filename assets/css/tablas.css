@@ -1,0 +1,360 @@
+/* Estilos para tablas - Proyecto González Laola */
+/* Versión limpia y optimizada */
+
+/* ==================== VARIABLES ==================== */
+:root {
+    --table-border-radius: 15px;
+    --table-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 188, 212, 0.2);
+    --table-border: 1px solid rgba(0, 188, 212, 0.3);
+    --header-gradient: linear-gradient(45deg, var(--color-primary), var(--color-primary-dark));
+    --header-after-gradient: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    --row-hover-bg: rgba(0, 188, 212, 0.1);
+    --row-hover-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    --striped-row-bg: rgba(0, 0, 0, 0.2);
+    --img-border: 2px solid rgba(0, 188, 212, 0.3);
+    --img-hover-shadow: 0 0 15px rgba(0, 188, 212, 0.5);
+}
+
+/* ==================== ESTRUCTURA DE TABLA ==================== */
+.table-responsive {
+    position: relative;
+    margin-bottom: 2rem;
+    border-radius: var(--table-border-radius);
+    box-shadow: var(--table-shadow);
+    border: var(--table-border);
+    overflow: hidden;
+}
+
+/* Tablas */
+.table {
+    width: 100%;
+    margin-bottom: 0;
+    color: var(--color-text);
+    background-color: var(--color-card-bg);
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+}
+
+/* ==================== ESTILOS PARA ENCABEZADOS DE TABLA ==================== */
+.table thead th {
+    background: var(--header-gradient);
+    color: #000;
+    font-weight: 600;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    padding: 8px 4px;
+    border: none;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.8rem;
+}
+
+/* Efecto de brillo en los encabezados */
+.table thead th::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--header-after-gradient);
+    transition: 0.5s;
+}
+
+.table:hover thead th::after {
+    left: 100%;
+}
+
+/* ==================== ESTILOS PARA CELDAS DE TABLA ==================== */
+.table td {
+    padding: 4px 3px;
+    vertical-align: middle;
+    border-top: 1px solid rgba(0, 188, 212, 0.1);
+    transition: all 0.2s ease;
+    font-size: 0.8rem;
+}
+
+/* Efecto hover en las filas */
+.table-hover tbody tr:hover {
+    background-color: var(--row-hover-bg) !important;
+    transform: translateY(-2px);
+    box-shadow: var(--row-hover-shadow);
+    transition: all 0.3s ease;
+}
+
+/* Estilo para filas alternas */
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: var(--striped-row-bg);
+}
+
+/* ==================== ESTILOS PARA IMÁGENES EN TABLAS ==================== */
+.table img.img-thumbnail {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border: var(--img-border);
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.table img.img-thumbnail:hover {
+    transform: scale(1.2);
+    border-color: var(--color-primary);
+    box-shadow: var(--img-hover-shadow);
+    z-index: 10;
+}
+
+/* ==================== BOTONES DENTRO DE TABLAS ==================== */
+.table .btn {
+    margin: 1px;
+    padding: 3px 6px;
+    transition: all 0.3s ease;
+}
+
+.table .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.table .btn-group .btn-sm {
+    padding: 0.2rem 0.35rem;
+    font-size: 0.7rem;
+}
+
+/* ==================== MEJORAS PARA LAS FECHAS ==================== */
+.fecha-celda {
+    white-space: nowrap;
+    font-size: 0.8em;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.hora-celda {
+    font-size: 0.75em;
+    opacity: 0.8;
+    margin-top: 2px;
+    display: block;
+}
+
+/* ==================== ESTILOS ESPECÍFICOS PARA LA TABLA DE PRODUCTOS ==================== */
+/* Definir anchos específicos para cada columna */
+.productos-table th.nombre-column,
+.productos-table td:nth-child(1) {
+    width: 120px;
+}
+
+.productos-table th.descripcion-column,
+.productos-table td:nth-child(2) {
+    width: 180px;
+}
+
+.productos-table th.categoria-column,
+.productos-table td:nth-child(3) {
+    width: 100px;
+}
+
+.productos-table th.precio-column,
+.productos-table td:nth-child(4),
+.productos-table td:nth-child(5) {
+    width: 75px; /* Aumentado de 70px a 75px para dar más espacio */
+    text-align: right;
+}
+
+/* Centrar tanto los encabezados como las celdas de stock y mínimo */
+.productos-table th.stock-column {
+    width: 45px;
+    text-align: center;
+}
+
+.productos-table td:nth-child(6),
+.productos-table td:nth-child(7) {
+    width: 45px;
+    text-align: center;
+}
+
+.productos-table th.fecha-column,
+.productos-table td:nth-child(8),
+.productos-table td:nth-child(9) {
+    width: 80px;
+}
+
+.productos-table th.imagen-column,
+.productos-table td:nth-child(10) {
+    width: 60px;
+}
+
+.productos-table th.actions-column,
+.productos-table td:nth-child(11) {
+    width: 70px;
+}
+
+/* Mejorar la visualización de celdas con contenido largo */
+.descripcion-celda {
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    font-size: 0.8em;
+    line-height: 1.2;
+}
+
+/* Eliminar el display: block para evitar el recuadro oscuro */
+.nombre-celda, .categoria-celda {
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Se elimina display: block */
+}
+
+/* Asegurar que los precios se muestren en una sola línea */
+.productos-table td:nth-child(4),
+.productos-table td:nth-child(5) {
+    white-space: nowrap;
+    overflow: visible; /* Cambiado de hidden a visible */
+    min-width: 75px; /* Asegurar un ancho mínimo */
+    font-size: 0.8rem; /* Reducir ligeramente el tamaño de fuente */
+}
+
+/* Resto del CSS se mantiene igual */
+@media (max-width: 1200px) {
+    .descripcion-celda {
+        max-width: 150px;
+    }
+    
+    .table thead th {
+        font-size: 0.75rem;
+    }
+    
+    .table td {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .descripcion-celda {
+        max-width: 120px;
+    }
+    
+    .table .btn-sm {
+        padding: 0.15rem 0.3rem;
+    }
+    
+    .table thead th {
+        padding: 6px 3px;
+    }
+}
+
+@media (max-width: 768px) {
+    .descripcion-celda {
+        max-width: 100px;
+    }
+    
+    .table .btn-sm {
+        padding: 0.1rem 0.25rem;
+    }
+    
+    .table img.img-thumbnail {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .productos-table th.nombre-column,
+    .productos-table td:nth-child(1) {
+        width: 100px;
+    }
+    
+    .productos-table th.categoria-column,
+    .productos-table td:nth-child(2) {
+        width: 80px;
+    }
+}
+
+@media (max-width: 576px) {
+    .table thead th {
+        padding: 5px 2px;
+        font-size: 0.7rem;
+    }
+    
+    .table td {
+        padding: 3px 2px;
+        font-size: 0.7rem;
+    }
+    
+    .table img.img-thumbnail {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .table .btn-sm {
+        padding: 0.1rem 0.2rem;
+        font-size: 0.65rem;
+    }
+    
+    .productos-table th.nombre-column,
+    .productos-table td:nth-child(1) {
+        width: 80px;
+    }
+    
+    .productos-table th.categoria-column,
+    .productos-table td:nth-child(2) {
+        width: 70px;
+    }
+    
+    .productos-table th.precio-column,
+    .productos-table td:nth-child(3) {
+        width: 60px;
+    }
+    
+    .productos-table th.stock-column,
+    .productos-table td:nth-child(4) {
+        width: 50px;
+    }
+    
+    .productos-table th.imagen-column,
+    .productos-table td:nth-child(5) {
+        width: 40px;
+    }
+    
+    .productos-table th.actions-column,
+    .productos-table td:nth-child(6) {
+        width: 60px;
+    }
+}
+
+/* ==================== ESTILOS PARA LA TABLA DE PAPELERA ==================== */
+.table-warning {
+    background-color: rgba(255, 193, 7, 0.1);
+}
+
+.table-warning thead th {
+    background: linear-gradient(45deg, #ffc107, #e0a800);
+    color: #000;
+}
+
+.table-warning.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: rgba(224, 168, 0, 0.1);
+}
+
+.table-warning.table-hover > tbody > tr:hover {
+    background-color: rgba(224, 168, 0, 0.2) !important;
+}
+
+/* ==================== ESTILOS PARA LA TABLA DE CARRITO ==================== */
+.table-cart {
+    background-color: rgba(0, 188, 212, 0.05);
+}
+
+.table-cart thead th {
+    background: linear-gradient(45deg, #17a2b8, #138496);
+    color: #000;
+}
+
+/* ==================== ESTILOS PARA MODALES CON TABLAS ==================== */
+.modal-header.border-info {
+    border-bottom-color: var(--color-primary) !important;
+}

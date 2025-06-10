@@ -31,7 +31,7 @@
                     <form action="<?= base_url('carrito_actualiza') ?>" method="post">
                         <div class="container-fluid px-0 my-3">
                             <div class="table-responsive">
-                                <table class="table table-hover table-dark table-striped border border-secondary">
+                                <table class="table table-hover table-dark table-striped border border-secondary table-cart">
                                     <thead class="table-info text-dark">
                                         <tr>
                                             <th>IMAGEN</th>
