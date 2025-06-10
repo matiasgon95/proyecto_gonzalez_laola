@@ -156,11 +156,16 @@
     width: 100px;
 }
 
-.productos-table th.precio-column,
+/* Centrar encabezados de precio y aumentar el ancho */
+.productos-table th.precio-column {
+    width: 85px; /* Aumentado de 75px a 85px */
+    text-align: center; /* Centrar encabezados */
+}
+
 .productos-table td:nth-child(4),
 .productos-table td:nth-child(5) {
-    width: 75px; /* Aumentado de 70px a 75px para dar más espacio */
-    text-align: right;
+    width: 85px; /* Aumentado de 75px a 85px */
+    text-align: right; /* Mantener alineación a la derecha para los valores */
 }
 
 /* Centrar tanto los encabezados como las celdas de stock y mínimo */
@@ -216,8 +221,8 @@
 .productos-table td:nth-child(5) {
     white-space: nowrap;
     overflow: visible; /* Cambiado de hidden a visible */
-    min-width: 75px; /* Asegurar un ancho mínimo */
-    font-size: 0.8rem; /* Reducir ligeramente el tamaño de fuente */
+    min-width: 85px; /* Asegurar un ancho mínimo, aumentado de 75px a 85px */
+    font-size: 0.8rem;
 }
 
 /* Resto del CSS se mantiene igual */
