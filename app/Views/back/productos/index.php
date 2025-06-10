@@ -11,8 +11,11 @@
             <a href="<?= base_url('back/productos/crear') ?>" class="btn btn-info text-black rounded-pill px-4 me-2">
                 <i class="fas fa-plus"></i> Nuevo Producto
             </a>
-            <a href="<?= base_url('back/productos/papelera') ?>" class="btn btn-warning text-black rounded-pill px-4">
+            <a href="<?= base_url('back/productos/papelera') ?>" class="btn btn-warning text-black rounded-pill px-4 me-2">
                 <i class="fas fa-trash-alt"></i> Papelera
+            </a>
+            <a href="<?= base_url('back/dashboard') ?>" class="btn btn-outline-info rounded-pill px-4">
+                <i class="fas fa-arrow-left"></i> Volver al Dashboard
             </a>
         </div>
     </div>

@@ -27,6 +27,8 @@ $routes->post('front/registro_usuario/guardar','Front\RegistroController::guarda
 // Rutas protegidas por perfil
 $routes->group('front/cliente', ['filter' => 'auth:2'], function($routes) {
     $routes->get('dashboard', 'Admin\PanelController::cliente');
+    $routes->get('perfil', 'Front\ClienteController::perfil');
+    $routes->post('actualizar_perfil', 'Front\ClienteController::actualizar_perfil');
 });
 
 // Rutas de gestión de Productos del admin
