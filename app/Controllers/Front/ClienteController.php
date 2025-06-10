@@ -3,17 +3,23 @@
 namespace App\Controllers\Front;
 
 use App\Models\usuario_model;
+use App\Models\Ventas_cabecera_model;
+use App\Models\Ventas_detalle_model;
 use App\Controllers\BaseController;
 
 class ClienteController extends BaseController
 {
     protected $usuarioModel;
+    protected $ventasCabeceraModel;
+    protected $ventasDetalleModel;
     protected $session;
     protected $helpers = ['url', 'form'];
 
     public function __construct()
     {
         $this->usuarioModel = new usuario_model();
+        $this->ventasCabeceraModel = new Ventas_cabecera_model();
+        $this->ventasDetalleModel = new Ventas_detalle_model();
         $this->session = session();
     }
 
@@ -73,5 +79,44 @@ class ClienteController extends BaseController
         ]);
         
         return redirect()->to('front/cliente/perfil')->with('mensaje', 'Perfil actualizado correctamente');
+    }
+    
+    // Método para mostrar los pedidos del cliente
+    public function pedidos()
+    {
+        // Obtener el ID del usuario de la sesión
+        $usuario_id = session()->get('usuario_id');
+        
+        // Obtener todos los pedidos del usuario
+        $pedidos = $this->ventasCabeceraModel->getVentas($usuario_id);
+        
+        $data['pedidos'] = $pedidos;
+        return view('front/cliente/pedidos', $data);
+    }
+    
+    // Método para ver el detalle de un pedido específico
+    public function detalle_pedido($id)
+    {
+        // Obtener el ID del usuario de la sesión
+        $usuario_id = session()->get('usuario_id');
+        
+        // Obtener información de la cabecera del pedido
+        $pedido = $this->ventasCabeceraModel
+            ->select('ventas_cabecera.*, usuarios.nombre, usuarios.apellido, usuarios.email, usuarios.provincia')
+            ->join('usuarios', 'usuarios.id = ventas_cabecera.usuario_id', 'left')
+            ->where('ventas_cabecera.id', $id)
+            ->where('ventas_cabecera.usuario_id', $usuario_id) // Asegurar que el pedido pertenece al usuario
+            ->first();
+
+        if (!$pedido) {
+            return redirect()->to('front/cliente/pedidos')->with('error', 'Pedido no encontrado o no tienes permiso para verlo');
+        }
+
+        // Obtener detalles del pedido
+        $detalles = $this->ventasDetalleModel->getDetalles($id);
+
+        $data['pedido'] = $pedido;
+        $data['detalles'] = $detalles;
+        return view('front/cliente/detalle_pedido', $data);
     }
 }

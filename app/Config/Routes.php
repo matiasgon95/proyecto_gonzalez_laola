@@ -29,6 +29,8 @@ $routes->group('front/cliente', ['filter' => 'auth:2'], function($routes) {
     $routes->get('dashboard', 'Admin\PanelController::cliente');
     $routes->get('perfil', 'Front\ClienteController::perfil');
     $routes->post('actualizar_perfil', 'Front\ClienteController::actualizar_perfil');
+    $routes->get('pedidos', 'Front\ClienteController::pedidos');
+    $routes->get('detalle_pedido/(:num)', 'Front\ClienteController::detalle_pedido/$1');
 });
 
 // Rutas de gestión de Productos del admin
