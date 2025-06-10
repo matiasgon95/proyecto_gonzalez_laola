@@ -72,11 +72,12 @@
 
 .img-thumbnail.border-info {
     background-color: var(--color-card-bg);
-    padding: 0.5rem;
+    padding: 0; /* Cambiado de 0.5rem a 0 para eliminar el padding */
     transition: var(--transition-standard);
 }
 
-.img-thumbnail.border-info:hover {
+.img-thumbnail.border-info:hover,
+.img-thumbnail.border-warning:hover {
     transform: scale(1.1);
 }
 
@@ -602,4 +603,14 @@
         padding: 10px 15px;
         bottom: 20px;
     }
+}
+
+/* Estilos para mejorar la visibilidad del texto en los acordeones de términos y condiciones */
+.terminos-container .accordion-body {
+    color: var(--color-text); /* Usar el color de texto claro definido en las variables */
+}
+
+.terminos-container .accordion-body p {
+    color: var(--color-text); /* Asegurar que los párrafos dentro del accordion-body también tengan el color correcto */
+    margin-bottom: 0.75rem;
 }

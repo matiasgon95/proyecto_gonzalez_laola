@@ -31,17 +31,17 @@
                 <table class="table table-hover table-dark table-striped align-middle mb-0 admin-table productos-papelera-table">
                     <thead class="table-warning text-black">
                         <tr>
-                            <th class="nombre-column">Nombre</th>
-                            <th class="descripcion-column d-none d-md-table-cell">Descripción</th>
-                            <th class="categoria-column">Categoría</th>
-                            <th class="precio-column">Precio</th>
-                            <th class="precio-column d-none d-sm-table-cell">P.vta</th>
-                            <th class="stock-column">Stock</th>
-                            <th class="stock-column d-none d-md-table-cell">Mínimo</th>
-                            <th class="fecha-column d-none d-lg-table-cell">Creado</th>
-                            <th class="fecha-column d-none d-lg-table-cell">Modificado</th>
-                            <th class="imagen-column">Imagen</th>
-                            <th class="actions-column">Acciones</th>
+                            <th class="nombre-column text-center">Nombre</th>
+                            <th class="descripcion-column d-none d-md-table-cell text-center">Descripción</th>
+                            <th class="categoria-column text-center">Categoría</th>
+                            <th class="precio-column text-center">Precio</th>
+                            <th class="precio-column d-none d-sm-table-cell text-center">P.vta</th>
+                            <th class="stock-column text-center">Stock</th>
+                            <th class="stock-column d-none d-md-table-cell text-center text-nowrap">Mínimo</th>
+                            <th class="fecha-column d-none d-lg-table-cell text-center">Creado</th>
+                            <th class="fecha-column d-none d-lg-table-cell text-center">Modificado</th>
+                            <th class="imagen-column text-center">Imagen</th>
+                            <th class="actions-column text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
