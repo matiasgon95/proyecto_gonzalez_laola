@@ -37,13 +37,13 @@
                 <table class="table table-dark table-striped table-hover">
                     <thead class="table-info">
                         <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Email</th>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">Nombre</th>
+                            <th class="text-center">Apellido</th>
+                            <th class="text-center">Email</th>
                             <!-- Eliminar la columna Usuario -->
-                            <th>Perfil</th>
-                            <th>Estado</th>
+                            <th class="text-center">Perfil</th>
+                            <th class="text-center">Estado</th>
                             <th class="text-center">Acciones</th>
                         </tr>
                     </thead>
@@ -55,19 +55,19 @@
                         <?php else: ?>
                             <?php foreach ($usuarios as $usuario): ?>
                             <tr>
-                                <td><?= $usuario->id ?></td>
-                                <td><?= $usuario->nombre ?></td>
-                                <td><?= $usuario->apellido ?></td>
-                                <td><?= $usuario->email ?></td>
+                                <td class="text-center"><?= $usuario->id ?></td>
+                                <td class="text-center"><?= $usuario->nombre ?></td>
+                                <td class="text-center"><?= $usuario->apellido ?></td>
+                                <td class="text-center"><?= $usuario->email ?></td>
                                 <!-- Eliminar la columna que muestra $usuario->usuario -->
-                                <td>
+                                <td class="text-center">
                                     <?php if($usuario->perfil_id == 1): ?>
                                         <span class="badge bg-danger">Administrador</span>
                                     <?php else: ?>
                                         <span class="badge bg-info">Cliente</span>
                                     <?php endif; ?>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <?php if($usuario->baja == 'si'): ?>
                                         <span class="badge bg-danger">Bloqueado</span>
                                     <?php else: ?>

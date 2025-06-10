@@ -2,33 +2,49 @@
 :root {
     --color-background: #0d0d0d;
     --color-card-bg: #1a1a1a;
-    --color-primary: #00bcd4;
-    --color-primary-dark: #0097a7;
+    /* Actualizar colores primarios a tonos más modernos */
+    --color-primary: #00e5ff; /* Cyan más brillante */
+    --color-primary-dark: #00b8d4;
+    --color-secondary: #7b1fa2; /* Añadir color secundario púrpura */
+    --color-accent: #ff4081; /* Añadir color de acento */
     --color-text: #e0f7fa;
+    --color-text-secondary: #b2ebf2;
     --transition-standard: all 0.3s ease;
     --shadow-standard: 0 5px 15px rgba(0, 0, 0, 0.3);
     --shadow-hover: 0 10px 25px rgba(0, 188, 212, 0.3);
+    /* Nuevas variables para gradientes */
+    --gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    --gradient-dark: linear-gradient(135deg, #121212, #1d1d1d);
 }
 
-/* Estilo general */
+/* Actualizar estilos de tipografía */
 body {
     background-color: var(--color-background);
-    font-family: "Orbitron", sans-serif;
+    font-family: "Roboto", sans-serif; /* Fuente base más legible */
     color: var(--color-text);
     margin: 0;
     padding: 0;
 }
 
-/* Títulos */
 h1, h2, h4 {
-    color: #e0f7fa;
+    font-family: "Orbitron", sans-serif;
+    color: var(--color-primary);
     text-align: center;
     margin-top: 20px;
+    letter-spacing: 1px;
 }
 
 h3 {
-    color: #e0f7fa;
+    font-family: "Rajdhani", sans-serif;
+    color: var(--color-primary);
     margin-top: 20px;
+    font-weight: 600;
+}
+
+/* Añadir clase para textos destacados */
+.tech-text {
+    font-family: "Orbitron", sans-serif;
+    letter-spacing: 1px;
 }
 
 /* Estilos para botones de favoritos */
@@ -80,4 +96,53 @@ h3 {
 
 .scroll-top-btn i {
     font-size: 1.5rem;
+}
+
+
+/* Animaciones y transiciones */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 5px rgba(0, 229, 255, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(0, 229, 255, 0.8); }
+    100% { box-shadow: 0 0 5px rgba(0, 229, 255, 0.5); }
+}
+
+/* Clases de utilidad para animaciones */
+.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+    /* Eliminamos la animación */
+}
+
+.pulse {
+    /* Mantenemos este efecto ya que es para hover */
+    animation: pulse 2s infinite;
+}
+
+.glow {
+    /* Mantenemos este efecto ya que es para elementos específicos */
+    animation: glow 2s infinite;
+}
+
+/* Aplicar animaciones a elementos específicos */
+.producto-titulo {
+    animation: fadeIn 0.8s ease forwards;
+}
+
+.btn-comprar:hover {
+    animation: pulse 1s infinite;
+}
+
+.precio-valor {
+    animation: glow 2s infinite;
 }

@@ -294,12 +294,12 @@
             <!-- Botones de navegación -->
             <div class="d-flex justify-content-between mt-4">
                 <div>
-                    <a href="<?= base_url('carrito') ?>" class="btn btn-outline-info">
-                        <i class="fas fa-arrow-left me-2"></i>Volver al Carrito
-                    </a>
                     <button type="button" id="prevStepBtn" class="btn btn-outline-info" style="display: none;">
                         <i class="fas fa-arrow-left me-2"></i>Anterior
                     </button>
+                    <a href="<?= base_url('carrito') ?>" class="btn btn-outline-info">
+                        <i class="fas fa-arrow-left me-2"></i>Volver al Carrito
+                    </a>
                 </div>
                 <div>
                     <button type="button" id="nextStepBtn" class="btn btn-info text-dark">
@@ -314,43 +314,3 @@
     </div>
 </div>
 <?= $this->endSection(); ?>
-
-<script>
-// Script de inicialización para checkout
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Checkout cargado');
-    
-    // Verificar valores de los campos
-    const nombreInput = document.getElementById('nombre');
-    console.log('Valor del campo nombre:', nombreInput ? nombreInput.value : 'No encontrado');
-    
-    // Verificar si updateSummary está disponible
-    if (typeof updateSummary === 'function') {
-        console.log('updateSummary está disponible');
-        
-        // Forzar la actualización del resumen después de que todo esté cargado
-        setTimeout(function() {
-            updateSummary();
-            console.log('Resumen actualizado manualmente');
-            console.log('Valor de summary_nombre después de actualizar:', 
-                document.getElementById('summary_nombre') ? 
-                document.getElementById('summary_nombre').textContent : 'No encontrado');
-        }, 500);
-    } else {
-        console.error('La función updateSummary no está disponible');
-    }
-    
-    // Asegurarse de que el resumen se actualice al cambiar de paso
-    const nextStepBtn = document.getElementById('nextStepBtn');
-    if (nextStepBtn) {
-        nextStepBtn.addEventListener('click', function() {
-            setTimeout(function() {
-                if (typeof updateSummary === 'function') {
-                    updateSummary();
-                    console.log('Resumen actualizado después de cambiar de paso');
-                }
-            }, 100);
-        });
-    }
-});
-</script>

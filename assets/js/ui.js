@@ -70,3 +70,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Aquí puedes agregar más inicializaciones de UI en el futuro
 });
+
+// Efecto de navbar al hacer scroll
+const navbar = document.querySelector('.mi-navbar');
+if (navbar) {
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+}
