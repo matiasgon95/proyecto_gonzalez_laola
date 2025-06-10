@@ -41,6 +41,9 @@ $routes->group('back', ['filter' => 'auth:1'], function($routes) {
     $routes->get('productos/editar/(:num)', 'Admin\ProductoController::editar/$1');
     $routes->post('productos/actualizar/(:num)', 'Admin\ProductoController::actualizar/$1');
     $routes->get('productos/eliminar/(:num)', 'Admin\ProductoController::eliminar/$1');
+    
+    // Agregar esta línea para la ruta de guardar categoría
+    $routes->post('productos/guardar_categoria', 'Admin\ProductoController::guardarCategoria');
 });
 
 // Rutas de productos

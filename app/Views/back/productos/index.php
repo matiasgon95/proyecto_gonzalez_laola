@@ -5,6 +5,9 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h1 class="h2 text-info">Listado de Productos</h1>
         <div>
+            <button type="button" class="btn btn-success text-black rounded-pill px-4 me-2" data-bs-toggle="modal" data-bs-target="#modalCrearCategoria">
+                <i class="fas fa-tags"></i> Nueva Categoría
+            </button>
             <a href="<?= base_url('back/productos/crear') ?>" class="btn btn-info text-black rounded-pill px-4 me-2">
                 <i class="fas fa-plus"></i> Nuevo Producto
             </a>
@@ -13,6 +16,43 @@
             </a>
         </div>
     </div>
+
+    <!-- Modal para crear categoría -->
+    <div class="modal fade" id="modalCrearCategoria" tabindex="-1" aria-labelledby="modalCrearCategoriaLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content bg-dark text-info border border-info">
+                <div class="modal-header bg-info text-black">
+                    <h5 class="modal-title" id="modalCrearCategoriaLabel">Crear Nueva Categoría</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Eliminar estas líneas comentadas -->
+                    <!-- <form id="formCrearCategoria" action="<?= base_url('back/productos/guardar-categoria') ?>" method="post"> -->
+                    
+                    <!-- Cambiar esto: -->
+                    <form id="formCrearCategoria" action="<?= base_url('back/productos/guardar_categoria') ?>" method="post">
+                        <?= csrf_field() ?>
+                        <div class="mb-3">
+                            <label for="descripcion" class="form-label">Nombre de la categoría</label>
+                            <input type="text" class="form-control bg-dark text-info border-info" id="descripcion" name="descripcion" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" form="formCrearCategoria" class="btn btn-info text-black">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mensaje de éxito para categoría creada -->
+    <?php if (session()->getFlashdata('mensaje_categoria')) : ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?= session()->getFlashdata('mensaje_categoria') ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif; ?>
 
     <div class="card shadow border border-info">
         <div class="card-body p-0 p-sm-2">

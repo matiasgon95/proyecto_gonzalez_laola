@@ -186,4 +186,33 @@ class ProductoController extends BaseController
 
         return redirect()->to('back/productos/papelera')->with('exito', 'Producto restaurado correctamente');
     }
+
+    /**
+     * Guarda una nueva categoría desde el modal
+     */
+    public function guardarCategoria() // Puedes renombrar a guardar_categoria para consistencia
+    {
+        // Validar los datos del formulario
+        $rules = [
+            'descripcion' => 'required|min_length[2]|max_length[100]'
+        ];
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+
+        // Preparar los datos para guardar
+        $data = [
+            'descripcion' => $this->request->getPost('descripcion'),
+            'activo' => 1,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ];
+
+        // Guardar la categoría
+        $this->categoriaModel->insert($data);
+
+        // Redirigir con mensaje de éxito
+        return redirect()->to('back/productos')->with('mensaje_categoria', 'Categoría creada correctamente');
+    }
 }
