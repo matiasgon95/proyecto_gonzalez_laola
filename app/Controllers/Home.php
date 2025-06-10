@@ -1,12 +1,23 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\ProductoModel;
+use App\Models\CategoriaModel;
 
 class Home extends BaseController
 {
     public function index()
     {
-        return view('front/principal');
+        $productoModel = new ProductoModel();
+        $categoriaModel = new CategoriaModel();
+
+        $categorias = $categoriaModel->where('activo', 1)->findAll();
+        $destacados = $productoModel->obtenerDestacados(50); // más cantidad para filtrar bien
+
+        return view('front/principal', [
+            'categorias' => $categorias,
+            'destacados' => $destacados,
+        ]);
     }
 
     public function quienes_somos()

@@ -206,6 +206,41 @@
     position: relative;
 }
 
+.scrolling-wrapper {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 10px;
+  }
+  
+  .scrolling-wrapper .card {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .categoria-boton {
+    display: inline-block;
+    padding: 6px 12px;       /* Espacio interno para que el texto no quede pegado */
+    margin: 0 6px 10px 0;   /* Separación entre botones */
+    background-color: #6f42c1; /* Color de fondo (violeta oscuro por ej.) */
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 8px;     /* Esquinas redondeadas pero no círculo */
+    cursor: pointer;
+    white-space: nowrap;    /* Para que el texto no se parta en varias líneas */
+    transition: background-color 0.3s ease;
+  }
+  
+  .categoria-boton:hover {
+    background-color: #5933a2;
+  }
+  
+  .categoria-boton:active {
+    background-color: #4a2d85;
+  }
+  
+
+
 .carousel::before {
     content: '';
     position: absolute;

@@ -128,4 +128,21 @@ class Producto extends BaseController
         ]);
     }
 
+<<<<<<< Updated upstream
+=======
+    public function sugerencias()
+    {
+        $termino = $this->request->getGet('q');
+
+        if (empty($termino)) {
+            $productos = $this->productoModel->getProductosConCategoriaActivos();
+        } else {
+            $productos = $this->productoModel->buscarConSinonimos($termino);
+        }
+
+        return $this->response->setJSON($productos);
+    }
+
+    
+>>>>>>> Stashed changes
 }

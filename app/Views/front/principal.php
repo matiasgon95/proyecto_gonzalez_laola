@@ -40,6 +40,59 @@
 </div>
 <!-- fin carrousel -->
 
+<!-- Menú circular de categorías -->
+<div class="container my-4 d-flex justify-content-center gap-3 flex-wrap">
+    <button class="btn btn-outline-info categoria-filtro active" data-categoria="todas" style="border-radius:50%; width:60px; height:60px; padding:0;">
+        <small>Todas</small>
+    </button>
+    <?php foreach ($categorias as $cat): ?>
+        <button class="btn btn-outline-info categoria-filtro categoria-boton" data-categoria="<?= esc($cat['descripcion']) ?>">
+            <small><?= esc($cat['descripcion']) ?></small>
+        </button>
+    <?php endforeach; ?>
+</div>
+
+
+<!-- Productos destacados -->
+<section class="container my-3">
+  <div class="row g-3" id="productos-container">
+    <?php foreach ($destacados as $producto): ?>
+      <div class="col-6 col-md-3 producto-item" data-categoria="<?= esc($producto['categoria']) ?>">
+        <div class="card shadow border-0">
+          <img src="<?= base_url('public/' . $producto['imagen']) ?>" class="card-img-top" alt="<?= esc($producto['nombre']) ?>">
+          <div class="card-body p-2 text-center">
+            <h6 class="card-title mb-1"><?= esc($producto['nombre']) ?></h6>
+            <p class="card-text fw-bold text-primary mb-1">$<?= number_format($producto['precio'], 2, ',', '.') ?></p>
+            <a href="<?= base_url('producto/detalle/' . $producto['id']) ?>" class="btn btn-sm btn-outline-info w-100">Ver más</a>
+          </div>
+        </div>
+      </div>
+    <?php endforeach; ?>
+  </div>
+</section>
+
+<script>
+  // Filtrado por categoría sin recargar página
+  document.querySelectorAll('.categoria-filtro').forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Quitar active de todos
+      document.querySelectorAll('.categoria-filtro').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const categoriaSeleccionada = btn.getAttribute('data-categoria').toLowerCase();
+
+      document.querySelectorAll('.producto-item').forEach(producto => {
+        const catProd = producto.getAttribute('data-categoria').toLowerCase();
+        if (categoriaSeleccionada === 'todas' || catProd === categoriaSeleccionada) {
+          producto.style.display = 'block';
+        } else {
+          producto.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
 <!-- Presentación de la empresa -->
 <section class="container my-5 text-center">
   <h2 class="mb-4">Bienvenido a GL Technology</h2>
