@@ -121,6 +121,7 @@
                                             <?php if(session()->get('usuario_id')): ?>
                                             <!-- Formulario para agregar a favoritos -->
                                             <form action="<?= base_url('front/cliente/agregar_favorito') ?>" method="post" class="mb-2">
+                                                <?= csrf_field() ?>
                                                 <input type="hidden" name="producto_id" value="<?= $producto['id'] ?>">
                                                 <button type="submit" class="btn btn-outline-info rounded-pill w-100 favorito-btn" data-producto-id="<?= $producto['id'] ?>">
                                                     <i class="far fa-heart me-2"></i>Agregar a favoritos
@@ -130,9 +131,10 @@
                                             
                                             <!-- Formulario para agregar al carrito -->
                                             <form action="<?= base_url('carrito_agrega') ?>" method="post">
+                                                <?= csrf_field() ?>
                                                 <input type="hidden" name="id" value="<?= $producto['id'] ?>">
-                                                <input type="hidden" name="name" value="<?= $producto['nombre'] ?>">
-                                                <input type="hidden" name="price" value="<?= $producto['precio_vta'] ?>">
+                                                <input type="hidden" name="nombre_prod" value="<?= $producto['nombre'] ?>">  <!-- Corregido -->
+                                                <input type="hidden" name="precio_vta" value="<?= $producto['precio_vta'] ?>">  <!-- Corregido -->
                                                 <input type="hidden" name="imagen" value="<?= $producto['imagen'] ?>">
                                                 <button type="submit" class="btn btn-outline-info rounded-pill w-100">
                                                     <i class="fas fa-shopping-cart me-2"></i>Agregar al carrito

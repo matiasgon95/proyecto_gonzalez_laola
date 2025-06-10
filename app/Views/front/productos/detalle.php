@@ -107,8 +107,8 @@
                     <form action="<?= base_url('carrito_agrega'); ?>" method="post">
                         <?= csrf_field() ?>
                         <input type="hidden" name="id" value="<?= $producto['id']; ?>">
-                        <input type="hidden" name="nombre_prod" value="<?= $producto['nombre']; ?>">
-                        <input type="hidden" name="precio_vta" value="<?= $producto['precio_vta']; ?>">
+                        <input type="hidden" name="nombre_prod" value="<?= $producto['nombre']; ?>">  <!-- Correcto -->
+                        <input type="hidden" name="precio_vta" value="<?= $producto['precio_vta']; ?>">  <!-- Correcto -->
                         <input type="hidden" name="imagen" value="<?= $producto['imagen']; ?>">
                         
                         <div class="row mb-3">
