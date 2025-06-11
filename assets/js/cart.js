@@ -131,7 +131,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Función para actualizar el contador del carrito
-    function updateCartCount() {
+    // Exponemos la función globalmente para que pueda ser llamada desde otros scripts
+    window.updateCartCount = function() {
         fetch(baseUrl + 'carrito/count')
             .then(response => response.json())
             .then(data => {
