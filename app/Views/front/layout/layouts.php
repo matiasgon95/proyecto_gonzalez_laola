@@ -16,12 +16,8 @@
     <script src="<?= base_url('assets/js/bootstrap.bundle.min.js') ?>"></script>
     <!--iconos para login y carrito-->
     <link href="<?= base_url('assets/css/bootstrap-icons/font/bootstrap-icons.css') ?>" rel="stylesheet"> 
-    <!--Google Fonts-->
-    <!-- Reemplazar la sección de Google Fonts con esto: -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Añadir fuentes más modernas y variadas -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Roboto:wght@300;400;500;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Fuentes locales -->
+    <link rel="stylesheet" href="<?= base_url('assets/css/fonts.css') ?>">
     
     <!-- Variable global para la URL base -->
     <script>
