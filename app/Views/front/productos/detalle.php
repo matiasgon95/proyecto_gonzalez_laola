@@ -23,48 +23,7 @@
             </div>
         </div>
     </div>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Guardar la posición actual de la página
-        const currentPosition = window.scrollY;
-        
-        // Configurar el toast para que se cierre automáticamente después de 5 segundos
-        setTimeout(function() {
-            const toast = document.querySelector('.toast');
-            const bsToast = new bootstrap.Toast(toast);
-            bsToast.hide();
-        }, 5000);
-        
-        // Restaurar la posición de desplazamiento
-        window.scrollTo(0, currentPosition);
-        
-        // Abrir el modal del carrito al hacer clic en el botón del toast
-        document.getElementById('openCartModalBtn').addEventListener('click', function() {
-            const cartModal = document.getElementById('cartModal');
-            cartModal.classList.add('show');
-            // Cargar el contenido del carrito
-            fetch(baseUrl + 'carrito/mini')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('cartModalBody').innerHTML = data;
-                    // Configurar los botones del carrito
-                    if (typeof setupCartButtons === 'function') {
-                        setupCartButtons();
-                    } else {
-                        // Si la función no está disponible, cargar el script y ejecutarla
-                        const script = document.createElement('script');
-                        script.src = baseUrl + 'assets/js/cart.js';
-                        script.onload = function() {
-                            if (typeof setupCartButtons === 'function') {
-                                setupCartButtons();
-                            }
-                        };
-                        document.head.appendChild(script);
-                    }
-                });
-        });
-    });
-    </script>
+    <!-- El script se elimina de aquí ya que su funcionalidad está en notifications.js -->
     <?php endif; ?>
     
     <!-- Título del producto -->
@@ -81,9 +40,9 @@
         <!-- Columna derecha: Precio y botones -->
         <div class="col-md-6">
             <div class="producto-info">
-                <div class="producto-precio mb-4">
+                <div class="producto-precio mb-4 d-inline-block">
                     <span class="precio-etiqueta">Precio:</span>
-                    <span class="precio-valor">$<?= esc($producto['precio_vta']); ?></span>
+                    <span class="precio-valor">$<?= number_format($producto['precio_vta'], 2, ',', '.'); ?></span>
                 </div>
 
                 <div class="producto-stock mb-4">
@@ -112,14 +71,14 @@
                         <input type="hidden" name="imagen" value="<?= $producto['imagen']; ?>">
                         
                         <div class="row mb-3">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="cantidad" class="form-label">Cantidad:</label>
-                                <input type="number" name="qty" id="cantidad" class="form-control" value="1" min="1" max="<?= $producto['stock']; ?>">
+                                <input type="number" name="qty" id="cantidad" class="form-control form-control-sm" value="1" min="1" max="<?= $producto['stock']; ?>">
                             </div>
                         </div>
                         
-                        <div class="d-grid gap-2 d-md-flex">
-                            <button type="submit" class="btn btn-info text-dark btn-comprar">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                            <button type="submit" class="btn btn-info text-dark btn-comprar" style="width: 180px;">
                                 <i class="fas fa-cart-plus me-2"></i>Añadir al carrito
                             </button>
                             
@@ -129,7 +88,7 @@
                             <form action="<?= base_url('front/cliente/agregar_favorito'); ?>" method="post" class="d-inline favorito-form">
                                 <?= csrf_field() ?>
                                 <input type="hidden" name="producto_id" value="<?= $producto['id']; ?>">
-                                <button type="submit" class="btn btn-outline-danger favorito-btn">
+                                <button type="submit" class="btn btn-outline-danger favorito-btn" style="width: 180px;">
                                     <i class="fas fa-heart me-2"></i>Añadir a favoritos
                                 </button>
                             </form>
@@ -137,7 +96,7 @@
                             </form>
                             <?php endif; ?>
                             
-                            <a href="<?= base_url('productos'); ?>" class="btn btn-outline-secondary btn-volver">
+                            <a href="<?= base_url('productos'); ?>" class="btn btn-outline-secondary btn-volver" style="width: 180px;">
                                 <i class="fas fa-arrow-left me-2"></i>Volver al catálogo
                             </a>
                         </div>

@@ -76,16 +76,6 @@ class LoginController extends Controller
         
     }
 
-    public function dashboard()
-    {
-        if (!session()->get('usuario_logueado')) {
-            return redirect()->to('front/login');
-        }
-
-        return view('front/cliente/dashboard');
-    }
-
-
     public function logout()
     {
         $this->session->destroy();
