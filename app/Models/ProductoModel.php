@@ -42,8 +42,8 @@ class ProductoModel extends Model
         return $this->select('productos.*, categorias.descripcion as categoria')
                     ->join('categorias', 'categorias.id = productos.categoria_id', 'left')
                     ->where('productos.eliminado', 0)
-                    ->where('productos.stock >', 0)
                     ->findAll();
+        // Eliminamos la línea: ->where('productos.stock >', 0)
     }
 
     // Obtener productos eliminados (papelera)
@@ -73,8 +73,9 @@ class ProductoModel extends Model
         $builder = $this->select('productos.*, categorias.descripcion as categoria')
                         ->join('categorias', 'categorias.id = productos.categoria_id', 'left')
                         ->where('productos.eliminado', 0)
-                        ->where('productos.stock >', 0)
                         ->groupStart();
+        // Eliminamos la línea: ->where('productos.stock >', 0)
+        // Y eliminamos el segundo ->groupStart() que está duplicado
 
         foreach ($palabrasClave as $palabra) {
             $builder->orLike('productos.nombre', $palabra)
@@ -106,8 +107,8 @@ class ProductoModel extends Model
         // Iniciar consulta de productos
         $builder = $this->select('productos.*, categorias.descripcion as categoria')
                         ->join('categorias', 'categorias.id = productos.categoria_id', 'left')
-                        ->where('productos.eliminado', 0)
-                        ->where('productos.stock >', 0);
+                        ->where('productos.eliminado', 0);
+        // Eliminamos la línea: ->where('productos.stock >', 0);
 
         // Buscar por nombre o descripción del producto
         $builder->groupStart()

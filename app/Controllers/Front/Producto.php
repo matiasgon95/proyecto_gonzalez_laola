@@ -28,8 +28,8 @@ class Producto extends BaseController
         // Iniciar la consulta base
         $builder = $this->productoModel->select('productos.*, categorias.descripcion as categoria')
                                       ->join('categorias', 'categorias.id = productos.categoria_id', 'left')
-                                      ->where('productos.eliminado', 0)
-                                      ->where('productos.stock >', 0);
+                                      ->where('productos.eliminado', 0);
+        // Eliminamos la línea: ->where('productos.stock >', 0);
         
         // Aplicar ordenación según el parámetro
         if ($orden == 'precio_asc') {
@@ -73,7 +73,6 @@ class Producto extends BaseController
                                         ->join('categorias', 'categorias.id = productos.categoria_id', 'left')
                                         ->where('productos.id', $id)
                                         ->where('productos.eliminado', 0)
-                                        ->where('productos.stock >', 0)
                                         ->first();
 
         if (!$producto) {
@@ -102,11 +101,11 @@ class Producto extends BaseController
         
         // Iniciar la consulta base
         $builder = $this->productoModel
-                         ->select('productos.*, categorias.descripcion as categoria')
-                         ->join('categorias', 'categorias.id = productos.categoria_id', 'left')
-                         ->where('productos.categoria_id', $categoriaObj['id'])
-                         ->where('productos.eliminado', 0)
-                         ->where('productos.stock >', 0);
+                 ->select('productos.*, categorias.descripcion as categoria')
+                 ->join('categorias', 'categorias.id = productos.categoria_id', 'left')
+                 ->where('productos.categoria_id', $categoriaObj['id'])
+                 ->where('productos.eliminado', 0);
+        // Eliminamos la línea: ->where('productos.stock >', 0);
         
         // Aplicar ordenación según el parámetro
         if ($orden == 'precio_asc') {

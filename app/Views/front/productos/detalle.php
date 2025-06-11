@@ -52,7 +52,9 @@
                         $diferencia = $stock - $stock_min;
                     ?>
 
-                    <?php if ($stock <= $stock_min): ?>
+                    <?php if ($stock <= 0): ?>
+                        <span class="text-danger fw-bold"><i class="fas fa-exclamation-circle me-1"></i> Sin stock actualmente</span>
+                    <?php elseif ($stock <= $stock_min): ?>
                         <span class="text-warning fw-bold">¡Pocos en stock! (<?= esc($stock); ?> disponibles)</span>
                     <?php elseif ($diferencia <= 5): ?>
                         <span class="text-danger fw-bold">Últimas unidades (<?= esc($stock); ?> disponibles)</span>
@@ -73,12 +75,12 @@
                         <div class="row mb-3">
                             <div class="col-md-4">
                                 <label for="cantidad" class="form-label">Cantidad:</label>
-                                <input type="number" name="qty" id="cantidad" class="form-control form-control-sm" value="1" min="1" max="<?= $producto['stock']; ?>">
+                                <input type="number" name="qty" id="cantidad" class="form-control form-control-sm" value="1" min="1" max="<?= $producto['stock']; ?>" <?= ($producto['stock'] <= 0) ? 'disabled' : '' ?>>
                             </div>
                         </div>
                         
                         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                            <button type="submit" class="btn btn-info text-dark btn-comprar" style="width: 180px;">
+                            <button type="submit" class="btn btn-info text-dark btn-comprar" style="width: 180px;" <?= ($producto['stock'] <= 0) ? 'disabled' : '' ?>>
                                 <i class="fas fa-cart-plus me-2"></i>Añadir al carrito
                             </button>
                             
