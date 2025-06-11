@@ -245,17 +245,21 @@ footer .social-icons a:hover {
 .logo-container {
     display: flex;
     align-items: center;
+    height: 100%; /* Ocupa todo el alto disponible del contenedor padre */
+    padding: 0; /* Elimina cualquier padding que pueda afectar */
 }
 
 .logo-container img.logo {
-    max-height: 60px; /* Controla la altura máxima del logo */
+    height: 150px; /* Altura más grande para el logo */
     width: auto; /* Mantiene la proporción */
     transition: var(--transition-standard);
+    object-fit: contain; /* Asegura que la imagen se ajuste correctamente */
+    max-width: none; /* Evita restricciones de ancho */
 }
 
-/* En modo móvil, reducir aún más */
+/* En modo móvil, reducir ligeramente */
 @media (max-width: 768px) {
     .logo-container img.logo {
-        max-height: 50px;
+        height: 120px;
     }
 }
