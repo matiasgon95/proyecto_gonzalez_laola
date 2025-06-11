@@ -54,7 +54,7 @@
                                 <div class="input-group">
                                     <input type="password" class="form-control bg-dark text-info border-info" name="pass" id="pass" required>
                                     <button class="btn btn-outline-info" type="button" id="togglePassword">
-                                        <i class="fas fa-eye" id="toggleIcon"></i>
+                                        <i class="fas fa-eye" id="eyeIcon"></i>
                                     </button>
                                 </div>
                                 <div class="form-text text-info small mt-1">

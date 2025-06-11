@@ -30,7 +30,12 @@
 
                             <div class="mb-3">
                                 <label for="password" class="form-label">Contraseña</label>
-                                <input type="password" class="form-control bg-dark text-info border-info" name="pass" id="pass" required>
+                                <div class="input-group">
+                                    <input type="password" class="form-control bg-dark text-info border-info" name="pass" id="pass" required>
+                                    <button class="btn btn-outline-info" type="button" id="togglePassword">
+                                        <i class="fas fa-eye" id="eyeIcon"></i>
+                                    </button>
+                                </div>
                             </div>
 
                             <button type="submit" class="btn btn-outline-info w-100 mb-4 py-2 fw-bold hover-scale">
@@ -50,6 +55,7 @@
     </div>
 </div>
 
+<?= $this->endSection(); ?>
 <style>
 .hover-scale {
     transition: transform 0.2s ease;
@@ -86,5 +92,3 @@
     transform-origin: bottom left;
 }
 </style>
-
-<?= $this->endSection(); ?>
