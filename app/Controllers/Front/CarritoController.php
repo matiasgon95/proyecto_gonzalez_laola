@@ -362,6 +362,9 @@ class CarritoController extends BaseController
             $productoModel->update($item['id'], ['stock' => $producto['stock'] - $item['qty']]);
         }
         
+        // Después de registrar la venta, guardar el ID en la sesión
+        $this->session->set('ultima_venta_id', $venta_id);
+        
         // Vaciar carrito y mostrar confirmación
         $this->cart->destroy();
         
@@ -417,5 +420,38 @@ class CarritoController extends BaseController
         echo view('front/nav_view');
         echo view('back/compras/ver_factura_usuario', $data);
         echo view('front/footer_view');
+    }
+    
+    // Método para generar factura ficticia
+    public function generar_factura($venta_id)
+    {
+        // Verificar si el usuario está logueado
+        if (!session()->get('usuario_id')) {
+            return redirect()->to(base_url('front/login'));
+        }
+        
+        // Cargar modelos necesarios
+        $ventasModel = new \App\Models\Ventas_cabecera_model();
+        $detalleModel = new \App\Models\Ventas_detalle_model();
+        
+        // Obtener datos de la venta
+        $venta = $ventasModel->find($venta_id);
+        
+        // Verificar que la venta exista y pertenezca al usuario actual
+        if (empty($venta) || $venta['usuario_id'] != session()->get('usuario_id')) {
+            $this->session->setFlashdata('mensaje', 'No se encontró la factura solicitada.');
+            $this->session->setFlashdata('tipo_mensaje', 'warning');
+            return redirect()->to(base_url('productos'));
+        }
+        
+        // Obtener detalles de la venta
+        $data['venta'] = $detalleModel->getDetalles($venta_id);
+        $data['cabecera'] = $venta;
+        $data['titulo'] = "Factura #" . $venta_id;
+        $data['fecha'] = date('Y-m-d H:i:s'); // Fecha actual para la factura
+        $data['numero_factura'] = 'F-' . str_pad($venta_id, 6, '0', STR_PAD_LEFT); // Formato: F-000001
+        
+        // Generar vista de factura
+        return view('front/carrito/factura', $data);
     }
 }

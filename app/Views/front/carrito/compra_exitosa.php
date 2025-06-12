@@ -12,6 +12,14 @@
                     <div class="alert alert-info mt-3">
                         <p class="mb-0">Te hemos enviado un correo electrónico con los detalles de tu compra.</p>
                     </div>
+                    
+                    <?php if(session()->has('ultima_venta_id')): ?>
+                    <div class="mt-3">
+                        <a href="<?= base_url('carrito/generar_factura/' . session()->get('ultima_venta_id')) ?>" class="btn btn-success" target="_blank">
+                            <i class="fas fa-file-invoice me-2"></i>Generar Factura
+                        </a>
+                    </div>
+                    <?php endif; ?>
                 </div>
                 
                 <div class="row mt-5">

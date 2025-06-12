@@ -87,6 +87,7 @@ $routes->get('carrito/compra_exitosa', 'Front\CarritoController::compra_exitosa'
 // Rutas de checkout
 $routes->get('carrito_comprar', 'Front\CarritoController::comprar');
 $routes->post('carrito_confirmar', 'Front\CarritoController::confirmar');
+$routes->get('carrito/generar_factura/(:num)', 'Front\CarritoController::generar_factura/$1');
 
 
 // Rutas de administración de usuarios
