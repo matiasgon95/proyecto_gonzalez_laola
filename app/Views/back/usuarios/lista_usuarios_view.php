@@ -4,15 +4,20 @@
 <div class="container py-5 bg-dark text-info">
     <div class="card bg-dark border-info mb-4">
         <div class="card-body">
-            <h2 class="text-center mb-4">
-                <?php if(isset($tipo) && $tipo == 'clientes'): ?>
-                    Listado de Clientes
-                <?php elseif(isset($tipo) && $tipo == 'administradores'): ?>
-                    Listado de Administradores
-                <?php else: ?>
-                    Listado de Todos los Usuarios
-                <?php endif; ?>
-            </h2>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>
+                    <?php if(isset($tipo) && $tipo == 'clientes'): ?>
+                        Listado de Clientes
+                    <?php elseif(isset($tipo) && $tipo == 'administradores'): ?>
+                        Listado de Administradores
+                    <?php else: ?>
+                        Listado de Todos los Usuarios
+                    <?php endif; ?>
+                </h2>
+                <a href="<?= base_url('back/dashboard') ?>" class="btn btn-outline-info rounded-pill px-4">
+                    <i class="fas fa-arrow-left"></i> Volver al Dashboard
+                </a>
+            </div>
             
             <?php if(session()->getFlashdata('mensaje')): ?>
                 <div class="alert alert-success">
@@ -103,15 +108,7 @@
                     </tbody>
                 </table>
             </div>
-            
-            <div class="mt-3">
-                <a href="<?= site_url('admin/dashboard') ?>" class="btn btn-secondary">
-                    <i class="fas fa-arrow-left"></i> Volver al Dashboard
-                </a>
-            </div>
         </div>
     </div>
 </div>
-
 <?= $this->endSection() ?>
-<td><?= $usuario->email ?></td>
