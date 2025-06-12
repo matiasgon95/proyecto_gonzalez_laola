@@ -27,15 +27,15 @@
                             </div>
                         <?php endif; ?>
                         <div class="d-block d-md-none alert alert-info py-2 mb-2 text-center small">
-                            <i class="fas fa-arrows-left-right          me-1"></i> Desliza horizontalmente para        ver toda la tabla
+                            <i class="fas fa-arrows-left-right me-1"></i> Desliza horizontalmente para ver toda la tabla
                         </div>
                         <div class="table-responsive">
                             <table class="table table-hover table-dark table-striped align-middle mb-0">
                                 <thead class="table-info text-black">
                                     <tr>
-                                        <th>Pedido #</th>
-                                        <th>Fecha</th>
-                                        <th>Total</th>
+                                        <th class="text-center">Pedido #</th>
+                                        <th class="text-center">Fecha</th>
+                                        <th class="text-center">Total</th>
                                         <th class="text-center">Acciones</th>
                                     </tr>
                                 </thead>
@@ -47,9 +47,14 @@
                                                 <td class="text-center"><?= date('d/m/Y H:i', strtotime($pedido['fecha'])) ?></td>
                                                 <td class="text-center">$<?= number_format($pedido['total_venta'], 2, ',', '.') ?></td>
                                                 <td class="text-center">
-                                                    <a href="<?= base_url('front/cliente/detalle_pedido/' . $pedido['id']) ?>" class="btn btn-sm btn-info">
-                                                        <i class="fas fa-eye"></i> Ver detalle
-                                                    </a>
+                                                    <div class="btn-group" role="group">
+                                                        <a href="<?= base_url('front/cliente/detalle_pedido/' . $pedido['id']) ?>" class="btn btn-sm btn-info me-2">
+                                                            <i class="fas fa-eye"></i> Ver detalle
+                                                        </a>
+                                                        <a href="<?= base_url('carrito/generar_factura/' . $pedido['id']) ?>" class="btn btn-sm btn-success">
+                                                            <i class="fas fa-file-invoice"></i> Ver factura
+                                                        </a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
