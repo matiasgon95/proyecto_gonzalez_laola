@@ -13,7 +13,8 @@ $routes->get('/', 'Home::index');
 $routes->get('productos', 'Front\Producto::index');
 $routes->get('comercializacion', 'Home::comercializacion');
 $routes->get('quienes_somos', 'Home::quienes_somos');
-$routes->get('contacto', 'Home::contacto');
+$routes->get('contacto', 'Front\ContactoController::index'); // Actualizada
+$routes->post('front/contacto/enviar', 'Front\ContactoController::enviar');
 $routes->get('terminos', 'Home::terminos');
 $routes->get('sitio_en_construccion', 'Home::sitio_en_construccion');
 
@@ -58,6 +59,12 @@ $routes->group('back', ['filter' => 'auth:1'], function($routes) {
     
     // Ruta para estadísticas
     $routes->get('estadisticas', 'Admin\PanelController::estadisticas');
+    
+    // Rutas para gestión de consultas
+    $routes->get('consultas', 'Admin\ConsultaController::index');
+    $routes->get('consultas/ver/(:num)', 'Admin\ConsultaController::ver/$1');
+    $routes->get('consultas/cambiarEstado/(:num)/(:segment)', 'Admin\ConsultaController::cambiarEstado/$1/$2');
+    $routes->get('consultas/eliminar/(:num)', 'Admin\ConsultaController::eliminar/$1');
 });
 
 // Rutas de productos

@@ -157,4 +157,90 @@ class ClienteController extends BaseController
         
         return $this->response->setJSON(['esFavorito' => $esFavorito]);
     }
+
+    public function actualizar_perfil()
+    {
+        // Obtener el ID del usuario de la sesión
+        $usuario_id = session()->get('usuario_id');
+        
+        // Validar los datos del formulario
+        $rules = [
+            'nombre' => [
+                'rules' => 'required|min_length[3]|max_length[50]',
+                'errors' => [
+                    'required' => 'El nombre es obligatorio',
+                    'min_length' => 'El nombre debe tener al menos 3 caracteres',
+                    'max_length' => 'El nombre no debe exceder los 50 caracteres'
+                ]
+            ],
+            'apellido' => [
+                'rules' => 'required|min_length[3]|max_length[50]',
+                'errors' => [
+                    'required' => 'El apellido es obligatorio',
+                    'min_length' => 'El apellido debe tener al menos 3 caracteres',
+                    'max_length' => 'El apellido no debe exceder los 50 caracteres'
+                ]
+            ],
+            'email' => [
+                'rules' => 'required|valid_email',
+                'errors' => [
+                    'required' => 'El email es obligatorio',
+                    'valid_email' => 'Por favor ingrese un email válido'
+                ]
+            ],
+            'provincia' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'La provincia es obligatoria'
+                ]
+            ]
+        ];
+        
+        // Si se proporciona una contraseña, validarla con las mismas reglas que en el registro
+        if ($this->request->getPost('pass') != '') {
+            $rules['pass'] = [
+                'rules' => 'min_length[8]|max_length[16]|regex_match[/^(?=.*[A-Z])(?=.*[0-9])/]',
+                'errors' => [
+                    'min_length' => 'La contraseña debe tener al menos 8 caracteres',
+                    'max_length' => 'La contraseña no debe exceder los 16 caracteres',
+                    'regex_match' => 'La contraseña debe contener al menos una letra mayúscula y un número'
+                ]
+            ];
+        }
+        
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+        
+        // Preparar los datos para actualizar
+        $datos = [
+            'nombre' => $this->request->getPost('nombre'),
+            'apellido' => $this->request->getPost('apellido'),
+            'email' => $this->request->getPost('email'),
+            'provincia' => $this->request->getPost('provincia')
+        ];
+        
+        // Si se proporciona una contraseña, actualizarla
+        if ($this->request->getPost('pass') != '') {
+            $datos['pass'] = password_hash($this->request->getPost('pass'), PASSWORD_DEFAULT);
+        }
+        
+        // Actualizar los datos del usuario
+        $actualizado = $this->usuarioModel->update($usuario_id, $datos);
+        
+        if ($actualizado) {
+            // Actualizar los datos de la sesión
+            $usuario = $this->usuarioModel->obtener_usuario_por_id($usuario_id);
+            $datosSession = [
+                'usuario_nombre' => $usuario->nombre,
+                'usuario_apellido' => $usuario->apellido,
+                'usuario_email' => $usuario->email
+            ];
+            session()->set($datosSession);
+            
+            return redirect()->to('front/cliente/perfil')->with('mensaje', 'Perfil actualizado correctamente');
+        } else {
+            return redirect()->back()->with('error', 'No se pudo actualizar el perfil');
+        }
+    }
 }

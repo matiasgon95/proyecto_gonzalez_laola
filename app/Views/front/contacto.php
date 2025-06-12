@@ -13,7 +13,24 @@
                 </div>
                 
                 <div class="card-body p-4">
-                    <form action="" method="post">
+                    <?php if (session()->has('mensaje')): ?>
+                        <div class="alert alert-success">
+                            <?= session('mensaje') ?>
+                        </div>
+                    <?php endif; ?>
+                    
+                    <?php if (session()->has('errors')): ?>
+                        <div class="alert alert-danger">
+                            <ul>
+                                <?php foreach (session('errors') as $error): ?>
+                                    <li><?= $error ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    <?php endif; ?>
+                    
+                    <form action="<?= site_url('front/contacto/enviar') ?>" method="post">
+                        <?= csrf_field() ?>
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-group">

@@ -51,6 +51,9 @@
                                 <div class="col-md-6">
                                     <label for="pass" class="form-label">Contraseña (dejar en blanco si no cambia)</label>
                                     <input type="password" class="form-control bg-dark text-info border-info" id="pass" name="pass">
+                                    <div class="form-text text-info small mt-1">
+                                        La contraseña debe tener entre 8 y 16 caracteres, incluir al menos una letra mayúscula y un número.
+                                    </div>
                                 </div>
                             </div>
                             

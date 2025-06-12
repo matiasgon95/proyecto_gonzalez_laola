@@ -37,7 +37,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-3">
+                    <div class="col-md-6 col-lg-2">
                         <div class="card h-100 bg-dark border-info dashboard-card">
                             <div class="card-body text-center">
                                 <a href="<?= base_url('back/pedidos') ?>" class="text-decoration-none text-info dashboard-link">
@@ -47,11 +47,22 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-6 col-lg-3">
+                    
+                    <!-- Nuevo menú para consultas -->
+                    <div class="col-md-6 col-lg-2">
                         <div class="card h-100 bg-dark border-info dashboard-card">
                             <div class="card-body text-center">
-                                <!-- Reemplazar el enlace actual de estadísticas -->
+                                <a href="<?= base_url('back/consultas') ?>" class="text-decoration-none text-info dashboard-link">
+                                    <i class="fas fa-envelope fa-3x mb-3"></i>
+                                    <h5 class="card-title">Consultas</h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-2">
+                        <div class="card h-100 bg-dark border-info dashboard-card">
+                            <div class="card-body text-center">
                                 <a href="<?= base_url('back/estadisticas') ?>" class="text-decoration-none text-info dashboard-link">
                                     <i class="fas fa-chart-line fa-3x mb-3"></i>
                                     <h5 class="card-title" style="font-size: 1.2rem;">Estadísticas</h5>
