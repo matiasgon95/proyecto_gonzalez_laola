@@ -24,6 +24,15 @@ class ConsultaModel extends Model
         return $builder->orderBy('fecha_creacion', 'DESC')->get()->getResult();
     }
     
+    // Obtener consultas activas (no archivadas)
+    public function getConsultasActivas()
+    {
+        $builder = $this->builder();
+        $builder->where('estado !=', 'archivada');
+        
+        return $builder->orderBy('fecha_creacion', 'DESC')->get()->getResult();
+    }
+    
     // Cambiar el estado de una consulta
     public function cambiarEstado($id, $estado)
     {

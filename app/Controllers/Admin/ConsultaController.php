@@ -18,7 +18,7 @@ class ConsultaController extends BaseController
     {
         $data = [
             'titulo' => 'Gestión de Consultas',
-            'consultas' => $this->consultaModel->getConsultas()
+            'consultas' => $this->consultaModel->getConsultasActivas()
         ];
         
         return view('back/consultas/index', $data);
@@ -91,5 +91,15 @@ class ConsultaController extends BaseController
         }
         
         return redirect()->to('back/consultas')->with('mensaje', $mensaje);
+    }
+    
+    public function archivadas()
+    {
+        $data = [
+            'titulo' => 'Consultas Archivadas',
+            'consultas' => $this->consultaModel->getConsultas('archivada')
+        ];
+        
+        return view('back/consultas/archivadas', $data);
     }
 }

@@ -9,9 +9,14 @@
                     <div class="card-body text-info">
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <h1 class="display-5">Gestión de Consultas</h1>
-                            <a href="<?= base_url('back/dashboard') ?>" class="btn btn-outline-info rounded-pill px-4">
-                                <i class="fas fa-arrow-left"></i> Volver al Dashboard
-                            </a>
+                            <div>
+                                <a href="<?= base_url('back/consultas/archivadas') ?>" class="btn btn-secondary rounded-pill px-4 me-2">
+                                    <i class="fas fa-archive"></i> Ver Archivadas
+                                </a>
+                                <a href="<?= base_url('back/dashboard') ?>" class="btn btn-outline-info rounded-pill px-4">
+                                    <i class="fas fa-arrow-left"></i> Volver al Dashboard
+                                </a>
+                            </div>
                         </div>
                         
                         <?php if (session()->has('mensaje')): ?>
