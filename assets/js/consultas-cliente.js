@@ -4,6 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const botonesVerConsulta = document.querySelectorAll('.ver-consulta');
     const modalConsulta = new bootstrap.Modal(document.getElementById('modalConsulta'));
     
+    // Modal de confirmación para eliminar
+    const modalConfirmarEliminar = new bootstrap.Modal(document.getElementById('modalConfirmarEliminar'));
+    const botonesEliminarConsulta = document.querySelectorAll('.eliminar-consulta');
+    const btnConfirmarEliminar = document.getElementById('btn-confirmar-eliminar');
+    
     // Función para formatear la fecha
     function formatearFecha(fechaStr) {
         const fecha = new Date(fechaStr);
@@ -52,6 +57,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.error('Error al obtener los detalles de la consulta:', error);
                     alert('Error al cargar los detalles de la consulta');
                 });
+        });
+    });
+    
+    // Evento para eliminar consulta
+    botonesEliminarConsulta.forEach(boton => {
+        boton.addEventListener('click', function() {
+            const consultaId = this.getAttribute('data-id');
+            btnConfirmarEliminar.href = `${baseUrl}/front/cliente/eliminar_consulta/${consultaId}`;
+            modalConfirmarEliminar.show();
         });
     });
 });

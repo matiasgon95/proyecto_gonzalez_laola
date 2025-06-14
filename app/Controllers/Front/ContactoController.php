@@ -17,6 +17,15 @@ class ContactoController extends BaseController
     
     public function index()
     {
+        // Verificar si el usuario está logueado
+        $session = session();
+        
+        if ($session->has('usuario_id')) {
+            // Si está logueado, redirigir a la página de nueva consulta para clientes
+            return redirect()->to('front/cliente/nueva_consulta');
+        }
+        
+        // Si no está logueado, mostrar el formulario de contacto normal
         return view('front/contacto', [
             'titulo' => 'Contacto'
         ]);

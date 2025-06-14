@@ -64,7 +64,7 @@
                             <div class="card-body text-center">
                                 <a href="<?= base_url('front/cliente/consultas') ?>" class="text-decoration-none text-info dashboard-link">
                                     <i class="fas fa-comments fa-3x mb-3"></i>
-                                    <h5 class="card-title">Consultas</h5>
+                                    <h5 class="card-title">Mis consultas</h5>
                                 </a>
                             </div>
                         </div>

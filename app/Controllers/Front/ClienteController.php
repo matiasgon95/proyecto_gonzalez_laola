@@ -287,4 +287,83 @@ class ClienteController extends BaseController
         
         return $this->response->setJSON(['consulta' => $consulta]);
     }
+
+    // Método para mostrar el formulario de nueva consulta
+    public function nueva_consulta()
+    {
+        $data['titulo'] = 'Nueva Consulta';
+        return view('front/cliente/nueva_consulta', $data);
+    }
+
+    // Método para guardar la nueva consulta
+    public function guardar_consulta()
+    {
+        // Validación del formulario
+        $rules = [
+            'asunto' => 'required|min_length[5]|max_length[200]',
+            'mensaje' => 'required|min_length[10]'
+        ];
+        
+        // Mensajes personalizados en español
+        $messages = [
+            'asunto' => [
+                'required' => 'El campo Asunto es obligatorio.',
+                'min_length' => 'El campo Asunto debe tener al menos {param} caracteres.',
+                'max_length' => 'El campo Asunto no puede exceder los {param} caracteres.'
+            ],
+            'mensaje' => [
+                'required' => 'El campo Mensaje es obligatorio.',
+                'min_length' => 'El campo Mensaje debe tener al menos {param} caracteres.'
+            ]
+        ];
+        
+        if (!$this->validate($rules, $messages)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+        
+        // Obtener datos del usuario de la sesión
+        $session = session();
+        $usuario_id = $session->get('usuario_id');
+        $usuario = $this->usuarioModel->obtener_usuario_por_id($usuario_id);
+        
+        // Guardar la consulta en la base de datos
+        $data = [
+            'nombre' => $usuario->nombre,
+            'apellido' => $usuario->apellido,
+            'email' => $usuario->email,
+            'asunto' => $this->request->getPost('asunto'),
+            'mensaje' => $this->request->getPost('mensaje'),
+            'estado' => 'pendiente',
+            'es_registrado' => 'si',
+            'id_usuario' => $usuario_id
+        ];
+        
+        $this->consultaModel->insert($data);
+        
+        return redirect()->to('front/cliente/consultas')->with('mensaje', 'Tu consulta ha sido enviada correctamente. Te responderemos a la brevedad.');
+    }
+
+    public function eliminar_consulta($id)
+    {
+        // Obtener el ID del usuario de la sesión
+        $usuario_id = session()->get('usuario_id');
+        
+        // Verificar que la consulta exista y pertenezca al usuario
+        $builder = $this->consultaModel->builder();
+        $consulta = $builder->where('id', $id)
+                            ->where('id_usuario', $usuario_id)
+                            ->get()
+                            ->getRow();
+        
+        if (!$consulta) {
+            return redirect()->to('front/cliente/consultas')
+                             ->with('error', 'Consulta no encontrada o no tienes permiso para eliminarla');
+        }
+        
+        // Eliminar la consulta
+        $this->consultaModel->delete($id);
+        
+        return redirect()->to('front/cliente/consultas')
+                         ->with('mensaje', 'La consulta ha sido eliminada correctamente');
+    }
 }

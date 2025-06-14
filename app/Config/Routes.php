@@ -39,6 +39,9 @@ $routes->group('front/cliente', ['filter' => 'auth:2'], function($routes) {
     // Nuevas rutas para consultas
     $routes->get('consultas', 'Front\ClienteController::consultas');
     $routes->get('detalle_consulta/(:num)', 'Front\ClienteController::detalle_consulta/$1');
+    $routes->get('nueva_consulta', 'Front\ClienteController::nueva_consulta');
+    $routes->post('guardar_consulta', 'Front\ClienteController::guardar_consulta');
+    $routes->get('eliminar_consulta/(:num)', 'Front\ClienteController::eliminar_consulta/$1'); // Nueva ruta para eliminar consulta
 });
 
 // Rutas de gestión de Productos del admin
