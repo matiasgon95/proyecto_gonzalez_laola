@@ -16,18 +16,25 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <p><strong>Nombre:</strong> <?= $consulta->nombre ?> <?= $consulta->apellido ?></p>
-                            </div>
-                            <div class="col-md-6">
                                 <p><strong>Email:</strong> <?= $consulta->email ?></p>
-                            </div>
-                        </div>
-                        
-                        <div class="row mb-3">
-                            <div class="col-md-6">
+                                <p><strong>Asunto:</strong> <?= $consulta->asunto ?></p>
                                 <p><strong>Fecha:</strong> <?= date('d/m/Y H:i', strtotime($consulta->fecha_creacion)) ?></p>
                             </div>
-                            <div class="col-md-6">
-                                <p><strong>Asunto:</strong> <?= $consulta->asunto ?></p>
+                            <div class="col-md-6 text-md-end">
+                                <p>
+                                    <strong>Estado:</strong> 
+                                    <span class="badge <?= $consulta->estado == 'pendiente' ? 'bg-warning text-dark' : ($consulta->estado == 'respondida' ? 'bg-success' : 'bg-secondary') ?>">
+                                        <?= ucfirst($consulta->estado) ?>
+                                    </span>
+                                </p>
+                                <p>
+                                    <strong>Tipo de usuario:</strong> 
+                                    <?php if ($consulta->es_registrado == 'si'): ?>
+                                        <span class="badge bg-primary">Cliente Registrado</span>
+                                    <?php else: ?>
+                                        <span class="badge bg-info text-dark">Visitante</span>
+                                    <?php endif; ?>
+                                </p>
                             </div>
                         </div>
                         

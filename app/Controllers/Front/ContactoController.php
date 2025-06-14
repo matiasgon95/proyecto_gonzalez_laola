@@ -64,6 +64,16 @@ class ContactoController extends BaseController
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
         
+        // Verificar si el usuario está logueado
+        $session = session();
+        $esRegistrado = 'no';
+        $idUsuario = null;
+        
+        if ($session->has('usuario_id')) {
+            $esRegistrado = 'si';
+            $idUsuario = $session->get('usuario_id');
+        }
+        
         // Guardar la consulta en la base de datos
         $data = [
             'nombre' => $this->request->getPost('nombre'),
@@ -71,7 +81,9 @@ class ContactoController extends BaseController
             'email' => $this->request->getPost('email'),
             'asunto' => $this->request->getPost('asunto'),
             'mensaje' => $this->request->getPost('consulta'),
-            'estado' => 'pendiente'
+            'estado' => 'pendiente',
+            'es_registrado' => $esRegistrado,
+            'id_usuario' => $idUsuario
         ];
         
         $this->consultaModel->insert($data);

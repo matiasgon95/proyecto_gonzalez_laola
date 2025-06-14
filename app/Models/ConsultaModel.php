@@ -10,7 +10,7 @@ class ConsultaModel extends Model
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'object';
-    protected $allowedFields    = ['nombre', 'apellido', 'email', 'asunto', 'mensaje', 'estado'];
+    protected $allowedFields    = ['nombre', 'apellido', 'email', 'asunto', 'mensaje', 'estado', 'id_usuario', 'es_registrado'];
     
     // Obtener todas las consultas
     public function getConsultas($estado = null)

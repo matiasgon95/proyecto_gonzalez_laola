@@ -62,13 +62,14 @@
                                             <th class="text-center">Asunto</th>
                                             <th class="text-center">Fecha</th>
                                             <th class="text-center">Estado</th>
+                                            <th class="text-center">Tipo</th>
                                             <th class="text-center">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php if (empty($consultas)): ?>
                                             <tr>
-                                                <td colspan="8" class="text-center">No hay consultas registradas</td>
+                                                <td colspan="9" class="text-center">No hay consultas registradas</td>
                                             </tr>
                                         <?php else: ?>
                                             <?php foreach ($consultas as $consulta): ?>
@@ -88,6 +89,13 @@
                                                             <span class="badge bg-success">Respondida</span>
                                                         <?php else: ?>
                                                             <span class="badge bg-secondary">Archivada</span>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <?php if ($consulta->es_registrado == 'si'): ?>
+                                                            <span class="badge bg-primary">Registrado</span>
+                                                        <?php else: ?>
+                                                            <span class="badge bg-info text-dark">Visitante</span>
                                                         <?php endif; ?>
                                                     </td>
                                                     <td class="text-center">
