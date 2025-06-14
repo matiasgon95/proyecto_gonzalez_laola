@@ -7,6 +7,7 @@ use App\Models\Ventas_cabecera_model;
 use App\Models\Ventas_detalle_model;
 use App\Models\FavoritoModel;
 use App\Models\ProductoModel;
+use App\Models\ConsultaModel; // Agregar esta línea
 use App\Controllers\BaseController;
 
 class ClienteController extends BaseController
@@ -16,6 +17,7 @@ class ClienteController extends BaseController
     protected $ventasDetalleModel;
     protected $favoritoModel;
     protected $productoModel;
+    protected $consultaModel; // Agregar esta línea
     protected $session;
     protected $helpers = ['url', 'form'];
 
@@ -26,9 +28,10 @@ class ClienteController extends BaseController
         $this->ventasDetalleModel = new Ventas_detalle_model();
         $this->favoritoModel = new FavoritoModel();
         $this->productoModel = new ProductoModel();
+        $this->consultaModel = new ConsultaModel(); // Agregar esta línea
         $this->session = session();
     }
-
+    
     public function perfil()
     {
         // Obtener el ID del usuario de la sesión
@@ -242,5 +245,46 @@ class ClienteController extends BaseController
         } else {
             return redirect()->back()->with('error', 'No se pudo actualizar el perfil');
         }
+    }
+
+    // Método para mostrar las consultas del cliente
+    public function consultas()
+    {
+        // Obtener el ID del usuario de la sesión
+        $usuario_id = session()->get('usuario_id');
+        
+        // Obtener todas las consultas del usuario
+        $builder = $this->consultaModel->builder();
+        $builder->where('id_usuario', $usuario_id);
+        $consultas = $builder->orderBy('fecha_creacion', 'DESC')->get()->getResult();
+        
+        $data['consultas'] = $consultas;
+        $data['titulo'] = 'Mis Consultas';
+        
+        return view('front/cliente/consultas', $data);
+    }
+
+    // Método para ver el detalle de una consulta específica
+    public function detalle_consulta($id)
+    {
+        // Obtener el ID del usuario de la sesión
+        $usuario_id = session()->get('usuario_id');
+        
+        // Obtener la consulta asegurándose que pertenezca al usuario
+        $builder = $this->consultaModel->builder();
+        $consulta = $builder->where('id', $id)
+                            ->where('id_usuario', $usuario_id)
+                            ->get()
+                            ->getRow();
+        
+        if (!$consulta) {
+            return redirect()->to('front/cliente/consultas')
+                             ->with('error', 'Consulta no encontrada o no tienes permiso para verla');
+        }
+        
+        $data['consulta'] = $consulta;
+        $data['titulo'] = 'Detalle de Consulta';
+        
+        return $this->response->setJSON(['consulta' => $consulta]);
     }
 }
