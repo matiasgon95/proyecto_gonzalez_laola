@@ -7,7 +7,7 @@
             <div class="col-lg-10">
                 <div class="card bg-dark border-info mb-4">
                     <div class="card-body text-info">
-                        <h1 class="display-4 text-center mb-4">Panel de Administración</h1>
+                        <h1 class="admin-panel-title text-center mb-4">Panel de Administración</h1>
                         <p class="lead text-center mb-4">Bienvenido, <?= session('usuario_nombre') ?> 
                             <span class="badge bg-info text-dark ms-2">Administrador</span>
                         </p>
