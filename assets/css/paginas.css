@@ -501,7 +501,7 @@
     }
 }
 
-/* Estilos mejorados para el carrusel */
+/* Estilos mejorados para el carrusel principal */
 .carousel-container {
     max-width: 85%;
     margin: 2rem auto;
@@ -510,6 +510,17 @@
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
     position: relative;
     border: 1px solid rgba(0, 229, 255, 0.2);
+    /* Añadir estas propiedades para controlar mejor el tamaño */
+    height: auto;
+    min-height: 400px;
+}
+
+/* Asegurar que las imágenes del carrusel principal se muestren correctamente */
+.carousel-container .carousel-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    max-height: 500px;
 }
 
 /* Estilos para los carruseles de productos en la página principal */
@@ -520,7 +531,7 @@
     position: relative;
     border: 1px solid rgba(0, 229, 255, 0.2);
     margin-bottom: 15px;
-    height: 250px; /* Altura fija para todos los carruseles */
+    height: 250px; /* Altura fija para los carruseles de productos */
 }
 
 /* Efecto de gradiente en los bordes */
@@ -628,21 +639,48 @@
     box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
 }
 
-/* Ajustes responsivos */
+/* Ajustes responsivos mejorados */
 @media (max-width: 768px) {
-    .product-carousel-container {
-        height: 200px;
+    .carousel-container {
+        max-width: 95%;
+        margin: 1rem auto;
+        min-height: 300px;
     }
     
-    .product-carousel-container .carousel-item img {
-        height: 200px;
+    .carousel-container .carousel-item img {
+        height: auto;
+        max-height: 300px;
     }
     
-    .product-title {
-        font-size: 0.8rem;
+    .carousel-caption {
+        padding: 10px 15px;
+        bottom: 20px;
+    }
+}
+
+/* Ajustes adicionales para pantallas muy pequeñas */
+@media (max-width: 576px) {
+    .carousel-container {
+        max-width: 100%;
+        margin: 0.5rem auto;
+        min-height: 200px;
+        border-radius: 10px;
     }
     
-    .precio-producto {
+    .carousel-container .carousel-item img {
+        max-height: 200px;
+    }
+    
+    .carousel-caption {
+        padding: 8px 12px;
+        bottom: 10px;
+        width: 80%;
+        left: 10%;
+        right: 10%;
+    }
+    
+    .carousel-caption .btn {
+        padding: 5px 15px;
         font-size: 0.9rem;
     }
 }
