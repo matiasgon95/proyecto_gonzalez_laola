@@ -9,7 +9,7 @@
                     <div class="card-header bg-dark border-info d-flex justify-content-between align-items-center">
                         <h2 class="mb-0">Mis Productos Favoritos</h2>
                         <a href="<?= base_url('front/cliente/dashboard') ?>" class="btn btn-outline-info rounded-pill px-4">
-                            <i class="fas fa-arrow-left me-2"></i>Volver al Dashboard
+                            <i class="fas fa-arrow-left me-2"></i>Volver al Panel
                         </a>
                     </div>
                     <div class="card-body">

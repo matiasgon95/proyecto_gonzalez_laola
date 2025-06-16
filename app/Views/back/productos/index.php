@@ -15,7 +15,7 @@
                 <i class="fas fa-trash-alt"></i> Papelera
             </a>
             <a href="<?= base_url('back/dashboard') ?>" class="btn btn-outline-info rounded-pill px-4">
-                <i class="fas fa-arrow-left"></i> Volver al Dashboard
+                <i class="fas fa-arrow-left"></i> Volver al Panel
             </a>
         </div>
     </div>

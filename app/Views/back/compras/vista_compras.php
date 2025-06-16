@@ -114,7 +114,7 @@
                             <?php if (!empty($datos_adicionales) && isset($datos_adicionales['metodo_entrega']) && $datos_adicionales['metodo_entrega'] === 'envio_domicilio'): ?>
                             <tr>
                                 <th colspan="4" class="text-end">Costo de envío:</th>
-                                <td>$500.00</td>
+                                <td>$10000.00</td>
                             </tr>
                             <?php endif; ?>
                             <tr>
