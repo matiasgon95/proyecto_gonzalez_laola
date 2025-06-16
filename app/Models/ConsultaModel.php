@@ -33,6 +33,21 @@ class ConsultaModel extends Model
         return $builder->orderBy('fecha_creacion', 'DESC')->get()->getResult();
     }
     
+    // Obtener consultas por tipo de usuario (registrado o visitante)
+    public function getConsultasPorTipo($esRegistrado, $estado = null)
+    {
+        $builder = $this->builder();
+        $builder->where('es_registrado', $esRegistrado);
+        
+        if ($estado === 'activas') {
+            $builder->where('estado !=', 'archivada');
+        } else if ($estado) {
+            $builder->where('estado', $estado);
+        }
+        
+        return $builder->orderBy('fecha_creacion', 'DESC')->get()->getResult();
+    }
+    
     // Cambiar el estado de una consulta
     public function cambiarEstado($id, $estado)
     {

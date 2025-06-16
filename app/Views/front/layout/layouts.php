@@ -31,6 +31,7 @@
     <script src="<?= base_url('assets/js/search.js') ?>"></script>
     <script src="<?= base_url('assets/js/checkout.js') ?>"></script>
     <script src="<?= base_url('assets/js/password-toggle.js') ?>"></script>
+    <script src="<?= base_url('assets/js/productos.js') ?>"></script>
     
     <!--Titulo-->
     <title><?= isset($titulo) ? $titulo . ' - GL technology' : 'GL technology' ?></title>

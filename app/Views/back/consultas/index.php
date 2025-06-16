@@ -31,6 +31,15 @@
                             </div>
                         <?php endif; ?>
                         
+                        <!-- Botones de filtrado -->
+                        <div class="mb-3 d-flex justify-content-between">
+                            <div>
+                                <a href="<?= base_url('back/consultas') ?>" class="btn btn-info me-2 <?= !isset($tipo) ? 'active' : '' ?>">Todos</a>
+                                <a href="<?= base_url('back/consultas/registrados') ?>" class="btn btn-info me-2 <?= isset($tipo) && $tipo == 'registrados' ? 'active' : '' ?>">Clientes</a>
+                                <a href="<?= base_url('back/consultas/visitantes') ?>" class="btn btn-info <?= isset($tipo) && $tipo == 'visitantes' ? 'active' : '' ?>">Visitantes</a>
+                            </div>
+                        </div>
+                        
                         <form action="<?= base_url('back/consultas/accionMasiva') ?>" method="post" id="formAccionMasiva">
                             <?= csrf_field() ?>
                             <div class="d-flex justify-content-between mb-3">

@@ -58,38 +58,27 @@
 
         <!-- Lista de productos -->
         <div class="col-md-9">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h1 class="text-info mb-0">Catálogo de Productos</h1>
+            <div class="mb-4">
+                <h1 class="text-info mb-3">Catálogo de Productos</h1>
                 
                 <!-- Selector de ordenación -->
-                <div class="dropdown">
-                    <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-sort me-1"></i> Ordenar por: 
-                        <?php 
-                        $textoOrden = 'Todos';
-                        if (isset($orden_actual)) {
-                            switch ($orden_actual) {
-                                case 'productos.id': $textoOrden = 'Todos'; break;
-                                case 'precio_asc': $textoOrden = 'Precio: menor a mayor'; break;
-                                case 'precio_desc': $textoOrden = 'Precio: mayor a menor'; break;
-                                case 'mas_vendidos': $textoOrden = 'Más vendidos'; break;
-                            }
-                        }
-                        echo $textoOrden;
-                        ?>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                <div class="d-flex align-items-center">
+                    <span class="me-2">Ordenar por:</span>
+                    <select class="form-select" style="width: auto;" id="ordenSelector">
                         <?php 
                         // Determinar la URL base para los enlaces de ordenación
                         $urlBase = isset($categoria_actual) 
                             ? base_url('producto/categoria/' . urlencode($categoria_actual)) 
                             : base_url('productos');
+                            
+                        // Obtener el parámetro de ordenación actual
+                        $orden_actual = $orden_actual ?? 'productos.id';
                         ?>
-                        <li><a class="dropdown-item" href="<?= $urlBase . '?orden=productos.id' ?>">Todos</a></li>
-                        <li><a class="dropdown-item" href="<?= $urlBase . '?orden=mas_vendidos' ?>">Más vendidos</a></li>
-                        <li><a class="dropdown-item" href="<?= $urlBase . '?orden=precio_asc' ?>">Precio: menor a mayor</a></li>
-                        <li><a class="dropdown-item" href="<?= $urlBase . '?orden=precio_desc' ?>">Precio: mayor a menor</a></li>
-                    </ul>
+                        <option value="<?= $urlBase . '?orden=productos.id' ?>" <?= $orden_actual == 'productos.id' ? 'selected' : '' ?>>Todos</option>
+                        <option value="<?= $urlBase . '?orden=mas_vendidos' ?>" <?= $orden_actual == 'mas_vendidos' ? 'selected' : '' ?>>Más vendidos</option>
+                        <option value="<?= $urlBase . '?orden=precio_asc' ?>" <?= $orden_actual == 'precio_asc' ? 'selected' : '' ?>>Precio: menor a mayor</option>
+                        <option value="<?= $urlBase . '?orden=precio_desc' ?>" <?= $orden_actual == 'precio_desc' ? 'selected' : '' ?>>Precio: mayor a menor</option>
+                    </select>
                 </div>
             </div>
             

@@ -14,12 +14,20 @@ class ConsultaController extends BaseController
         $this->consultaModel = new ConsultaModel();
     }
     
-    public function index()
+    public function index($tipo = null)
     {
         $data = [
             'titulo' => 'Gestión de Consultas',
-            'consultas' => $this->consultaModel->getConsultasActivas()
+            'tipo' => $tipo
         ];
+        
+        if ($tipo === 'registrados') {
+            $data['consultas'] = $this->consultaModel->getConsultasPorTipo('si', 'activas');
+        } else if ($tipo === 'visitantes') {
+            $data['consultas'] = $this->consultaModel->getConsultasPorTipo('no', 'activas');
+        } else {
+            $data['consultas'] = $this->consultaModel->getConsultasActivas();
+        }
         
         return view('back/consultas/index', $data);
     }
@@ -93,12 +101,20 @@ class ConsultaController extends BaseController
         return redirect()->to('back/consultas')->with('mensaje', $mensaje);
     }
     
-    public function archivadas()
+    public function archivadas($tipo = null)
     {
         $data = [
             'titulo' => 'Consultas Archivadas',
-            'consultas' => $this->consultaModel->getConsultas('archivada')
+            'tipo' => $tipo
         ];
+        
+        if ($tipo === 'registrados') {
+            $data['consultas'] = $this->consultaModel->getConsultasPorTipo('si', 'archivada');
+        } else if ($tipo === 'visitantes') {
+            $data['consultas'] = $this->consultaModel->getConsultasPorTipo('no', 'archivada');
+        } else {
+            $data['consultas'] = $this->consultaModel->getConsultas('archivada');
+        }
         
         return view('back/consultas/archivadas', $data);
     }

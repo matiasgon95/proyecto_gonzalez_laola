@@ -68,13 +68,17 @@ $routes->group('back', ['filter' => 'auth:1'], function($routes) {
     
     // Rutas para consultas
     $routes->get('consultas', 'Admin\ConsultaController::index');
+    $routes->get('consultas/registrados', 'Admin\ConsultaController::index/registrados');
+    $routes->get('consultas/visitantes', 'Admin\ConsultaController::index/visitantes');
     $routes->get('consultas/ver/(:num)', 'Admin\ConsultaController::ver/$1');
-    $routes->get('consultas/getDetalleConsulta/(:num)', 'Admin\ConsultaController::getDetalleConsulta/$1'); // Nueva ruta
+    $routes->get('consultas/getDetalleConsulta/(:num)', 'Admin\ConsultaController::getDetalleConsulta/$1');
     $routes->get('consultas/cambiarEstado/(:num)/(:alpha)', 'Admin\ConsultaController::cambiarEstado/$1/$2');
     $routes->get('consultas/eliminar/(:num)', 'Admin\ConsultaController::eliminar/$1');
     $routes->post('consultas/accionMasiva', 'Admin\ConsultaController::accionMasiva');
     $routes->get('consultas/archivadas', 'Admin\ConsultaController::archivadas');
-    $routes->post('consultas/accionMasivaArchivadas', 'Admin\ConsultaController::accionMasivaArchivadas'); // Agregar esta línea
+    $routes->get('consultas/archivadas/registrados', 'Admin\ConsultaController::archivadas/registrados');
+    $routes->get('consultas/archivadas/visitantes', 'Admin\ConsultaController::archivadas/visitantes');
+    $routes->post('consultas/accionMasivaArchivadas', 'Admin\ConsultaController::accionMasivaArchivadas');
     $routes->get('consultas/ver/(:num)', 'Admin\ConsultaController::ver/$1');
     $routes->get('consultas/cambiarEstado/(:num)/(:segment)', 'Admin\ConsultaController::cambiarEstado/$1/$2');
     $routes->get('consultas/eliminar/(:num)', 'Admin\ConsultaController::eliminar/$1');
