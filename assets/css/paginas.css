@@ -512,15 +512,26 @@
     border: 1px solid rgba(0, 229, 255, 0.2);
 }
 
+/* Estilos para los carruseles de productos en la página principal */
+.product-carousel-container {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    position: relative;
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    margin-bottom: 15px;
+    height: 250px; /* Altura fija para todos los carruseles */
+}
+
 /* Efecto de gradiente en los bordes */
-.carousel-container::before {
+.product-carousel-container::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: 20px;
+    border-radius: 15px;
     padding: 2px;
     background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -530,33 +541,116 @@
     z-index: 2;
 }
 
-/* Ajuste de altura para que no sea tan grande */
-.carousel-item img {
-    height: 400px;
-    object-fit: cover;
-    object-position: center;
-}
-
-/* Mejora de los controles del carrusel */
-.carousel-control-prev, .carousel-control-next {
-    width: 10%;
+/* Ajustes para los controles de los carruseles de productos */
+.product-carousel-container .carousel-control-prev,
+.product-carousel-container .carousel-control-next {
+    width: 15%;
     opacity: 0;
-    transition: all 0.4s ease;
+    transition: all 0.3s ease;
+    z-index: 10;
 }
 
-.carousel-container:hover .carousel-control-prev,
-.carousel-container:hover .carousel-control-next {
-    opacity: 0.8;
+.product-carousel-container:hover .carousel-control-prev,
+.product-carousel-container:hover .carousel-control-next {
+    opacity: 0.7;
 }
 
-.carousel-control-prev-icon, .carousel-control-next-icon {
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 50%;
-    padding: 25px;
-    background-size: 50%;
+/* Estilos para las imágenes en los carruseles */
+.product-carousel-container .carousel-item img {
+    height: 250px;
+    object-fit: contain;
+    background: radial-gradient(circle at center, rgba(30, 30, 30, 1), rgba(15, 15, 15, 1));
+    width: 100%;
+    display: block;
+    margin: 0 auto;
 }
 
-/* Mejora del caption */
+/* Overlay para la información del producto */
+.product-info-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 8px;
+    transition: all 0.3s ease;
+    transform: translateY(100%);
+    opacity: 0;
+    backdrop-filter: blur(5px);
+    border-top: 1px solid rgba(0, 229, 255, 0.2);
+    z-index: 5;
+}
+
+.carousel-item a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
+.carousel-item a:hover .product-info-overlay {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Estilos para el título del producto */
+.product-title {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    color: var(--color-primary);
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Estilos para el precio */
+.precio-producto {
+    font-family: "Orbitron", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    margin-bottom: 5px;
+}
+
+/* Estilos para el botón */
+.product-info-overlay .btn {
+    margin-top: 5px;
+    transition: all 0.3s ease;
+    padding: 2px 8px;
+    font-size: 0.8rem;
+}
+
+.carousel-item a:hover .btn {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    .product-carousel-container {
+        height: 200px;
+    }
+    
+    .product-carousel-container .carousel-item img {
+        height: 200px;
+    }
+    
+    .product-title {
+        font-size: 0.8rem;
+    }
+    
+    .precio-producto {
+        font-size: 0.9rem;
+    }
+}
+
+.carousel-item img {
+    height: 300px;
+}
+
 .carousel-caption {
     background: rgba(0, 0, 0, 0.7);
     border-radius: 15px;
