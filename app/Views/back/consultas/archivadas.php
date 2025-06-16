@@ -7,8 +7,8 @@
             <div class="col-12">
                 <div class="card bg-dark border-info mb-4">
                     <div class="card-body text-info">
-                        <div class="d-flex justify-content-between align-items-center mb-4">
-                            <h1 class="display-5">Consultas Archivadas</h1>
+                        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+                            <h1 class="display-5 mb-3 mb-md-0">Consultas Archivadas</h1>
                             <div>
                                 <a href="<?= base_url('back/consultas') ?>" class="btn btn-info rounded-pill px-4 me-2">
                                     <i class="fas fa-inbox"></i> Ver Consultas Activas
@@ -31,32 +31,45 @@
                             </div>
                         <?php endif; ?>
                         
-                        <!-- Botones de filtrado -->
-                        <div class="mb-3 d-flex justify-content-between">
-                            <div>
-                                <a href="<?= base_url('back/consultas/archivadas') ?>" class="btn btn-info me-2 <?= !isset($tipo) ? 'active' : '' ?>">Todos</a>
-                                <a href="<?= base_url('back/consultas/archivadas/registrados') ?>" class="btn btn-info me-2 <?= isset($tipo) && $tipo == 'registrados' ? 'active' : '' ?>">Clientes</a>
-                                <a href="<?= base_url('back/consultas/archivadas/visitantes') ?>" class="btn btn-info <?= isset($tipo) && $tipo == 'visitantes' ? 'active' : '' ?>">Visitantes</a>
-                            </div>
-                        </div>
-                        
                         <!-- Formulario para acciones masivas -->
                         <form id="formAccionMasiva" action="<?= base_url('back/consultas/accionMasivaArchivadas') ?>" method="post">
                             <?= csrf_field() ?>
-                            <div class="d-flex justify-content-between mb-3">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="seleccionarTodos">
-                                    <label class="form-check-label" for="seleccionarTodos">Seleccionar todos</label>
-                                </div>
-                                <div class="d-flex">
-                                    <select name="accion" class="form-select me-2" required>
-                                        <option value="">Seleccionar acción</option>
-                                        <option value="pendiente">Restaurar como pendiente</option>
-                                        <option value="eliminar">Eliminar</option>
-                                    </select>
-                                    <button type="submit" class="btn btn-info" id="btnAplicar" disabled>
-                                        <i class="fas fa-check me-1"></i>Aplicar
-                                    </button>
+                            <!-- Contenedor de filtros y acciones agrupados -->
+                            <div class="card bg-dark border-info mb-3">
+                                <div class="card-body p-3">
+                                    <div class="row align-items-center">
+                                        <!-- Filtros de tipo de consulta -->
+                                        <div class="col-md-6 mb-3 mb-md-0">
+                                            <div class="btn-group w-100">
+                                                <a href="<?= base_url('back/consultas/archivadas') ?>" class="btn btn-info <?= !isset($tipo) ? 'active' : '' ?>">
+                                                    <i class="fas fa-list me-1"></i> Todos
+                                                </a>
+                                                <a href="<?= base_url('back/consultas/archivadas/registrados') ?>" class="btn btn-info <?= isset($tipo) && $tipo == 'registrados' ? 'active' : '' ?>">
+                                                    <i class="fas fa-user-check me-1"></i> Clientes
+                                                </a>
+                                                <a href="<?= base_url('back/consultas/archivadas/visitantes') ?>" class="btn btn-info <?= isset($tipo) && $tipo == 'visitantes' ? 'active' : '' ?>">
+                                                    <i class="fas fa-user me-1"></i> Visitantes
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!-- Acciones masivas -->
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-center">
+                                                <div class="form-check form-check-inline me-2">
+                                                    <input class="form-check-input" type="checkbox" id="seleccionarTodos">
+                                                    <label class="form-check-label" for="seleccionarTodos">Seleccionar</label>
+                                                </div>
+                                                <select name="accion" class="form-select me-2" required>
+                                                    <option value="">Acción</option>
+                                                    <option value="pendiente">Restaurar como pendiente</option>
+                                                    <option value="eliminar">Eliminar</option>
+                                                </select>
+                                                <button type="submit" class="btn btn-info" id="btnAplicar" disabled>
+                                                    <i class="fas fa-check me-1"></i>Aplicar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         

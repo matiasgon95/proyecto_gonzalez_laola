@@ -168,10 +168,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="text-center mt-5">
-            <a href="<?= base_url() ?>" class="btn btn-outline-info"><i class="fas fa-home me-2"></i>Volver al inicio</a>
-        </div>
     </div>
 </div>
 <?= $this->endSection(); ?>

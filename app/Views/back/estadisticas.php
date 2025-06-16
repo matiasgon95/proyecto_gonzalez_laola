@@ -6,9 +6,9 @@
 <link rel="stylesheet" href="<?= base_url('assets/css/estadisticas.css') ?>">
 
 <div class="container-fluid py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h2 text-info">Estadísticas del Sistema</h1>
-        <a href="<?= base_url('back/dashboard') ?>" class="btn btn-outline-info rounded-pill px-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+        <h1 class="h2 text-info mb-3 mb-md-0">Estadísticas del Sistema</h1>
+        <a href="<?= base_url('back/dashboard') ?>" class="btn btn-outline-info rounded-pill px-4 align-self-start align-self-md-auto">
             <i class="fas fa-arrow-left"></i> Volver al Panel
         </a>
     </div>
