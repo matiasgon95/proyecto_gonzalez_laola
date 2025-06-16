@@ -2,8 +2,8 @@
 <?= $this->section('contenedor') ?>
 
 <div class="container-fluid py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h2 text-info">Detalle del Pedido #<?= esc($pedido['id']) ?></h1>
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+        <h1 class="h2 text-info mb-3 mb-md-0">Detalle del Pedido #<?= esc($pedido['id']) ?></h1>
         <a href="<?= base_url('back/pedidos') ?>" class="btn btn-outline-info rounded-pill px-4">
             <i class="fas fa-arrow-left"></i> Volver a Pedidos
         </a>

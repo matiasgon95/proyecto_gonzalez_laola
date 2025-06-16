@@ -685,7 +685,420 @@ form .d-flex.justify-content-between.mb-3 {
         font-size: 1.5rem;
     }
     
-    .container-fluid.py-5 {
+    .container-fluid.py-4 {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+}
+
+/* Estilos para la agrupación de filtros y acciones */
+.card .card-body .btn-group {
+    box-shadow: 0 0 10px rgba(0, 195, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.card .card-body .btn-group .btn {
+    border-radius: 0;
+    border: 1px solid rgba(0, 195, 255, 0.3);
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+}
+
+.card .card-body .btn-group .btn:first-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.card .card-body .btn-group .btn:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.card .card-body .btn-group .btn.active {
+    background-color: rgba(0, 195, 255, 0.8);
+    color: #0d1117;
+    font-weight: 500;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Ajustes responsivos para los filtros y acciones */
+/* Estilos responsivos para las páginas de productos */
+@media (max-width: 768px) {
+    /* Ajustes para el título y botones en la vista de productos */
+    .container-fluid .d-flex.flex-column.flex-md-row h1 {
+        text-align: center;
+        width: 100%;
+    }
+    
+    .container-fluid .d-flex.flex-column.flex-md-row > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    
+    .container-fluid .d-flex.flex-column.flex-md-row > div .btn,
+    .container-fluid .d-flex.flex-column.flex-md-row > div button {
+        width: 100%;
+        max-width: 300px;
+        margin-bottom: 0.5rem;
+        justify-content: center;
+    }
+    
+    /* Ajustes para pantallas pequeñas pero no tan pequeñas */
+    .container-fluid .d-flex.flex-column.flex-md-row > div.d-flex.flex-column.flex-sm-row {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Ajustes adicionales para pantallas muy pequeñas */
+    .container-fluid.py-4 {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+    
+    .container-fluid .d-flex.flex-column.flex-md-row h1 {
+        font-size: 1.5rem;
+    }
+    
+    .container-fluid .d-flex.flex-column.flex-md-row > div .btn,
+    .container-fluid .d-flex.flex-column.flex-md-row > div button {
+        font-size: 0.85rem;
+        padding: 0.375rem 0.75rem;
+    }
+}
+    
+    .table .btn-sm {
+        padding: 0.1rem 0.2rem;
+        font-size: 0.65rem;
+    }
+    
+    .productos-table th.nombre-column,
+    .productos-table td:nth-child(1) {
+        width: 80px;
+    }
+    
+    .productos-table th.categoria-column,
+    .productos-table td:nth-child(2) {
+        width: 70px;
+    }
+    
+    .productos-table th.precio-column,
+    .productos-table td:nth-child(3) {
+        width: 60px;
+    }
+    
+    .productos-table th.stock-column,
+    .productos-table td:nth-child(4) {
+        width: 50px;
+    }
+    
+    .productos-table th.imagen-column,
+    .productos-table td:nth-child(5) {
+        width: 40px;
+    }
+    
+    .productos-table th.actions-column,
+    .productos-table td:nth-child(6) {
+        width: 60px;
+    }
+
+
+/* ==================== ESTILOS PARA LA TABLA DE PAPELERA ==================== */
+.table-warning {
+    background-color: rgba(255, 193, 7, 0.1);
+}
+
+/* Selector más específico para el encabezado de la tabla de papelera */
+.table.table-dark thead.table-warning th,
+.productos-papelera-table thead.table-warning th {
+    background: linear-gradient(45deg, #ffc107, #ffca2c) !important; /* Amarillo brillante con !important */
+    color: #000 !important;
+    text-align: center !important;
+    border-bottom: 2px solid #e0a800 !important;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Anular el efecto de brillo para los encabezados de la tabla de papelera */
+.table.table-dark thead.table-warning th::after,
+.productos-papelera-table thead.table-warning th::after {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent) !important;
+}
+
+.table-warning.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: rgba(224, 168, 0, 0.1);
+}
+
+.table-warning.table-hover > tbody > tr:hover {
+    background-color: rgba(224, 168, 0, 0.2) !important;
+}
+
+/* Estilos específicos para la tabla de papelera */
+.productos-papelera-table th.nombre-column,
+.productos-papelera-table td:nth-child(1) {
+    width: 120px;
+}
+
+.productos-papelera-table th.descripcion-column,
+.productos-papelera-table td:nth-child(2) {
+    width: 180px;
+}
+
+.productos-papelera-table th.categoria-column,
+.productos-papelera-table td:nth-child(3) {
+    width: 100px;
+}
+
+/* Centrar encabezados de precio y aumentar el ancho */
+.productos-papelera-table th.precio-column {
+    width: 85px;
+    text-align: center;
+}
+
+.productos-papelera-table td:nth-child(4),
+.productos-papelera-table td:nth-child(5) {
+    width: 85px;
+    text-align: left; /* Cambiar alineación a la izquierda para los valores */
+    white-space: nowrap;
+    overflow: visible;
+    min-width: 85px;
+    font-size: 0.8rem;
+}
+
+/* Centrar tanto los encabezados como las celdas de stock y mínimo */
+.productos-papelera-table th.stock-column {
+    width: 45px;
+    text-align: center;
+}
+
+.productos-papelera-table td:nth-child(6),
+.productos-papelera-table td:nth-child(7) {
+    width: 45px;
+    text-align: center;
+}
+
+.productos-papelera-table th.fecha-column,
+.productos-papelera-table td:nth-child(8),
+.productos-papelera-table td:nth-child(9) {
+    width: 80px;
+}
+
+.productos-papelera-table th.imagen-column,
+.productos-papelera-table td:nth-child(10) {
+    width: 60px;
+    text-align: center;
+}
+
+.productos-papelera-table th.actions-column,
+.productos-papelera-table td:nth-child(11) {
+    width: 70px;
+    text-align: center;
+}
+
+/* ==================== ESTILOS PARA LA TABLA DE CARRITO ==================== */
+.table-cart {
+    background-color: rgba(0, 188, 212, 0.05);
+}
+
+.table-cart thead th {
+    background: linear-gradient(45deg, #17a2b8, #138496);
+    color: #000;
+}
+
+/* ==================== ESTILOS PARA MODALES CON TABLAS ==================== */
+.modal-header.border-info {
+    border-bottom-color: var(--color-primary) !important;
+}
+
+/* Botones mejorados para la tabla de papelera */
+.productos-papelera-table .btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 5px; /* Espacio entre botones */
+}
+
+.productos-papelera-table .btn {
+    border-radius: 8px; /* Bordes más redondeados */
+    padding: 5px 8px; /* Más padding para botones más grandes */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Transición más elegante */
+    position: relative;
+    overflow: hidden;
+    margin: 2px;
+}
+
+.productos-papelera-table .btn:hover {
+    transform: translateY(-3px) scale(1.05); /* Efecto de elevación y ligero aumento */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+.productos-papelera-table .btn:active {
+    transform: translateY(1px); /* Efecto de presión */
+}
+
+.productos-papelera-table .btn-outline-success {
+    border-width: 2px; /* Borde más grueso */
+    background-color: rgba(25, 135, 84, 0.05); /* Fondo sutil */
+}
+
+.productos-papelera-table .btn-outline-danger {
+    border-width: 2px; /* Borde más grueso */
+    background-color: rgba(220, 53, 69, 0.05); /* Fondo sutil */
+}
+
+.productos-papelera-table .btn-outline-success {
+    border-width: 2px; /* Borde más grueso */
+    background-color: rgba(25, 135, 84, 0.05); /* Fondo sutil */
+}
+
+/* Efecto de brillo al pasar el cursor */
+.productos-papelera-table .btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.productos-papelera-table .btn:hover::before {
+    opacity: 1;
+    animation: shine 1.5s ease;
+}
+
+@keyframes shine {
+    from {
+        left: -50%;
+    }
+    to {
+        left: 150%;
+    }
+}
+
+/* Estilos para menús desplegables dentro de tablas */
+.table .dropdown-menu.table-dropdown {
+    position: absolute;
+    transform: none !important; /* Anular la transformación general */
+    left: auto !important;
+    right: 0 !important; /* Alinear a la derecha del botón */
+    min-width: 200px; /* Ancho mínimo para que quepa el contenido */
+    z-index: 1021; /* Asegurar que aparezca por encima de otros elementos */
+}
+
+/* Asegurar que los elementos del menú sean legibles */
+.table .dropdown-menu.table-dropdown .dropdown-item {
+    white-space: nowrap;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+}
+
+/* Mejorar la visualización en dispositivos móviles */
+@media (max-width: 576px) {
+    .table .dropdown-menu.table-dropdown {
+        min-width: 180px;
+        font-size: 0.8rem;
+    }
+    
+    .table .dropdown-menu.table-dropdown .dropdown-item {
+        padding: 6px 10px;
+    }
+}
+
+/* Espaciado para botones de acción en tablas */
+/* Estilos para el selector de acciones masivas y botón aplicar */
+.table-consultas .form-select,
+.table-consultas #btnAplicar,
+.card .table-consultas .form-select,
+.card .table-consultas #btnAplicar,
+div .d-flex .form-select,
+div .d-flex #btnAplicar {
+    font-size: 0.75rem !important;
+    padding: 0.05rem 0.4rem !important;
+    height: 24px !important;
+    line-height: 1 !important;
+    min-height: unset !important;
+    max-height: 24px !important;
+    box-sizing: border-box !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+.table-consultas .form-select,
+.card .table-consultas .form-select,
+div .d-flex .form-select {
+    max-width: 160px !important;
+    border-radius: 4px !important;
+    border: 1px solid rgba(0, 195, 255, 0.3) !important;
+    background-color: rgba(13, 17, 23, 0.95) !important;
+    color: #00c3ff !important;
+    box-shadow: 0 0 5px rgba(0, 195, 255, 0.1) !important;
+    appearance: none !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2300c3ff' class='bi bi-chevron-down' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 0.5rem center !important;
+    background-size: 10px 10px !important;
+    padding-right: 1.5rem !important;
+}
+
+.table-consultas #btnAplicar,
+.card .table-consultas #btnAplicar,
+div .d-flex #btnAplicar {
+    padding-left: 0.6rem !important;
+    padding-right: 0.6rem !important;
+    border-radius: 4px !important;
+    border: 1px solid rgba(0, 195, 255, 0.5) !important;
+    background: linear-gradient(to bottom, rgba(0, 195, 255, 0.8), rgba(0, 150, 200, 0.8)) !important;
+    color: #0d1117 !important;
+    font-weight: 500 !important;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Ajuste adicional para reducir el espacio entre elementos */
+.table-consultas .d-flex.justify-content-between.mb-3,
+.card .table-consultas .d-flex.justify-content-between.mb-3,
+form .d-flex.justify-content-between.mb-3 {
+    margin-bottom: 0.25rem !important;
+}
+
+/* Estilos responsivos para las páginas de consultas */
+@media (max-width: 768px) {
+    .card-body .display-5 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+    
+    .d-flex.flex-column.flex-md-row > div {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .d-flex.flex-column.flex-md-row > div .btn {
+        margin-bottom: 0.5rem;
+        width: 100%;
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-body .display-5 {
+        font-size: 1.5rem;
+    }
+    
+    .container-fluid.py-4 {
         padding-top: 1rem !important;
         padding-bottom: 1rem !important;
     }
@@ -752,6 +1165,18 @@ form .d-flex.justify-content-between.mb-3 {
     .card .card-body .form-check-label {
         font-size: 0.8rem;
     }
+    
+    /* Estilos adicionales para la vista de detalle de pedidos en modo responsive */
+    .container-fluid .d-flex.flex-column.flex-md-row h1.h2 {
+        text-align: center;
+        width: 100%;
+    }
+    
+    .container-fluid .d-flex.flex-column.flex-md-row .btn {
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto;
+    }
 }
 
 @media (max-width: 576px) {
@@ -766,5 +1191,44 @@ form .d-flex.justify-content-between.mb-3 {
     
     .card .card-body .btn-group .btn span {
         display: none;
+    }
+    
+    /* Ajustes adicionales para pantallas muy pequeñas */
+    .container.py-5 {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
+    
+    .container .card .d-flex.flex-column.flex-md-row h2 {
+        font-size: 1.5rem;
+    }
+    
+    .container .card .card-body {
+        padding: 1rem;
+    }
+}
+
+/* Estilos responsivos para la vista de pedidos */
+@media (max-width: 768px) {
+    .container-fluid .d-flex.flex-column.flex-md-row > a.btn {
+        align-self: flex-start;
+        margin-bottom: 1rem;
+    }
+    
+    .container-fluid .h2.text-info {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .container-fluid.py-4 {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+    
+    .container-fluid .h2.text-info {
+        font-size: 1.3rem;
     }
 }

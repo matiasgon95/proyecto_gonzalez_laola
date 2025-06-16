@@ -2,19 +2,19 @@
 <?= $this->section('contenedor') ?>
 
 <div class="container-fluid py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h2 text-info">Listado de Productos</h1>
-        <div>
-            <button type="button" class="btn btn-success text-black rounded-pill px-4 me-2" data-bs-toggle="modal" data-bs-target="#modalCrearCategoria">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+        <h1 class="h2 text-info mb-3 mb-md-0">Listado de Productos</h1>
+        <div class="d-flex flex-column flex-sm-row">
+            <button type="button" class="btn btn-success text-black rounded-pill px-4 me-sm-2 mb-2 mb-sm-0" data-bs-toggle="modal" data-bs-target="#modalCrearCategoria">
                 <i class="fas fa-tags"></i> Nueva Categoría
             </button>
-            <a href="<?= base_url('back/productos/crear') ?>" class="btn btn-info text-black rounded-pill px-4 me-2">
+            <a href="<?= base_url('back/productos/crear') ?>" class="btn btn-info text-black rounded-pill px-4 me-sm-2 mb-2 mb-sm-0">
                 <i class="fas fa-plus"></i> Nuevo Producto
             </a>
-            <a href="<?= base_url('back/productos/papelera') ?>" class="btn btn-warning text-black rounded-pill px-4 me-2">
+            <a href="<?= base_url('back/productos/papelera') ?>" class="btn btn-warning text-black rounded-pill px-4 me-sm-2 mb-2 mb-sm-0">
                 <i class="fas fa-trash-alt"></i> Papelera
             </a>
-            <a href="<?= base_url('back/dashboard') ?>" class="btn btn-outline-info rounded-pill px-4">
+            <a href="<?= base_url('back/dashboard') ?>" class="btn btn-outline-info rounded-pill px-4 mb-2 mb-sm-0">
                 <i class="fas fa-arrow-left"></i> Volver al Panel
             </a>
         </div>

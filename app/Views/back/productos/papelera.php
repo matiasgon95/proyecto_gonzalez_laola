@@ -2,8 +2,8 @@
 <?= $this->section('contenedor') ?>
 
 <div class="container-fluid py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h2 text-warning">Papelera de Productos Eliminados</h1>
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+        <h1 class="h2 text-warning mb-3 mb-md-0">Papelera de Productos Eliminados</h1>
         <a href="<?= base_url('back/productos') ?>" class="btn btn-info text-black rounded-pill px-4">
             <i class="fas fa-arrow-left"></i> Volver a Productos
         </a>

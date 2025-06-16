@@ -2,8 +2,8 @@
 <?= $this->section('contenedor') ?>
 
 <div class="container-fluid py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h2 text-info">Listado de Pedidos</h1>
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+        <h1 class="h2 text-info mb-3 mb-md-0">Listado de Pedidos</h1>
         <a href="<?= base_url('back/dashboard') ?>" class="btn btn-outline-info rounded-pill px-4">
             <i class="fas fa-arrow-left"></i> Volver al Panel
         </a>
@@ -18,7 +18,7 @@
 
     <div class="card shadow border border-info">
         <div class="card-body p-0 p-sm-2">
-            <div class="d-block d-md-none alert alert-info      py-2 mb-2 text-center small">
+            <div class="d-block d-md-none alert alert-info py-2 mb-2 text-center small">
                 <i class="fas fa-arrows-left-right me-1"></i> Desliza horizontalmente para ver toda la tabla
             </div>
             <div class="table-responsive">

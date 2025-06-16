@@ -4,8 +4,8 @@
 <div class="container py-5 bg-dark text-info">
     <div class="card bg-dark border-info mb-4">
         <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2>
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+                <h2 class="mb-3 mb-md-0">
                     <?php if(isset($tipo) && $tipo == 'clientes'): ?>
                         Listado de Clientes
                     <?php elseif(isset($tipo) && $tipo == 'administradores'): ?>
@@ -25,14 +25,14 @@
                 </div>
             <?php endif; ?>
             
-            <div class="mb-3 d-flex justify-content-between">
-                <div>
-                    <a href="<?= site_url('admin/usuarios') ?>" class="btn btn-info me-2">Todos</a>
-                    <a href="<?= site_url('admin/usuarios/clientes') ?>" class="btn btn-info me-2">Clientes</a>
-                    <a href="<?= site_url('admin/usuarios/administradores') ?>" class="btn btn-info">Administradores</a>
+            <div class="mb-3 d-flex flex-column flex-md-row justify-content-between">
+                <div class="d-flex flex-wrap mb-3 mb-md-0">
+                    <a href="<?= site_url('admin/usuarios') ?>" class="btn btn-info me-2 mb-2">Todos</a>
+                    <a href="<?= site_url('admin/usuarios/clientes') ?>" class="btn btn-info me-2 mb-2">Clientes</a>
+                    <a href="<?= site_url('admin/usuarios/administradores') ?>" class="btn btn-info mb-2">Administradores</a>
                 </div>
                 <div>
-                    <a href="<?= site_url('admin/usuarios/agregar/admin') ?>" class="btn btn-success">
+                    <a href="<?= site_url('admin/usuarios/agregar/admin') ?>" class="btn btn-success w-100 w-md-auto">
                         <i class="fas fa-user-plus"></i> Nuevo Administrador
                     </a>
                 </div>

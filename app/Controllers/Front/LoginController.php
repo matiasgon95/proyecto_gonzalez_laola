@@ -49,13 +49,19 @@ class LoginController extends Controller
         $usuario = $this->usuarioModel->obtener_por_email($email);
 
         if ($usuario) {
+            // Verificar si el usuario está dado de baja
+            if ($usuario->baja == 'si') {
+                $this->session->setFlashdata('error', 'Esta cuenta está bloqueada. Contacte con el administrador.');
+                return redirect()->to('front/login');
+            }
+            
             if (password_verify($pass, $usuario->pass)) {
                 // Guardar en sesión
                 $this->session->set([
                     'usuario_id'       => $usuario->id,
                     'usuario_email'    => $usuario->email,
                     'usuario_nombre'   => $usuario->nombre,
-                    'usuario_apellido' => $usuario->apellido, // Añadir el apellido a la sesión
+                    'usuario_apellido' => $usuario->apellido,
                     'perfil_id'        => $usuario->perfil_id,
                     'usuario_logueado' => true
                 ]);
@@ -73,7 +79,6 @@ class LoginController extends Controller
             $this->session->setFlashdata('error', 'El usuario no existe.');
             return redirect()->to('front/login');
         }
-        
     }
 
     public function logout()
