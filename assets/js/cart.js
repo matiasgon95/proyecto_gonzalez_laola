@@ -448,7 +448,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (this.value === 'envio_domicilio') {
                     datosEnvio.style.display = 'block';
                     // Simular costo de envío
-                    const costoEnvioValor = 500; // $500 de envío
+                    const costoEnvioValor = 10000; // $500 de envío
                     costoEnvioElement.textContent = '$' + costoEnvioValor.toFixed(2);
                     inputCostoEnvio.value = costoEnvioValor;
                     

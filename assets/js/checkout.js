@@ -15,6 +15,80 @@ document.addEventListener('DOMContentLoaded', function() {
         const submitBtn = document.getElementById('submitCheckoutBtn');
         let currentStep = 0;
         
+        // Elementos para el cálculo del envío
+        const metodoEntregaRadios = document.querySelectorAll('input[name="metodo_entrega"]');
+        const metodoPagoRadios = document.querySelectorAll('input[name="metodo_pago"]');
+        const efectivoRadio = document.getElementById('efectivo');
+        const datosEnvio = document.getElementById('datos_envio');
+        const subtotalValue = parseFloat(document.getElementById('subtotal_value').value);
+        const shippingCostDisplay = document.getElementById('shipping_cost_display');
+        const totalAmountDisplay = document.getElementById('total_amount_display');
+        const inputCostoEnvio = document.querySelector('input[name="costo_envio"]');
+        const inputTotal = document.querySelector('input[name="total"]');
+        
+        // Función para actualizar el costo de envío y total
+        function updateShippingAndTotal() {
+            const isEnvioDomicilio = document.getElementById('envio_domicilio').checked;
+            const shippingCost = isEnvioDomicilio ? 10000 : 0; // $10.000 de costo de envío
+            const total = subtotalValue + shippingCost;
+            
+            // Actualizar displays
+            shippingCostDisplay.textContent = '$' + shippingCost.toFixed(2).replace('.', ',');
+            totalAmountDisplay.textContent = '$' + total.toFixed(2).replace('.', ',');
+            
+            // Actualizar campos ocultos
+            inputCostoEnvio.value = shippingCost;
+            inputTotal.value = total;
+            
+            // Deshabilitar opción de efectivo si es envío a domicilio
+            if (isEnvioDomicilio) {
+                efectivoRadio.disabled = true;
+                // Si efectivo estaba seleccionado, cambiar a tarjeta
+                if (efectivoRadio.checked) {
+                    document.getElementById('tarjeta').checked = true;
+                    togglePaymentFields();
+                }
+                // Agregar mensaje visual
+                const efectivoLabel = document.querySelector('label[for="efectivo"]');
+                if (efectivoLabel) {
+                    efectivoLabel.classList.add('text-muted');
+                    efectivoLabel.title = 'No disponible para envío a domicilio';
+                }
+            } else {
+                efectivoRadio.disabled = false;
+                // Quitar mensaje visual
+                const efectivoLabel = document.querySelector('label[for="efectivo"]');
+                if (efectivoLabel) {
+                    efectivoLabel.classList.remove('text-muted');
+                    efectivoLabel.title = '';
+                }
+            }
+        }
+        
+        // Función para mostrar/ocultar campos de pago
+        function togglePaymentFields() {
+            const selectedMethod = document.querySelector('input[name="metodo_pago"]:checked').value;
+            const datosTarjeta = document.getElementById('datos_tarjeta');
+            const datosTransferencia = document.getElementById('datos_transferencia');
+            const datosEfectivo = document.getElementById('datos_efectivo');
+            
+            datosTarjeta.style.display = 'none';
+            datosTransferencia.style.display = 'none';
+            datosEfectivo.style.display = 'none';
+            
+            switch (selectedMethod) {
+                case 'tarjeta':
+                    datosTarjeta.style.display = 'block';
+                    break;
+                case 'transferencia':
+                    datosTransferencia.style.display = 'block';
+                    break;
+                case 'efectivo':
+                    datosEfectivo.style.display = 'block';
+                    break;
+            }
+        }
+        
         // Función para actualizar el paso actual
         function updateStep(newStep) {
             // Ocultar todos los pasos primero
@@ -62,6 +136,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Usar la implementación local
                     localUpdateSummary();
                 }
+                // Asegurarse de que el costo de envío y total estén actualizados
+                updateShippingAndTotal();
             }
         }
         
@@ -211,5 +287,35 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }
-    }, 500); // Reducido a 500ms para una carga más rápida
+        
+        // Event listeners para los métodos de entrega
+        metodoEntregaRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.value === 'envio_domicilio') {
+                    datosEnvio.style.display = 'block';
+                } else {
+                    datosEnvio.style.display = 'none';
+                }
+                // Llamar a updateShippingAndTotal inmediatamente después del cambio
+                updateShippingAndTotal();
+            });
+        });
+        
+        // Event listeners para los métodos de pago
+        metodoPagoRadios.forEach(radio => {
+            radio.addEventListener('change', togglePaymentFields);
+        });
+        
+        // Inicializar campos de pago y costo de envío
+        togglePaymentFields();
+        updateShippingAndTotal();
+        
+        // Forzar una actualización inicial para asegurar que el estado sea correcto
+        const envioDomicilioRadio = document.getElementById('envio_domicilio');
+        if (envioDomicilioRadio && envioDomicilioRadio.checked) {
+            datosEnvio.style.display = 'block';
+            updateShippingAndTotal();
+        }
+        
+    }, 1000); // Reducido a 1 segundo para una carga más rápida
 });

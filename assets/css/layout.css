@@ -365,3 +365,80 @@ footer .social-icons a:hover {
         z-index: 1050;
     }
 }
+
+/* Estilos para el botón de búsqueda en móvil */
+/* Estilos para los iconos de navegación */
+.nav-icon-link {
+    background: transparent;
+    border: none;
+    color: var(--color-primary);
+    padding: 5px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.nav-icon-link:hover {
+    background-color: rgba(0, 229, 255, 0.1);
+    transform: scale(1.1);
+    color: var(--color-text);
+}
+
+.nav-icon-link i {
+    font-size: 1.5rem;
+}
+
+#searchToggleBtn {
+    background: transparent;
+    border: none;
+    color: var(--color-primary);
+    padding: 5px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+#searchToggleBtn:hover {
+    background-color: rgba(0, 229, 255, 0.1);
+    transform: scale(1.1);
+}
+
+/* Contenedor de búsqueda móvil */
+.mobile-search-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: rgba(10, 10, 10, 0.95);
+    padding: 10px 0;
+    z-index: 1050;
+    border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.mobile-search-container .input-group {
+    display: flex;
+    align-items: center;
+}
+
+.mobile-search-container .autocomplete-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #1a1a1a;
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 0 0 8px 8px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1060;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}

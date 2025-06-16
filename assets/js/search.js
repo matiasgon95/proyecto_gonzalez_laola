@@ -119,3 +119,43 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// Funcionalidad para el botón de búsqueda en móvil
+document.addEventListener('DOMContentLoaded', function() {
+    const searchToggleBtn = document.getElementById('searchToggleBtn');
+    const mobileSearchContainer = document.getElementById('mobileSearchContainer');
+    const closeSearchBtn = document.getElementById('closeSearchBtn');
+    
+    if (searchToggleBtn && mobileSearchContainer) {
+        // Mostrar el buscador móvil al hacer clic en el botón de lupa
+        searchToggleBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            mobileSearchContainer.classList.remove('d-none');
+            mobileSearchContainer.classList.add('d-block');
+            // Enfocar el campo de búsqueda
+            const searchInput = mobileSearchContainer.querySelector('.search-autocomplete');
+            if (searchInput) {
+                searchInput.focus();
+            }
+        });
+        
+        // Cerrar el buscador móvil al hacer clic en el botón de cerrar
+        if (closeSearchBtn) {
+            closeSearchBtn.addEventListener('click', function() {
+                mobileSearchContainer.classList.remove('d-block');
+                mobileSearchContainer.classList.add('d-none');
+            });
+        }
+        
+        // Cerrar el buscador móvil al hacer clic fuera de él
+        document.addEventListener('click', function(e) {
+            if (!mobileSearchContainer.contains(e.target) && 
+                e.target !== searchToggleBtn && 
+                !searchToggleBtn.contains(e.target) &&
+                mobileSearchContainer.classList.contains('d-block')) {
+                mobileSearchContainer.classList.remove('d-block');
+                mobileSearchContainer.classList.add('d-none');
+            }
+        });
+    }
+});

@@ -12,6 +12,11 @@
 
       <!-- Botón hamburguesa estilizado - MODIFICADO -->
       <div class="d-flex align-items-center gap-3 order-lg-3">
+        <!-- Botón de búsqueda para móviles -->
+        <button id="searchToggleBtn" class="nav-icon-link d-lg-none">
+          <i class="bi bi-search fs-4"></i>
+        </button>
+        
         <!-- Iconos usuario / carrito con efectos -->
         <div class="iconos-nav d-flex align-items-center">
           <div class="dropdown dropdown-hover">
@@ -62,11 +67,27 @@
         </div>
       </form>
     </div>
+    
+    <!-- Buscador móvil flotante (inicialmente oculto) -->
+    <div id="mobileSearchContainer" class="mobile-search-container d-none">
+      <form class="buscador-nav w-100 px-3" action="<?= base_url('producto/buscar'); ?>" method="get">
+        <div class="input-group">
+          <input type="text" class="form-control form-control-sm search-autocomplete" placeholder="Buscar productos..." name="q" autocomplete="off">
+          <button class="btn btn-outline-info btn-sm" type="submit">
+            <i class="bi bi-search"></i>
+          </button>
+          <button type="button" id="closeSearchBtn" class="btn btn-outline-danger btn-sm">
+            <i class="bi bi-x"></i>
+          </button>
+          <div class="autocomplete-results"></div>
+        </div>
+      </form>
+    </div>
 
     <!-- Segunda fila: Enlaces + Buscador (en responsive) -->
     <div class="collapse navbar-collapse justify-content-center w-100" id="navbarSupportedContent">
       
-      <!-- Buscador móvil mejorado -->
+      <!-- Buscador móvil mejorado (dentro del menú hamburguesa) -->
       <form class="buscador-nav w-100 my-3 px-3 d-lg-none" action="<?= base_url('producto/buscar'); ?>" method="get">
         <div class="input-group">
           <input type="text" class="form-control form-control-sm search-autocomplete" placeholder="Buscar productos..." name="q" autocomplete="off">
