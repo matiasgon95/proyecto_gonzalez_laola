@@ -113,4 +113,37 @@ class ConsultaController extends BaseController
         
         return $this->response->setJSON(['consulta' => $consulta]);
     }
+    
+    // Método para acciones masivas en consultas archivadas
+    public function accionMasivaArchivadas()
+    {
+        $consultas = $this->request->getPost('consultas');
+        $accion = $this->request->getPost('accion');
+        
+        // Verificar que se hayan seleccionado consultas
+        if (empty($consultas)) {
+            return redirect()->to('back/consultas/archivadas')->with('error', 'No se seleccionaron consultas');
+        }
+        
+        // Verificar que la acción sea válida
+        $acciones_validas = ['pendiente', 'eliminar'];
+        if (!in_array($accion, $acciones_validas)) {
+            return redirect()->to('back/consultas/archivadas')->with('error', 'Acción no válida');
+        }
+        
+        // Procesar según la acción seleccionada
+        if ($accion === 'eliminar') {
+            // Eliminar las consultas seleccionadas
+            $this->consultaModel->delete($consultas);
+            $mensaje = 'Consultas eliminadas correctamente';
+        } else {
+            // Cambiar el estado de las consultas seleccionadas
+            foreach ($consultas as $id) {
+                $this->consultaModel->cambiarEstado($id, $accion);
+            }
+            $mensaje = 'Consultas restauradas correctamente';
+        }
+        
+        return redirect()->to('back/consultas/archivadas')->with('mensaje', $mensaje);
+    }
 }

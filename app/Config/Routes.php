@@ -74,7 +74,7 @@ $routes->group('back', ['filter' => 'auth:1'], function($routes) {
     $routes->get('consultas/eliminar/(:num)', 'Admin\ConsultaController::eliminar/$1');
     $routes->post('consultas/accionMasiva', 'Admin\ConsultaController::accionMasiva');
     $routes->get('consultas/archivadas', 'Admin\ConsultaController::archivadas');
-    $routes->get('consultas/archivadas', 'Admin\ConsultaController::archivadas'); // Nueva ruta para consultas archivadas
+    $routes->post('consultas/accionMasivaArchivadas', 'Admin\ConsultaController::accionMasivaArchivadas'); // Agregar esta línea
     $routes->get('consultas/ver/(:num)', 'Admin\ConsultaController::ver/$1');
     $routes->get('consultas/cambiarEstado/(:num)/(:segment)', 'Admin\ConsultaController::cambiarEstado/$1/$2');
     $routes->get('consultas/eliminar/(:num)', 'Admin\ConsultaController::eliminar/$1');

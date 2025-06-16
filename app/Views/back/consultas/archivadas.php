@@ -31,62 +31,87 @@
                             </div>
                         <?php endif; ?>
                         
-                        <div class="table-responsive">
-                            <table class="table table-dark table-hover table-bordered table-consultas">
-                                <thead class="bg-info text-dark">
-                                    <tr>
-                                        <th class="text-center">ID</th>
-                                        <th class="text-center">Nombre</th>
-                                        <th class="text-center">Email</th>
-                                        <th class="text-center">Asunto</th>
-                                        <th class="text-center">Fecha</th>
-                                        <th class="text-center">Estado</th>
-                                        <th class="text-center">Tipo</th>
-                                        <th class="text-center">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php if (empty($consultas)): ?>
+                        <!-- Formulario para acciones masivas -->
+                        <form id="formAccionMasiva" action="<?= base_url('back/consultas/accionMasivaArchivadas') ?>" method="post">
+                            <?= csrf_field() ?>
+                            <div class="d-flex justify-content-between mb-3">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="seleccionarTodos">
+                                    <label class="form-check-label" for="seleccionarTodos">Seleccionar todos</label>
+                                </div>
+                                <div class="d-flex">
+                                    <select name="accion" class="form-select me-2" required>
+                                        <option value="">Seleccionar acción</option>
+                                        <option value="pendiente">Restaurar como pendiente</option>
+                                        <option value="eliminar">Eliminar</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-info" id="btnAplicar" disabled>
+                                        <i class="fas fa-check me-1"></i>Aplicar
+                                    </button>
+                                </div>
+                            </div>
+                        
+                            <div class="table-responsive">
+                                <table class="table table-dark table-hover table-bordered table-consultas">
+                                    <thead class="bg-info text-dark">
                                         <tr>
-                                            <td colspan="8" class="text-center">No hay consultas archivadas</td>
+                                            <th class="text-center" style="width: 40px;">Sel</th>
+                                            <th class="text-center">ID</th>
+                                            <th class="text-center">Nombre</th>
+                                            <th class="text-center">Email</th>
+                                            <th class="text-center">Asunto</th>
+                                            <th class="text-center">Fecha</th>
+                                            <th class="text-center">Estado</th>
+                                            <th class="text-center">Tipo</th>
+                                            <th class="text-center">Acciones</th>
                                         </tr>
-                                    <?php else: ?>
-                                        <?php foreach ($consultas as $consulta): ?>
+                                    </thead>
+                                    <tbody>
+                                        <?php if (empty($consultas)): ?>
                                             <tr>
-                                                <td class="text-center"><?= $consulta->id ?></td>
-                                                <td><?= $consulta->nombre ?> <?= $consulta->apellido ?></td>
-                                                <td><?= $consulta->email ?></td>
-                                                <td><?= $consulta->asunto ?></td>
-                                                <td class="text-center"><?= date('d/m/Y H:i', strtotime($consulta->fecha_creacion)) ?></td>
-                                                <td class="text-center">
-                                                    <span class="badge bg-secondary">Archivada</span>
-                                                </td>
-                                                <td class="text-center">
-                                                    <?php if ($consulta->es_registrado == 'si'): ?>
-                                                        <span class="badge bg-primary">Registrado</span>
-                                                    <?php else: ?>
-                                                        <span class="badge bg-info text-dark">Visitante</span>
-                                                    <?php endif; ?>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="btn-group">
-                                                        <button type="button" class="btn btn-info btn-sm ver-consulta" data-id="<?= $consulta->id ?>" title="Ver detalles">
-                                                            <i class="fas fa-eye"></i>
-                                                        </button>
-                                                        <a href="<?= base_url('back/consultas/cambiarEstado/' . $consulta->id . '/pendiente') ?>" class="btn btn-warning btn-sm" title="Restaurar como pendiente">
-                                                            <i class="fas fa-undo"></i>
-                                                        </a>
-                                                        <button type="button" class="btn btn-danger btn-sm eliminar-consulta" data-id="<?= $consulta->id ?>" title="Eliminar">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </button>
-                                                    </div>
-                                                </td>
+                                                <td colspan="9" class="text-center">No hay consultas archivadas</td>
                                             </tr>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
-                                </tbody>
-                            </table>
-                        </div>
+                                        <?php else: ?>
+                                            <?php foreach ($consultas as $consulta): ?>
+                                                <tr>
+                                                    <td class="text-center">
+                                                        <input class="form-check-input consulta-check" type="checkbox" name="consultas[]" value="<?= $consulta->id ?>">
+                                                    </td>
+                                                    <td class="text-center"><?= $consulta->id ?></td>
+                                                    <td><?= $consulta->nombre ?> <?= $consulta->apellido ?></td>
+                                                    <td><?= $consulta->email ?></td>
+                                                    <td><?= $consulta->asunto ?></td>
+                                                    <td class="text-center"><?= date('d/m/Y H:i', strtotime($consulta->fecha_creacion)) ?></td>
+                                                    <td class="text-center">
+                                                        <span class="badge bg-secondary">Archivada</span>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <?php if ($consulta->es_registrado == 'si'): ?>
+                                                            <span class="badge bg-primary">Registrado</span>
+                                                        <?php else: ?>
+                                                            <span class="badge bg-info text-dark">Visitante</span>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-info btn-sm ver-consulta" data-id="<?= $consulta->id ?>" title="Ver detalles">
+                                                                <i class="fas fa-eye"></i>
+                                                            </button>
+                                                            <a href="<?= base_url('back/consultas/cambiarEstado/' . $consulta->id . '/pendiente') ?>" class="btn btn-warning btn-sm" title="Restaurar como pendiente">
+                                                                <i class="fas fa-undo"></i>
+                                                            </a>
+                                                            <button type="button" class="btn btn-danger btn-sm eliminar-consulta" data-id="<?= $consulta->id ?>" title="Eliminar">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
