@@ -100,18 +100,18 @@
                                                     </td>
                                                     <td class="text-center">
                                                         <div class="btn-group">
-                                                            <a href="<?= base_url('back/consultas/ver/' . $consulta->id) ?>" class="btn btn-info btn-sm" title="Ver detalles">
+                                                            <button type="button" class="btn btn-info btn-sm ver-consulta" data-id="<?= $consulta->id ?>" title="Ver detalles">
                                                                 <i class="fas fa-eye"></i>
-                                                            </a>
+                                                            </button>
                                                             <a href="<?= base_url('back/consultas/cambiarEstado/' . $consulta->id . '/respondida') ?>" class="btn btn-success btn-sm" title="Marcar como respondida">
                                                                 <i class="fas fa-check"></i>
                                                             </a>
                                                             <a href="<?= base_url('back/consultas/cambiarEstado/' . $consulta->id . '/archivada') ?>" class="btn btn-secondary btn-sm" title="Archivar">
                                                                 <i class="fas fa-archive"></i>
                                                             </a>
-                                                            <a href="<?= base_url('back/consultas/eliminar/' . $consulta->id) ?>" class="btn btn-danger btn-sm" title="Eliminar" onclick="return confirm('¿Estás seguro de eliminar esta consulta?')">
+                                                            <button type="button" class="btn btn-danger btn-sm eliminar-consulta" data-id="<?= $consulta->id ?>" title="Eliminar">
                                                                 <i class="fas fa-trash-alt"></i>
-                                                            </a>
+                                                            </button>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -123,6 +123,74 @@
                         </form>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para ver detalle de consulta -->
+<div class="modal fade" id="modalConsulta" tabindex="-1" aria-labelledby="modalConsultaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content bg-dark text-info">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalConsultaLabel">Detalle de Consulta</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p><strong>Nombre:</strong> <span id="consulta-nombre"></span></p>
+                        <p><strong>Email:</strong> <span id="consulta-email"></span></p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <p><strong>Asunto:</strong> <span id="consulta-asunto"></span></p>
+                        <p><strong>Tipo:</strong> <span id="consulta-tipo"></span></p>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p><strong>Fecha:</strong> <span id="consulta-fecha"></span></p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <p><strong>Estado:</strong> <span id="consulta-estado"></span></p>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <p class="text-center"><strong>Mensaje:</strong></p>
+                        <div class="p-3 bg-dark border border-info rounded" id="consulta-mensaje"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between mt-3" id="consulta-acciones">
+                            <!-- Aquí se insertarán los botones de acción dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para confirmar eliminación de consulta -->
+<div class="modal fade" id="modalConfirmarEliminar" tabindex="-1" aria-labelledby="modalConfirmarEliminarLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-dark text-info">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalConfirmarEliminarLabel">Confirmar Eliminación</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p>¿Estás seguro de que deseas eliminar esta consulta?</p>
+                <p class="text-danger">Esta acción no se puede deshacer.</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <a href="#" id="btn-confirmar-eliminar" class="btn btn-danger">Eliminar</a>
             </div>
         </div>
     </div>

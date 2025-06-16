@@ -29,29 +29,173 @@ function initConsultasSelection() {
     
     // Evento para cada checkbox individual
     checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            verificarSeleccionados();
-            
-            // Actualizar el estado del checkbox "seleccionar todos"
-            const todosMarcados = Array.from(checkboxes).every(cb => cb.checked);
-            seleccionarTodos.checked = todosMarcados;
-        });
+        checkbox.addEventListener('change', verificarSeleccionados);
     });
     
-    // Confirmación antes de enviar el formulario
+    // Confirmar antes de enviar el formulario si la acción es eliminar
     formAccionMasiva.addEventListener('submit', function(e) {
         const accion = document.querySelector('select[name="accion"]').value;
-        const seleccionados = document.querySelectorAll('.consulta-check:checked').length;
-        
         if (accion === 'eliminar') {
-            if (!confirm(`¿Estás seguro de eliminar ${seleccionados} consulta(s)?`)) {
+            if (!confirm('¿Estás seguro de eliminar las consultas seleccionadas? Esta acción no se puede deshacer.')) {
                 e.preventDefault();
             }
         }
     });
 }
 
+// Función para formatear la fecha
+function formatearFecha(fechaStr) {
+    const fecha = new Date(fechaStr);
+    return fecha.toLocaleString('es-ES', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+}
+
+// Función para formatear el estado
+function formatearEstado(estado) {
+    switch(estado) {
+        case 'pendiente':
+            return '<span class="badge bg-warning text-dark">Pendiente</span>';
+        case 'respondida':
+            return '<span class="badge bg-success">Respondida</span>';
+        case 'archivada':
+            return '<span class="badge bg-secondary">Archivada</span>';
+        default:
+            return '<span class="badge bg-info">Desconocido</span>';
+    }
+}
+
+// Función para formatear el tipo de usuario
+function formatearTipoUsuario(esRegistrado) {
+    if (esRegistrado === 'si') {
+        return '<span class="badge bg-primary">Cliente Registrado</span>';
+    } else {
+        return '<span class="badge bg-info text-dark">Visitante</span>';
+    }
+}
+
+// Función para inicializar los modales de consultas
+function initConsultasModals() {
+    // Botones para ver detalle de consulta
+    const botonesVerConsulta = document.querySelectorAll('.ver-consulta');
+    const modalConsulta = document.getElementById('modalConsulta');
+    
+    // Modal de confirmación para eliminar
+    const modalConfirmarEliminar = document.getElementById('modalConfirmarEliminar');
+    const botonesEliminarConsulta = document.querySelectorAll('.eliminar-consulta');
+    const btnConfirmarEliminar = document.getElementById('btn-confirmar-eliminar');
+    
+    // Si no existen los elementos, no ejecutar el código
+    if (!modalConsulta || !botonesVerConsulta.length) return;
+    
+    // Inicializar modales con Bootstrap
+    const modalConsultaBS = new bootstrap.Modal(modalConsulta);
+    const modalConfirmarEliminarBS = modalConfirmarEliminar ? new bootstrap.Modal(modalConfirmarEliminar) : null;
+    
+    // Evento para ver detalle de consulta
+    botonesVerConsulta.forEach(boton => {
+        boton.addEventListener('click', function() {
+            const consultaId = this.getAttribute('data-id');
+            
+            // Usar la variable global baseUrl definida en el layout
+            fetch(`${baseUrl}/back/consultas/getDetalleConsulta/${consultaId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+                        return;
+                    }
+                    
+                    // Llenar el modal con los datos
+                    document.getElementById('consulta-nombre').textContent = `${data.consulta.nombre} ${data.consulta.apellido}`;
+                    document.getElementById('consulta-email').textContent = data.consulta.email;
+                    document.getElementById('consulta-asunto').textContent = data.consulta.asunto;
+                    document.getElementById('consulta-tipo').innerHTML = formatearTipoUsuario(data.consulta.es_registrado);
+                    document.getElementById('consulta-estado').innerHTML = formatearEstado(data.consulta.estado);
+                    document.getElementById('consulta-mensaje').innerHTML = data.consulta.mensaje.replace(/\n/g, '<br>');
+                    document.getElementById('consulta-fecha').textContent = formatearFecha(data.consulta.fecha_creacion);
+                    
+                    // Generar botones de acción según el estado
+                    const accionesContainer = document.getElementById('consulta-acciones');
+                    accionesContainer.innerHTML = '';
+                    
+                    // Botones según el estado
+                    if (data.consulta.estado === 'pendiente' || data.consulta.estado === 'respondida') {
+                        accionesContainer.innerHTML += `
+                            <a href="${baseUrl}/back/consultas/cambiarEstado/${data.consulta.id}/archivada" class="btn btn-secondary">
+                                <i class="fas fa-archive me-2"></i>Archivar
+                            </a>
+                        `;
+                    }
+                    
+                    if (data.consulta.estado === 'pendiente') {
+                        accionesContainer.innerHTML += `
+                            <a href="${baseUrl}/back/consultas/cambiarEstado/${data.consulta.id}/respondida" class="btn btn-success">
+                                <i class="fas fa-check me-2"></i>Marcar como respondida
+                            </a>
+                        `;
+                    }
+                    
+                    if (data.consulta.estado === 'archivada') {
+                        accionesContainer.innerHTML += `
+                            <a href="${baseUrl}/back/consultas/cambiarEstado/${data.consulta.id}/pendiente" class="btn btn-warning">
+                                <i class="fas fa-undo me-2"></i>Restaurar como pendiente
+                            </a>
+                        `;
+                    }
+                    
+                    // Botón de eliminar siempre presente
+                    accionesContainer.innerHTML += `
+                        <button type="button" class="btn btn-danger eliminar-consulta-modal" data-id="${data.consulta.id}">
+                            <i class="fas fa-trash-alt me-2"></i>Eliminar
+                        </button>
+                    `;
+                    
+                    // Añadir evento al botón de eliminar dentro del modal
+                    const btnEliminarModal = accionesContainer.querySelector('.eliminar-consulta-modal');
+                    if (btnEliminarModal) {
+                        btnEliminarModal.addEventListener('click', function() {
+                            const consultaId = this.getAttribute('data-id');
+                            modalConsultaBS.hide();
+                            if (modalConfirmarEliminarBS) {
+                                btnConfirmarEliminar.href = `${baseUrl}/back/consultas/eliminar/${consultaId}`;
+                                modalConfirmarEliminarBS.show();
+                            } else {
+                                if (confirm('¿Estás seguro de eliminar esta consulta? Esta acción no se puede deshacer.')) {
+                                    window.location.href = `${baseUrl}/back/consultas/eliminar/${consultaId}`;
+                                }
+                            }
+                        });
+                    }
+                    
+                    // Mostrar el modal
+                    modalConsultaBS.show();
+                })
+                .catch(error => {
+                    console.error('Error al obtener los detalles de la consulta:', error);
+                    alert('Error al cargar los detalles de la consulta');
+                });
+        });
+    });
+    
+    // Evento para eliminar consulta
+    if (botonesEliminarConsulta.length && modalConfirmarEliminarBS && btnConfirmarEliminar) {
+        botonesEliminarConsulta.forEach(boton => {
+            boton.addEventListener('click', function() {
+                const consultaId = this.getAttribute('data-id');
+                btnConfirmarEliminar.href = `${baseUrl}/back/consultas/eliminar/${consultaId}`;
+                modalConfirmarEliminarBS.show();
+            });
+        });
+    }
+}
+
 // Inicializar cuando el DOM esté cargado
 document.addEventListener('DOMContentLoaded', function() {
     initConsultasSelection();
+    initConsultasModals();
 });

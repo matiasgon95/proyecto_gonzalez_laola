@@ -66,8 +66,14 @@ $routes->group('back', ['filter' => 'auth:1'], function($routes) {
     // Ruta para estadísticas
     $routes->get('estadisticas', 'Admin\PanelController::estadisticas');
     
-    // Rutas para gestión de consultas
+    // Rutas para consultas
     $routes->get('consultas', 'Admin\ConsultaController::index');
+    $routes->get('consultas/ver/(:num)', 'Admin\ConsultaController::ver/$1');
+    $routes->get('consultas/getDetalleConsulta/(:num)', 'Admin\ConsultaController::getDetalleConsulta/$1'); // Nueva ruta
+    $routes->get('consultas/cambiarEstado/(:num)/(:alpha)', 'Admin\ConsultaController::cambiarEstado/$1/$2');
+    $routes->get('consultas/eliminar/(:num)', 'Admin\ConsultaController::eliminar/$1');
+    $routes->post('consultas/accionMasiva', 'Admin\ConsultaController::accionMasiva');
+    $routes->get('consultas/archivadas', 'Admin\ConsultaController::archivadas');
     $routes->get('consultas/archivadas', 'Admin\ConsultaController::archivadas'); // Nueva ruta para consultas archivadas
     $routes->get('consultas/ver/(:num)', 'Admin\ConsultaController::ver/$1');
     $routes->get('consultas/cambiarEstado/(:num)/(:segment)', 'Admin\ConsultaController::cambiarEstado/$1/$2');

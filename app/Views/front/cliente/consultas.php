@@ -2,85 +2,84 @@
 
 <?= $this->section('contenedor'); ?>
 
-<div class="container py-5">
-    <div class="row mb-4">
-        <div class="col-md-12">
-            <div class="card bg-dark text-info">
-                <div class="card-body">
-                    <h1 class="card-title"><?= $titulo ?></h1>
-                    <p class="card-text">Aquí puedes ver todas tus consultas realizadas.</p>
-                    <a href="<?= base_url('front/cliente/dashboard') ?>" class="btn btn-outline-info">
-                        <i class="fas fa-arrow-left me-2"></i>Volver al Panel
-                    </a>
-                    <a href="<?= base_url('front/cliente/nueva_consulta') ?>" class="btn btn-info ms-2">
-                        <i class="fas fa-plus me-2"></i>Nueva Consulta
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <?php if (session()->getFlashdata('mensaje')) : ?>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <?= session()->getFlashdata('mensaje') ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
-    
-    <?php if (session()->getFlashdata('error')) : ?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <?= session()->getFlashdata('error') ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
-    
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card bg-dark text-info">
-                <div class="card-body">
-                    <?php if (empty($consultas)) : ?>
-                        <div class="alert alert-info text-center">
-                            No tienes consultas realizadas. Puedes crear una nueva desde la sección de contacto.
+<div class="container-fluid py-5 bg-dark text-info">
+    <div class="container-fluid px-4">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="card bg-dark border-info mb-4">
+                    <div class="card-body text-info">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h1 class="display-5"><?= $titulo ?></h1>
+                            <div>
+                                <a href="<?= base_url('front/cliente/nueva_consulta') ?>" class="btn btn-info rounded-pill px-4 me-2">
+                                    <i class="fas fa-plus"></i> Nueva Consulta
+                                </a>
+                                <a href="<?= base_url('front/cliente/dashboard') ?>" class="btn btn-outline-info rounded-pill px-4">
+                                    <i class="fas fa-arrow-left"></i> Volver al Panel
+                                </a>
+                            </div>
                         </div>
-                    <?php else : ?>
+                        
+                        <?php if (session()->getFlashdata('mensaje')) : ?>
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <?= session()->getFlashdata('mensaje') ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php endif; ?>
+                        
+                        <?php if (session()->getFlashdata('error')) : ?>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <?= session()->getFlashdata('error') ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        <?php endif; ?>
+                        
                         <div class="table-responsive">
-                            <table class="table table-dark table-hover table-bordered text-info text-center">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center">Fecha</th>
-                                        <th class="text-center">Asunto</th>
-                                        <th class="text-center">Estado</th>
-                                        <th class="text-center">Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($consultas as $consulta) : ?>
+                            <?php if (empty($consultas)) : ?>
+                                <div class="alert alert-info text-center">
+                                    No tienes consultas realizadas. Puedes crear una nueva desde la sección de contacto.
+                                </div>
+                            <?php else : ?>
+                                <table class="table table-dark table-hover table-bordered table-consultas">
+                                    <thead class="bg-info text-dark">
                                         <tr>
-                                            <td class="text-center align-middle"><?= date('d/m/Y H:i', strtotime($consulta->fecha_creacion)) ?></td>
-                                            <td class="text-center align-middle"><?= $consulta->asunto ?></td>
-                                            <td class="text-center align-middle">
-                                                <?php if ($consulta->estado == 'pendiente') : ?>
-                                                    <span class="badge bg-warning text-dark">Pendiente</span>
-                                                <?php elseif ($consulta->estado == 'respondida') : ?>
-                                                    <span class="badge bg-success">Respondida</span>
-                                                <?php elseif ($consulta->estado == 'archivada') : ?>
-                                                    <span class="badge bg-secondary">Archivada</span>
-                                                <?php endif; ?>
-                                            </td>
-                                            <td class="text-center align-middle">
-                                                <button type="button" class="btn btn-sm btn-info ver-consulta" data-id="<?= $consulta->id ?>">
-                                                    <i class="fas fa-eye"></i> Ver
-                                                </button>
-                                                <button type="button" class="btn btn-sm btn-danger eliminar-consulta" data-id="<?= $consulta->id ?>">
-                                                    <i class="fas fa-trash"></i> Eliminar
-                                                </button>
-                                            </td>
+                                            <th class="text-center">Fecha</th>
+                                            <th class="text-center">Asunto</th>
+                                            <th class="text-center">Estado</th>
+                                            <th class="text-center">Acciones</th>
                                         </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($consultas as $consulta) : ?>
+                                            <tr>
+                                                <td class="text-center align-middle"><?= date('d/m/Y H:i', strtotime($consulta->fecha_creacion)) ?></td>
+                                                <td class="align-middle"><?= $consulta->asunto ?></td>
+                                                <td class="text-center align-middle">
+                                                    <?php if ($consulta->estado == 'pendiente') : ?>
+                                                        <span class="badge bg-warning text-dark">Pendiente</span>
+                                                    <?php elseif ($consulta->estado == 'respondida') : ?>
+                                                        <span class="badge bg-success">Respondida</span>
+                                                    <?php elseif ($consulta->estado == 'archivada') : ?>
+                                                        <span class="badge bg-secondary">Archivada</span>
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td class="text-center align-middle">
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-info btn-sm ver-consulta" data-id="<?= $consulta->id ?>" title="Ver detalles">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <button type="button" class="btn btn-danger btn-sm eliminar-consulta" data-id="<?= $consulta->id ?>" title="Eliminar">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            <?php endif; ?>
                         </div>
-                    <?php endif; ?>
+                    </div>
                 </div>
             </div>
         </div>

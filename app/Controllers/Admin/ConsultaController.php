@@ -102,4 +102,15 @@ class ConsultaController extends BaseController
         
         return view('back/consultas/archivadas', $data);
     }
+    
+    public function getDetalleConsulta($id)
+    {
+        $consulta = $this->consultaModel->find($id);
+        
+        if (!$consulta) {
+            return $this->response->setJSON(['error' => 'Consulta no encontrada']);
+        }
+        
+        return $this->response->setJSON(['consulta' => $consulta]);
+    }
 }
