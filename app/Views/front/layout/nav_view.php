@@ -87,17 +87,6 @@
     <!-- Segunda fila: Enlaces + Buscador (en responsive) -->
     <div class="collapse navbar-collapse justify-content-center w-100" id="navbarSupportedContent">
       
-      <!-- Buscador móvil mejorado (dentro del menú hamburguesa) -->
-      <form class="buscador-nav w-100 my-3 px-3 d-lg-none" action="<?= base_url('producto/buscar'); ?>" method="get">
-        <div class="input-group">
-          <input type="text" class="form-control form-control-sm search-autocomplete" placeholder="Buscar productos..." name="q" autocomplete="off">
-          <button class="btn btn-outline-info btn-sm" type="submit">
-            <i class="bi bi-search"></i>
-          </button>
-          <div class="autocomplete-results"></div>
-        </div>
-      </form>
-
       <!-- Menú de enlaces mejorado -->
       <ul class="navbar-nav mb-2 mb-lg-0 d-flex flex-column flex-lg-row gap-2 gap-lg-4 text-center">
         <li class="nav-item">
