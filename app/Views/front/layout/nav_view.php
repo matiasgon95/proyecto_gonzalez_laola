@@ -19,6 +19,7 @@
         
         <!-- Iconos usuario / carrito con efectos -->
         <div class="iconos-nav d-flex align-items-center">
+          <!-- Menú desplegable de usuario con opciones según estado de sesión -->
           <div class="dropdown dropdown-hover">
             <a href="<?= base_url('front/login') ?>" class="nav-icon-link" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="bi bi-person-circle fs-4"></i>
@@ -26,22 +27,26 @@
             <ul class="dropdown-menu dropdown-menu-end nav-dropdown" aria-labelledby="userDropdown">
               <?php if(session()->get('usuario_logueado')): ?>
                 <?php if(session()->get('perfil_id') == 1): ?>
+                  <!-- Opción para administradores -->
                   <li><a class="dropdown-item" href="<?= base_url('back/dashboard') ?>"><i class="bi bi-gear me-2"></i>Administrar</a></li>
                 <?php elseif(session()->get('perfil_id') == 2): ?>
+                  <!-- Opción para clientes registrados -->
                   <li><a class="dropdown-item" href="<?= base_url('front/cliente/dashboard') ?>"><i class="bi bi-person-gear me-2"></i>Mi Cuenta</a></li>
                 <?php endif; ?>
                 <li><a class="dropdown-item" href="<?= site_url('LoginController/logout') ?>"><i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión</a></li>
               <?php else: ?>
+                <!-- Opciones para usuarios no autenticados -->
                 <li><a class="dropdown-item" href="<?= base_url('front/login') ?>"><i class="bi bi-box-arrow-in-right me-2"></i>Iniciar Sesión</a></li>
                 <li><a class="dropdown-item" href="<?= base_url('front/registro_usuario') ?>"><i class="bi bi-person-plus me-2"></i>Registrarse</a></li>
               <?php endif; ?>
             </ul>
           </div>
-          <!-- Reemplazar el enlace actual del carrito por este -->
+          <!-- Icono de carrito con contador de productos -->
           <a href="#" class="nav-icon-link position-relative ms-3">
               <i class="bi bi-cart3 fs-4"></i>
               <?php $cart = \Config\Services::cart(); ?>
               <?php if ($cart->totalItems() > 0): ?>
+              <!-- Badge con contador de productos en carrito -->
               <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                   <?= $cart->totalItems(); ?>
                   <span class="visually-hidden">productos en el carrito</span>
@@ -50,13 +55,14 @@
           </a>
         </div>
         
+        <!-- Botón hamburguesa para menú móvil -->
         <button class="navbar-toggler border-0 ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
 
-      <!-- Buscador mejorado -->
+      <!-- Buscador mejorado para pantallas grandes -->
       <form class="buscador-nav mx-4 d-none d-lg-flex" style="flex: 0 0 40%;" action="<?= base_url('producto/buscar'); ?>" method="get">
         <div class="input-group">
           <input type="text" class="form-control form-control-sm search-autocomplete" placeholder="Buscar productos..." name="q" autocomplete="off">
@@ -76,6 +82,7 @@
           <button class="btn btn-outline-info btn-sm" type="submit">
             <i class="bi bi-search"></i>
           </button>
+          <!-- Botón para cerrar el buscador móvil -->
           <button type="button" id="closeSearchBtn" class="btn btn-outline-danger btn-sm">
             <i class="bi bi-x"></i>
           </button>
@@ -87,7 +94,7 @@
     <!-- Segunda fila: Enlaces + Buscador (en responsive) -->
     <div class="collapse navbar-collapse justify-content-center w-100" id="navbarSupportedContent">
       
-      <!-- Menú de enlaces mejorado -->
+      <!-- Menú de enlaces principal -->
       <ul class="navbar-nav mb-2 mb-lg-0 d-flex flex-column flex-lg-row gap-2 gap-lg-4 text-center">
         <li class="nav-item">
           <a class="nav-link" href="<?= base_url('/'); ?>">Inicio</a>
