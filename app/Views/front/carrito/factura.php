@@ -79,8 +79,18 @@
             <tfoot>
                 <tr>
                     <!-- Fila de total general -->
-                    <td colspan="3" style="text-align: right;"><strong>Total:</strong></td>
-                    <td><strong>$<?= number_format($total, 2, ',', '.') ?></strong></td>
+                    <td colspan="3" class="text-end">Subtotal:</td>
+                    <td class="text-end">$<?= number_format($total, 2, ',', '.') ?></td>
+                </tr>
+                <?php if (isset($cabecera['total_venta']) && $cabecera['total_venta'] > $total): ?>
+                <tr>
+                    <td colspan="3" class="text-end">Costo de envío:</td>
+                    <td class="text-end">$<?= number_format($cabecera['total_venta'] - $total, 2, ',', '.') ?></td>
+                </tr>
+                <?php endif; ?>
+                <tr class="total-label">
+                    <td colspan="3" class="text-end fw-bold">Total:</td>
+                    <td class="text-end fw-bold">$<?= number_format($cabecera['total_venta'] ?? $total, 2, ',', '.') ?></td>
                 </tr>
             </tfoot>
         </table>      

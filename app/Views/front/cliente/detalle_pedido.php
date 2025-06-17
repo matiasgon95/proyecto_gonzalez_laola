@@ -86,6 +86,25 @@
                                                         <td>$<?= number_format($detalle['precio'], 2, ',', '.') ?></td>
                                                     </tr>
                                                 <?php endforeach; ?>
+                                                <!-- Calcular el subtotal sumando todos los precios de los detalles -->
+                                                <?php 
+                                                $subtotal = 0;
+                                                foreach ($detalles as $detalle) {
+                                                    $subtotal += $detalle['precio'];
+                                                }
+                                                ?>
+                                                <!-- Mostrar subtotal -->
+                                                <tr>
+                                                    <td colspan="4" class="text-end">Subtotal:</td>
+                                                    <td>$<?= number_format($subtotal, 2, ',', '.') ?></td>
+                                                </tr>
+                                                <!-- Mostrar costo de envío si existe diferencia entre total y subtotal -->
+                                                <?php if ($pedido['total_venta'] > $subtotal): ?>
+                                                <tr>
+                                                    <td colspan="4" class="text-end">Costo de envío:</td>
+                                                    <td>$<?= number_format($pedido['total_venta'] - $subtotal, 2, ',', '.') ?></td>
+                                                </tr>
+                                                <?php endif; ?>
                                                 <!-- Fila de total al final de la tabla -->
                                                 <tr class="table-info text-dark">
                                                     <td colspan="4" class="text-end fw-bold">Total:</td>
