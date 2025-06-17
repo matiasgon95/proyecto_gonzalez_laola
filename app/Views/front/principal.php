@@ -2,16 +2,16 @@
 
 <?= $this->section('contenedor'); ?>
 
-<!-- Mostrar mensaje Flash si existe -->
+<!-- Mostrar mensaje Flash si existe - Sistema de notificaciones para el usuario -->
 <?php if (session()->getFlashdata('mensaje')): ?>
     <?php $tipo = session()->getFlashdata('tipo_mensaje') ?? 'info'; ?>
-    <div class="alert alert-<?= $tipo ?> alert-dismissible fade show mt-3 mx-3 fw-bold" role="alert">
+    <div class="alert alert-<?= $tipo ?>" alert-dismissible fade show mt-3 mx-3 fw-bold" role="alert">
         <i class="fas fa-info-circle me-2"></i><?= session()->getFlashdata('mensaje') ?>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
     </div>
 <?php endif; ?>
 
-<!-- carrousel -->
+<!-- Carrousel principal - Muestra imágenes promocionales con enlaces a categorías -->
 <div class="carousel-container">
   <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
     <div class="carousel-inner">
@@ -40,7 +40,7 @@
 </div>
 <!-- fin carrousel -->
 
-<!-- Presentación de la empresa -->
+<!-- Presentación de la empresa - Sección informativa sobre GL Technology -->
 <section class="container my-5 text-center">
   <h2 class="mb-4">Bienvenido a GL Technology</h2>
   <p class="lead">
@@ -48,13 +48,14 @@
   </p>
 </section>
 
-<!-- Introducción a productos -->
+<!-- Introducción a productos - Muestra carruseles de productos por categoría -->
 <section class="container my-5">
   <div class="row text-center">
-    <!-- Procesadores -->
+    <!-- Procesadores - Carrusel dinámico que muestra productos de la categoría -->
     <div class="col-md-4 mb-4">
       <div class="product-carousel-container">
         <?php if (!empty($productosProcesadores)): ?>
+          <!-- Si hay productos, muestra un carrusel dinámico -->
           <div id="carouselProcesadores" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
             <div class="carousel-inner">
               <?php foreach($productosProcesadores as $index => $producto): ?>
@@ -82,6 +83,7 @@
             </button>
           </div>
         <?php else: ?>
+          <!-- Si no hay productos, muestra una imagen estática -->
           <img src="<?= base_url('assets/img/ProcesadorRyzen5_3600.jpg') ?>" class="img-fluid card-img-top" alt="Procesadores">
         <?php endif; ?>
       </div>
@@ -89,7 +91,7 @@
       <p>Potenciá tu PC con lo último en tecnología de procesamiento. Trabajamos con Intel y AMD.</p>
     </div>
     
-    <!-- Memorias RAM -->
+    <!-- Memorias RAM - Estructura similar al carrusel de procesadores -->
     <div class="col-md-4 mb-4">
       <div class="product-carousel-container">
         <?php if (!empty($productosMemoriasRam)): ?>
@@ -127,7 +129,7 @@
       <p>Ampliá la memoria de tu equipo con módulos DDR4 y DDR5 de las mejores marcas.</p>
     </div>
     
-    <!-- Placas Base -->
+    <!-- Placas Base - Estructura similar a los carruseles anteriores -->
     <div class="col-md-4 mb-4">
       <div class="product-carousel-container">
         <?php if (!empty($productosPlacasBase)): ?>
