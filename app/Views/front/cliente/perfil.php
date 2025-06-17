@@ -1,12 +1,15 @@
-<?= $this->extend('front/layout/layouts'); ?>
+<?= $this->extend('front/layout/layouts'); ?><!-- Extiende la plantilla principal -->
 
-<?= $this->section('contenedor'); ?>
+<?= $this->section('contenedor'); ?><!-- Inicia la sección de contenido -->
 
+<!-- Contenedor principal con fondo oscuro y texto en color info -->
 <div class="container-fluid py-5 bg-dark text-info">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                <!-- Tarjeta principal del perfil -->
                 <div class="card bg-dark border-info">
+                    <!-- Encabezado con título y botón de retorno -->
                     <div class="card-header bg-dark border-info d-flex justify-content-between align-items-center">
                         <h2 class="mb-0">Mi Perfil</h2>
                         <a href="<?= base_url('front/cliente/dashboard') ?>" class="btn btn-outline-info rounded-pill px-4">
@@ -14,12 +17,14 @@
                         </a>
                     </div>
                     <div class="card-body">
+                        <!-- Sistema de notificaciones: Mensajes de éxito -->
                         <?php if(session()->has('mensaje')): ?>
                             <div class="alert alert-success">
                                 <?= session('mensaje') ?>
                             </div>
                         <?php endif; ?>
                         
+                        <!-- Sistema de notificaciones: Mensajes de error -->
                         <?php if(session()->has('errors')): ?>
                             <div class="alert alert-danger">
                                 <ul class="mb-0">
@@ -30,8 +35,10 @@
                             </div>
                         <?php endif; ?>
                         
+                        <!-- Formulario de actualización de perfil -->
                         <form method="post" action="<?= site_url('front/cliente/actualizar_perfil') ?>" class="needs-validation">
-                            <?= csrf_field() ?>
+                            <?= csrf_field() ?><!-- Protección CSRF -->
+                            <!-- Campos de nombre y apellido -->
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="nombre" class="form-label">Nombre</label>
@@ -43,6 +50,7 @@
                                 </div>
                             </div>
                             
+                            <!-- Campos de email y contraseña -->
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="email" class="form-label">Email</label>
@@ -51,17 +59,20 @@
                                 <div class="col-md-6">
                                     <label for="pass" class="form-label">Contraseña (dejar en blanco si no cambia)</label>
                                     <input type="password" class="form-control bg-dark text-info border-info" id="pass" name="pass">
+                                    <!-- Texto de ayuda para requisitos de contraseña -->
                                     <div class="form-text text-info small mt-1">
                                         La contraseña debe tener entre 8 y 16 caracteres, incluir al menos una letra mayúscula y un número.
                                     </div>
                                 </div>
                             </div>
                             
+                            <!-- Selector de provincia -->
                             <div class="row mb-3">
                                 <div class="col-md-12">
                                     <label for="provincia" class="form-label">Provincia</label>
                                     <select class="form-select bg-dark text-info border-info" name="provincia" id="provincia" required>
                                         <option value="" disabled>Seleccione una provincia</option>
+                                        <!-- Lista de provincias de Argentina con selección automática basada en datos del usuario -->
                                         <option value="Buenos Aires" <?= ($usuario->provincia == 'Buenos Aires') ? 'selected' : '' ?>>Buenos Aires</option>
                                         <option value="Ciudad Autónoma de Buenos Aires" <?= ($usuario->provincia == 'Ciudad Autónoma de Buenos Aires') ? 'selected' : '' ?>>Ciudad Autónoma de Buenos Aires</option>
                                         <option value="Catamarca" <?= ($usuario->provincia == 'Catamarca') ? 'selected' : '' ?>>Catamarca</option>
@@ -90,6 +101,7 @@
                                 </div>
                             </div>
                             
+                            <!-- Botones de acción -->
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
                                 <a href="<?= site_url('front/cliente/dashboard') ?>" class="btn btn-secondary me-md-2">
                                     <i class="fas fa-times"></i> Cancelar
@@ -106,4 +118,4 @@
     </div>
 </div>
 
-<?= $this->endSection() ?>
+<?= $this->endSection() ?><!-- Finaliza la sección de contenido -->
