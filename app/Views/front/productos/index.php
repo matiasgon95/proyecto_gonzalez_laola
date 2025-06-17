@@ -2,7 +2,7 @@
 
 <?= $this->section('contenedor'); ?>
 <div class="container py-4">
-    <!-- Mostrar mensaje Flash si existe como toast -->
+    <!-- Sistema de notificaciones - Muestra mensajes flash como toast en la esquina inferior derecha -->
     <?php if (session()->getFlashdata('mensaje')): ?>
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
         <div class="toast show bg-dark" role="alert" aria-live="assertive" aria-atomic="true">
@@ -26,7 +26,7 @@
     <?php endif; ?>
     
     <div class="row">
-        <!-- Barra lateral de categorías -->
+        <!-- Barra lateral de categorías - Permite filtrar productos por categoría -->
         <div class="col-md-3">
             <div class="sidebar shadow-sm">
                 <div class="d-flex justify-content-between align-items-center">
@@ -56,12 +56,12 @@
             </div>
         </div>
 
-        <!-- Lista de productos -->
+        <!-- Catálogo principal - Muestra los productos con opciones de ordenación y paginación -->
         <div class="col-md-9">
             <div class="mb-4">
                 <h1 class="text-info mb-3">Catálogo de Productos</h1>
                 
-                <!-- Selector de ordenación -->
+                <!-- Selector de ordenación - Permite ordenar productos por diferentes criterios -->
                 <div class="d-flex align-items-center">
                     <span class="me-2">Ordenar por:</span>
                     <select class="form-select" style="width: auto;" id="ordenSelector">
@@ -82,6 +82,7 @@
                 </div>
             </div>
             
+            <!-- Indicador de búsqueda - Muestra el término buscado y opción para limpiar -->
             <?php if(isset($termino_busqueda)): ?>
             <div class="alert alert-info mb-4">
                 <i class="fas fa-search me-2"></i> Resultados para: <strong><?= esc($termino_busqueda) ?></strong>
@@ -89,9 +90,11 @@
             </div>
             <?php endif; ?>
             
+            <!-- Rejilla de productos - Muestra los productos en tarjetas responsivas -->
             <div class="row">
                 <?php if (!empty($productos)): ?>
                     <?php foreach ($productos as $producto): ?>
+                        <!-- Tarjeta de producto individual - Contiene imagen, información y botones de acción -->
                         <div class="col-md-4 mb-4">
                             <div class="card shadow border border-info h-100">
                                 <img src="<?= base_url('public/' . $producto['imagen']) ?>" 
@@ -104,18 +107,21 @@
                                     <div class="mt-auto">
                                         <p class="card-text text-info mb-3">$<?= number_format($producto['precio_vta'], 2, ',', '.'); ?></p>
                                         
+                                        <!-- Indicador de stock - Muestra alerta cuando no hay stock disponible -->
                                         <?php if($producto['stock'] <= 0): ?>
                                             <div class="alert alert-danger py-1 mb-3 text-center">
                                                 <i class="fas fa-exclamation-circle me-1"></i> Sin stock
                                             </div>
                                         <?php endif; ?>
                                         
+                                        <!-- Botones de acción - Ver detalle, agregar a favoritos y al carrito -->
                                         <div class="d-flex flex-column gap-2">
                                             <a href="<?= base_url('producto/detalle/' . $producto['id']); ?>" 
                                                 class="btn btn-info text-black rounded-pill">
                                                 <i class="fas fa-eye me-2"></i>Ver detalle
                                             </a>
                                             
+                                            <!-- Botón de favoritos - Solo visible para usuarios logueados -->
                                             <?php if(session()->get('usuario_id')): ?>
                                             <!-- Formulario para agregar a favoritos -->
                                             <form action="<?= base_url('front/cliente/agregar_favorito') ?>" method="post" class="mb-2">
@@ -127,7 +133,7 @@
                                             </form>
                                             <?php endif; ?>
                                             
-                                            <!-- Formulario para agregar al carrito -->
+                                            <!-- Formulario para agregar al carrito - Se deshabilita si no hay stock -->
                                             <form action="<?= base_url('carrito_agrega') ?>" method="post">
                                                 <?= csrf_field() ?>
                                                 <input type="hidden" name="id" value="<?= $producto['id'] ?>">
@@ -145,7 +151,7 @@
                         </div>
                     <?php endforeach; ?>
                     
-                    <!-- Agregar los enlaces de paginación -->
+                    <!-- Sistema de paginación - Muestra enlaces para navegar entre páginas de resultados -->
                     <div class="col-12 mt-4">
                         <div class="d-flex justify-content-center">
                             <?php if (isset($pager)): ?>
@@ -154,6 +160,7 @@
                         </div>
                     </div>
                 <?php else: ?>
+                    <!-- Mensaje cuando no hay productos - Se muestra cuando la categoría está vacía -->
                     <div class="col-12 text-center text-muted">
                         <p>No hay productos en esta categoría.</p>
                     </div>
