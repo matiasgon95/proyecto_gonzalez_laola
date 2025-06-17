@@ -2,10 +2,12 @@
 
 <?= $this->section('contenedor'); ?>
 
+<!-- Sección principal: Formulario de contacto -->
 <div class="container py-4">
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <div class="card shadow border border-info">
+                <!-- Encabezado del formulario -->
                 <div class="card-header bg-info text-black text-center py-4">
                     <h1 class="h3 mb-2">Contacto</h1>
                     <p class="mb-0">¿Tienes preguntas sobre nuestros productos o necesitas ayuda con tu compra?</p>
@@ -13,12 +15,14 @@
                 </div>
                 
                 <div class="card-body p-4">
+                    <!-- Mensajes de éxito -->
                     <?php if (session()->has('mensaje')): ?>
                         <div class="alert alert-success">
                             <?= session('mensaje') ?>
                         </div>
                     <?php endif; ?>
                     
+                    <!-- Mensajes de error -->
                     <?php if (session()->has('errors')): ?>
                         <div class="alert alert-danger">
                             <ul>
@@ -29,9 +33,11 @@
                         </div>
                     <?php endif; ?>
                     
+                    <!-- Formulario de contacto -->
                     <form action="<?= site_url('front/contacto/enviar') ?>" method="post">
                         <?= csrf_field() ?>
                         <div class="row g-3">
+                            <!-- Campos de información personal -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="form_name" class="form-label">Nombre</label>
@@ -49,6 +55,7 @@
                                 </div>
                             </div>
                             
+                            <!-- Campos de contacto y asunto -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="form_email" class="form-label">Email</label>
@@ -66,6 +73,7 @@
                                 </div>
                             </div>
                             
+                            <!-- Campo de consulta -->
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="form_message" class="form-label">Consulta</label>
@@ -77,6 +85,7 @@
                                 </div>
                             </div>
                             
+                            <!-- Botón de envío -->
                             <div class="col-12 text-center">
                                 <button type="submit" class="btn btn-info text-black rounded-pill px-5">
                                     <i class="fas fa-paper-plane me-2"></i>Enviar Consulta

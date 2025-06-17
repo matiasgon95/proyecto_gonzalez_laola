@@ -1,6 +1,7 @@
 <?= $this->extend('front/layout/layouts'); ?>
 <?= $this->section('contenedor'); ?>
 
+<!-- Contenedor principal del formulario de registro -->
 <div class="container-fluid py-5 bg-dark text-info">
     <div class="container">
         <div class="row justify-content-center">
@@ -9,6 +10,7 @@
                     <div class="card-body">
                         <h3 class="text-center mb-4">Registrar nuevo usuario</h3>
 
+                        <!-- Mensajes de alerta (éxito, error, validación) -->
                         <?php if (session()->getFlashdata('success')): ?>
                             <div class="alert alert-success bg-success bg-opacity-25 border-success text-success">
                                 <?= session()->getFlashdata('success') ?>
@@ -31,9 +33,11 @@
                             </div>
                         <?php endif; ?>
 
+                        <!-- Formulario de registro -->
                         <form action="<?= base_url('front/registro_usuario/guardar') ?>" method="post">
                             <?= csrf_field() ?>
 
+                            <!-- Campos de datos personales -->
                             <div class="mb-3">
                                 <label for="nombre" class="form-label"><i class="fas fa-user me-2"></i>Nombre</label>
                                 <input type="text" class="form-control bg-dark text-info border-info" name="nombre" id="nombre" value="<?= old('nombre') ?>" required>
@@ -49,6 +53,7 @@
                                 <input type="email" class="form-control bg-dark text-info border-info" name="email" id="email" value="<?= old('email') ?>" required>
                             </div>
 
+                            <!-- Campo de contraseña con toggle para mostrar/ocultar -->
                             <div class="mb-3">
                                 <label for="pass" class="form-label"><i class="fas fa-lock me-2"></i>Contraseña</label>
                                 <div class="input-group">
@@ -62,6 +67,7 @@
                                 </div>
                             </div>
 
+                            <!-- Selector de provincia -->
                             <div class="mb-4">
                                 <label for="provincia" class="form-label"><i class="fas fa-map-marker-alt me-2"></i>Provincia</label>
                                 <select class="form-select bg-dark text-info border-info" name="provincia" id="provincia" required>
@@ -94,6 +100,7 @@
                                 </select>
                             </div>
 
+                            <!-- Botones y enlaces -->
                             <button type="submit" class="btn btn-outline-info w-100 py-2 fw-bold hover-scale mb-3">
                                 <i class="fas fa-user-plus me-2"></i>Registrar
                             </button>
