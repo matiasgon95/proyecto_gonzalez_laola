@@ -1,10 +1,12 @@
 <?= $this->extend('front/layout/layouts'); ?>
 
 <?= $this->section('contenedor'); ?>
+<!-- Sección principal de confirmación de compra exitosa -->
 <div class="container py-5" id="compra-exitosa">
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <div class="shadow-sm p-4 p-md-5 bg-dark text-light rounded">
+                <!-- Cabecera con mensaje de confirmación -->
                 <div class="text-center mb-4">
                     <i class="fas fa-check-circle text-success fa-5x mb-3"></i>
                     <h2 class="text-info">¡Compra Realizada con Éxito!</h2>
@@ -14,6 +16,7 @@
                     </div>
                     
                     <?php if(session()->has('ultima_venta_id')): ?>
+                    <!-- Botón para generar factura si existe ID de venta en sesión -->
                     <div class="mt-3">
                         <a href="<?= base_url('carrito/generar_factura/' . session()->get('ultima_venta_id')) ?>" class="btn btn-success" target="_blank">
                             <i class="fas fa-file-invoice me-2"></i>Generar Factura
@@ -22,7 +25,9 @@
                     <?php endif; ?>
                 </div>
                 
+                <!-- Sección de opciones post-compra -->
                 <div class="row mt-5">
+                    <!-- Opción para ver pedidos -->
                     <div class="col-md-6 mb-3 mb-md-0">
                         <div class="card bg-dark border-info h-100">
                             <div class="card-body text-center d-flex flex-column justify-content-between">
@@ -37,6 +42,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Opción para seguir comprando -->
                     <div class="col-md-6">
                         <div class="card bg-dark border-info h-100">
                             <div class="card-body text-center d-flex flex-column justify-content-between">
