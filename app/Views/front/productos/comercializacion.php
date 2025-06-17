@@ -2,17 +2,22 @@
 
 <?= $this->section('contenedor'); ?>
 
+<!-- Contenedor principal de la página de comercialización -->
 <div class="container-fluid py-5 bg-dark text-info">
     <div class="container">
+        <!-- Título principal de la página -->
         <h1 class="display-4 text-center mb-5 text-info fw-bold">Comercialización</h1>
 
+        <!-- Tarjeta de introducción con mensaje de bienvenida -->
         <div class="card bg-dark border-info mb-4">
             <div class="card-body text-info">
                 <p class="lead">En <strong class="text-info">GL Technology</strong>, trabajamos para que tu experiencia de compra sea rápida, segura y eficiente. A continuación, te detallamos todo lo que necesitás saber sobre nuestros procesos de entrega, envío y formas de pago.</p>
             </div>
         </div>
 
+        <!-- Cuadrícula de tarjetas informativas (2x2) -->
         <div class="row g-4">
+            <!-- Tarjeta de Tipos de Entregas -->
             <div class="col-md-6">
                 <div class="card h-100 bg-dark border-info hover-card">
                     <div class="card-body text-info">
@@ -26,6 +31,7 @@
                 </div>
             </div>
 
+            <!-- Tarjeta de Formas de Envío -->
             <div class="col-md-6">
                 <div class="card h-100 bg-dark border-info hover-card">
                     <div class="card-body text-info">
@@ -40,6 +46,7 @@
                 </div>
             </div>
 
+            <!-- Tarjeta de Formas de Pago -->
             <div class="col-md-6">
                 <div class="card h-100 bg-dark border-info hover-card">
                     <div class="card-body text-info">
@@ -54,6 +61,7 @@
                 </div>
             </div>
 
+            <!-- Tarjeta de Información Adicional -->
             <div class="col-md-6">
                 <div class="card h-100 bg-dark border-info hover-card">
                     <div class="card-body text-info">
