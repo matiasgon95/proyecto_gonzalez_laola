@@ -2,7 +2,7 @@
 
 <?= $this->section('contenedor'); ?>
 <div class="container producto-detalle-container my-5">
-    <!-- Mostrar mensaje Flash si existe como toast -->
+    <!-- Sistema de notificaciones: Mostrar mensaje Flash si existe como toast -->
     <?php if (session()->getFlashdata('mensaje')): ?>
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
         <div class="toast show bg-dark" role="alert" aria-live="assertive" aria-atomic="true">
@@ -30,23 +30,26 @@
     <h1 class="producto-titulo mb-4"><?= esc($producto['nombre']); ?></h1>
     
     <div class="row">
-        <!-- Columna izquierda: Imagen -->
+        <!-- Columna izquierda: Imagen del producto -->
         <div class="col-md-6">
             <div class="producto-imagen-container mb-4">
                 <img src="<?= base_url('public/' . $producto['imagen']); ?>" class="producto-imagen img-fluid" alt="<?= esc($producto['nombre']); ?>">
             </div>
         </div>
         
-        <!-- Columna derecha: Precio y botones -->
+        <!-- Columna derecha: Información, precio y acciones del producto -->
         <div class="col-md-6">
             <div class="producto-info">
+                <!-- Sección de precio -->
                 <div class="producto-precio mb-4 d-inline-block">
                     <span class="precio-etiqueta">Precio:</span>
                     <span class="precio-valor">$<?= number_format($producto['precio_vta'], 2, ',', '.'); ?></span>
                 </div>
 
+                <!-- Indicador de disponibilidad de stock con diferentes estados -->
                 <div class="producto-stock mb-4">
                     <?php
+                        // Cálculo de disponibilidad de stock
                         $stock = $producto['stock'];
                         $stock_min = $producto['stock_min'];
                         $diferencia = $stock - $stock_min;
@@ -63,15 +66,17 @@
                     <?php endif; ?>
                 </div>
 
-                <!-- Formulario con selector de cantidad -->
+                <!-- Sección de acciones: Formulario para añadir al carrito -->
                 <div class="producto-acciones mt-4">
                     <form action="<?= base_url('carrito_agrega'); ?>" method="post">
                         <?= csrf_field() ?>
+                        <!-- Campos ocultos con información del producto -->
                         <input type="hidden" name="id" value="<?= $producto['id']; ?>">
                         <input type="hidden" name="nombre_prod" value="<?= $producto['nombre']; ?>">  <!-- Correcto -->
                         <input type="hidden" name="precio_vta" value="<?= $producto['precio_vta']; ?>">  <!-- Correcto -->
                         <input type="hidden" name="imagen" value="<?= $producto['imagen']; ?>">
                         
+                        <!-- Selector de cantidad -->
                         <div class="row mb-3">
                             <div class="col-md-4">
                                 <label for="cantidad" class="form-label">Cantidad:</label>
@@ -79,13 +84,14 @@
                             </div>
                         </div>
                         
+                        <!-- Botones de acción -->
                         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                             <button type="submit" class="btn btn-info text-dark btn-comprar" style="width: 180px;" <?= ($producto['stock'] <= 0) ? 'disabled' : '' ?>>
                                 <i class="fas fa-cart-plus me-2"></i>Añadir al carrito
                             </button>
                             
                             <?php if(session()->has('usuario_id')): ?>
-                                <!-- Separar el formulario de favoritos del formulario de carrito -->
+                                <!-- Formulario para añadir a favoritos (solo para usuarios logueados) -->
                             </form>
                             <form action="<?= base_url('front/cliente/agregar_favorito'); ?>" method="post" class="d-inline favorito-form">
                                 <?= csrf_field() ?>
@@ -98,6 +104,7 @@
                             </form>
                             <?php endif; ?>
                             
+                            <!-- Botón para volver al catálogo -->
                             <a href="<?= base_url('productos'); ?>" class="btn btn-outline-secondary btn-volver" style="width: 180px;">
                                 <i class="fas fa-arrow-left me-2"></i>Volver al catálogo
                             </a>
@@ -107,7 +114,7 @@
         </div>
     </div>
     
-    <!-- Descripción debajo de la imagen -->
+    <!-- Sección de descripción del producto -->
     <div class="row mt-4">
         <div class="col-12">
             <div class="producto-descripcion p-3 border rounded">
