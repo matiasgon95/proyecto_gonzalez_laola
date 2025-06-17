@@ -1,26 +1,28 @@
-<?= $this->extend('front/layout/layouts') ?>
-<?= $this->section('contenedor') ?>
+<?= $this->extend('front/layout/layouts') ?> <!-- Extiende la plantilla principal de layouts -->
+<?= $this->section('contenedor') ?> <!-- Inicia la sección 'contenedor' que se insertará en la plantilla -->
 
+<!-- Contenedor principal con fondo oscuro y texto en color info (azul claro) -->
 <div class="container-fluid py-5 bg-dark text-info">
     <div class="container">
         <div class="row justify-content-center">
-            <!-- Reducimos el ancho del contenedor principal a col-lg-10 -->
+            <!-- Reducimos el ancho del contenedor principal a col-lg-10 para mejor legibilidad -->
             <div class="col-lg-10"> 
-                <!-- Reducimos el ancho del panel superior -->
+                <!-- Panel superior con título y bienvenida, limitado a 800px de ancho -->
                 <div class="card bg-dark border-info mb-4 mx-auto" style="max-width: 800px;">
                     <div class="card-body text-info">
                         <h1 class="display-4 text-center mb-4">Panel de Cliente</h1>
+                        <!-- Muestra el nombre del usuario desde la sesión -->
                         <p class="lead text-center mb-4">Bienvenido, <?= session()->get('usuario_nombre') ?> 
                             <span class="badge bg-info text-dark ms-2">Cliente</span>
                         </p>
                     </div>
                 </div>
 
-                <!-- Contenedor con el mismo ancho máximo que el panel superior -->
+                <!-- Contenedor de tarjetas de navegación con el mismo ancho máximo que el panel superior -->
                 <div class="mx-auto" style="max-width: 800px;">
-                    <!-- Cambiamos a justify-content-between y ajustamos el espaciado -->
+                    <!-- Grid de tarjetas con espaciado y distribución uniforme -->
                     <div class="row g-3 justify-content-between"> 
-                        <!-- Reducimos ligeramente el ancho de las tarjetas -->
+                        <!-- Tarjeta de Mi Perfil - Responsive: 2 columnas en móvil, 3 en tablet, 5 en desktop -->
                         <div class="col-6 col-md-4 col-lg">
                             <div class="card h-100 bg-dark border-info dashboard-card">
                                 <div class="card-body text-center">
@@ -32,6 +34,7 @@
                             </div>
                         </div>
 
+                        <!-- Tarjeta de Comprar - Enlace a la tienda de productos -->
                         <div class="col-6 col-md-4 col-lg">
                             <div class="card h-100 bg-dark border-info dashboard-card">
                                 <div class="card-body text-center">
@@ -43,6 +46,7 @@
                             </div>
                         </div>
 
+                        <!-- Tarjeta de Mis Pedidos - Historial de compras del cliente -->
                         <div class="col-6 col-md-4 col-lg">
                             <div class="card h-100 bg-dark border-info dashboard-card">
                                 <div class="card-body text-center">
@@ -54,6 +58,7 @@
                             </div>
                         </div>
 
+                        <!-- Tarjeta de Favoritos - Productos marcados como favoritos -->
                         <div class="col-6 col-md-4 col-lg">
                             <div class="card h-100 bg-dark border-info dashboard-card">
                                 <div class="card-body text-center">
@@ -65,6 +70,7 @@
                             </div>
                         </div>
                         
+                        <!-- Tarjeta de Consultas - Sistema de mensajería/soporte -->
                         <div class="col-6 col-md-4 col-lg">
                             <div class="card h-100 bg-dark border-info dashboard-card">
                                 <div class="card-body text-center">
@@ -78,6 +84,7 @@
                     </div>
                 </div>
 
+                <!-- Botón de cierre de sesión centrado y separado de las tarjetas -->
                 <div class="text-center mt-5">
                     <a href="<?= base_url('LoginController/logout') ?>" class="btn btn-outline-danger btn-lg">
                         <i class="fas fa-power-off me-2"></i>Cerrar Sesión
@@ -88,4 +95,4 @@
     </div>
 </div>
 
-<?= $this->endSection() ?>
+<?= $this->endSection() ?> <!-- Finaliza la sección 'contenedor' -->
