@@ -1,6 +1,16 @@
+/**
+ * @fileoverview Sistema de visualización de estadísticas mediante gráficos
+ * Este script utiliza Chart.js para crear visualizaciones gráficas de datos estadísticos
+ * relacionados con las ventas y la distribución de productos por categoría.
+ */
+
 // Configuración de gráficos con Chart.js
 document.addEventListener('DOMContentLoaded', function() {
-    // Obtener los datos del servidor que fueron pasados como atributos data-*
+    /**
+     * Obtención de datos para los gráficos
+     * Los datos se pasan desde el servidor como atributos data-* en los elementos HTML
+     * Se utiliza JSON.parse con un valor predeterminado '[]' para manejar casos donde los datos no estén disponibles
+     */
     const ventasChart = document.getElementById('ventasPorMes');
     const mesesData = JSON.parse(ventasChart.getAttribute('data-meses') || '[]');
     const ventasData = JSON.parse(ventasChart.getAttribute('data-ventas') || '[]');
@@ -9,7 +19,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const categoriasData = JSON.parse(categoriasChart.getAttribute('data-categorias') || '[]');
     const productosPorCategoriaData = JSON.parse(categoriasChart.getAttribute('data-productos') || '[]');
     
-    // Gráfico de ventas por mes - muestra la evolución de ventas a lo largo del tiempo
+    /**
+     * Gráfico de ventas por mes
+     * Tipo: Línea
+     * Propósito: Mostrar la evolución de ventas a lo largo del tiempo
+     * Características:
+     * - Línea con tensión para suavizar la curva
+     * - Área bajo la curva coloreada con transparencia
+     * - Escala Y comenzando desde cero
+     * - Colores personalizados para mejorar la legibilidad
+     */
     const ctxVentas = ventasChart.getContext('2d');
     const ventasChartInstance = new Chart(ctxVentas, {
         type: 'line',
@@ -56,7 +75,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Gráfico de productos por categoría - visualiza la distribución de productos
+    /**
+     * Gráfico de productos por categoría
+     * Tipo: Doughnut (rosquilla)
+     * Propósito: Visualizar la distribución de productos entre diferentes categorías
+     * Características:
+     * - Paleta de colores variada para distinguir categorías
+     * - Borde oscuro para mejorar la separación visual
+     * - Leyenda ubicada a la derecha para mejor visualización
+     * - Diseño responsive para adaptarse a diferentes tamaños de pantalla
+     */
     const ctxCategorias = categoriasChart.getContext('2d');
     const categoriasChartInstance = new Chart(ctxCategorias, {
         type: 'doughnut',
