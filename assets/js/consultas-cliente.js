@@ -1,15 +1,24 @@
-// Manejo de consultas del cliente
+/**
+ * @fileoverview Gestión de consultas del cliente en el frontend
+ * Este archivo maneja la visualización de detalles de consultas y la confirmación
+ * para eliminar consultas mediante modales de Bootstrap.
+ */
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Botones para ver detalle de consulta
+    // Inicialización de elementos para ver detalle de consulta
     const botonesVerConsulta = document.querySelectorAll('.ver-consulta');
     const modalConsulta = new bootstrap.Modal(document.getElementById('modalConsulta'));
     
-    // Modal de confirmación para eliminar
+    // Inicialización de elementos para el modal de confirmación de eliminación
     const modalConfirmarEliminar = new bootstrap.Modal(document.getElementById('modalConfirmarEliminar'));
     const botonesEliminarConsulta = document.querySelectorAll('.eliminar-consulta');
     const btnConfirmarEliminar = document.getElementById('btn-confirmar-eliminar');
     
-    // Función para formatear la fecha
+    /**
+     * Formatea una fecha en string al formato local español
+     * @param {string} fechaStr - Fecha en formato string
+     * @return {string} Fecha formateada
+     */
     function formatearFecha(fechaStr) {
         const fecha = new Date(fechaStr);
         return fecha.toLocaleString('es-ES', {
@@ -21,7 +30,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Función para formatear el estado
+    /**
+     * Formatea el estado de una consulta como un badge HTML
+     * @param {string} estado - Estado de la consulta ('pendiente', 'respondida', 'archivada')
+     * @return {string} HTML con el badge correspondiente al estado
+     */
     function formatearEstado(estado) {
         switch(estado) {
             case 'pendiente':
@@ -35,22 +48,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Evento para ver detalle de consulta
+    // Configuración de eventos para ver detalle de consulta
     botonesVerConsulta.forEach(boton => {
         boton.addEventListener('click', function() {
             const consultaId = this.getAttribute('data-id');
             
-            // Usar la variable global baseUrl definida en el layout
+            // Petición AJAX para obtener detalles de la consulta
             fetch(`${baseUrl}/front/cliente/detalle_consulta/${consultaId}`)
                 .then(response => response.json())
                 .then(data => {
-                    // Llenar el modal con los datos
+                    // Actualización del contenido del modal con los datos recibidos
                     document.getElementById('consulta-asunto').textContent = data.consulta.asunto;
                     document.getElementById('consulta-estado').innerHTML = formatearEstado(data.consulta.estado);
                     document.getElementById('consulta-mensaje').textContent = data.consulta.mensaje;
                     document.getElementById('consulta-fecha').textContent = formatearFecha(data.consulta.fecha_creacion);
                     
-                    // Mostrar el modal
+                    // Mostrar el modal con los detalles
                     modalConsulta.show();
                 })
                 .catch(error => {
@@ -60,11 +73,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Evento para eliminar consulta
+    // Configuración de eventos para eliminar consulta
     botonesEliminarConsulta.forEach(boton => {
         boton.addEventListener('click', function() {
             const consultaId = this.getAttribute('data-id');
+            // Configurar la URL de eliminación en el botón de confirmación
             btnConfirmarEliminar.href = `${baseUrl}/front/cliente/eliminar_consulta/${consultaId}`;
+            // Mostrar el modal de confirmación
             modalConfirmarEliminar.show();
         });
     });
