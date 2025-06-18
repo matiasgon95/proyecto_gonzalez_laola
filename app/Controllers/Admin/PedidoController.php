@@ -8,13 +8,39 @@ use App\Models\Ventas_detalle_model;
 use App\Models\usuario_model;
 use App\Models\ProductoModel;
 
+/**
+ * PedidoController
+ * 
+ * Controlador para la gestión de pedidos en el panel de administración
+ * Permite visualizar y gestionar los pedidos realizados por los usuarios
+ */
 class PedidoController extends BaseController
 {
+    /**
+     * @var Ventas_cabecera_model Modelo para operaciones con cabeceras de ventas
+     */
     protected $ventasCabeceraModel;
+    
+    /**
+     * @var Ventas_detalle_model Modelo para operaciones con detalles de ventas
+     */
     protected $ventasDetalleModel;
+    
+    /**
+     * @var usuario_model Modelo para operaciones con usuarios
+     */
     protected $usuarioModel;
+    
+    /**
+     * @var ProductoModel Modelo para operaciones con productos
+     */
     protected $productoModel;
 
+    /**
+     * Constructor
+     * 
+     * Inicializa los modelos necesarios para las operaciones del controlador
+     */
     public function __construct()
     {
         $this->ventasCabeceraModel = new Ventas_cabecera_model();
@@ -23,7 +49,14 @@ class PedidoController extends BaseController
         $this->productoModel = new ProductoModel();
     }
 
-    // Mostrar listado de pedidos
+    /**
+     * Muestra el listado de todos los pedidos
+     * 
+     * Obtiene todos los pedidos con información del usuario asociado
+     * y los muestra ordenados por fecha descendente
+     * 
+     * @return mixed Vista con la lista de pedidos
+     */
     public function index()
     {
         // Obtener todos los pedidos con información del usuario
@@ -37,7 +70,15 @@ class PedidoController extends BaseController
         return view('back/pedidos/index', $data);
     }
 
-    // Ver detalle de un pedido específico
+    /**
+     * Muestra el detalle de un pedido específico
+     * 
+     * Obtiene la información de la cabecera del pedido junto con los datos del usuario
+     * y los detalles de los productos incluidos en el pedido
+     * 
+     * @param int $id ID del pedido a mostrar
+     * @return mixed Vista con el detalle del pedido o redirección si no existe
+     */
     public function detalle($id)
     {
         // Obtener información de la cabecera del pedido
