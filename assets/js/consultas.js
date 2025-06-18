@@ -1,8 +1,15 @@
 /**
- * Script para la gestión de consultas
+ * @fileoverview Sistema de gestión de consultas para el panel de administración
+ * Este script maneja la visualización, selección, filtrado y acciones sobre las consultas
+ * de los usuarios, incluyendo cambios de estado, eliminación y acciones masivas.
  */
 
-// Función para inicializar la gestión de selección de consultas
+/**
+ * Inicializa la funcionalidad de selección de consultas y acciones masivas
+ * - Configura el selector "marcar todos"
+ * - Habilita/deshabilita el botón de aplicar según la selección
+ * - Implementa confirmación antes de eliminar consultas
+ */
 function initConsultasSelection() {
     // Selector para marcar/desmarcar todos
     const seleccionarTodos = document.getElementById('seleccionarTodos');
@@ -13,7 +20,9 @@ function initConsultasSelection() {
     // Si no existen los elementos, no ejecutar el código
     if (!seleccionarTodos || !checkboxes.length || !btnAplicar || !formAccionMasiva) return;
     
-    // Función para verificar si hay checkboxes seleccionados
+    /**
+     * Verifica si hay checkboxes seleccionados y habilita/deshabilita el botón de aplicar
+     */
     function verificarSeleccionados() {
         const haySeleccionados = Array.from(checkboxes).some(checkbox => checkbox.checked);
         btnAplicar.disabled = !haySeleccionados;
@@ -43,7 +52,11 @@ function initConsultasSelection() {
     });
 }
 
-// Función para formatear la fecha
+/**
+ * Formatea una fecha ISO a formato local español
+ * @param {string} fechaStr - Fecha en formato ISO o compatible con Date
+ * @returns {string} Fecha formateada en formato local (DD/MM/YYYY HH:MM)
+ */
 function formatearFecha(fechaStr) {
     const fecha = new Date(fechaStr);
     return fecha.toLocaleString('es-ES', {
@@ -55,7 +68,11 @@ function formatearFecha(fechaStr) {
     });
 }
 
-// Función para formatear el estado
+/**
+ * Genera un badge HTML según el estado de la consulta
+ * @param {string} estado - Estado de la consulta ('pendiente', 'respondida', 'archivada')
+ * @returns {string} HTML con el badge correspondiente al estado
+ */
 function formatearEstado(estado) {
     switch(estado) {
         case 'pendiente':
@@ -69,7 +86,11 @@ function formatearEstado(estado) {
     }
 }
 
-// Función para formatear el tipo de usuario
+/**
+ * Genera un badge HTML según el tipo de usuario
+ * @param {string} esRegistrado - Indica si el usuario está registrado ('si' o 'no')
+ * @returns {string} HTML con el badge correspondiente al tipo de usuario
+ */
 function formatearTipoUsuario(esRegistrado) {
     if (esRegistrado === 'si') {
         return '<span class="badge bg-primary">Cliente Registrado</span>';
@@ -78,7 +99,13 @@ function formatearTipoUsuario(esRegistrado) {
     }
 }
 
-// Función para inicializar los modales de consultas
+/**
+ * Inicializa los modales para ver detalles de consultas y confirmar eliminación
+ * - Configura los eventos para los botones de ver consulta
+ * - Carga los detalles de la consulta mediante AJAX
+ * - Genera botones de acción según el estado actual
+ * - Configura los eventos para eliminar consultas
+ */
 function initConsultasModals() {
     // Botones para ver detalle de consulta
     const botonesVerConsulta = document.querySelectorAll('.ver-consulta');
