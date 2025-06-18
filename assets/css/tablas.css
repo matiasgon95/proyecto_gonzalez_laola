@@ -23,7 +23,7 @@
     border-radius: var(--table-border-radius);
     box-shadow: var(--table-shadow);
     border: var(--table-border);
-    overflow-x: auto; /* Garantiza el desplazamiento horizontal */
+    overflow-x: auto !important; /* Garantiza el desplazamiento horizontal */
     -webkit-overflow-scrolling: touch; /* Mejora el desplazamiento en iOS */
     max-width: 100%; /* Asegura que no exceda el ancho del contenedor */
     padding: 0;
@@ -38,7 +38,7 @@
     border-collapse: collapse;
     border-spacing: 0;
     table-layout: fixed; /* Mantener fixed para controlar mejor los anchos de columna */
-    min-width: 800px; /* Ancho mínimo para asegurar que todas las columnas sean visibles con scroll */
+    min-width: 1200px; /* Aumentar el ancho mínimo para asegurar que todas las columnas sean visibles con scroll */
     border-radius: var(--table-border-radius);
 }
 
@@ -69,12 +69,14 @@
         padding: 4px 2px;
         font-size: 0.65rem;
         white-space: nowrap;
+        display: table-cell !important; /* Forzar que todas las celdas se muestren */
     }
     
     .table td {
         padding: 2px 2px;
         font-size: 0.65rem;
         white-space: nowrap; /* Evita que el texto se rompa en múltiples líneas */
+        display: table-cell !important; /* Forzar que todas las celdas se muestren */
     }
     
     /* Reducir el tamaño de las imágenes en móviles */

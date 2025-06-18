@@ -68,14 +68,14 @@
                     <thead class="table-info text-black">
                         <tr>
                             <th class="nombre-column text-center">Nombre</th>
-                            <th class="descripcion-column d-none d-md-table-cell text-center">Descripción</th>
+                            <th class="descripcion-column text-center">Descripción</th>
                             <th class="categoria-column text-center">Categoría</th>
                             <th class="precio-column text-center">Precio</th>
-                            <th class="precio-column d-none d-sm-table-cell text-center">P.vta</th>
+                            <th class="precio-column text-center">P.vta</th>
                             <th class="stock-column text-center">Stock</th>
-                            <th class="stock-column d-none d-md-table-cell text-center text-nowrap">Mínimo</th>
-                            <th class="fecha-column d-none d-lg-table-cell text-center">Creado</th>
-                            <th class="fecha-column d-none d-lg-table-cell text-center">Modificado</th>
+                            <th class="stock-column text-center text-nowrap">Mínimo</th>
+                            <th class="fecha-column text-center">Creado</th>
+                            <th class="fecha-column text-center">Modificado</th>
                             <th class="imagen-column text-center">Imagen</th>
                             <th class="actions-column text-center">Acciones</th>
                         </tr>
@@ -85,26 +85,29 @@
                             <?php foreach ($productos as $producto) : ?>
                                 <tr>
                                     <td class="text-nowrap nombre-celda"><?= esc($producto['nombre']) ?></td>
-                                    <td class="d-none d-md-table-cell">
+                                    <td>
                                         <div class="descripcion-celda" title="<?= esc($producto['descripcion']) ?>">
                                             <?= esc($producto['descripcion']) ?>
                                         </div>
                                     </td>
                                     <td class="text-nowrap categoria-celda"><?= esc($producto['categoria_descripcion']) ?></td>
                                     <td>$<?= number_format($producto['precio'], 2, ',', '.') ?></td>
-                                    <td class="d-none d-sm-table-cell">$<?= number_format($producto['precio_vta'], 2, ',', '.') ?></td>
+                                    <td>$<?= number_format($producto['precio_vta'], 2, ',', '.') ?></td>
+                                    <!-- Celda de stock con indicador visual para stock bajo -->
                                     <td class="<?= ($producto['stock'] < $producto['stock_min']) ? 'text-danger fw-bold' : '' ?>">
                                         <?= $producto['stock'] ?>
                                         <?php if ($producto['stock'] < $producto['stock_min']) : ?>
                                             <i class="fas fa-exclamation-triangle ms-1 text-warning" title="Stock bajo"></i>
                                         <?php endif; ?>
                                     </td>
-                                    <td class="d-none d-md-table-cell"><?= $producto['stock_min'] ?></td>
-                                    <td class="fecha-celda d-none d-lg-table-cell">
+                                    <td><?= $producto['stock_min'] ?></td>
+                                    <!-- Fechas de creación con formato personalizado -->
+                                    <td class="fecha-celda">
                                         <div><?= date('d/m/y', strtotime($producto['created_at'])) ?></div>
                                         <div class="hora-celda"><?= date('H:i', strtotime($producto['created_at'])) ?></div>
                                     </td>
-                                    <td class="fecha-celda d-none d-lg-table-cell">
+                                    <!-- Fechas de modificación con formato personalizado -->
+                                    <td class="fecha-celda">
                                         <div><?= date('d/m/y', strtotime($producto['updated_at'])) ?></div>
                                         <div class="hora-celda"><?= date('H:i', strtotime($producto['updated_at'])) ?></div>
                                     </td>
