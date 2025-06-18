@@ -1,8 +1,16 @@
 /**
- * Script para manejar las notificaciones toast y la funcionalidad del carrito
+ * @fileoverview Sistema de notificaciones toast y funcionalidad del carrito de compras
+ * Este script maneja la creación y visualización de notificaciones toast para informar
+ * al usuario sobre acciones relacionadas con el carrito de compras, así como la
+ * funcionalidad para agregar productos al carrito mediante AJAX.
  */
 
-// Función para inicializar las notificaciones toast
+/**
+ * Inicializa las notificaciones toast y configura el botón para abrir el modal del carrito
+ * - Configura el cierre automático de los toast después de 5 segundos
+ * - Mantiene la posición de desplazamiento de la página después de mostrar notificaciones
+ * - Configura el evento para abrir el modal del carrito desde el botón del toast
+ */
 function initToastNotifications() {
     // Guardar la posición actual de la página
     const currentPosition = window.scrollY;
@@ -47,7 +55,14 @@ function initToastNotifications() {
     }
 }
 
-// Función para manejar el envío del formulario de agregar al carrito
+/**
+ * Configura los formularios de agregar al carrito para usar AJAX en lugar de envío tradicional
+ * - Previene el envío tradicional del formulario
+ * - Envía los datos mediante fetch API
+ * - Muestra notificaciones toast con el resultado
+ * - Actualiza el contador del carrito
+ * - Mantiene la posición de desplazamiento de la página
+ */
 function setupAddToCartForms() {
     const addToCartForms = document.querySelectorAll('form[action*="carrito_agrega"]');
     
@@ -101,7 +116,18 @@ function setupAddToCartForms() {
     });
 }
 
-// Función para mostrar notificaciones toast dinámicamente
+/**
+ * Crea y muestra notificaciones toast dinámicamente
+ * @param {string} message - El mensaje a mostrar en la notificación
+ * @param {string} type - El tipo de notificación ('success' o 'error')
+ * 
+ * Esta función:
+ * - Crea un contenedor para los toast si no existe
+ * - Genera dinámicamente el HTML para la notificación
+ * - Configura el botón para ver el carrito
+ * - Establece un temporizador para cerrar automáticamente la notificación
+ * - Elimina el elemento del DOM después de ocultarlo
+ */
 function showToastNotification(message, type = 'success') {
     // Crear el contenedor del toast si no existe
     let toastContainer = document.querySelector('.toast-container');
