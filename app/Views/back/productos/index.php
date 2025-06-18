@@ -161,14 +161,4 @@
         </div>
     </div>
 </div>
-
-<script>
-    function mostrarImagenModal(imagenSrc, nombreProducto) {
-        document.getElementById('imagenModalSrc').src = imagenSrc;
-        document.getElementById('imagenModalLabel').textContent = 'Imagen: ' + nombreProducto;
-        var modal = new bootstrap.Modal(document.getElementById('imagenModal'));
-        modal.show();
-    }
-</script>
-
 <?= $this->endSection() ?>
