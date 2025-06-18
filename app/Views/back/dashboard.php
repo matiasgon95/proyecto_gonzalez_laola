@@ -1,10 +1,12 @@
-<?= $this->extend('front/layout/layouts') ?>
-<?= $this->section('contenedor') ?>
+<?= $this->extend('front/layout/layouts') ?> <!-- Extiende la plantilla principal -->
+<?= $this->section('contenedor') ?> <!-- Inicia la sección de contenido -->
 
+<!-- Panel principal de administración -->
 <div class="container-fluid py-5 bg-dark text-info">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-10">
+                <!-- Encabezado del panel con saludo al usuario -->
                 <div class="card bg-dark border-info mb-4">
                     <div class="card-body text-info">
                         <h1 class="admin-panel-title text-center mb-4">Panel de Administración</h1>
@@ -14,7 +16,9 @@
                     </div>
                 </div>
 
+                <!-- Tarjetas de navegación a las diferentes secciones del panel -->
                 <div class="row g-4">
+                    <!-- Tarjeta de Gestión de Usuarios -->
                     <div class="col-md-6 col-lg-3">
                         <div class="card h-100 bg-dark border-info dashboard-card">
                             <div class="card-body text-center">
@@ -26,6 +30,7 @@
                         </div>
                     </div>
 
+                    <!-- Tarjeta de Gestión de Productos -->
                     <div class="col-md-6 col-lg-3">
                         <div class="card h-100 bg-dark border-info dashboard-card">
                             <div class="card-body text-center">
@@ -37,6 +42,7 @@
                         </div>
                     </div>
 
+                    <!-- Tarjeta de Pedidos -->
                     <div class="col-md-6 col-lg-2">
                         <div class="card h-100 bg-dark border-info dashboard-card">
                             <div class="card-body text-center">
@@ -48,7 +54,7 @@
                         </div>
                     </div>
                     
-                    <!-- Nuevo menú para consultas -->
+                    <!-- Tarjeta de Consultas -->
                     <div class="col-md-6 col-lg-2">
                         <div class="card h-100 bg-dark border-info dashboard-card">
                             <div class="card-body text-center">
@@ -60,6 +66,7 @@
                         </div>
                     </div>
 
+                    <!-- Tarjeta de Estadísticas -->
                     <div class="col-md-6 col-lg-2">
                         <div class="card h-100 bg-dark border-info dashboard-card">
                             <div class="card-body text-center">
@@ -72,6 +79,7 @@
                     </div>
                 </div>
 
+                <!-- Botón de cierre de sesión -->
                 <div class="text-center mt-5">
                     <a href="<?= base_url('LoginController/logout') ?>" class="btn btn-outline-danger btn-lg">
                         <i class="fas fa-power-off me-2"></i>Cerrar Sesión
@@ -82,4 +90,4 @@
     </div>
 </div>
 
-<?= $this->endSection() ?>
+<?= $this->endSection() ?> <!-- Finaliza la sección de contenido -->
