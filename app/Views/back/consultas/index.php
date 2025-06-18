@@ -74,18 +74,18 @@
                             </div>
                         
                             <div class="table-responsive">
-                                <table class="table table-dark table-hover table-bordered table-consultas"> <!-- Añadida clase table-consultas -->
+                                <table class="table table-dark table-hover table-bordered"> <!-- Eliminada clase table-consultas -->
                                     <thead class="bg-info text-dark">
                                         <tr>
-                                            <th class="text-center" style="width: 40px;">Sel</th>
-                                            <th class="text-center">ID</th>
-                                            <th class="text-center">Nombre</th>
-                                            <th class="text-center">Email</th>
-                                            <th class="text-center">Asunto</th>
-                                            <th class="text-center">Fecha</th>
-                                            <th class="text-center">Estado</th>
-                                            <th class="text-center">Tipo</th>
-                                            <th class="text-center">Acciones</th>
+                                            <th class="text-center" style="width: 30px;">Sel</th>
+                                            <th class="text-center" style="width: 30px;">ID</th>
+                                            <th class="text-center" style="width: 100px;">Nombre</th> <!-- Reducido el ancho del nombre -->
+                                            <th class="text-center" style="width: 140px;">Email</th> <!-- Añadido ancho fijo al email -->
+                                            <th class="text-center" style="width: 150px;">Asunto</th> <!-- Reducido aún más el ancho del asunto -->
+                                            <th class="text-center" style="width: 100px;">Fecha</th>
+                                            <th class="text-center" style="width: 90px;">Estado</th>
+                                            <th class="text-center" style="width: 90px;">Tipo</th>
+                                            <th class="text-center" style="width: 120px;">Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -121,17 +121,17 @@
                                                         <?php endif; ?>
                                                     </td>
                                                     <td class="text-center">
-                                                        <div class="btn-group">
-                                                            <button type="button" class="btn btn-info btn-sm ver-consulta" data-id="<?= $consulta->id ?>" title="Ver detalles">
+                                                        <div class="btn-group"> <!-- Cambiado de btn-group btn-group-sm a solo btn-group -->
+                                                            <button type="button" class="btn btn-info btn-sm ver-consulta" data-id="<?= $consulta->id ?>" title="Ver detalles"> <!-- Añadido btn-sm a cada botón -->
                                                                 <i class="fas fa-eye"></i>
                                                             </button>
-                                                            <a href="<?= base_url('back/consultas/cambiarEstado/' . $consulta->id . '/respondida') ?>" class="btn btn-success btn-sm" title="Marcar como respondida">
+                                                            <a href="<?= base_url('back/consultas/cambiarEstado/' . $consulta->id . '/respondida') ?>" class="btn btn-success btn-sm" title="Marcar como respondida"> <!-- Añadido btn-sm -->
                                                                 <i class="fas fa-check"></i>
                                                             </a>
-                                                            <a href="<?= base_url('back/consultas/cambiarEstado/' . $consulta->id . '/archivada') ?>" class="btn btn-secondary btn-sm" title="Archivar">
+                                                            <a href="<?= base_url('back/consultas/cambiarEstado/' . $consulta->id . '/archivada') ?>" class="btn btn-secondary btn-sm" title="Archivar"> <!-- Añadido btn-sm -->
                                                                 <i class="fas fa-archive"></i>
                                                             </a>
-                                                            <button type="button" class="btn btn-danger btn-sm eliminar-consulta" data-id="<?= $consulta->id ?>" title="Eliminar">
+                                                            <button type="button" class="btn btn-danger btn-sm eliminar-consulta" data-id="<?= $consulta->id ?>" title="Eliminar"> <!-- Añadido btn-sm -->
                                                                 <i class="fas fa-trash-alt"></i>
                                                             </button>
                                                         </div>
@@ -217,8 +217,4 @@
         </div>
     </div>
 </div>
-
-<!-- Incluir el script para la gestión de consultas -->
-<script src="<?= base_url('assets/js/consultas.js') ?>"></script>
-
 <?= $this->endSection() ?>

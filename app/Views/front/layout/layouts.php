@@ -32,6 +32,7 @@
     <script src="<?= base_url('assets/js/checkout.js') ?>"></script><!-- Proceso de pago -->
     <script src="<?= base_url('assets/js/password-toggle.js') ?>"></script><!-- Mostrar/ocultar contraseña -->
     <script src="<?= base_url('assets/js/productos.js') ?>"></script><!-- Funcionalidades de productos -->
+    <script src="<?= base_url('assets/js/consultas.js') ?>"></script><!-- Funcionalidades de consultas -->
     
     <!--Titulo - Dinámico según la página actual-->
     <title><?= isset($titulo) ? $titulo . ' - GL technology' : 'GL technology' ?></title>
