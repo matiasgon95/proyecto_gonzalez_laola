@@ -143,9 +143,9 @@
                                     <div class="alert alert-info">
                                         <p class="mb-0">Realiza la transferencia a la siguiente cuenta:</p>
                                         <p class="mb-0">Banco: Banco Ejemplo</p>
-                                        <p class="mb-0">Titular: La Ola Informática</p>
+                                        <p class="mb-0">Titular: GL Technology</p>
                                         <p class="mb-0">CBU: 0000000000000000000000</p>
-                                        <p class="mb-0">Alias: LAOLA.INFORMATICA</p>
+                                        <p class="mb-0">Alias: GL.TECHNOLOGY</p>
                                     </div>
                                 </div>
                                 

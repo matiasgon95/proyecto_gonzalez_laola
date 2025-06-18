@@ -5,8 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const checkoutElement = document.getElementById('checkout');
         if (!checkoutElement) return;
         
-        console.log('Checkout cargado correctamente');
-        
         // Elementos del checkout
         const checkoutSteps = document.querySelectorAll('.checkout-step');
         const stepContents = document.querySelectorAll('.checkout-step-content');
@@ -65,17 +63,19 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        // Función para mostrar/ocultar campos de pago
+        // Función para mostrar/ocultar campos de pago según el método seleccionado
         function togglePaymentFields() {
             const selectedMethod = document.querySelector('input[name="metodo_pago"]:checked').value;
             const datosTarjeta = document.getElementById('datos_tarjeta');
             const datosTransferencia = document.getElementById('datos_transferencia');
             const datosEfectivo = document.getElementById('datos_efectivo');
             
+            // Ocultar todos los campos de pago primero
             datosTarjeta.style.display = 'none';
             datosTransferencia.style.display = 'none';
             datosEfectivo.style.display = 'none';
             
+            // Mostrar solo los campos correspondientes al método seleccionado
             switch (selectedMethod) {
                 case 'tarjeta':
                     datosTarjeta.style.display = 'block';
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        // Función para actualizar el paso actual
+        // Función para actualizar el paso actual y gestionar la navegación entre pasos
         function updateStep(newStep) {
             // Ocultar todos los pasos primero
             stepContents.forEach(content => {
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 checkoutSteps[currentStep].classList.add('active');
             }
             
-            // Actualizar estado de los botones
+            // Actualizar estado de los botones de navegación
             if (prevStepBtn) {
                 prevStepBtn.style.display = currentStep > 0 ? 'block' : 'none';
             }
@@ -132,7 +132,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (typeof updateSummary === 'function') {
                     updateSummary();
                 } else {
-                    console.error('La función updateSummary no está disponible');
                     // Usar la implementación local
                     localUpdateSummary();
                 }
@@ -141,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        // Implementación local de updateSummary
+        // Implementación local de updateSummary para mostrar los datos del cliente en el resumen
         function localUpdateSummary() {
             // Actualizar datos del cliente
             const nombreInput = document.getElementById('nombre');
@@ -201,6 +200,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (summaryLocalidad) summaryLocalidad.textContent = localidad;
                 if (summaryCodigoPostal) summaryCodigoPostal.textContent = codigoPostal;
                 
+                // Mostrar los contenedores de información de dirección
                 const direccionContainer = document.getElementById('summary_direccion_container');
                 const provinciaContainer = document.getElementById('summary_provincia_container');
                 const localidadContainer = document.getElementById('summary_localidad_container');
@@ -211,6 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (localidadContainer) localidadContainer.style.display = 'block';
                 if (codigoPostalContainer) codigoPostalContainer.style.display = 'block';
             } else {
+                // Ocultar los contenedores de información de dirección si no es envío a domicilio
                 const direccionContainer = document.getElementById('summary_direccion_container');
                 const provinciaContainer = document.getElementById('summary_provincia_container');
                 const localidadContainer = document.getElementById('summary_localidad_container');
@@ -222,7 +223,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (codigoPostalContainer) codigoPostalContainer.style.display = 'none';
             }
             
-            // Actualizar método de pago
+            // Actualizar método de pago y mostrar detalles específicos según el método
             const metodoPagoChecked = document.querySelector('input[name="metodo_pago"]:checked');
             if (metodoPagoChecked) {
                 const metodoPagoValue = metodoPagoChecked.value;
@@ -288,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
         
-        // Event listeners para los métodos de entrega
+        // Event listeners para los métodos de entrega - muestra/oculta campos de dirección
         metodoEntregaRadios.forEach(radio => {
             radio.addEventListener('change', function() {
                 if (this.value === 'envio_domicilio') {
@@ -301,7 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
         
-        // Event listeners para los métodos de pago
+        // Event listeners para los métodos de pago - muestra/oculta campos específicos
         metodoPagoRadios.forEach(radio => {
             radio.addEventListener('change', togglePaymentFields);
         });
