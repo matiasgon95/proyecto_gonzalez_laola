@@ -208,61 +208,111 @@
     display: block;
 }
 
-/* ==================== ESTILOS ESPECÍFICOS PARA LA TABLA DE PRODUCTOS ==================== */
-/* Definir anchos específicos para cada columna */
+/* ==================== ESTILOS CORREGIDOS PARA LA TABLA DE PRODUCTOS ==================== */
+/* Estos estilos sobrescribirán los anteriores y asegurarán la misma disposición que la papelera */
+
+/* Selector más específico para el encabezado de la tabla de productos */
+.table.table-dark.productos-table,
+.productos-table {
+    background-color: rgba(23, 162, 184, 0.1) !important;
+    border: 1px solid #17a2b8 !important;
+    box-shadow: 0 0 10px rgba(23, 162, 184, 0.2) !important;
+}
+
+.table.table-dark thead.table-info th,
+.productos-table thead.table-info th {
+    background: linear-gradient(45deg, #17a2b8, #138496) !important;
+    color: #000 !important;
+    text-align: center !important;
+    border-bottom: 2px solid #138496 !important;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Anular el efecto de brillo para los encabezados de la tabla de productos */
+.table.table-dark thead.table-info th::after,
+.productos-table thead.table-info th::after {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent) !important;
+}
+
+.productos-table.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: rgba(23, 162, 184, 0.1) !important;
+}
+
+.productos-table.table-hover > tbody > tr:hover {
+    background-color: rgba(23, 162, 184, 0.2) !important;
+}
+
+/* Estilos específicos para la tabla de productos (exactamente iguales a los de papelera) */
 .productos-table th.nombre-column,
 .productos-table td:nth-child(1) {
-    width: 120px;
+    width: 120px !important;
+    max-width: 120px !important;
 }
 
 .productos-table th.descripcion-column,
 .productos-table td:nth-child(2) {
-    width: 180px;
+    width: 180px !important;
+    max-width: 180px !important;
 }
 
 .productos-table th.categoria-column,
 .productos-table td:nth-child(3) {
-    width: 100px;
+    width: 100px !important;
+    max-width: 100px !important;
 }
 
 /* Centrar encabezados de precio y aumentar el ancho */
 .productos-table th.precio-column {
-    width: 85px; /* Aumentado de 75px a 85px */
-    text-align: center; /* Centrar encabezados */
+    width: 85px !important;
+    max-width: 85px !important;
+    text-align: center !important;
 }
 
 .productos-table td:nth-child(4),
 .productos-table td:nth-child(5) {
-    width: 85px; /* Aumentado de 75px a 85px */
-    text-align: left; /* Cambiado de right a left */
+    width: 85px !important;
+    max-width: 85px !important;
+    text-align: left !important; /* Cambiar alineación a la izquierda para los valores */
+    white-space: nowrap !important;
+    overflow: visible !important;
+    min-width: 85px !important;
+    font-size: 0.8rem !important;
 }
 
 /* Centrar tanto los encabezados como las celdas de stock y mínimo */
 .productos-table th.stock-column {
-    width: 45px;
-    text-align: center;
+    width: 45px !important;
+    max-width: 45px !important;
+    text-align: center !important;
 }
 
 .productos-table td:nth-child(6),
 .productos-table td:nth-child(7) {
-    width: 45px;
-    text-align: center;
+    width: 45px !important;
+    max-width: 45px !important;
+    text-align: center !important;
 }
 
 .productos-table th.fecha-column,
 .productos-table td:nth-child(8),
 .productos-table td:nth-child(9) {
-    width: 80px;
+    width: 80px !important;
+    max-width: 80px !important;
+    text-align: center !important;
 }
 
 .productos-table th.imagen-column,
 .productos-table td:nth-child(10) {
-    width: 60px;
+    width: 60px !important;
+    max-width: 60px !important;
+    text-align: center !important;
 }
 
 .productos-table th.actions-column,
 .productos-table td:nth-child(11) {
-    width: 70px;
+    width: 70px !important;
+    max-width: 70px !important;
+    text-align: center !important;
 }
 
 /* Mejorar la visualización de celdas con contenido largo */
@@ -507,6 +557,91 @@
 }
 
 /* Botones mejorados para la tabla de papelera */
+/* Botones mejorados para la tabla de productos */
+.productos-table .btn-group {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 5px !important; /* Espacio entre botones */
+}
+
+.productos-table .btn {
+    border-radius: 8px !important; /* Bordes más redondeados */
+    padding: 5px 8px !important; /* Más padding para botones más grandes */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important; /* Transición más elegante */
+    position: relative !important;
+    overflow: hidden !important;
+    margin: 2px !important;
+}
+
+.productos-table .btn:hover {
+    transform: translateY(-3px) scale(1.05) !important; /* Efecto de elevación y ligero aumento */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important; /* Sombra más pronunciada */
+}
+
+.productos-table .btn:active {
+    transform: translateY(1px) !important; /* Efecto de presión */
+}
+
+.productos-table .btn-outline-success {
+    border-width: 2px !important; /* Borde más grueso */
+    background-color: rgba(25, 135, 84, 0.05) !important; /* Fondo sutil */
+}
+
+.productos-table .btn-outline-danger {
+    border-width: 2px !important; /* Borde más grueso */
+    background-color: rgba(220, 53, 69, 0.05) !important; /* Fondo sutil */
+}
+
+.productos-table .btn-outline-info {
+    border-width: 2px !important; /* Borde más grueso */
+    background-color: rgba(13, 202, 240, 0.05) !important; /* Fondo sutil */
+}
+
+/* Efecto de brillo al pasar el cursor */
+.productos-table .btn::before {
+    content: '' !important;
+    position: absolute !important;
+    top: -50% !important;
+    left: -50% !important;
+    width: 200% !important;
+    height: 200% !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    transform: rotate(45deg) !important;
+    opacity: 0 !important;
+    transition: opacity 0.3s ease !important;
+}
+
+.productos-table .btn:hover::before {
+    opacity: 1 !important;
+    animation: shine 1.5s ease !important;
+}
+
+/* Asegurarse de que las imágenes tengan el mismo estilo */
+.productos-table img.img-thumbnail {
+    border: 2px solid #17a2b8 !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.productos-table img.img-thumbnail:hover {
+    transform: scale(1.1) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+    cursor: pointer !important;
+}
+
+/* Asegurarse de que las imágenes tengan el mismo estilo */
+.productos-table img.img-thumbnail {
+    border: 2px solid #17a2b8 !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.productos-table img.img-thumbnail:hover {
+    transform: scale(1.1) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+    cursor: pointer !important;
+}
+
 .productos-papelera-table .btn-group {
     display: flex;
     justify-content: center;
