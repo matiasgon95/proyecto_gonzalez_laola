@@ -3,8 +3,19 @@
 namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 
+/**
+ * PanelController
+ * 
+ * Controlador para la gestión de los diferentes paneles de administración y cliente
+ * Incluye funcionalidades para mostrar estadísticas del sistema
+ */
 class PanelController extends BaseController
 {
+    /**
+     * Muestra el panel de control para clientes
+     * 
+     * @return mixed Vista del panel de cliente
+     */
     public function cliente()
     {
         return view('front/cliente/dashboard', [
@@ -12,6 +23,11 @@ class PanelController extends BaseController
         ]);
     }
 
+    /**
+     * Muestra el panel de control para administradores
+     * 
+     * @return mixed Vista del panel de administración
+     */
     public function admin()
     {
         return view('back/dashboard', [
@@ -19,6 +35,15 @@ class PanelController extends BaseController
         ]);
     }
 
+    /**
+     * Genera y muestra estadísticas del sistema
+     * 
+     * Incluye datos sobre usuarios, productos, categorías, ventas y pedidos
+     * Prepara información para gráficos de ventas por mes, productos más vendidos,
+     * productos por categoría y productos con stock bajo
+     * 
+     * @return mixed Vista con las estadísticas del sistema
+     */
     public function estadisticas()
     {
         // Cargar los modelos necesarios
