@@ -10,17 +10,59 @@ use App\Models\ProductoModel;
 use App\Models\ConsultaModel; // Agregar esta línea
 use App\Controllers\BaseController;
 
+/**
+ * ClienteController - Gestiona las funcionalidades del área de cliente
+ * 
+ * Este controlador maneja todas las operaciones relacionadas con el perfil del cliente,
+ * pedidos, favoritos, consultas y actualización de datos personales.
+ */
 class ClienteController extends BaseController
 {
+    /**
+     * @var usuario_model Modelo para operaciones con usuarios
+     */
     protected $usuarioModel;
+    
+    /**
+     * @var Ventas_cabecera_model Modelo para operaciones con cabeceras de ventas
+     */
     protected $ventasCabeceraModel;
+    
+    /**
+     * @var Ventas_detalle_model Modelo para operaciones con detalles de ventas
+     */
     protected $ventasDetalleModel;
+    
+    /**
+     * @var FavoritoModel Modelo para operaciones con favoritos
+     */
     protected $favoritoModel;
+    
+    /**
+     * @var ProductoModel Modelo para operaciones con productos
+     */
     protected $productoModel;
-    protected $consultaModel; // Agregar esta línea
+    
+    /**
+     * @var ConsultaModel Modelo para operaciones con consultas
+     */
+    protected $consultaModel;
+    
+    /**
+     * @var \CodeIgniter\Session\Session Instancia de la sesión
+     */
     protected $session;
+    
+    /**
+     * @var array Helpers utilizados por el controlador
+     */
     protected $helpers = ['url', 'form'];
 
+    /**
+     * Constructor del controlador
+     * 
+     * Inicializa los modelos y la sesión necesarios para el funcionamiento
+     */
     public function __construct()
     {
         $this->usuarioModel = new usuario_model();
@@ -28,10 +70,17 @@ class ClienteController extends BaseController
         $this->ventasDetalleModel = new Ventas_detalle_model();
         $this->favoritoModel = new FavoritoModel();
         $this->productoModel = new ProductoModel();
-        $this->consultaModel = new ConsultaModel(); // Agregar esta línea
+        $this->consultaModel = new ConsultaModel();
         $this->session = session();
     }
     
+    /**
+     * Muestra la página de perfil del cliente
+     * 
+     * Obtiene y muestra los datos personales del usuario logueado
+     * 
+     * @return string Vista del perfil del cliente
+     */
     public function perfil()
     {
         // Obtener el ID del usuario de la sesión
@@ -44,6 +93,13 @@ class ClienteController extends BaseController
         return view('front/cliente/perfil', $data);
     }
 
+    /**
+     * Muestra la lista de pedidos del cliente
+     * 
+     * Obtiene y muestra todos los pedidos realizados por el usuario logueado
+     * 
+     * @return string Vista de pedidos del cliente
+     */
     public function pedidos()
     {
         // Obtener el ID del usuario de la sesión
@@ -57,7 +113,15 @@ class ClienteController extends BaseController
         return view('front/cliente/pedidos', $data);
     }
     
-    // Método para ver el detalle de un pedido específico
+    /**
+     * Muestra el detalle de un pedido específico
+     * 
+     * Obtiene y muestra la información detallada de un pedido, verificando
+     * que pertenezca al usuario logueado
+     * 
+     * @param int $id ID del pedido a mostrar
+     * @return \CodeIgniter\HTTP\RedirectResponse|string Vista del detalle o redirección
+     */
     public function detalle_pedido($id)
     {
         // Obtener el ID del usuario de la sesión
@@ -83,7 +147,14 @@ class ClienteController extends BaseController
         return view('front/cliente/detalle_pedido', $data);
     }
     
-    // Método para mostrar los favoritos del cliente
+    /**
+     * Muestra los productos favoritos del cliente
+     * 
+     * Obtiene y muestra todos los productos marcados como favoritos
+     * por el usuario logueado
+     * 
+     * @return string Vista de favoritos del cliente
+     */
     public function favoritos()
     {
         // Obtener el ID del usuario de la sesión
@@ -96,7 +167,14 @@ class ClienteController extends BaseController
         return view('front/cliente/favoritos', $data);
     }
     
-    // Método para agregar un producto a favoritos
+    /**
+     * Agrega un producto a la lista de favoritos
+     * 
+     * Recibe el ID del producto por POST y lo agrega a favoritos
+     * si el usuario está logueado
+     * 
+     * @return \CodeIgniter\HTTP\RedirectResponse Redirección con mensaje de resultado
+     */
     public function agregar_favorito()
     {
         // Verificar si el usuario está logueado
@@ -121,7 +199,15 @@ class ClienteController extends BaseController
         }
     }
     
-    // Método para eliminar un producto de favoritos
+    /**
+     * Elimina un producto de la lista de favoritos
+     * 
+     * Recibe el ID del producto por URL y lo elimina de favoritos
+     * si el usuario está logueado
+     * 
+     * @param int $producto_id ID del producto a eliminar de favoritos
+     * @return \CodeIgniter\HTTP\RedirectResponse Redirección con mensaje de resultado
+     */
     public function eliminar_favorito($producto_id = null)
     {
         // Verificar si el usuario está logueado
@@ -141,7 +227,15 @@ class ClienteController extends BaseController
         return redirect()->back()->with('mensaje', 'Producto eliminado de favoritos');
     }
     
-    // Método para verificar si un producto es favorito (para AJAX)
+    /**
+     * Verifica si un producto está en favoritos (para AJAX)
+     * 
+     * Recibe el ID del producto por URL y devuelve un JSON indicando
+     * si está en favoritos del usuario logueado
+     * 
+     * @param int $producto_id ID del producto a verificar
+     * @return \CodeIgniter\HTTP\Response Respuesta JSON con el resultado
+     */
     public function es_favorito($producto_id = null)
     {
         // Verificar si el usuario está logueado
@@ -161,6 +255,14 @@ class ClienteController extends BaseController
         return $this->response->setJSON(['esFavorito' => $esFavorito]);
     }
 
+    /**
+     * Actualiza los datos del perfil del cliente
+     * 
+     * Recibe los datos del formulario, valida y actualiza la información
+     * del usuario en la base de datos
+     * 
+     * @return \CodeIgniter\HTTP\RedirectResponse Redirección con mensaje de resultado
+     */
     public function actualizar_perfil()
     {
         // Obtener el ID del usuario de la sesión
@@ -247,7 +349,14 @@ class ClienteController extends BaseController
         }
     }
 
-    // Método para mostrar las consultas del cliente
+    /**
+     * Muestra las consultas realizadas por el cliente
+     * 
+     * Obtiene y muestra todas las consultas realizadas por el usuario logueado
+     * ordenadas por fecha de creación descendente
+     * 
+     * @return string Vista de consultas del cliente
+     */
     public function consultas()
     {
         // Obtener el ID del usuario de la sesión
@@ -264,7 +373,15 @@ class ClienteController extends BaseController
         return view('front/cliente/consultas', $data);
     }
 
-    // Método para ver el detalle de una consulta específica
+    /**
+     * Muestra el detalle de una consulta específica
+     * 
+     * Obtiene y devuelve en formato JSON la información de una consulta,
+     * verificando que pertenezca al usuario logueado
+     * 
+     * @param int $id ID de la consulta a mostrar
+     * @return \CodeIgniter\HTTP\Response|\CodeIgniter\HTTP\RedirectResponse Respuesta JSON o redirección
+     */
     public function detalle_consulta($id)
     {
         // Obtener el ID del usuario de la sesión
@@ -288,14 +405,24 @@ class ClienteController extends BaseController
         return $this->response->setJSON(['consulta' => $consulta]);
     }
 
-    // Método para mostrar el formulario de nueva consulta
+    /**
+     * Muestra el formulario para crear una nueva consulta
+     * 
+     * @return string Vista del formulario de nueva consulta
+     */
     public function nueva_consulta()
     {
         $data['titulo'] = 'Nueva Consulta';
         return view('front/cliente/nueva_consulta', $data);
     }
 
-    // Método para guardar la nueva consulta
+    /**
+     * Procesa el envío de una nueva consulta
+     * 
+     * Valida los datos del formulario y guarda la consulta en la base de datos
+     * 
+     * @return \CodeIgniter\HTTP\RedirectResponse Redirección con mensaje de resultado
+     */
     public function guardar_consulta()
     {
         // Validación del formulario
@@ -333,9 +460,9 @@ class ClienteController extends BaseController
             'email' => $usuario->email,
             'asunto' => $this->request->getPost('asunto'),
             'mensaje' => $this->request->getPost('mensaje'),
-            'estado' => 'pendiente',
-            'es_registrado' => 'si',
-            'id_usuario' => $usuario_id
+            'estado' => 'pendiente',  // Estado inicial de la consulta
+            'es_registrado' => 'si',  // El usuario está registrado
+            'id_usuario' => $usuario_id  // ID del usuario logueado
         ];
         
         $this->consultaModel->insert($data);
@@ -343,6 +470,15 @@ class ClienteController extends BaseController
         return redirect()->to('front/cliente/consultas')->with('mensaje', 'Tu consulta ha sido enviada correctamente. Te responderemos a la brevedad.');
     }
 
+    /**
+     * Elimina una consulta del cliente
+     * 
+     * Recibe el ID de la consulta por URL, verifica que pertenezca al usuario
+     * logueado y la elimina de la base de datos
+     * 
+     * @param int $id ID de la consulta a eliminar
+     * @return \CodeIgniter\HTTP\RedirectResponse Redirección con mensaje de resultado
+     */
     public function eliminar_consulta($id)
     {
         // Obtener el ID del usuario de la sesión
