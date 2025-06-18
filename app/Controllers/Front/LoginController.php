@@ -5,18 +5,47 @@ namespace App\Controllers\Front;
 use App\Models\usuario_model;
 use CodeIgniter\Controller;
 
+/**
+ * LoginController - Gestiona la autenticación de usuarios en el frontend
+ * 
+ * Este controlador maneja el inicio de sesión, cierre de sesión y
+ * la redirección al panel de control según el perfil del usuario.
+ */
 class LoginController extends Controller
 {
+    /**
+     * @var usuario_model Modelo para operaciones con usuarios
+     */
     protected $usuarioModel;
+    
+    /**
+     * @var \CodeIgniter\Session\Session Instancia de la sesión
+     */
     protected $session;
+    
+    /**
+     * @var array Helpers utilizados por el controlador
+     */
     protected $helpers = ['url', 'form'];
 
+    /**
+     * Constructor del controlador
+     * 
+     * Inicializa el modelo de usuario y la sesión
+     */
     public function __construct()
     {
         $this->usuarioModel = new usuario_model();
         $this->session = session();
     }
 
+    /**
+     * Muestra la página de inicio de sesión
+     * 
+     * Si el usuario ya está logueado, redirige al dashboard
+     * 
+     * @return \CodeIgniter\HTTP\RedirectResponse|string Vista de login o redirección
+     */
     public function index()
     {
         // Si ya está logueado, redirigir al dashboard
@@ -29,6 +58,13 @@ class LoginController extends Controller
         ]);
     }
 
+    /**
+     * Muestra el panel de control del cliente
+     * 
+     * Verifica que el usuario esté logueado antes de mostrar el dashboard
+     * 
+     * @return \CodeIgniter\HTTP\RedirectResponse|string Vista del dashboard o redirección
+     */
     public function dashboard()
     {
         if (!session()->get('usuario_logueado')) {
@@ -40,7 +76,13 @@ class LoginController extends Controller
         ]);
     }
 
-
+    /**
+     * Procesa la autenticación del usuario
+     * 
+     * Verifica las credenciales, establece la sesión y redirige según el perfil
+     * 
+     * @return \CodeIgniter\HTTP\RedirectResponse Redirección según resultado
+     */
     public function autenticar()
     {
         $email = strtolower(trim($this->request->getPost('email')));
@@ -56,15 +98,16 @@ class LoginController extends Controller
             }
             
             if (password_verify($pass, $usuario->pass)) {
-                // Guardar en sesión
+                // Guardar datos del usuario en sesión
                 $this->session->set([
                     'usuario_id'       => $usuario->id,
                     'usuario_email'    => $usuario->email,
                     'usuario_nombre'   => $usuario->nombre,
                     'usuario_apellido' => $usuario->apellido,
-                    'perfil_id'        => $usuario->perfil_id,
+                    'perfil_id'        => $usuario->perfil_id, // 1=Admin, 2=Cliente
                     'usuario_logueado' => true
                 ]);
+                
                 // Redirigir según perfil
                 if ($usuario->perfil_id == 1) {
                     return redirect()->to('back/dashboard'); // Admin
@@ -81,6 +124,13 @@ class LoginController extends Controller
         }
     }
 
+    /**
+     * Cierra la sesión del usuario
+     * 
+     * Destruye la sesión actual y redirige a la página de login
+     * 
+     * @return \CodeIgniter\HTTP\RedirectResponse Redirección a la página de login
+     */
     public function logout()
     {
         $this->session->destroy();
