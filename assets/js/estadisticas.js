@@ -1,8 +1,17 @@
 // Configuración de gráficos con Chart.js
 document.addEventListener('DOMContentLoaded', function() {
-    // Gráfico de ventas por mes
-    const ctxVentas = document.getElementById('ventasPorMes').getContext('2d');
-    const ventasChart = new Chart(ctxVentas, {
+    // Obtener los datos del servidor que fueron pasados como atributos data-*
+    const ventasChart = document.getElementById('ventasPorMes');
+    const mesesData = JSON.parse(ventasChart.getAttribute('data-meses') || '[]');
+    const ventasData = JSON.parse(ventasChart.getAttribute('data-ventas') || '[]');
+    
+    const categoriasChart = document.getElementById('productosPorCategoria');
+    const categoriasData = JSON.parse(categoriasChart.getAttribute('data-categorias') || '[]');
+    const productosPorCategoriaData = JSON.parse(categoriasChart.getAttribute('data-productos') || '[]');
+    
+    // Gráfico de ventas por mes - muestra la evolución de ventas a lo largo del tiempo
+    const ctxVentas = ventasChart.getContext('2d');
+    const ventasChartInstance = new Chart(ctxVentas, {
         type: 'line',
         data: {
             labels: mesesData,
@@ -47,21 +56,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Gráfico de productos por categoría
-    const ctxCategorias = document.getElementById('productosPorCategoria').getContext('2d');
-    const categoriasChart = new Chart(ctxCategorias, {
+    // Gráfico de productos por categoría - visualiza la distribución de productos
+    const ctxCategorias = categoriasChart.getContext('2d');
+    const categoriasChartInstance = new Chart(ctxCategorias, {
         type: 'doughnut',
         data: {
             labels: categoriasData,
             datasets: [{
                 data: productosPorCategoriaData,
                 backgroundColor: [
-                    'rgba(13, 202, 240, 0.8)',
-                    'rgba(13, 110, 253, 0.8)',
-                    'rgba(25, 135, 84, 0.8)',
-                    'rgba(255, 193, 7, 0.8)',
-                    'rgba(220, 53, 69, 0.8)',
-                    'rgba(111, 66, 193, 0.8)'
+                    'rgba(13, 202, 240, 0.8)',  // Azul info
+                    'rgba(13, 110, 253, 0.8)',  // Azul primario
+                    'rgba(25, 135, 84, 0.8)',   // Verde
+                    'rgba(255, 193, 7, 0.8)',   // Amarillo
+                    'rgba(220, 53, 69, 0.8)',   // Rojo
+                    'rgba(111, 66, 193, 0.8)'   // Púrpura
                 ],
                 borderColor: '#212529',
                 borderWidth: 2

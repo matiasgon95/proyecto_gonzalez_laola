@@ -5,7 +5,9 @@
 <!-- Agregar esta línea para incluir el CSS -->
 <link rel="stylesheet" href="<?= base_url('assets/css/estadisticas.css') ?>">
 
+<!-- Contenedor principal de la página de estadísticas -->
 <div class="container-fluid py-4">
+    <!-- Encabezado con título y botón de regreso -->
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
         <h1 class="h2 text-info mb-3 mb-md-0">Estadísticas del Sistema</h1>
         <a href="<?= base_url('back/dashboard') ?>" class="btn btn-outline-info rounded-pill px-4 align-self-start align-self-md-auto">
@@ -13,8 +15,9 @@
         </a>
     </div>
     
-    <!-- Tarjetas de resumen -->
+    <!-- Tarjetas de resumen con indicadores clave -->
     <div class="row g-4 mb-5">
+        <!-- Tarjeta de usuarios -->
         <div class="col-md-6 col-lg-3">
             <div class="card bg-dark border-info h-100">
                 <div class="card-body text-center">
@@ -26,6 +29,7 @@
             </div>
         </div>
         
+        <!-- Tarjeta de productos -->
         <div class="col-md-6 col-lg-3">
             <div class="card bg-dark border-info h-100">
                 <div class="card-body text-center">
@@ -37,6 +41,7 @@
             </div>
         </div>
         
+        <!-- Tarjeta de pedidos -->
         <div class="col-md-6 col-lg-3">
             <div class="card bg-dark border-info h-100">
                 <div class="card-body text-center">
@@ -48,6 +53,7 @@
             </div>
         </div>
         
+        <!-- Tarjeta de ventas -->
         <div class="col-md-6 col-lg-3">
             <div class="card bg-dark border-info h-100">
                 <div class="card-body text-center">
@@ -69,7 +75,10 @@
                     <h5 class="mb-0">Ventas por Mes</h5>
                 </div>
                 <div class="card-body">
-                    <canvas id="ventasPorMes" height="300"></canvas>
+                    <canvas id="ventasPorMes" 
+                           data-meses='<?= json_encode($meses) ?>' 
+                           data-ventas='<?= json_encode($datos_ventas) ?>'
+                           height="300"></canvas>
                 </div>
             </div>
         </div>
@@ -100,7 +109,10 @@
                     <h5 class="mb-0">Productos por Categoría</h5>
                 </div>
                 <div class="card-body">
-                    <canvas id="productosPorCategoria" height="300"></canvas>
+                    <canvas id="productosPorCategoria"
+                           data-categorias='<?= json_encode($categorias) ?>'
+                           data-productos='<?= json_encode($productos_por_categoria) ?>'
+                           height="300"></canvas>
                 </div>
             </div>
         </div>
@@ -149,15 +161,6 @@
 <!-- Al final del archivo, antes de cerrar la sección -->
 <!-- Incluir Chart.js desde CDN -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<!-- Pasar los datos PHP a JavaScript -->
-<script>
-    // Datos para los gráficos
-    const mesesData = <?= json_encode($meses) ?>;
-    const ventasData = <?= json_encode($datos_ventas) ?>;
-    const categoriasData = <?= json_encode($categorias) ?>;
-    const productosPorCategoriaData = <?= json_encode($productos_por_categoria) ?>;
-</script>
 
 <!-- Incluir el archivo JavaScript externo -->
 <script src="<?= base_url('assets/js/estadisticas.js') ?>"></script>
