@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Gestión del proceso de checkout (finalización de compra)
+ * Este archivo maneja la navegación entre pasos del checkout, cálculo de costos,
+ * gestión de métodos de pago y envío, y actualización del resumen de compra.
+ */
+
 document.addEventListener('DOMContentLoaded', function() {
     // Esperar a que todos los scripts se carguen completamente
     setTimeout(function() {
@@ -5,7 +11,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const checkoutElement = document.getElementById('checkout');
         if (!checkoutElement) return;
         
-        // Elementos del checkout
+        /**
+         * Elementos de navegación del checkout
+         */
         const checkoutSteps = document.querySelectorAll('.checkout-step');
         const stepContents = document.querySelectorAll('.checkout-step-content');
         const nextStepBtn = document.getElementById('nextStepBtn');
@@ -13,7 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const submitBtn = document.getElementById('submitCheckoutBtn');
         let currentStep = 0;
         
-        // Elementos para el cálculo del envío
+        /**
+         * Elementos para el cálculo del envío y pago
+         */
         const metodoEntregaRadios = document.querySelectorAll('input[name="metodo_entrega"]');
         const metodoPagoRadios = document.querySelectorAll('input[name="metodo_pago"]');
         const efectivoRadio = document.getElementById('efectivo');
@@ -24,7 +34,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const inputCostoEnvio = document.querySelector('input[name="costo_envio"]');
         const inputTotal = document.querySelector('input[name="total"]');
         
-        // Función para actualizar el costo de envío y total
+        /**
+         * Actualiza el costo de envío y el total según el método de entrega seleccionado
+         * También gestiona la disponibilidad del pago en efectivo según el método de entrega
+         */
         function updateShippingAndTotal() {
             const isEnvioDomicilio = document.getElementById('envio_domicilio').checked;
             const shippingCost = isEnvioDomicilio ? 10000 : 0; // $10.000 de costo de envío
@@ -63,7 +76,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        // Función para mostrar/ocultar campos de pago según el método seleccionado
+        /**
+         * Muestra u oculta los campos específicos según el método de pago seleccionado
+         */
         function togglePaymentFields() {
             const selectedMethod = document.querySelector('input[name="metodo_pago"]:checked').value;
             const datosTarjeta = document.getElementById('datos_tarjeta');
@@ -89,7 +104,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        // Función para actualizar el paso actual y gestionar la navegación entre pasos
+        /**
+         * Actualiza el paso actual del checkout y gestiona la navegación entre pasos
+         * @param {number} newStep - El índice del nuevo paso a mostrar
+         */
         function updateStep(newStep) {
             // Ocultar todos los pasos primero
             stepContents.forEach(content => {
@@ -140,7 +158,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        // Implementación local de updateSummary para mostrar los datos del cliente en el resumen
+        /**
+         * Actualiza el resumen de compra con los datos del cliente y selecciones realizadas
+         * Esta es una implementación local que se usa si no existe una función global
+         */
         function localUpdateSummary() {
             // Actualizar datos del cliente
             const nombreInput = document.getElementById('nombre');
@@ -252,6 +273,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
+        /**
+         * Inicialización del checkout
+         */
         // Inicializar el primer paso
         if (checkoutSteps.length > 0 && stepContents.length > 0) {
             // Ocultar todos los pasos primero
@@ -263,6 +287,9 @@ document.addEventListener('DOMContentLoaded', function() {
             updateStep(0);
         }
         
+        /**
+         * Configuración de eventos para navegación entre pasos
+         */
         // Event listeners para los botones de navegación
         if (nextStepBtn) {
             nextStepBtn.addEventListener('click', function(e) {
@@ -289,6 +316,9 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
         
+        /**
+         * Configuración de eventos para métodos de entrega y pago
+         */
         // Event listeners para los métodos de entrega - muestra/oculta campos de dirección
         metodoEntregaRadios.forEach(radio => {
             radio.addEventListener('change', function() {
@@ -307,6 +337,9 @@ document.addEventListener('DOMContentLoaded', function() {
             radio.addEventListener('change', togglePaymentFields);
         });
         
+        /**
+         * Inicialización de estados
+         */
         // Inicializar campos de pago y costo de envío
         togglePaymentFields();
         updateShippingAndTotal();
