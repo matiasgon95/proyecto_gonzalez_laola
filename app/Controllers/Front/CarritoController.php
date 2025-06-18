@@ -4,11 +4,32 @@ namespace App\Controllers\Front;
 
 use App\Controllers\BaseController;
 
+/**
+ * CarritoController
+ * 
+ * Controlador encargado de gestionar todas las operaciones relacionadas con el carrito de compras
+ * incluyendo agregar productos, actualizar cantidades, procesar compras y generar facturas.
+ */
 class CarritoController extends BaseController
 {
+    /**
+     * Instancia del servicio de carrito
+     *
+     * @var \Config\Services::cart
+     */
     protected $cart;
+    
+    /**
+     * Instancia de la sesión
+     *
+     * @var \Config\Services::session
+     */
     protected $session;
     
+    /**
+     * Constructor del controlador
+     * Inicializa los helpers y servicios necesarios
+     */
     public function __construct()
     {
         helper(['form', 'url', 'cart']);
@@ -16,6 +37,11 @@ class CarritoController extends BaseController
         $this->session = session();
     }
     
+    /**
+     * Muestra la página principal del carrito de compras
+     *
+     * @return view
+     */
     public function index()
     {
         $data = [
@@ -27,6 +53,12 @@ class CarritoController extends BaseController
         return view('front/carrito/index', $data);
     }
     
+    /**
+     * Agrega un producto al carrito de compras
+     * Verifica el stock disponible antes de agregar
+     *
+     * @return redirect|JSON
+     */
     public function add()
     {
         $this->cart = \Config\Services::cart();
@@ -87,6 +119,11 @@ class CarritoController extends BaseController
         }
     }
     
+    /**
+     * Actualiza las cantidades de los productos en el carrito
+     *
+     * @return redirect
+     */
     public function actualiza_carrito()
     {
         $this->cart = \Config\Services::cart();
@@ -104,6 +141,13 @@ class CarritoController extends BaseController
         return redirect()->to(base_url('carrito'));
     }
     
+    /**
+     * Incrementa la cantidad de un producto en el carrito
+     * Verifica el stock disponible antes de incrementar
+     *
+     * @param string $rowid ID de la fila del carrito
+     * @return redirect|JSON
+     */
     public function suma($rowid)
     {
         $this->cart = \Config\Services::cart();
@@ -142,6 +186,13 @@ class CarritoController extends BaseController
         return redirect()->to(base_url('carrito'));
     }
     
+    /**
+     * Decrementa la cantidad de un producto en el carrito
+     * La cantidad mínima es 1
+     *
+     * @param string $rowid ID de la fila del carrito
+     * @return redirect|JSON
+     */
     public function resta($rowid)
     {
         $this->cart = \Config\Services::cart();
@@ -168,6 +219,12 @@ class CarritoController extends BaseController
         return redirect()->to(base_url('carrito'));
     }
     
+    /**
+     * Elimina un producto del carrito
+     *
+     * @param string $rowid ID de la fila del carrito
+     * @return redirect|JSON
+     */
     public function remove($rowid)
     {
         $this->cart = \Config\Services::cart();
@@ -182,6 +239,11 @@ class CarritoController extends BaseController
         return redirect()->to(base_url('carrito'));
     }
     
+    /**
+     * Vacía completamente el carrito
+     *
+     * @return redirect
+     */
     public function clear()
     {
         $this->cart = \Config\Services::cart();
@@ -190,6 +252,11 @@ class CarritoController extends BaseController
         return redirect()->to(base_url('carrito'));
     }
     
+    /**
+     * Muestra una versión mini del carrito para mostrar en el header
+     *
+     * @return view
+     */
     public function mini()
     {
         $this->cart = \Config\Services::cart();
@@ -201,6 +268,11 @@ class CarritoController extends BaseController
         return view('front/carrito/mini', $data);
     }
     
+    /**
+     * Devuelve el número total de items en el carrito en formato JSON
+     *
+     * @return JSON
+     */
     public function count()
     {
         $this->cart = \Config\Services::cart();
@@ -209,6 +281,12 @@ class CarritoController extends BaseController
         ]);
     }
     
+    /**
+     * Inicia el proceso de compra
+     * Verifica stock y si el usuario está logueado
+     *
+     * @return redirect|view
+     */
     public function comprar()
     {
         // Verificar si hay productos en el carrito
@@ -267,6 +345,12 @@ class CarritoController extends BaseController
         return view('front/carrito/checkout', $data);
     }
     
+    /**
+     * Confirma y procesa la compra
+     * Registra la venta en la base de datos y actualiza el stock
+     *
+     * @return redirect
+     */
     public function confirmar()
     {
         // Verificar si hay productos en el carrito
@@ -376,7 +460,11 @@ class CarritoController extends BaseController
         return redirect()->to(base_url('carrito/compra_exitosa'));
     }
     
-    // Nuevo método para mostrar la vista de compra exitosa
+    /**
+     * Muestra la vista de compra exitosa
+     *
+     * @return view
+     */
     public function compra_exitosa()
     {
         $data['titulo'] = "Compra Exitosa";
@@ -384,7 +472,12 @@ class CarritoController extends BaseController
         return view('front/carrito/compra_exitosa', $data);
     }
     
-    // Eliminar los métodos ver_factura y ver_facturas_usuario
+    /**
+     * Muestra los detalles de una factura específica
+     *
+     * @param int $venta_id ID de la venta
+     * @return view|redirect
+     */
     public function ver_factura($venta_id)
     {
         //Verificar si el usuario está logueado
@@ -409,6 +502,12 @@ class CarritoController extends BaseController
         echo view('front/footer_view');
     }
     
+    /**
+     * Muestra todas las facturas de un usuario
+     *
+     * @param int $id_usuario ID del usuario
+     * @return view
+     */
     public function ver_facturas_usuario($id_usuario)
     {
         $ventas = new \App\Models\Ventas_cabecera_model();
@@ -422,7 +521,13 @@ class CarritoController extends BaseController
         echo view('front/footer_view');
     }
     
-    // Método para generar factura ficticia
+    /**
+     * Genera una factura para una venta específica
+     * Verifica que la venta pertenezca al usuario actual
+     *
+     * @param int $venta_id ID de la venta
+     * @return view|redirect
+     */
     public function generar_factura($venta_id)
     {
         // Verificar si el usuario está logueado
