@@ -1,9 +1,14 @@
+<?php
+// Vista para mostrar el detalle de una compra realizada
+// Muestra información del cliente, método de entrega, método de pago y productos comprados
+?>
 <div class="container my-5">
     <div class="card bg-dark text-info border-info">
         <div class="card-header bg-info text-dark">
             <h3 class="mb-0">Detalle de Compra</h3>
         </div>
         <div class="card-body">
+            <?php // Mensaje de confirmación o información sobre la compra ?>  
             <?php if (session()->getFlashdata('mensaje')): ?>
                 <?php $tipo = session()->getFlashdata('tipo_mensaje') ?? 'info'; ?>
                 <div class="alert alert-<?= $tipo ?> alert-dismissible fade show mb-4 text-center" role="alert">
@@ -28,7 +33,7 @@
             ?>
             
             <?php if (!empty($venta)): ?>
-                <!-- Resto del contenido de la vista -->
+                <!-- Sección de datos del cliente y entrega -->
                 <?php if (!empty($datos_adicionales)): ?>
                 <div class="row mb-4">
                     <div class="col-md-6">
@@ -53,6 +58,7 @@
                                     <?= $datos_adicionales['metodo_entrega'] === 'retiro_local' ? 'Retiro en local' : 'Envío a domicilio' ?>
                                 </p>
                                 
+                                <?php // Mostrar dirección solo si el método de entrega es envío a domicilio ?>
                                 <?php if ($datos_adicionales['metodo_entrega'] === 'envio_domicilio'): ?>
                                     <p><strong>Dirección:</strong> <?= esc($datos_adicionales['direccion']) ?></p>
                                     <p><strong>Ciudad:</strong> <?= esc($datos_adicionales['ciudad']) ?></p>
@@ -61,6 +67,7 @@
                                 
                                 <p><strong>Método de pago:</strong> 
                                     <?php 
+                                    // Formatear el método de pago para mostrar texto descriptivo
                                     switch ($datos_adicionales['metodo_pago']) {
                                         case 'tarjeta':
                                             echo 'Tarjeta de Crédito/Débito';
@@ -80,6 +87,7 @@
                 </div>
                 <?php endif; ?>
                 
+                <!-- Tabla de productos comprados -->
                 <div class="table-responsive">
                     <table class="table table-dark table-hover">
                         <thead>
@@ -93,6 +101,7 @@
                         </thead>
                         <tbody>
                             <?php 
+                            // Calcular el total de la compra
                             $total = 0;
                             foreach ($venta as $item): 
                                 $total += $item['precio'];
@@ -111,6 +120,7 @@
                             <?php endforeach; ?>
                         </tbody>
                         <tfoot>
+                            <?php // Mostrar costo de envío si corresponde ?>
                             <?php if (!empty($datos_adicionales) && isset($datos_adicionales['metodo_entrega']) && $datos_adicionales['metodo_entrega'] === 'envio_domicilio'): ?>
                             <tr>
                                 <th colspan="4" class="text-end">Costo de envío:</th>
@@ -124,11 +134,13 @@
                         </tfoot>
                     </table>
                 </div>
+                <!-- Botones de acción -->
                 <div class="mt-4 text-center">
                     <a href="<?= base_url('productos') ?>" class="btn btn-info">Seguir comprando</a>
                     <a href="<?= base_url('mis_compras/' . session('id_usuario')) ?>" class="btn btn-outline-info">Ver todas mis compras</a>
                 </div>
             <?php else: ?>
+                <!-- Mensaje cuando no hay datos de compra disponibles -->
                 <div class="alert alert-warning">
                     <h4 class="alert-heading"><i class="fas fa-exclamation-triangle me-2"></i>No se encontraron detalles de la compra</h4>
                     <p>No se pudieron cargar los detalles de la compra. Por favor, contacta con el administrador.</p>
