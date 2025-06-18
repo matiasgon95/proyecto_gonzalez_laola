@@ -1,8 +1,16 @@
 /**
- * Script para manejar la funcionalidad de ordenamiento de productos
+ * Script para manejar la funcionalidad de ordenamiento de productos y visualización de imágenes
+ * Este archivo implementa:
+ * - Ordenamiento de productos mediante selector
+ * - Visualización de imágenes ampliadas en modal
  */
 
-// Función para cambiar el orden de los productos automáticamente cuando se selecciona una opción
+/**
+ * Inicializa la funcionalidad de ordenamiento de productos
+ * Configura el evento change en el selector de ordenamiento para redirigir
+ * automáticamente a la URL correspondiente cuando se selecciona una opción
+ * @returns {void}
+ */
 function initProductSorting() {
     // Obtener el selector de ordenamiento
     const ordenSelector = document.getElementById('ordenSelector');
@@ -29,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
  * Muestra un modal con la imagen ampliada del producto
  * @param {string} imagenSrc - URL de la imagen a mostrar
  * @param {string} nombreProducto - Nombre del producto para el título
+ * @returns {void}
  */
 function mostrarImagenModal(imagenSrc, nombreProducto) {
     document.getElementById('imagenModalSrc').src = imagenSrc;
