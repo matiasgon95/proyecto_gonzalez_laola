@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Sistema de gestión de favoritos para productos
+ * Este script maneja la verificación, adición y eliminación de productos favoritos
+ * mediante peticiones AJAX, proporcionando una experiencia de usuario fluida sin
+ * recargar la página.
+ */
+
 document.addEventListener('DOMContentLoaded', function() {
     // Verificar el estado de los favoritos al cargar la página
     verificarFavoritos();
@@ -6,7 +13,11 @@ document.addEventListener('DOMContentLoaded', function() {
     configurarBotonesFavoritos();
 });
 
-// Función para verificar si los productos son favoritos
+/**
+ * Verifica si los productos mostrados en la página son favoritos del usuario actual
+ * Realiza peticiones AJAX para cada botón de favorito y actualiza su apariencia
+ * según el estado devuelto por el servidor.
+ */
 function verificarFavoritos() {
     // Obtener todos los botones de favoritos
     const botonesFavoritos = document.querySelectorAll('.favorito-btn');
@@ -34,7 +45,11 @@ function verificarFavoritos() {
     });
 }
 
-// Función para configurar los botones de favoritos para usar AJAX
+/**
+ * Configura los formularios de favoritos para usar AJAX en lugar del envío tradicional
+ * Implementa la lógica para alternar el estado de favorito (agregar/eliminar) y
+ * actualiza la apariencia del botón según el resultado de la operación.
+ */
 function configurarBotonesFavoritos() {
     // Obtener todos los formularios de favoritos
     const formulariosFavoritos = document.querySelectorAll('form[action*="agregar_favorito"]');
