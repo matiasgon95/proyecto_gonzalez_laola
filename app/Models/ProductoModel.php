@@ -5,11 +5,27 @@ namespace App\Models;
 use CodeIgniter\Model;
 use App\Models\SinonimoModel;
 
+/**
+ * Modelo para gestionar productos
+ * 
+ * Este modelo maneja las operaciones CRUD y consultas relacionadas con los productos
+ * del sistema, incluyendo búsquedas avanzadas y relaciones con categorías.
+ */
 class ProductoModel extends Model
 {
+    /**
+     * Nombre de la tabla en la base de datos
+     */
     protected $table = 'productos';
+    
+    /**
+     * Clave primaria de la tabla
+     */
     protected $primaryKey = 'id';
 
+    /**
+     * Campos permitidos para inserción masiva
+     */
     protected $allowedFields = [
         'nombre',
         'descripcion',
@@ -24,19 +40,33 @@ class ProductoModel extends Model
         'updated_at'
     ];
 
+    /**
+     * Configuración para manejo automático de timestamps
+     */
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
 
+    /**
+     * Instancia del modelo de sinónimos para búsquedas avanzadas
+     */
     protected $sinonimoModel;
 
+    /**
+     * Constructor del modelo
+     * Inicializa la instancia del modelo de sinónimos
+     */
     public function __construct()
     {
         parent::__construct();
         $this->sinonimoModel = new SinonimoModel();
     }
 
-    // Obtener productos activos (no eliminados) y con stock > 0, junto con la categoría
+    /**
+     * Obtener productos activos (no eliminados) junto con la categoría
+     * 
+     * @return array Lista de productos activos con información de categoría
+     */
     public function getProductosConCategoriaActivos()
     {
         return $this->select('productos.*, categorias.descripcion as categoria')
@@ -46,7 +76,11 @@ class ProductoModel extends Model
         // Eliminamos la línea: ->where('productos.stock >', 0)
     }
 
-    // Obtener productos eliminados (papelera)
+    /**
+     * Obtener productos eliminados (papelera)
+     * 
+     * @return array Lista de productos en papelera con información de categoría
+     */
     public function getProductosEliminados()
     {
         return $this->select('productos.*, categorias.descripcion as categoria')
@@ -55,7 +89,12 @@ class ProductoModel extends Model
                     ->findAll();
     }
 
-    // Búsqueda usando SinonimoModel para obtener sinónimos de la palabra clave
+    /**
+     * Búsqueda de productos usando sinónimos de la palabra clave
+     * 
+     * @param string $termino Término de búsqueda
+     * @return array Lista de productos que coinciden con el término o sus sinónimos
+     */
     public function buscarConSinonimos($termino)
     {
         // Buscar palabras clave relacionadas al sinónimo ingresado
@@ -89,7 +128,15 @@ class ProductoModel extends Model
     }
 
 
-    // El método buscarProductosAvanzado queda igual, ya que es más completo
+    /**
+     * Búsqueda avanzada de productos utilizando la tabla de sinónimos
+     * 
+     * Este método realiza una búsqueda más completa utilizando consultas directas a la base de datos
+     * para encontrar productos relacionados con el término de búsqueda o sus sinónimos.
+     * 
+     * @param string $termino Término de búsqueda
+     * @return array Lista de productos que coinciden con los criterios de búsqueda
+     */
     public function buscarProductosAvanzado($termino)
     {
         $db = \Config\Database::connect();
