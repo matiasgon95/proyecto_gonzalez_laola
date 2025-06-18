@@ -1,3 +1,14 @@
+/**
+ * Módulo de búsqueda y autocompletado
+ * 
+ * Este archivo implementa la funcionalidad de búsqueda con autocompletado para productos
+ * y la gestión del buscador en dispositivos móviles.
+ */
+
+/**
+ * Inicialización del autocompletado para campos de búsqueda
+ * Configura la funcionalidad de autocompletado para todos los campos con clase 'search-autocomplete'
+ */
 document.addEventListener('DOMContentLoaded', function() {
     // Seleccionar todos los campos de búsqueda con autocompletado
     const searchInputs = document.querySelectorAll('.search-autocomplete');
@@ -5,8 +16,11 @@ document.addEventListener('DOMContentLoaded', function() {
     searchInputs.forEach(input => {
         const resultsContainer = input.parentElement.querySelector('.autocomplete-results');
         let debounceTimer;
-        //
-        // Función para cargar sugerencias
+        
+        /**
+         * Carga sugerencias de productos desde el servidor
+         * @param {string} query - Texto de búsqueda (opcional)
+         */
         function cargarSugerencias(query = '') {
             fetch(`${baseUrl}/producto/sugerencias?q=${encodeURIComponent(query)}`)
                 .then(response => response.json())
@@ -55,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         nombre.textContent = producto.nombre;
                         textContainer.appendChild(nombre);
                         
-                        // Precio del producto
+                        // Precio del producto formateado con separadores de miles y decimales
                         const precio = document.createElement('div');
                         precio.textContent = `$${parseFloat(producto.precio).toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: true, decimal: ',', thousands: '.'})}`;  
                         textContainer.appendChild(precio);
@@ -79,13 +93,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
         }
         
-        // Evento de clic en el campo de búsqueda
+        // Evento de clic en el campo de búsqueda - muestra todas las sugerencias
         input.addEventListener('click', function() {
             // Cargar todas las sugerencias al hacer clic
             cargarSugerencias();
         });
         
-        // Evento de entrada de texto
+        // Evento de entrada de texto con debounce para evitar múltiples solicitudes
         input.addEventListener('input', function() {
             const query = this.value.trim();
             
@@ -104,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 300); // 300ms de retraso
         });
         
-        // Ocultar resultados al hacer clic fuera
+        // Ocultar resultados al hacer clic fuera del campo de búsqueda
         document.addEventListener('click', function(e) {
             if (!input.contains(e.target) && !resultsContainer.contains(e.target)) {
                 resultsContainer.style.display = 'none';
@@ -120,7 +134,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Funcionalidad para el botón de búsqueda en móvil
+/**
+ * Funcionalidad para el botón de búsqueda en dispositivos móviles
+ * Permite mostrar/ocultar el campo de búsqueda en interfaces móviles
+ */
 document.addEventListener('DOMContentLoaded', function() {
     const searchToggleBtn = document.getElementById('searchToggleBtn');
     const mobileSearchContainer = document.getElementById('mobileSearchContainer');
