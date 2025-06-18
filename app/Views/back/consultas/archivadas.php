@@ -1,3 +1,7 @@
+<?php
+// Vista para la gestión de consultas archivadas
+// Permite visualizar, filtrar y realizar acciones masivas sobre las consultas archivadas
+?>
 <?= $this->extend('front/layout/layouts') ?>
 <?= $this->section('contenedor') ?>
 
@@ -73,6 +77,7 @@
                                 </div>
                             </div>
                         
+                            <!-- Tabla de consultas con columnas responsivas -->
                             <div class="table-responsive">
                                 <table class="table table-dark table-hover table-bordered table-consultas">
                                     <thead class="bg-info text-dark">
@@ -141,7 +146,7 @@
     </div>
 </div>
 
-<!-- Modal para ver detalle de consulta -->
+<!-- Modales para interacción con consultas: visualización de detalles y confirmación de eliminación -->
 <div class="modal fade" id="modalConsulta" tabindex="-1" aria-labelledby="modalConsultaLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content bg-dark text-info">
@@ -208,8 +213,4 @@
         </div>
     </div>
 </div>
-
-<!-- Incluir el script para la gestión de consultas -->
-<script src="<?= base_url('assets/js/consultas.js') ?>"></script>
-
 <?= $this->endSection() ?>
