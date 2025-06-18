@@ -1,7 +1,9 @@
-<?= $this->extend('front/layout/layouts') ?>
-<?= $this->section('contenedor') ?>
+<?= $this->extend('front/layout/layouts') ?> <!-- Extiende la plantilla principal -->
+<?= $this->section('contenedor') ?> <!-- Inicia la sección de contenido -->
 
+<!-- Contenedor principal -->
 <div class="container-fluid py-4">
+    <!-- Encabezado con título y botón de retorno -->
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
         <h1 class="h2 text-warning mb-3 mb-md-0">Papelera de Productos Eliminados</h1>
         <a href="<?= base_url('back/productos') ?>" class="btn btn-info text-black rounded-pill px-4">
@@ -9,18 +11,21 @@
         </a>
     </div>
     
+    <!-- Mensajes de alerta para operaciones exitosas -->
     <?php if(session()->getFlashdata('exito')): ?>
         <div class="alert alert-success">
             <?= session()->getFlashdata('exito') ?>
         </div>
     <?php endif; ?>
 
+    <!-- Mensajes de alerta para errores -->
     <?php if(session()->getFlashdata('error')): ?>
         <div class="alert alert-danger">
             <?= session()->getFlashdata('error') ?>
         </div>
     <?php endif; ?>
 
+    <!-- Tarjeta principal con la tabla de productos -->
     <div class="card shadow border border-warning">
         <div class="card-body p-0 p-sm-2"> <!-- Reducir aún más el padding en móviles -->
             <!-- Mensaje de desplazamiento horizontal - solo visible en móviles -->
@@ -29,6 +34,7 @@
             </div>
             <div class="table-responsive">
                 <table class="table table-hover table-dark table-striped align-middle mb-0 admin-table productos-papelera-table">
+                    <!-- Encabezado de la tabla -->
                     <thead class="table-warning text-black">
                         <tr>
                             <th class="nombre-column text-center">Nombre</th>
@@ -44,6 +50,7 @@
                             <th class="actions-column text-center">Acciones</th>
                         </tr>
                     </thead>
+                    <!-- Cuerpo de la tabla con los productos eliminados -->
                     <tbody>
                         <?php if (!empty($productos) && is_array($productos)) : ?>
                             <?php foreach ($productos as $producto) : ?>
@@ -57,6 +64,7 @@
                                     <td class="text-nowrap categoria-celda"><?= esc($producto['categoria_descripcion']) ?></td>
                                     <td>$<?= number_format($producto['precio'], 2, ',', '.') ?></td>
                                     <td class="d-none d-sm-table-cell">$<?= number_format($producto['precio_vta'], 2, ',', '.') ?></td>
+                                    <!-- Celda de stock con indicador visual para stock bajo -->
                                     <td class="<?= ($producto['stock'] < $producto['stock_min']) ? 'text-danger fw-bold' : '' ?>">
                                         <?= $producto['stock'] ?>
                                         <?php if ($producto['stock'] < $producto['stock_min']) : ?>
@@ -64,14 +72,17 @@
                                         <?php endif; ?>
                                     </td>
                                     <td class="d-none d-md-table-cell"><?= $producto['stock_min'] ?></td>
+                                    <!-- Fechas de creación con formato personalizado -->
                                     <td class="fecha-celda d-none d-lg-table-cell">
                                         <div><?= date('d/m/y', strtotime($producto['created_at'])) ?></div>
                                         <div class="hora-celda"><?= date('H:i', strtotime($producto['created_at'])) ?></div>
                                     </td>
+                                    <!-- Fechas de modificación con formato personalizado -->
                                     <td class="fecha-celda d-none d-lg-table-cell">
                                         <div><?= date('d/m/y', strtotime($producto['updated_at'])) ?></div>
                                         <div class="hora-celda"><?= date('H:i', strtotime($producto['updated_at'])) ?></div>
                                     </td>
+                                    <!-- Miniatura de imagen con opción para ampliar -->
                                     <td class="text-center">
                                         <?php if (!empty($producto['imagen'])): ?>
                                             <img src="<?= base_url('public/' . $producto['imagen']) ?>" 
@@ -83,6 +94,7 @@
                                             <span class="text-muted">No</span>
                                         <?php endif; ?>
                                     </td>
+                                    <!-- Botones de acción: restaurar y eliminar definitivamente -->
                                     <td class="text-center">
                                         <div class="btn-group">
                                             <a href="<?= base_url('back/productos/restaurar/' . $producto['id']) ?>" 
@@ -100,6 +112,7 @@
                                 </tr>
                             <?php endforeach; ?>
                         <?php else : ?>
+                            <!-- Mensaje cuando no hay productos eliminados -->
                             <tr>
                                 <td colspan="11" class="text-center text-muted">No hay productos eliminados.</td>
                             </tr>
@@ -128,13 +141,4 @@
     </div>
 </div>
 
-<script>
-    function mostrarImagenModal(imagenSrc, nombreProducto) {
-        document.getElementById('imagenModalSrc').src = imagenSrc;
-        document.getElementById('imagenModalLabel').textContent = 'Imagen: ' + nombreProducto;
-        var modal = new bootstrap.Modal(document.getElementById('imagenModal'));
-        modal.show();
-    }
-</script>
-
-<?= $this->endSection() ?>
+<?= $this->endSection() ?> <!-- Finaliza la sección de contenido -->

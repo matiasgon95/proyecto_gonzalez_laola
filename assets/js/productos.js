@@ -24,3 +24,15 @@ function initProductSorting() {
 document.addEventListener('DOMContentLoaded', function() {
     initProductSorting();
 });
+
+/**
+ * Muestra un modal con la imagen ampliada del producto
+ * @param {string} imagenSrc - URL de la imagen a mostrar
+ * @param {string} nombreProducto - Nombre del producto para el título
+ */
+function mostrarImagenModal(imagenSrc, nombreProducto) {
+    document.getElementById('imagenModalSrc').src = imagenSrc;
+    document.getElementById('imagenModalLabel').textContent = 'Imagen: ' + nombreProducto;
+    var modal = new bootstrap.Modal(document.getElementById('imagenModal'));
+    modal.show();
+}
