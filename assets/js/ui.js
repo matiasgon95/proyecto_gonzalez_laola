@@ -1,8 +1,17 @@
 /**
  * Script para manejar elementos de la interfaz de usuario
+ * 
+ * Este archivo contiene funciones para mejorar la experiencia de usuario
+ * en el sitio web, incluyendo menús desplegables, botones de navegación
+ * y funcionalidades de formularios.
  */
 
-// Función para inicializar el menú contraíble de categorías
+/**
+ * Inicializa el menú contraíble de categorías
+ * 
+ * Permite al usuario mostrar/ocultar la lista de categorías y guarda
+ * la preferencia en localStorage para mantenerla entre sesiones.
+ */
 function initCategoryMenu() {
     const toggleBtn = document.getElementById('toggleCategories');
     const categoriesList = document.getElementById('categoriesList');
@@ -37,7 +46,12 @@ function initCategoryMenu() {
     });
 }
 
-// Función para inicializar el botón de volver arriba
+/**
+ * Inicializa el botón de volver arriba (scroll to top)
+ * 
+ * Muestra un botón fijo cuando el usuario ha desplazado la página
+ * hacia abajo y permite volver al inicio con un clic.
+ */
 function initScrollTopButton() {
     const scrollTopBtn = document.getElementById('scrollTopBtn');
     
@@ -63,7 +77,12 @@ function initScrollTopButton() {
     });
 }
 
-// Función para mostrar/ocultar contraseña en formularios
+/**
+ * Inicializa el toggle de visibilidad de contraseña
+ * 
+ * Permite al usuario alternar entre mostrar y ocultar la contraseña
+ * en los campos de formulario, cambiando también el icono correspondiente.
+ */
 function initPasswordToggle() {
     const togglePassword = document.getElementById('togglePassword');
     const passwordInput = document.getElementById('pass');
@@ -83,7 +102,9 @@ function initPasswordToggle() {
     });
 }
 
-// Inicializar cuando el DOM esté cargado
+/**
+ * Inicializa todas las funcionalidades de UI cuando el DOM está listo
+ */
 document.addEventListener('DOMContentLoaded', function() {
     initCategoryMenu();
     initScrollTopButton();
@@ -92,7 +113,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Aquí puedes agregar más inicializaciones de UI en el futuro
 });
 
-// Efecto de navbar al hacer scroll
+/**
+ * Efecto de cambio de estilo en la barra de navegación al hacer scroll
+ * 
+ * Añade una clase CSS 'scrolled' a la navbar cuando el usuario
+ * desplaza la página más allá de 50px, permitiendo aplicar estilos
+ * diferentes (como cambio de color o transparencia).
+ */
 const navbar = document.querySelector('.mi-navbar');
 if (navbar) {
     window.addEventListener('scroll', function() {
