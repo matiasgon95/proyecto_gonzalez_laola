@@ -6,18 +6,40 @@ use App\Controllers\BaseController;
 use App\Models\ProductoModel;
 use App\Models\CategoriaModel;
 
+/**
+ * ProductoController
+ * 
+ * Controlador para la gestión de productos en el panel de administración
+ * Permite crear, editar, eliminar y restaurar productos, así como gestionar categorías
+ */
 class ProductoController extends BaseController
 {
+    /**
+     * @var ProductoModel Modelo para operaciones con productos
+     */
     protected $productoModel;
+    
+    /**
+     * @var CategoriaModel Modelo para operaciones con categorías
+     */
     protected $categoriaModel;
 
+    /**
+     * Constructor
+     * 
+     * Inicializa los modelos necesarios para las operaciones del controlador
+     */
     public function __construct()
     {
         $this->productoModel = new ProductoModel();
         $this->categoriaModel = new CategoriaModel();
     }
 
-    // Mostrar productos activos (no eliminados)
+    /**
+     * Muestra la lista de productos activos (no eliminados)
+     * 
+     * @return mixed Vista con la lista de productos activos
+     */
     public function index()
     {
         $productos = $this->productoModel
@@ -31,7 +53,11 @@ class ProductoController extends BaseController
         return view('back/productos/index', $data);
     }
 
-    // Mostrar productos eliminados (papelera)
+    /**
+     * Muestra la lista de productos eliminados (papelera)
+     * 
+     * @return mixed Vista con la lista de productos en papelera
+     */
     public function papelera()
     {
         $productosEliminados = $this->productoModel
@@ -45,6 +71,11 @@ class ProductoController extends BaseController
         return view('back/productos/papelera', $data);
     }
 
+    /**
+     * Muestra el formulario para crear un nuevo producto
+     * 
+     * @return mixed Vista con el formulario de creación
+     */
     public function crear()
     {
         $data['categorias'] = $this->categoriaModel->findAll();
@@ -52,6 +83,12 @@ class ProductoController extends BaseController
         return view('back/productos/crear', $data);
     }
 
+    /**
+     * Limpia el nombre de archivo para usarlo como parte del nombre de la imagen
+     * 
+     * @param string $nombre Nombre original del archivo
+     * @return string Nombre limpio (minúsculas, sin caracteres especiales)
+     */
     private function limpiarNombreArchivo($nombre)
     {
         $nombre = strtolower($nombre);
@@ -60,8 +97,14 @@ class ProductoController extends BaseController
         return $nombre;
     }
 
+    /**
+     * Procesa el formulario de creación de producto
+     * 
+     * @return mixed Redirección a la lista de productos o al formulario con errores
+     */
     public function guardar()
     {
+        // Configuración de reglas de validación
         $validation = \Config\Services::validation();
         $validation->setRules([
             'nombre'       => 'required',
@@ -77,6 +120,7 @@ class ProductoController extends BaseController
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
 
+        // Procesamiento de la imagen si se ha subido
         $img = $this->request->getFile('imagen');
         if ($img && $img->isValid() && !$img->hasMoved()) {
             $originalName = pathinfo($img->getClientName(), PATHINFO_FILENAME);
@@ -88,6 +132,7 @@ class ProductoController extends BaseController
             $imagenPath = null;
         }
 
+        // Preparación de datos para inserción
         $datos = [
             'nombre'       => $this->request->getPost('nombre'),
             'descripcion'  => $this->request->getPost('descripcion'),
@@ -102,10 +147,17 @@ class ProductoController extends BaseController
             'updated_at'=> date('Y-m-d H:i:s'),
         ];
 
+        // Inserción en la base de datos
         $this->productoModel->insert($datos);
         return redirect()->to('back/productos');
     }
 
+    /**
+     * Muestra el formulario para editar un producto existente
+     * 
+     * @param int $id ID del producto a editar
+     * @return mixed Vista con el formulario de edición
+     */
     public function editar($id)
     {
         $producto = $this->productoModel->find($id);
@@ -119,8 +171,15 @@ class ProductoController extends BaseController
         return view('back/productos/editar', $data);
     }
 
+    /**
+     * Procesa el formulario de actualización de producto
+     * 
+     * @param int $id ID del producto a actualizar
+     * @return mixed Redirección a la lista de productos
+     */
     public function actualizar($id)
     {
+        // Procesamiento de la imagen si se ha subido una nueva
         $img = $this->request->getFile('imagen');
         if ($img && $img->isValid() && !$img->hasMoved()) {
             $originalName = pathinfo($img->getClientName(), PATHINFO_FILENAME);
@@ -131,9 +190,11 @@ class ProductoController extends BaseController
             $img->move('public/uploads', $newName);
             $imagenPath = 'uploads/' . $newName;
         } else {
+            // Mantener la imagen actual si no se sube una nueva
             $imagenPath = $this->request->getPost('imagen_actual');
         }
 
+        // Preparación de datos para actualización
         $datos = [
             'nombre'       => $this->request->getPost('nombre'),
             'descripcion'  => $this->request->getPost('descripcion'),
@@ -146,12 +207,18 @@ class ProductoController extends BaseController
             'updated_at'=> date('Y-m-d H:i:s'),
         ];
 
+        // Actualización en la base de datos
         $this->productoModel->update($id, $datos);
         session()->setFlashdata('exito', 'Producto actualizado correctamente.');
         return redirect()->to('back/productos');
     }
 
-    // Eliminación lógica (marcar eliminado)
+    /**
+     * Realiza una eliminación lógica del producto (marca como eliminado)
+     * 
+     * @param int $id ID del producto a eliminar
+     * @return mixed Redirección a la lista de productos
+     */
     public function eliminar($id)
     {
         $producto = $this->productoModel->find($id);
@@ -167,6 +234,12 @@ class ProductoController extends BaseController
         return redirect()->to('back/productos')->with('exito', 'Producto eliminado correctamente');
     }
     
+    /**
+     * Elimina definitivamente un producto de la base de datos
+     * 
+     * @param int $id ID del producto a eliminar permanentemente
+     * @return mixed Redirección a la papelera de productos
+     */
     public function eliminar_definitivo($id)
     {
         $this->productoModel->delete($id, true); // `true` para forzar borrado permanente
@@ -174,7 +247,12 @@ class ProductoController extends BaseController
     }
 
 
-    // Restaurar producto eliminado
+    /**
+     * Restaura un producto previamente eliminado (eliminación lógica)
+     * 
+     * @param int $id ID del producto a restaurar
+     * @return mixed Redirección a la papelera de productos
+     */
     public function restaurar($id)
     {
         $producto = $this->productoModel->find($id);
@@ -192,6 +270,8 @@ class ProductoController extends BaseController
 
     /**
      * Guarda una nueva categoría desde el modal
+     * 
+     * @return mixed Redirección a la lista de productos
      */
     public function guardarCategoria() // Puedes renombrar a guardar_categoria para consistencia
     {
