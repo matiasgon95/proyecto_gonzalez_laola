@@ -5,16 +5,38 @@ namespace App\Controllers\Front;
 use App\Controllers\BaseController;
 use App\Models\ConsultaModel;
 
+/**
+ * ContactoController - Gestiona el formulario de contacto en el frontend
+ * 
+ * Este controlador maneja la visualización del formulario de contacto
+ * y el procesamiento de las consultas enviadas por los usuarios.
+ */
 class ContactoController extends BaseController
 {
+    /**
+     * @var ConsultaModel Modelo para operaciones con consultas
+     */
     protected $consultaModel;
     
+    /**
+     * Constructor del controlador
+     * 
+     * Inicializa el modelo de consulta y carga los helpers necesarios
+     */
     public function __construct()
     {
         $this->consultaModel = new ConsultaModel();
         helper(['form', 'url']);
     }
     
+    /**
+     * Muestra la página de contacto
+     * 
+     * Si el usuario está logueado, redirige a la página de nueva consulta para clientes.
+     * Si no está logueado, muestra el formulario de contacto normal.
+     * 
+     * @return \CodeIgniter\HTTP\RedirectResponse|string Vista de contacto o redirección
+     */
     public function index()
     {
         // Verificar si el usuario está logueado
@@ -31,6 +53,14 @@ class ContactoController extends BaseController
         ]);
     }
     
+    /**
+     * Procesa el envío del formulario de contacto
+     * 
+     * Valida los datos del formulario, verifica si el usuario está logueado,
+     * y guarda la consulta en la base de datos.
+     * 
+     * @return \CodeIgniter\HTTP\RedirectResponse Redirección con mensaje de éxito o errores
+     */
     public function enviar()
     {
         // Validación del formulario
@@ -69,6 +99,7 @@ class ContactoController extends BaseController
             ]
         ];
         
+        // Si la validación falla, redirigir con errores
         if (!$this->validate($rules, $messages)) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
@@ -90,9 +121,9 @@ class ContactoController extends BaseController
             'email' => $this->request->getPost('email'),
             'asunto' => $this->request->getPost('asunto'),
             'mensaje' => $this->request->getPost('consulta'),
-            'estado' => 'pendiente',
-            'es_registrado' => $esRegistrado,
-            'id_usuario' => $idUsuario
+            'estado' => 'pendiente',  // Estado inicial de la consulta
+            'es_registrado' => $esRegistrado,  // Indica si el usuario está registrado
+            'id_usuario' => $idUsuario  // ID del usuario si está registrado
         ];
         
         $this->consultaModel->insert($data);
