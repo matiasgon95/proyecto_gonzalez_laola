@@ -1,3 +1,10 @@
+/**
+ * Gestión del carrito de compras y proceso de checkout
+ * Este archivo contiene la funcionalidad para:
+ * 1. Carrito modal (visualización, actualización y gestión de productos)
+ * 2. Proceso de checkout (pasos, validación y resumen de compra)
+ */
+
 document.addEventListener('DOMContentLoaded', function() {
     // Elementos del carrito modal
     const cartModal = document.getElementById('cartModal');
@@ -10,7 +17,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Si no existen los elementos, no ejecutar el código
     if (!cartModal || !openCartBtn) return;
     
-    // Función para cargar el contenido del carrito
+    /**
+     * Carga el contenido del carrito desde el servidor
+     * Realiza una petición AJAX para obtener el HTML del mini carrito
+     * y configura los botones después de cargar el contenido
+     */
     function loadCartContent() {
         fetch(baseUrl + 'carrito/mini')
             .then(response => response.text())
@@ -25,8 +36,11 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
     
-    // Configurar los event listeners para los botones del carrito
-    // Exponemos la función globalmente para que pueda ser llamada desde otros scripts
+    /**
+     * Configura los event listeners para los botones del carrito
+     * Esta función se expone globalmente para poder ser llamada desde otros scripts
+     * Maneja: incremento/decremento de cantidad, eliminación de productos y vaciado del carrito
+     */
     window.setupCartButtons = function() {
         // Eliminar event listeners existentes clonando y reemplazando los elementos
         
@@ -97,7 +111,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
     
-    // Función para actualizar un item del carrito
+    /**
+     * Actualiza un item específico del carrito (incrementar, decrementar o eliminar)
+     * @param {string} rowid - ID único del elemento del carrito
+     * @param {string} action - Acción a realizar: 'suma', 'resta' o 'remove'
+     */
     function updateCartItem(rowid, action) {
         let url = '';
         switch(action) {
@@ -130,8 +148,11 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
     
-    // Función para actualizar el contador del carrito
-    // Exponemos la función globalmente para que pueda ser llamada desde otros scripts
+    /**
+     * Actualiza el contador del carrito en la interfaz
+     * Esta función se expone globalmente para poder ser llamada desde otros scripts
+     * Actualiza el contador en el botón flotante y en la barra de navegación
+     */
     window.updateCartCount = function() {
         fetch(baseUrl + 'carrito/count')
             .then(response => response.json())
@@ -163,14 +184,16 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
     
-    // Abrir modal
+    // Configuración de eventos para abrir/cerrar el modal del carrito
+    
+    // Abrir modal desde el botón principal
     openCartBtn.addEventListener('click', function(e) {
         e.preventDefault();
         cartModal.classList.add('show');
         loadCartContent();
     });
     
-    // Modificar el comportamiento del botón del carrito en la barra de navegación
+    // Abrir modal desde el botón de la barra de navegación
     if (navCartBtn) {
         navCartBtn.addEventListener('click', function(e) {
             e.preventDefault();
@@ -179,13 +202,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Cerrar modal
+    // Cerrar modal con el botón de cierre
     if (closeCartBtn) {
         closeCartBtn.addEventListener('click', function() {
             cartModal.classList.remove('show');
         });
     }
     
+    // Cerrar modal con el botón de continuar comprando
     if (continueShoppingBtn) {
         continueShoppingBtn.addEventListener('click', function() {
             cartModal.classList.remove('show');
@@ -200,7 +224,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Funcionalidad para el checkout
+/**
+ * Funcionalidad para el proceso de checkout (página de finalización de compra)
+ * Maneja los pasos del checkout, validación de campos y actualización del resumen
+ */
 document.addEventListener('DOMContentLoaded', function() {
     // Verificar si estamos en la página de checkout
     if (!document.getElementById('checkout')) return;
@@ -213,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitBtn = document.getElementById('submitCheckoutBtn');
     let currentStep = 0;
     
-    // Mostrar/ocultar campos de dirección según método de entrega
+    // Elementos para el cálculo de costos y método de entrega
     const metodoEntrega = document.querySelectorAll('input[name="metodo_entrega"]');
     const datosEnvio = document.getElementById('datos_envio');
     const costoEnvioElement = document.getElementById('costo_envio');
@@ -222,7 +249,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const inputTotal = document.querySelector('input[name="total"]');
     const subtotalValue = parseFloat(document.getElementById('subtotal_value').value);
     
-    // Función para actualizar el paso actual
+    /**
+     * Actualiza la visualización del paso actual en el proceso de checkout
+     * @param {number} newStep - Índice del nuevo paso a mostrar
+     */
     function updateStep(newStep) {
         // Ocultar paso actual
         stepContents[currentStep].classList.remove('active');
@@ -277,7 +307,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Función para validar campos requeridos
+    /**
+     * Valida los campos requeridos en el paso actual
+     * Añade clases de validación visual y verifica campos específicos según el método de entrega y pago
+     * @returns {boolean} - true si todos los campos son válidos, false en caso contrario
+     */
     function validateRequiredFields() {
         let isValid = true;
         const requiredFields = stepContents[currentStep].querySelectorAll('[required]');
@@ -349,7 +383,10 @@ document.addEventListener('DOMContentLoaded', function() {
         return isValid;
     }
     
-    // Función para actualizar el resumen
+    /**
+     * Actualiza el resumen de la compra con los datos ingresados por el usuario
+     * Muestra información del cliente, método de entrega, dirección y método de pago
+     */
     function updateSummary() {
         // Actualizar datos del cliente
         const nombreInput = document.getElementById('nombre');
