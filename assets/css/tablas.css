@@ -546,11 +546,99 @@
 /* ==================== ESTILOS PARA LA TABLA DE CARRITO ==================== */
 .table-cart {
     background-color: rgba(0, 188, 212, 0.05);
+    min-width: auto !important; /* Anular el min-width fijo */
+    width: 100% !important; /* Asegurar que la tabla ocupe el 100% del contenedor */
 }
 
 .table-cart thead th {
     background: linear-gradient(45deg, #17a2b8, #138496);
     color: #000;
+}
+
+/* Ajustes responsivos específicos para la tabla del carrito */
+@media (max-width: 992px) {
+    .table-responsive .table-cart {
+        min-width: auto !important; /* Anular el min-width en pantallas pequeñas */
+    }
+    
+    /* Ajustar el tamaño de la imagen en pantallas pequeñas */
+    .table-cart .img-thumbnail {
+        width: 60px;
+        height: 60px;
+    }
+    
+    /* Reducir el padding en pantallas pequeñas */
+    .table-cart td, .table-cart th {
+        padding: 0.5rem !important;
+        font-size: 0.9rem;
+    }
+}
+
+/* Ajustes adicionales para pantallas muy pequeñas */
+@media (max-width: 576px) {
+    .table-cart .img-thumbnail {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .table-cart td, .table-cart th {
+        padding: 0.3rem !important;
+        font-size: 0.8rem;
+    }
+}
+
+/* ==================== ESTILOS PARA LA TABLA DE RESUMEN DE COMPRA ==================== */
+.table-responsive .table-dark.table-hover {
+    min-width: auto !important; /* Anular el min-width fijo */
+    width: 100% !important; /* Asegurar que la tabla ocupe el 100% del contenedor */
+}
+
+/* Ajustes responsivos específicos para la tabla de resumen de compra */
+@media (max-width: 992px) {
+    .table-responsive .table-dark.table-hover {
+        min-width: auto !important; /* Anular el min-width en pantallas pequeñas */
+    }
+    
+    /* Reducir el padding en pantallas pequeñas */
+    .table-dark.table-hover td, .table-dark.table-hover th {
+        padding: 0.5rem !important;
+        font-size: 0.9rem;
+    }
+}
+
+/* Ajustes adicionales para pantallas muy pequeñas */
+@media (max-width: 576px) {
+    .table-dark.table-hover td, .table-dark.table-hover th {
+        padding: 0.3rem !important;
+        font-size: 0.8rem;
+    }
+}
+
+/* ==================== ESTILOS PARA LA TABLA DE PEDIDOS DEL CLIENTE ==================== */
+.table-responsive .table-dark.table-striped {
+    min-width: auto !important; /* Anular el min-width fijo */
+    width: 100% !important; /* Asegurar que la tabla ocupe el 100% del contenedor */
+}
+
+/* Ajustes responsivos específicos para la tabla de pedidos */
+@media (max-width: 992px) {
+    .table-responsive .table-dark.table-striped {
+        min-width: auto !important; /* Anular el min-width en pantallas pequeñas */
+    }
+    
+    /* Reducir el padding en pantallas pequeñas */
+    .table-dark.table-striped td, .table-dark.table-striped th {
+        padding: 0.5rem !important;
+        font-size: 0.9rem;
+    }
+}
+
+/* Ajustes adicionales para pantallas muy pequeñas */
+@media (max-width: 576px) {
+    .table-dark.table-striped td, .table-dark.table-striped th {
+        padding: 0.3rem !important;
+        font-size: 0.8rem;
+    }
 }
 
 /* ==================== ESTILOS PARA MODALES CON TABLAS ==================== */

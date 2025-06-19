@@ -27,6 +27,18 @@
           <a href="<?= base_url('producto/categoria/Placas%20Base') ?>" class="btn btn-info btn-lg">Ver productos</a>
         </div>
       </div>
+      <div class="carousel-item">
+        <img src="<?= base_url('assets/img/memoria_ram.jpg') ?>" class="d-block w-100" alt="Imagen promocional 3">
+        <div class="carousel-caption d-block">
+          <a href="<?= base_url('producto/categoria/Memorias%20RAM') ?>" class="btn btn-info btn-lg">Ver productos</a>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="<?= base_url('assets/img/computadora-gamer.jpg') ?>" class="d-block w-100" alt="Imagen promocional 4">
+        <div class="carousel-caption d-block">
+          <a href="<?= base_url('producto/categoria/Equipos%20y%20Notebooks') ?>" class="btn btn-info btn-lg">Ver productos</a>
+        </div>
+      </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>

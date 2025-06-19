@@ -396,7 +396,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         const nombreCompleto = nombreInput.value;
-        console.log('Valor del campo nombre:', nombreCompleto);
         
         const email = document.getElementById('email') ? document.getElementById('email').value : '';
         const telefono = document.getElementById('telefono') ? document.getElementById('telefono').value : '';
@@ -406,7 +405,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const summaryNombre = document.getElementById('summary_nombre');
         if (summaryNombre) {
             summaryNombre.textContent = nombreCompleto;
-            console.log('Actualizando nombre completo:', nombreCompleto);
         } else {
             console.error('Elemento con ID "summary_nombre" no encontrado');
         }
@@ -610,5 +608,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 e.target.value = valor;
             });
         }
+    }
+});
+
+// Agregar el event listener fuera de la función updateSummary
+document.addEventListener('DOMContentLoaded', function() {
+    const telefonoContacto = document.getElementById('telefono_contacto');
+    if (telefonoContacto) {
+        telefonoContacto.addEventListener('input', function() {
+            // Actualizar el campo oculto telefono
+            const telefonoInput = document.getElementById('telefono');
+            if (telefonoInput && this.value) {
+                telefonoInput.value = this.value;
+            }
+            // Actualizar el resumen
+            updateSummary();
+        });
     }
 });

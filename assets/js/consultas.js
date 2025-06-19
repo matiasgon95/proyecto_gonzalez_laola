@@ -202,10 +202,7 @@ function initConsultasModals() {
                     // Mostrar el modal
                     modalConsultaBS.show();
                 })
-                .catch(error => {
-                    console.error('Error al obtener los detalles de la consulta:', error);
-                    alert('Error al cargar los detalles de la consulta');
-                });
+                
         });
     });
     

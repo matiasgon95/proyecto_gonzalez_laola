@@ -66,10 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Mostrar el modal con los detalles
                     modalConsulta.show();
                 })
-                .catch(error => {
-                    console.error('Error al obtener los detalles de la consulta:', error);
-                    alert('Error al cargar los detalles de la consulta');
-                });
+                
         });
     });
     
