@@ -1,3 +1,4 @@
+
 /* Estilos para tablas - Proyecto González Laola */
 /* Versión limpia y optimizada */
 
@@ -23,7 +24,7 @@
     border-radius: var(--table-border-radius);
     box-shadow: var(--table-shadow);
     border: var(--table-border);
-    overflow-x: auto !important; /* Garantiza el desplazamiento horizontal */
+    overflow-x: auto; /* Garantiza el desplazamiento horizontal */
     -webkit-overflow-scrolling: touch; /* Mejora el desplazamiento en iOS */
     max-width: 100%; /* Asegura que no exceda el ancho del contenedor */
     padding: 0;
@@ -38,7 +39,7 @@
     border-collapse: collapse;
     border-spacing: 0;
     table-layout: fixed; /* Mantener fixed para controlar mejor los anchos de columna */
-    min-width: 1200px; /* Aumentar el ancho mínimo para asegurar que todas las columnas sean visibles con scroll */
+    min-width: 800px; /* Ancho mínimo para asegurar que todas las columnas sean visibles con scroll */
     border-radius: var(--table-border-radius);
 }
 
@@ -69,14 +70,12 @@
         padding: 4px 2px;
         font-size: 0.65rem;
         white-space: nowrap;
-        display: table-cell !important; /* Forzar que todas las celdas se muestren */
     }
     
     .table td {
         padding: 2px 2px;
         font-size: 0.65rem;
         white-space: nowrap; /* Evita que el texto se rompa en múltiples líneas */
-        display: table-cell !important; /* Forzar que todas las celdas se muestren */
     }
     
     /* Reducir el tamaño de las imágenes en móviles */
@@ -546,99 +545,11 @@
 /* ==================== ESTILOS PARA LA TABLA DE CARRITO ==================== */
 .table-cart {
     background-color: rgba(0, 188, 212, 0.05);
-    min-width: auto !important; /* Anular el min-width fijo */
-    width: 100% !important; /* Asegurar que la tabla ocupe el 100% del contenedor */
 }
 
 .table-cart thead th {
     background: linear-gradient(45deg, #17a2b8, #138496);
     color: #000;
-}
-
-/* Ajustes responsivos específicos para la tabla del carrito */
-@media (max-width: 992px) {
-    .table-responsive .table-cart {
-        min-width: auto !important; /* Anular el min-width en pantallas pequeñas */
-    }
-    
-    /* Ajustar el tamaño de la imagen en pantallas pequeñas */
-    .table-cart .img-thumbnail {
-        width: 60px;
-        height: 60px;
-    }
-    
-    /* Reducir el padding en pantallas pequeñas */
-    .table-cart td, .table-cart th {
-        padding: 0.5rem !important;
-        font-size: 0.9rem;
-    }
-}
-
-/* Ajustes adicionales para pantallas muy pequeñas */
-@media (max-width: 576px) {
-    .table-cart .img-thumbnail {
-        width: 50px;
-        height: 50px;
-    }
-    
-    .table-cart td, .table-cart th {
-        padding: 0.3rem !important;
-        font-size: 0.8rem;
-    }
-}
-
-/* ==================== ESTILOS PARA LA TABLA DE RESUMEN DE COMPRA ==================== */
-.table-responsive .table-dark.table-hover {
-    min-width: auto !important; /* Anular el min-width fijo */
-    width: 100% !important; /* Asegurar que la tabla ocupe el 100% del contenedor */
-}
-
-/* Ajustes responsivos específicos para la tabla de resumen de compra */
-@media (max-width: 992px) {
-    .table-responsive .table-dark.table-hover {
-        min-width: auto !important; /* Anular el min-width en pantallas pequeñas */
-    }
-    
-    /* Reducir el padding en pantallas pequeñas */
-    .table-dark.table-hover td, .table-dark.table-hover th {
-        padding: 0.5rem !important;
-        font-size: 0.9rem;
-    }
-}
-
-/* Ajustes adicionales para pantallas muy pequeñas */
-@media (max-width: 576px) {
-    .table-dark.table-hover td, .table-dark.table-hover th {
-        padding: 0.3rem !important;
-        font-size: 0.8rem;
-    }
-}
-
-/* ==================== ESTILOS PARA LA TABLA DE PEDIDOS DEL CLIENTE ==================== */
-.table-responsive .table-dark.table-striped {
-    min-width: auto !important; /* Anular el min-width fijo */
-    width: 100% !important; /* Asegurar que la tabla ocupe el 100% del contenedor */
-}
-
-/* Ajustes responsivos específicos para la tabla de pedidos */
-@media (max-width: 992px) {
-    .table-responsive .table-dark.table-striped {
-        min-width: auto !important; /* Anular el min-width en pantallas pequeñas */
-    }
-    
-    /* Reducir el padding en pantallas pequeñas */
-    .table-dark.table-striped td, .table-dark.table-striped th {
-        padding: 0.5rem !important;
-        font-size: 0.9rem;
-    }
-}
-
-/* Ajustes adicionales para pantallas muy pequeñas */
-@media (max-width: 576px) {
-    .table-dark.table-striped td, .table-dark.table-striped th {
-        padding: 0.3rem !important;
-        font-size: 0.8rem;
-    }
 }
 
 /* ==================== ESTILOS PARA MODALES CON TABLAS ==================== */

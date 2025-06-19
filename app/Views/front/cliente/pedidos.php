@@ -55,13 +55,13 @@
                                                 <td class="text-center"><?= date('d/m/Y H:i', strtotime($pedido['fecha'])) ?></td>
                                                 <td class="text-center">$<?= number_format($pedido['total_venta'], 2, ',', '.') ?></td>
                                                 <td class="text-center">
-                                                    <!-- Botones de acción para cada pedido -->
-                                                    <div class="btn-group" role="group">
-                                                        <a href="<?= base_url('front/cliente/detalle_pedido/' . $pedido['id']) ?>" class="btn btn-sm btn-info me-2">
-                                                            <i class="fas fa-eye"></i> Ver detalle
+                                                    <!-- Modificar los botones para mejor visualización en móviles -->
+                                                    <div class="btn-group d-flex flex-column flex-md-row" role="group">
+                                                        <a href="<?= base_url('front/cliente/detalle_pedido/' . $pedido['id']) ?>" class="btn btn-sm btn-info mb-1 mb-md-0 me-md-2">
+                                                            <i class="fas fa-eye"></i><span class="d-none d-md-inline"> Ver detalle</span>
                                                         </a>
                                                         <a href="<?= base_url('carrito/generar_factura/' . $pedido['id']) ?>" class="btn btn-sm btn-success">
-                                                            <i class="fas fa-file-invoice"></i> Ver factura
+                                                            <i class="fas fa-file-invoice"></i><span class="d-none d-md-inline"> Ver factura</span>
                                                         </a>
                                                     </div>
                                                 </td>

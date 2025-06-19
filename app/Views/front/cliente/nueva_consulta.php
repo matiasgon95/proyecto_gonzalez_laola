@@ -63,12 +63,12 @@
                             
                             <!-- Botones de acción: volver y enviar consulta -->
                             <div class="col-12 text-center">
-                                <a href="<?= base_url('front/cliente/consultas') ?>" class="btn btn-outline-info rounded-pill px-4 me-2">
-                                    <i class="fas fa-arrow-left me-2"></i>Volver
-                                </a>
                                 <button type="submit" class="btn btn-info text-black rounded-pill px-5">
                                     <i class="fas fa-paper-plane me-2"></i>Enviar Consulta
                                 </button>
+                                <a href="<?= base_url('front/cliente/consultas') ?>" class="btn btn-outline-info rounded-pill px-4 me-2">
+                                    <i class="fas fa-arrow-left me-2"></i>Volver
+                                </a>
                             </div>
                         </div>
                     </form>
