@@ -68,8 +68,14 @@ function setupAddToCartForms() {
     
     addToCartForms.forEach(form => {
         form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevenir el envío tradicional del formulario
-            
+            e.preventDefault();
+            const cantidadInput = form.querySelector('input[name="qty"]');
+            const maxStock = parseInt(cantidadInput.getAttribute('max'), 10);
+            const cantidad = parseInt(cantidadInput.value, 10);
+            if (cantidad > maxStock) {
+                showToastNotification('No hay suficiente stock disponible para la cantidad solicitada.', 'error');
+                return;
+            }
             // Guardar la posición actual de desplazamiento
             const currentPosition = window.scrollY;
             
