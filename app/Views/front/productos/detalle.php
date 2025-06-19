@@ -62,7 +62,7 @@
                     <?php elseif ($diferencia <= 5): ?>
                         <span class="text-danger fw-bold">Últimas unidades (<?= esc($stock); ?> disponibles)</span>
                     <?php else: ?>
-                        <span class="text-success fw-bold">+<?= esc($diferencia); ?> disponibles</span>
+                        <span class="text-success fw-bold"><?= esc($stock); ?> disponibles</span>
                     <?php endif; ?>
                 </div>
 
