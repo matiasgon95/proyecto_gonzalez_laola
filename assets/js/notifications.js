@@ -70,17 +70,27 @@ function setupAddToCartForms() {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             const cantidadInput = form.querySelector('input[name="qty"]');
-            const maxStock = parseInt(cantidadInput.getAttribute('max'), 10);
-            const cantidad = parseInt(cantidadInput.value, 10);
-            if (cantidad > maxStock) {
-                showToastNotification('No hay suficiente stock disponible para la cantidad solicitada.', 'error');
-                return;
+            
+            // Verificar si existe el campo de cantidad
+            if (cantidadInput) {
+                const maxStock = parseInt(cantidadInput.getAttribute('max'), 10);
+                const cantidad = parseInt(cantidadInput.value, 10);
+                if (cantidad > maxStock) {
+                    showToastNotification('No hay suficiente stock disponible para la cantidad solicitada.', 'error');
+                    return;
+                }
             }
+            
             // Guardar la posición actual de desplazamiento
             const currentPosition = window.scrollY;
             
             // Crear un objeto FormData con los datos del formulario
             const formData = new FormData(this);
+            
+            // Si no existe el campo qty, agregar un valor predeterminado de 1
+            if (!cantidadInput) {
+                formData.append('qty', '1');
+            }
             
             // Enviar los datos mediante fetch API
             fetch(baseUrl + 'carrito_agrega', {
