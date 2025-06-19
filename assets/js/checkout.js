@@ -44,8 +44,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const total = subtotalValue + shippingCost;
             
             // Actualizar displays
-            shippingCostDisplay.textContent = '$' + shippingCost.toFixed(2).replace('.', ',');
-            totalAmountDisplay.textContent = '$' + total.toFixed(2).replace('.', ',');
+            shippingCostDisplay.textContent = '$' + shippingCost.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            totalAmountDisplay.textContent = '$' + total.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
             
             // Actualizar campos ocultos
             inputCostoEnvio.value = shippingCost;
