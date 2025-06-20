@@ -59,7 +59,7 @@
                                         <thead class="table-info text-black">
                                             <tr>
                                                 <th>Producto</th>
-                                                <th class="text-center d-none d-md-table-cell">Imagen</th> <!-- Ocultar en móviles -->
+                                                <th class="text-center d-md-table-cell">Imagen</th> <!-- Ocultar en móviles -->
                                                 <th class="text-center">Cant.</th> <!-- Abreviar texto -->
                                                 <th>Precio</th>
                                                 <th>Subtotal</th>
@@ -72,7 +72,7 @@
                                                 <?php foreach ($detalles as $detalle) : ?>
                                                     <tr>
                                                         <td><?= esc($detalle['nombre']) ?></td>
-                                                        <td class="text-center d-none d-md-table-cell"> <!-- Ocultar en móviles -->
+                                                        <td class="text-center d-md-table-cell"> <!-- Ocultar en móviles -->
                                                             <!-- Manejo condicional para mostrar imagen o mensaje si no existe -->
                                                             <?php if (!empty($detalle['imagen'])) : ?>
                                                                 <img src="<?= base_url('public/' . $detalle['imagen']) ?>" alt="<?= esc($detalle['nombre']) ?>" class="img-thumbnail" style="max-width: 80px;">
