@@ -141,15 +141,16 @@
                                                 <input type="hidden" name="precio_vta" value="<?= $producto['precio_vta'] ?>">  <!-- Corregido -->
                                                 <input type="hidden" name="imagen" value="<?= $producto['imagen'] ?>">
                                                 <input type="hidden" name="qty" value="1">
-                                                
-                                                <!-- Mostrar stock disponible -->
-                                                <div class="text-center mb-2 small <?= ($producto['stock'] <= 3) ? 'text-danger' : 'text-success' ?>">
-                                                    Stock disponible: <?= $producto['stock'] ?>
-                                                </div>
-                                                
+                                                                            
                                                 <button type="submit" class="btn btn-outline-info rounded-pill w-100" <?= ($producto['stock'] <= 0) ? 'disabled' : '' ?>>
                                                     <i class="fas fa-shopping-cart me-2"></i>Agregar al carrito
                                                 </button>
+
+                                                <!-- Mostrar stock disponible -->
+                                                <div class="text-center mb-2 small <?= ($producto['stock'] <= 3) ? 'text-danger' : 'text-success' ?>">
+                                                    
+                                                Stock disponible: <?= $producto['stock'] ?>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
