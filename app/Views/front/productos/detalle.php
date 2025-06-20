@@ -68,7 +68,7 @@
 
                 <!-- Sección de acciones: Formulario para añadir al carrito -->
                 <div class="producto-acciones mt-4">
-                    <form action="<?= base_url('carrito_add'); ?>" method="post">
+                    <form action="<?= base_url('carrito_agrega'); ?>" method="post">
                         <?= csrf_field() ?>
                         <!-- Campos ocultos con información del producto -->
                         <input type="hidden" name="id" value="<?= $producto['id']; ?>">

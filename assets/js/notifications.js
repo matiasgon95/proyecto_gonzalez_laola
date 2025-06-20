@@ -97,7 +97,7 @@ function setupAddToCartForms() {
                 method: 'POST',
                 body: formData
             })
-            fetch(baseUrl + 'carrito_ad', {
+            fetch(baseUrl + 'carrito_add', {
                 method: 'POST',
                 body: formData
             })

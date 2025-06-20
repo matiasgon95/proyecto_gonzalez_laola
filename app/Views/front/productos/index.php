@@ -134,7 +134,7 @@
                                             <?php endif; ?>
                                             
                                             <!-- Formulario para agregar al carrito - Se deshabilita si no hay stock -->
-                                            <form action="<?= base_url('carrito_add') ?>" method="post">
+                                            <form action="<?= base_url('carrito_agrega') ?>" method="post">
                                                 <?= csrf_field() ?>
                                                 <input type="hidden" name="id" value="<?= $producto['id'] ?>">
                                                 <input type="hidden" name="nombre_prod" value="<?= $producto['nombre'] ?>">  <!-- Corregido -->
