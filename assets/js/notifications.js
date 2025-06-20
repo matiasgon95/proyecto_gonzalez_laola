@@ -253,3 +253,18 @@ document.addEventListener('DOMContentLoaded', function() {
     initToastNotifications();
     setupAddToCartForms();
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const toast = document.querySelector('.toast');
+    if (toast) {
+        const rect = toast.getBoundingClientRect();
+        const isVisible = (
+            rect.top >= 0 &&
+            rect.bottom <= window.innerHeight
+        );
+
+        if (!isVisible) {
+            toast.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        }
+    }
+});
