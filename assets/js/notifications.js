@@ -64,7 +64,7 @@ function initToastNotifications() {
  * - Mantiene la posición de desplazamiento de la página
  */
 function setupAddToCartForms() {
-    const addToCartForms = document.querySelectorAll('form[action*="carrito_agrega"]');
+    const addToCartForms = document.querySelectorAll('form[action*="carrito_add"]');
     
     addToCartForms.forEach(form => {
         form.addEventListener('submit', function(e) {
@@ -93,10 +93,38 @@ function setupAddToCartForms() {
             }
             
             // Enviar los datos mediante fetch API
-            fetch(baseUrl + 'carrito_agrega', {
+            fetch(baseUrl + 'carrito_add', {
                 method: 'POST',
                 body: formData
             })
+            fetch(baseUrl + 'carrito_ad', {
+                method: 'POST',
+                body: formData
+            })
+            .then(async response => {
+                const text = await response.text(); // Leé como texto
+                try {
+                    const data = JSON.parse(text); // Intentá parsear
+                    console.log('✅ JSON válido:', data);
+                    
+                    const message = data.message || 'Producto añadido al carrito';
+                    const isSuccess = data.success === true;
+                    showToastNotification(message, isSuccess ? 'success' : 'error');
+                    
+                    if (typeof updateCartCount === 'function') {
+                        updateCartCount();
+                    }
+            
+                } catch (e) {
+                    console.error('❌ La respuesta NO es JSON:', text);
+                    showToastNotification('Respuesta inválida del servidor', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('❌ Error de red o fetch:', error);
+                showToastNotification('Hubo un error al procesar la solicitud.', 'error');
+            })
+            
             .then(response => response.json())
             .then(data => {
                 // Verificar si el producto se añadió correctamente
@@ -125,8 +153,6 @@ function setupAddToCartForms() {
                 if (typeof updateCartCount === 'function') {
                     updateCartCount();
                 }
-                // Mostrar un mensaje más informativo
-                showToastNotification('Producto añadido al carrito', 'success');
             });
         });
     });

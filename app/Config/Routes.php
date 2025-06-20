@@ -103,7 +103,6 @@ $routes->get('producto/sugerencias', 'Front\Producto::sugerencias'); // Autocomp
 // Rutas del carrito de compras - Gestión de compras
 $routes->get('carrito', 'Front\CarritoController::index'); // Vista del carrito
 $routes->post('carrito_add', 'Front\CarritoController::add'); // Agregar producto al carrito
-$routes->post('carrito_agrega', 'Front\CarritoController::add'); // Alias para compatibilidad
 $routes->post('carrito_actualiza', 'Front\CarritoController::actualiza_carrito'); // Actualizar cantidades
 $routes->get('carrito_suma/(:segment)', 'Front\CarritoController::suma/$1'); // Incrementar cantidad
 $routes->get('carrito_resta/(:segment)', 'Front\CarritoController::resta/$1'); // Decrementar cantidad
