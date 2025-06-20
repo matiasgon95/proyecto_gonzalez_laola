@@ -158,9 +158,8 @@
     </div>
 </div>
 
-<!-- Al final del archivo, antes de cerrar la sección -->
-<!-- Incluir Chart.js desde CDN -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Para cargar los gráficos -->
+<script src="<?= base_url('assets/js/chart.js') ?>"></script>
 
 <!-- Incluir el archivo JavaScript externo -->
 <script src="<?= base_url('assets/js/estadisticas.js') ?>"></script>
